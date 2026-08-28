@@ -27,12 +27,128 @@ jobs:
       contents: read
 
     steps:
+      # ------------------------------------------------------------
+      # Discord: 빌드 시작
+      # ------------------------------------------------------------
+      - name: Notify Discord on build start
+        continue-on-error: true
+        shell: bash
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          REPOSITORY: ${{ github.repository }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          COMMIT_SHA: ${{ github.sha }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message || github.event.pull_request.title || 'Manual workflow run' }}
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "::warning::DISCORD_WEBHOOK_URL is missing. Discord notification skipped."
+            exit 0
+          fi
+
+          SHORT_SHA="${COMMIT_SHA:0:7}"
+          SHORT_MESSAGE="${COMMIT_MESSAGE:0:500}"
+          TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          PAYLOAD=$(jq -n \
+            --arg repository "$REPOSITORY" \
+            --arg branch "$BRANCH_NAME" \
+            --arg commit "$SHORT_SHA" \
+            --arg commitMessage "$SHORT_MESSAGE" \
+            --arg actor "$ACTOR" \
+            --arg eventName "$EVENT_NAME" \
+            --arg runNumber "$RUN_NUMBER" \
+            --arg runUrl "$RUN_URL" \
+            --arg timestamp "$TIMESTAMP" \
+            '{
+              username: "SecondWindGames Build",
+              embeds: [
+                {
+                  title: "🔨 Unity Windows 빌드 시작",
+                  description: "SecondWindGames Windows 빌드를 시작했습니다.",
+                  url: $runUrl,
+                  color: 3447003,
+                  fields: [
+                    {
+                      name: "저장소",
+                      value: $repository,
+                      inline: true
+                    },
+                    {
+                      name: "브랜치",
+                      value: $branch,
+                      inline: true
+                    },
+                    {
+                      name: "빌드 번호",
+                      value: $runNumber,
+                      inline: true
+                    },
+                    {
+                      name: "커밋",
+                      value: $commit,
+                      inline: true
+                    },
+                    {
+                      name: "실행자",
+                      value: $actor,
+                      inline: true
+                    },
+                    {
+                      name: "실행 유형",
+                      value: $eventName,
+                      inline: true
+                    },
+                    {
+                      name: "변경 내용",
+                      value: $commitMessage,
+                      inline: false
+                    }
+                  ],
+                  footer: {
+                    text: "SecondWindGames · GitHub Actions"
+                  },
+                  timestamp: $timestamp
+                }
+              ],
+              components: [
+                {
+                  type: 1,
+                  components: [
+                    {
+                      type: 2,
+                      style: 5,
+                      label: "빌드 진행 상황",
+                      url: $runUrl
+                    }
+                  ]
+                }
+              ]
+            }')
+
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            "$DISCORD_WEBHOOK_URL"
+
+      # ------------------------------------------------------------
+      # Checkout
+      # ------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           lfs: true
           fetch-depth: 0
 
+      # ------------------------------------------------------------
+      # Unity Secret 확인
+      # ------------------------------------------------------------
       - name: Validate Unity secrets
         shell: bash
         env:
@@ -61,6 +177,9 @@ jobs:
 
           echo "All Unity secrets are configured."
 
+      # ------------------------------------------------------------
+      # Unity Library 캐시
+      # ------------------------------------------------------------
       - name: Cache Unity Library
         uses: actions/cache@v4
         with:
@@ -70,6 +189,9 @@ jobs:
             Library-${{ runner.os }}-StandaloneWindows64-
             Library-${{ runner.os }}-
 
+      # ------------------------------------------------------------
+      # Unity Windows 빌드
+      # ------------------------------------------------------------
       - name: Build Unity project
         uses: game-ci/unity-builder@v4
         env:
@@ -83,6 +205,9 @@ jobs:
           buildsPath: Builds
           versioning: Semantic
 
+      # ------------------------------------------------------------
+      # 빌드 결과물 업로드
+      # ------------------------------------------------------------
       - name: Upload build artifact
         id: upload-artifact
         uses: actions/upload-artifact@v4
@@ -92,6 +217,9 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      # ------------------------------------------------------------
+      # Discord: 빌드 성공
+      # ------------------------------------------------------------
       - name: Notify Discord on success
         if: success()
         continue-on-error: true
@@ -128,7 +256,7 @@ jobs:
               embeds: [
                 {
                   title: "✅ Unity Windows 빌드 완료",
-                  description: "[빌드 결과물 다운로드](\($artifactUrl))",
+                  description: "SecondWindGames Windows 빌드가 완료되었습니다.",
                   url: $artifactUrl,
                   color: 5763719,
                   fields: [
@@ -198,6 +326,9 @@ jobs:
             -d "$PAYLOAD" \
             "$DISCORD_WEBHOOK_URL"
 
+      # ------------------------------------------------------------
+      # Discord: 빌드 실패
+      # ------------------------------------------------------------
       - name: Notify Discord on failure
         if: failure()
         continue-on-error: true
@@ -232,7 +363,7 @@ jobs:
               embeds: [
                 {
                   title: "❌ Unity Windows 빌드 실패",
-                  description: "빌드 로그에서 최초 오류를 확인해주세요.",
+                  description: "빌드에 실패했습니다. Actions 로그에서 오류를 확인해주세요.",
                   url: $runUrl,
                   color: 15548997,
                   fields: [
