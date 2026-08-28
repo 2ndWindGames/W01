@@ -3,11 +3,13 @@ name: Unity Build
 on:
   push:
     branches:
-      - build
+      - main
+      - develop
 
   pull_request:
     branches:
-      - build      
+      - main
+      - develop
 
   workflow_dispatch:
 
@@ -17,12 +19,28 @@ concurrency:
 
 jobs:
   build:
-    name: Build Unity Project
+    name: Build Unity - ${{ matrix.platformName }}
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     permissions:
       contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Windows 빌드
+          - platformName: Windows
+            targetPlatform: StandaloneWindows64
+            artifactName: SecondWindGames-Windows
+            artifactPath: Builds/StandaloneWindows64
+
+          # Android APK 빌드
+          - platformName: Android
+            targetPlatform: Android
+            artifactName: SecondWindGames-Android
+            artifactPath: Builds/Android
 
     steps:
       # ------------------------------------------------------------
@@ -33,6 +51,7 @@ jobs:
         shell: bash
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PLATFORM_NAME: ${{ matrix.platformName }}
           REPOSITORY: ${{ github.repository }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           COMMIT_SHA: ${{ github.sha }}
@@ -41,6 +60,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           RUN_NUMBER: ${{ github.run_number }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ]; then
             echo "::warning::DISCORD_WEBHOOK_URL is missing. Discord notification skipped."
@@ -52,6 +72,7 @@ jobs:
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           PAYLOAD=$(jq -n \
+            --arg platform "$PLATFORM_NAME" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -65,11 +86,19 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: "🔨 Unity Windows 빌드 시작",
-                  description: "SecondWindGames Windows 빌드를 시작했습니다.",
+                  title: ("🔨 Unity " + $platform + " 빌드 시작"),
+                  description: (
+                    "SecondWindGames " + $platform
+                    + " 빌드를 시작했습니다."
+                  ),
                   url: $runUrl,
                   color: 3447003,
                   fields: [
+                    {
+                      name: "플랫폼",
+                      value: $platform,
+                      inline: true
+                    },
                     {
                       name: "저장소",
                       value: $repository,
@@ -153,6 +182,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
         run: |
           echo "UNITY_LICENSE length: ${#UNITY_LICENSE}"
           echo "UNITY_EMAIL length: ${#UNITY_EMAIL}"
@@ -177,28 +207,63 @@ jobs:
 
       # ------------------------------------------------------------
       # Unity Library 캐시
+      # 플랫폼별로 캐시를 분리
       # ------------------------------------------------------------
       - name: Cache Unity Library
         uses: actions/cache@v4
         with:
           path: Library
-          key: Library-${{ runner.os }}-StandaloneWindows64-${{ hashFiles('Packages/manifest.json', 'Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}
+
+          key: >-
+            Library-${{ runner.os }}-${{ matrix.targetPlatform }}-${{
+            hashFiles(
+            'Packages/manifest.json',
+            'Packages/packages-lock.json',
+            'ProjectSettings/ProjectVersion.txt'
+            ) }}
+
           restore-keys: |
-            Library-${{ runner.os }}-StandaloneWindows64-
+            Library-${{ runner.os }}-${{ matrix.targetPlatform }}-
             Library-${{ runner.os }}-
 
       # ------------------------------------------------------------
       # Unity Windows 빌드
       # ------------------------------------------------------------
-      - name: Build Unity project
+      - name: Build Unity Windows project
+        if: matrix.targetPlatform == 'StandaloneWindows64'
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
         with:
           projectPath: .
           targetPlatform: StandaloneWindows64
+          buildName: SecondWindGames
+          buildsPath: Builds
+          versioning: Semantic
+
+      # ------------------------------------------------------------
+      # Unity Android APK 빌드
+      # ------------------------------------------------------------
+      - name: Build Unity Android project
+        if: matrix.targetPlatform == 'Android'
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
+        with:
+          projectPath: .
+          targetPlatform: Android
+
+          # androidPackage: APK
+          # androidAppBundle: AAB
+          androidExportType: androidPackage
+
+          androidVersionCode: ${{ github.run_number }}
           buildName: SecondWindGames
           buildsPath: Builds
           versioning: Semantic
@@ -210,8 +275,10 @@ jobs:
         id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SecondWindGames-Windows-${{ github.run_number }}
-          path: Builds/StandaloneWindows64
+          name: >-
+            ${{ matrix.artifactName }}-${{ github.run_number }}
+
+          path: ${{ matrix.artifactPath }}
           if-no-files-found: error
           retention-days: 14
 
@@ -224,6 +291,7 @@ jobs:
         shell: bash
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PLATFORM_NAME: ${{ matrix.platformName }}
           ARTIFACT_URL: ${{ steps.upload-artifact.outputs.artifact-url }}
           REPOSITORY: ${{ github.repository }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
@@ -231,6 +299,7 @@ jobs:
           ACTOR: ${{ github.actor }}
           RUN_NUMBER: ${{ github.run_number }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ]; then
             echo "::warning::DISCORD_WEBHOOK_URL is missing. Discord notification skipped."
@@ -241,6 +310,7 @@ jobs:
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           PAYLOAD=$(jq -n \
+            --arg platform "$PLATFORM_NAME" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -253,11 +323,19 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: "✅ Unity Windows 빌드 완료",
-                  description: "SecondWindGames Windows 빌드가 완료되었습니다.",
+                  title: ("✅ Unity " + $platform + " 빌드 완료"),
+                  description: (
+                    "SecondWindGames " + $platform
+                    + " 빌드가 완료되었습니다."
+                  ),
                   url: $artifactUrl,
                   color: 5763719,
                   fields: [
+                    {
+                      name: "플랫폼",
+                      value: $platform,
+                      inline: true
+                    },
                     {
                       name: "저장소",
                       value: $repository,
@@ -333,12 +411,14 @@ jobs:
         shell: bash
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PLATFORM_NAME: ${{ matrix.platformName }}
           REPOSITORY: ${{ github.repository }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           COMMIT_SHA: ${{ github.sha }}
           ACTOR: ${{ github.actor }}
           RUN_NUMBER: ${{ github.run_number }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ]; then
             echo "::warning::DISCORD_WEBHOOK_URL is missing. Discord notification skipped."
@@ -349,6 +429,7 @@ jobs:
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           PAYLOAD=$(jq -n \
+            --arg platform "$PLATFORM_NAME" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -360,11 +441,20 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: "❌ Unity Windows 빌드 실패",
-                  description: "빌드에 실패했습니다. Actions 로그에서 오류를 확인해주세요.",
+                  title: ("❌ Unity " + $platform + " 빌드 실패"),
+                  description: (
+                    "SecondWindGames " + $platform
+                    + " 빌드에 실패했습니다. "
+                    + "Actions 로그에서 오류를 확인해주세요."
+                  ),
                   url: $runUrl,
                   color: 15548997,
                   fields: [
+                    {
+                      name: "플랫폼",
+                      value: $platform,
+                      inline: true
+                    },
                     {
                       name: "저장소",
                       value: $repository,
