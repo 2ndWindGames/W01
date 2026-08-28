@@ -1,0 +1,46 @@
+:root {
+    --ink: rgb(42, 35, 62);
+    --muted: rgb(122, 112, 142);
+    --cream: rgb(255, 249, 236);
+    --paper: rgb(255, 253, 247);
+    --gold: rgb(246, 178, 54);
+    --coral: rgb(241, 108, 93);
+    --violet: rgb(113, 92, 178);
+}
+
+.screen { flex-grow: 1; background-color: rgb(247, 241, 229); color: var(--ink); }
+.top-bar { height: 104px; padding: 24px 28px 16px; flex-direction: row; justify-content: space-between; align-items: center; background-color: var(--paper); border-bottom-width: 2px; border-bottom-color: rgb(231, 221, 205); }
+.brand-block { justify-content: center; }
+.eyebrow { font-size: 10px; letter-spacing: 3px; color: var(--coral); -unity-font-style: bold; }
+.title { font-size: 21px; -unity-font-style: bold; margin-top: 3px; }
+.currency-pill { height: 44px; padding: 0 16px; flex-direction: row; align-items: center; background-color: rgb(255, 239, 196); border-radius: 22px; border-width: 2px; border-color: rgb(242, 196, 91); }
+.currency-icon { color: rgb(221, 137, 25); font-size: 16px; margin-right: 8px; }
+.currency-value { font-size: 17px; -unity-font-style: bold; }
+.content { flex-grow: 1; padding: 18px 24px 12px; }
+.panel { background-color: var(--paper); border-radius: 24px; border-width: 2px; border-color: rgb(232, 221, 202); }
+.stage { min-height: 390px; align-items: center; padding: 24px 20px 20px; overflow: hidden; }
+.section-label { font-size: 11px; letter-spacing: 3px; color: var(--violet); -unity-font-style: bold; }
+.income-label { font-size: 20px; -unity-font-style: bold; margin-top: 5px; color: rgb(72, 59, 99); }
+.click-target { width: 230px; height: 230px; margin-top: 10px; padding: 0; background-color: rgba(255, 235, 172, 0.42); border-radius: 115px; border-width: 3px; border-color: rgba(239, 176, 53, 0.55); transition-property: scale, background-color; transition-duration: 0.08s; }
+.click-target:hover { background-color: rgba(255, 226, 137, 0.62); scale: 1.03; }
+.click-target:active { scale: 0.92; }
+.crystal-image { flex-grow: 1; margin: 14px; background-image: resource("ClickerUI/Art/clicker_crystal"); -unity-background-scale-mode: scale-to-fit; }
+.tap-hint { font-size: 12px; letter-spacing: 3px; -unity-font-style: bold; color: var(--muted); }
+.tap-value { margin-top: 5px; font-size: 15px; color: rgb(214, 130, 28); -unity-font-style: bold; }
+.upgrade-section { margin-top: 18px; }
+.section-heading { flex-direction: row; align-items: center; margin: 0 4px 9px; }
+.section-title { font-size: 16px; letter-spacing: 2px; -unity-font-style: bold; }
+.section-caption { margin-left: 10px; font-size: 12px; color: var(--muted); }
+.upgrade-card { height: 78px; margin-bottom: 10px; padding: 10px 12px; flex-direction: row; align-items: center; background-color: var(--paper); border-radius: 17px; border-width: 2px; border-color: rgb(232, 221, 202); }
+.upgrade-card:hover { border-color: var(--gold); background-color: rgb(255, 250, 237); }
+.upgrade-card:active { translate: 0 2px; }
+.upgrade-icon { width: 52px; height: 52px; border-radius: 15px; font-size: 11px; -unity-text-align: middle-center; color: white; -unity-font-style: bold; }
+.coral { background-color: var(--coral); }
+.violet { background-color: var(--violet); }
+.upgrade-copy { flex-grow: 1; margin-left: 13px; }
+.upgrade-name { font-size: 15px; -unity-font-style: bold; }
+.upgrade-detail { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.cost-pill { min-width: 72px; height: 34px; padding: 8px 10px; border-radius: 17px; background-color: rgb(247, 235, 211); -unity-text-align: middle-center; font-size: 12px; -unity-font-style: bold; }
+.bottom-nav { height: 76px; padding: 9px 16px 14px; flex-direction: row; background-color: var(--paper); border-top-width: 2px; border-top-color: rgb(231, 221, 205); }
+.nav-button { flex-grow: 1; margin: 0 4px; border-width: 0; border-radius: 14px; background-color: transparent; color: var(--muted); font-size: 11px; -unity-font-style: bold; }
+.nav-button.active { color: rgb(184, 105, 20); background-color: rgb(255, 239, 196); }
