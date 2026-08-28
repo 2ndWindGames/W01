@@ -1,55 +1,38 @@
-name: Unity Build
+name: Unity Android Build
 
 on:
   push:
     branches:
-      - build      
+      - build/aos      
 
   pull_request:
     branches:
-      - build      
+      - build/aos      
 
   workflow_dispatch:
 
 concurrency:
-  group: unity-build-${{ github.ref }}
+  group: unity-android-build-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build Unity - ${{ matrix.platformName }}
+  build-android:
+    name: Build Unity Android
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
     permissions:
       contents: read
 
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          # Windows 빌드
-          - platformName: Windows
-            targetPlatform: StandaloneWindows64
-            artifactName: SecondWindGames-Windows
-            artifactPath: Builds/StandaloneWindows64
-
-          # Android APK 빌드
-          - platformName: Android
-            targetPlatform: Android
-            artifactName: SecondWindGames-Android
-            artifactPath: Builds/Android
-
     steps:
       # ------------------------------------------------------------
-      # Discord: 빌드 시작
+      # Discord: Android 빌드 시작
       # ------------------------------------------------------------
       - name: Notify Discord on build start
         continue-on-error: true
         shell: bash
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          PLATFORM_NAME: ${{ matrix.platformName }}
           REPOSITORY: ${{ github.repository }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           COMMIT_SHA: ${{ github.sha }}
@@ -70,7 +53,6 @@ jobs:
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           PAYLOAD=$(jq -n \
-            --arg platform "$PLATFORM_NAME" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -84,17 +66,14 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: ("🔨 Unity " + $platform + " 빌드 시작"),
-                  description: (
-                    "SecondWindGames " + $platform
-                    + " 빌드를 시작했습니다."
-                  ),
+                  title: "🔨 Unity Android APK 빌드 시작",
+                  description: "SecondWindGames Android APK 빌드를 시작했습니다.",
                   url: $runUrl,
                   color: 3447003,
                   fields: [
                     {
                       name: "플랫폼",
-                      value: $platform,
+                      value: "Android",
                       inline: true
                     },
                     {
@@ -204,49 +183,21 @@ jobs:
           echo "All Unity secrets are configured."
 
       # ------------------------------------------------------------
-      # Unity Library 캐시
-      # 플랫폼별로 캐시를 분리
+      # Unity Android Library 캐시
       # ------------------------------------------------------------
       - name: Cache Unity Library
         uses: actions/cache@v4
         with:
           path: Library
-
-          key: >-
-            Library-${{ runner.os }}-${{ matrix.targetPlatform }}-${{
-            hashFiles(
-            'Packages/manifest.json',
-            'Packages/packages-lock.json',
-            'ProjectSettings/ProjectVersion.txt'
-            ) }}
-
+          key: Library-${{ runner.os }}-Android-${{ hashFiles('Packages/manifest.json', 'Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}
           restore-keys: |
-            Library-${{ runner.os }}-${{ matrix.targetPlatform }}-
+            Library-${{ runner.os }}-Android-
             Library-${{ runner.os }}-
-
-      # ------------------------------------------------------------
-      # Unity Windows 빌드
-      # ------------------------------------------------------------
-      - name: Build Unity Windows project
-        if: matrix.targetPlatform == 'StandaloneWindows64'
-        uses: game-ci/unity-builder@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-
-        with:
-          projectPath: .
-          targetPlatform: StandaloneWindows64
-          buildName: SecondWindGames
-          buildsPath: Builds
-          versioning: Semantic
 
       # ------------------------------------------------------------
       # Unity Android APK 빌드
       # ------------------------------------------------------------
       - name: Build Unity Android project
-        if: matrix.targetPlatform == 'Android'
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -256,32 +207,26 @@ jobs:
         with:
           projectPath: .
           targetPlatform: Android
-
-          # androidPackage: APK
-          # androidAppBundle: AAB
           androidExportType: androidPackage
-
           androidVersionCode: ${{ github.run_number }}
           buildName: SecondWindGames
           buildsPath: Builds
           versioning: Semantic
 
       # ------------------------------------------------------------
-      # 빌드 결과물 업로드
+      # Android 빌드 결과물 업로드
       # ------------------------------------------------------------
-      - name: Upload build artifact
+      - name: Upload Android build artifact
         id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          name: >-
-            ${{ matrix.artifactName }}-${{ github.run_number }}
-
-          path: ${{ matrix.artifactPath }}
+          name: SecondWindGames-Android-${{ github.run_number }}
+          path: Builds/Android
           if-no-files-found: error
           retention-days: 14
 
       # ------------------------------------------------------------
-      # Discord: 빌드 성공
+      # Discord: Android 빌드 성공
       # ------------------------------------------------------------
       - name: Notify Discord on success
         if: success()
@@ -289,7 +234,6 @@ jobs:
         shell: bash
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          PLATFORM_NAME: ${{ matrix.platformName }}
           ARTIFACT_URL: ${{ steps.upload-artifact.outputs.artifact-url }}
           REPOSITORY: ${{ github.repository }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
@@ -308,7 +252,6 @@ jobs:
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           PAYLOAD=$(jq -n \
-            --arg platform "$PLATFORM_NAME" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -321,17 +264,14 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: ("✅ Unity " + $platform + " 빌드 완료"),
-                  description: (
-                    "SecondWindGames " + $platform
-                    + " 빌드가 완료되었습니다."
-                  ),
+                  title: "✅ Unity Android APK 빌드 완료",
+                  description: "SecondWindGames Android APK 빌드가 완료되었습니다.",
                   url: $artifactUrl,
                   color: 5763719,
                   fields: [
                     {
                       name: "플랫폼",
-                      value: $platform,
+                      value: "Android",
                       inline: true
                     },
                     {
@@ -378,7 +318,7 @@ jobs:
                     {
                       type: 2,
                       style: 5,
-                      label: "빌드 다운로드",
+                      label: "Android APK 다운로드",
                       url: $artifactUrl
                     },
                     {
@@ -401,7 +341,7 @@ jobs:
             "$DISCORD_WEBHOOK_URL"
 
       # ------------------------------------------------------------
-      # Discord: 빌드 실패
+      # Discord: Android 빌드 실패
       # ------------------------------------------------------------
       - name: Notify Discord on failure
         if: failure()
@@ -409,7 +349,6 @@ jobs:
         shell: bash
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          PLATFORM_NAME: ${{ matrix.platformName }}
           REPOSITORY: ${{ github.repository }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           COMMIT_SHA: ${{ github.sha }}
@@ -427,7 +366,6 @@ jobs:
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           PAYLOAD=$(jq -n \
-            --arg platform "$PLATFORM_NAME" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -439,18 +377,14 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: ("❌ Unity " + $platform + " 빌드 실패"),
-                  description: (
-                    "SecondWindGames " + $platform
-                    + " 빌드에 실패했습니다. "
-                    + "Actions 로그에서 오류를 확인해주세요."
-                  ),
+                  title: "❌ Unity Android APK 빌드 실패",
+                  description: "Android APK 빌드에 실패했습니다. Actions 로그에서 오류를 확인해주세요.",
                   url: $runUrl,
                   color: 15548997,
                   fields: [
                     {
                       name: "플랫폼",
-                      value: $platform,
+                      value: "Android",
                       inline: true
                     },
                     {
