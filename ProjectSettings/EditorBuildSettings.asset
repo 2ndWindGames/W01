@@ -5,8 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/00.Scene/00.Intro.unity
     guid: 118fbcceedff4ae44bb7f74047b5920e
+  - enabled: 1
+    path: Assets/MiniGameKit/Samples/TapGame/MiniGameKitTapSample.unity
+    guid: 8f9a0b1c23456778899aabbccddeeff0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
