@@ -55,6 +55,10 @@ namespace MiniGameKit.Samples.TapGame
         private int m_Combo;
         private int m_Hits;
         private int m_MaxCombo;
+        private int m_Misses;
+        private int m_BombsTapped;
+        private float m_FeverRemaining;
+        private bool m_FeverTriggered;
 
         private void Awake()
         {
@@ -83,6 +87,7 @@ namespace MiniGameKit.Samples.TapGame
             }
 
             m_Timer.Tick(Time.deltaTime);
+            UpdateFever();
             UpdateTimerVisual();
         }
 
@@ -107,6 +112,10 @@ namespace MiniGameKit.Samples.TapGame
             m_Combo = 0;
             m_Hits = 0;
             m_MaxCombo = 0;
+            m_Misses = 0;
+            m_BombsTapped = 0;
+            m_FeverRemaining = 0f;
+            m_FeverTriggered = false;
             m_ScoreText.text = "00";
             m_ComboText.text = "STREAK x0";
             m_ResultText.text = string.Empty;
@@ -173,7 +182,9 @@ namespace MiniGameKit.Samples.TapGame
                 m_BestText.text = m_BestScore.ToString("00");
                 m_ResultText.text = "SCORE  " + m_Score.ToString("00")
                     + "\nBEST  " + m_BestScore.ToString("00")
-                    + "\nMAX STREAK  " + m_MaxCombo;
+                    + "\nMAX STREAK  " + m_MaxCombo
+                    + "\nACCURACY  " + GetAccuracy().ToString("0") + "%"
+                    + "\nGRADE  " + GetGrade();
             }
         }
 
@@ -184,15 +195,62 @@ namespace MiniGameKit.Samples.TapGame
                 return;
             }
 
+            if (target.Type == TapTargetType.Bomb)
+            {
+                m_BombsTapped++;
+                m_Combo = 0;
+                m_Timer.AddTime(-2f);
+                m_ComboText.text = "BOMB!  -2.0 SEC";
+                m_TargetPool.Despawn(target.gameObject);
+                m_ActiveTargets.Remove(target);
+                RefillTargets();
+                return;
+            }
+
             m_Hits++;
             m_Combo++;
             m_MaxCombo = Mathf.Max(m_MaxCombo, m_Combo);
-            m_Score += m_Config.scorePerTap;
+            int baseScore = target.Type == TapTargetType.Quick ? 3
+                : target.Type == TapTargetType.TimeBonus ? 2
+                : m_Config.scorePerTap;
+            int multiplier = m_Combo >= 20 ? 3 : m_Combo >= 5 ? 2 : 1;
+            m_Score += baseScore * multiplier;
+            if (target.Type == TapTargetType.TimeBonus)
+            {
+                m_Timer.AddTime(1f);
+            }
+
+            if (!m_FeverTriggered && m_Combo >= m_Config.feverCombo)
+            {
+                m_FeverTriggered = true;
+                m_FeverRemaining = m_Config.feverDuration;
+            }
             m_ScoreText.text = m_Score.ToString("00");
-            m_ComboText.text = m_Combo > 1 ? "STREAK x" + m_Combo : "NICE!  STREAK x1";
+            m_ComboText.text = m_FeverRemaining > 0f ? "FEVER!  x" + multiplier + "  •  STREAK " + m_Combo
+                : target.Type == TapTargetType.TimeBonus ? "+1.0 SEC  •  STREAK " + m_Combo
+                : "STREAK " + m_Combo + "  •  SCORE x" + multiplier;
             m_TargetPool.Despawn(target.gameObject);
             m_ActiveTargets.Remove(target);
-            SpawnTarget();
+            RefillTargets();
+        }
+
+        private void HandleTargetMissed(MiniGameTarget target)
+        {
+            if (m_GameFlow.State != GameFlowState.Playing)
+            {
+                return;
+            }
+
+            if (target.Type != TapTargetType.Bomb)
+            {
+                m_Misses++;
+                m_Combo = 0;
+                m_ComboText.text = "MISSED  •  STREAK LOST";
+            }
+
+            m_TargetPool.Despawn(target.gameObject);
+            m_ActiveTargets.Remove(target);
+            RefillTargets();
         }
 
         private void SpawnTarget()
@@ -211,9 +269,81 @@ namespace MiniGameKit.Samples.TapGame
                 return;
             }
 
-            target.SetVisual(m_TargetSprite, TargetColors[m_Hits % TargetColors.Length]);
-            target.Bind(HandleTargetTapped);
+            TapTargetType type = ChooseTargetType();
+            float progress = 1f - Mathf.Clamp01(m_Timer.Remaining / Mathf.Max(0.1f, m_Config.roundDuration));
+            float lifetime = Mathf.Lerp(m_Config.startingTargetLifetime, m_Config.minimumTargetLifetime, progress);
+            if (type == TapTargetType.Quick)
+            {
+                lifetime *= 0.62f;
+            }
+
+            float scale = Mathf.Lerp(0.82f, m_Config.minimumTargetScale, progress);
+            Color color = type == TapTargetType.Quick ? TargetColors[1]
+                : type == TapTargetType.TimeBonus ? new Color(1f, 0.78f, 0.2f)
+                : type == TapTargetType.Bomb ? new Color(1f, 0.2f, 0.3f)
+                : TargetColors[m_Hits % TargetColors.Length];
+            target.SetVisual(m_TargetSprite, color);
+            target.Bind(type, lifetime, scale, HandleTargetTapped, HandleTargetMissed);
             m_ActiveTargets.Add(target);
+        }
+
+        private TapTargetType ChooseTargetType()
+        {
+            float elapsed = m_Config.roundDuration - m_Timer.Remaining;
+            float roll = Random.value;
+            if (elapsed >= 15f && roll < 0.12f) return TapTargetType.Bomb;
+            if (elapsed >= 8f && roll < 0.32f) return TapTargetType.Quick;
+            if (roll < 0.39f) return TapTargetType.TimeBonus;
+            return TapTargetType.Normal;
+        }
+
+        private void RefillTargets()
+        {
+            int desired = m_FeverRemaining > 0f ? m_Config.feverTargetCount : m_Config.initialTargetCount;
+            while (m_ActiveTargets.Count < desired)
+            {
+                SpawnTarget();
+            }
+        }
+
+        private void UpdateFever()
+        {
+            if (m_FeverRemaining <= 0f)
+            {
+                return;
+            }
+
+            m_FeverRemaining = Mathf.Max(0f, m_FeverRemaining - Time.deltaTime);
+            m_StatusText.text = m_FeverRemaining > 0f ? "FEVER  " + m_FeverRemaining.ToString("0.0") : "TAP THE GLOWING TARGETS";
+            m_StatusText.color = m_FeverRemaining > 0f ? new Color(0.85f, 0.5f, 1f) : Color.white;
+            if (m_FeverRemaining <= 0f && m_ActiveTargets.Count > m_Config.initialTargetCount)
+            {
+                while (m_ActiveTargets.Count > m_Config.initialTargetCount)
+                {
+                    MiniGameTarget extra = m_ActiveTargets[m_ActiveTargets.Count - 1];
+                    m_ActiveTargets.RemoveAt(m_ActiveTargets.Count - 1);
+                    m_TargetPool.Despawn(extra.gameObject);
+                }
+            }
+            else
+            {
+                RefillTargets();
+            }
+        }
+
+        private float GetAccuracy()
+        {
+            int attempts = m_Hits + m_Misses + m_BombsTapped;
+            return attempts > 0 ? m_Hits * 100f / attempts : 0f;
+        }
+
+        private string GetGrade()
+        {
+            float accuracy = GetAccuracy();
+            if (m_Score >= 70 && accuracy >= 92f) return "S";
+            if (m_Score >= 50 && accuracy >= 85f) return "A";
+            if (m_Score >= 30 && accuracy >= 72f) return "B";
+            return m_Score >= 15 ? "C" : "D";
         }
 
         private Vector3 GetSpawnPosition()
@@ -341,9 +471,9 @@ namespace MiniGameKit.Samples.TapGame
             CreatePanel(canvas.transform, "TopBar", new Vector2(0f, 1f), new Vector2(1f, 1f),
                 new Vector2(0.5f, 1f), Vector2.zero, new Vector2(0f, 230f),
                 new Color(0.025f, 0.04f, 0.1f, 0.94f));
-            CreateText(canvas.transform, "TAP RUSH", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f),
+            CreateText(canvas.transform, "VIOLET TAP", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f),
                 new Vector2(0f, -28f), new Vector2(700f, 58f), 34, Color.white, TextAnchor.MiddleCenter);
-            CreateText(canvas.transform, "A 30-SECOND REFLEX CHALLENGE", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f),
+            CreateText(canvas.transform, "30-SECOND REFLEX OVERDRIVE", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f),
                 new Vector2(0f, -78f), new Vector2(700f, 34f), 15, MutedTextColor, TextAnchor.MiddleCenter);
 
             CreateStatCard(canvas.transform, "SCORE", new Vector2(-300f, -150f), out m_ScoreText);
@@ -354,11 +484,11 @@ namespace MiniGameKit.Samples.TapGame
                 new Vector2(0f, -270f), new Vector2(720f, 62f), 19, Color.white, TextAnchor.MiddleCenter);
             m_ComboText = CreateText(canvas.transform, "STREAK x0", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f),
                 new Vector2(0f, 184f), new Vector2(720f, 46f), 24, new Color(0.46f, 0.9f, 1f), TextAnchor.MiddleCenter);
-            m_HintText = CreateText(canvas.transform, "HIT EVERY GLOWING TARGET BEFORE TIME RUNS OUT", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f),
+            m_HintText = CreateText(canvas.transform, "VIOLET +3  •  GOLD +1 SEC  •  AVOID RED", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f),
                 new Vector2(0f, 140f), new Vector2(900f, 40f), 15, MutedTextColor, TextAnchor.MiddleCenter);
 
             m_ResultPanel = CreatePanel(canvas.transform, "ResultPanel", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
-                new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(650f, 300f), PanelColor);
+                new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(650f, 430f), PanelColor);
             m_ResultText = CreateText(m_ResultPanel.transform, string.Empty, Vector2.zero, Vector2.one,
                 Vector2.zero, Vector2.zero, 26, Color.white, TextAnchor.MiddleCenter);
 

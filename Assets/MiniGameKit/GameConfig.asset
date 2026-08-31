@@ -15,4 +15,10 @@ MonoBehaviour:
   roundDuration: 30
   scorePerTap: 1
   initialTargetCount: 1
+  startingTargetLifetime: 1.8
+  minimumTargetLifetime: 0.65
+  minimumTargetScale: 0.58
+  feverCombo: 10
+  feverDuration: 5
+  feverTargetCount: 2
   targetPrefab: {fileID: 0}

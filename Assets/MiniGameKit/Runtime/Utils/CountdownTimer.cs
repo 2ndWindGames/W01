@@ -32,6 +32,20 @@ namespace MiniGameKit
             IsRunning = false;
         }
 
+        public void AddTime(float seconds)
+        {
+            if (!IsRunning)
+            {
+                return;
+            }
+
+            Remaining = Math.Min(Duration + 10f, Math.Max(0f, Remaining + seconds));
+            if (Remaining <= 0f)
+            {
+                Complete();
+            }
+        }
+
         public void Tick(float deltaTime)
         {
             if (!IsRunning)
