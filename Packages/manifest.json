@@ -1,14 +1,6 @@
 {
-  "scopedRegistries": [
-    {
-      "name": "OpenUPM",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "com.google"
-      ]
-    }
-  ],
   "dependencies": {
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.ide.rider": "3.0.40",
     "com.unity.microsoft.gdk": "1.7.0",
     "com.unity.microsoft.gdk.tools": "1.7.0",
