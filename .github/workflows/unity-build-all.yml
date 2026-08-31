@@ -3,16 +3,16 @@ name: Unity Build All
 on:
   push:
     branches:
-      - main
+      - build/all
   
   pull_request:
     branches:
-      - main
-  
+      - build/all
+
   # 매일 오전 9시 (KST / UTC+9)
   schedule:
     - cron: '0 0 * * *'
-  
+
   workflow_dispatch:
 
 concurrency:
@@ -24,10 +24,10 @@ jobs:
     name: Build Unity - ${{ matrix.platformName }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
-    
+
     permissions:
       contents: read
-    
+
     strategy:
       fail-fast: false
       matrix:
@@ -37,13 +37,13 @@ jobs:
             targetPlatform: StandaloneWindows64
             artifactName: SecondWindGames-Windows
             artifactPath: Builds/StandaloneWindows64
-          
+
           # Android APK 빌드
           - platformName: Android
             targetPlatform: Android
             artifactName: SecondWindGames-Android
             artifactPath: Builds/Android
-    
+
     steps:
       # ------------------------------------------------------------
       # Discord: 빌드 시작
@@ -63,19 +63,32 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           RUN_NUMBER: ${{ github.run_number }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        
+
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ] && [ -z "$DISCORD_WEBHOOK_URL_2" ]; then
             echo "::warning::Discord webhook URLs are missing. Discord notification skipped."
             exit 0
           fi
-          
+
+          case "$PLATFORM_NAME" in
+            Windows)
+              PLATFORM_EMOJI="🪟"
+              ;;
+            Android)
+              PLATFORM_EMOJI="🤖"
+              ;;
+            *)
+              PLATFORM_EMOJI="🎮"
+              ;;
+          esac
+
           SHORT_SHA="${COMMIT_SHA:0:7}"
           SHORT_MESSAGE="${COMMIT_MESSAGE:0:500}"
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          
+
           PAYLOAD=$(jq -n \
             --arg platform "$PLATFORM_NAME" \
+            --arg platformEmoji "$PLATFORM_EMOJI" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -89,7 +102,7 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: ("🔨 Unity " + $platform + " 빌드 시작"),
+                  title: ("🔨 " + $platformEmoji + " Unity " + $platform + " 빌드 시작"),
                   description: (
                     "SecondWindGames " + $platform
                     + " 빌드를 시작했습니다."
@@ -158,7 +171,7 @@ jobs:
                 }
               ]
             }')
-          
+
           for WEBHOOK_URL in "$DISCORD_WEBHOOK_URL" "$DISCORD_WEBHOOK_URL_2"; do
             if [ -n "$WEBHOOK_URL" ]; then
               curl \
@@ -170,7 +183,7 @@ jobs:
                 "$WEBHOOK_URL"
             fi
           done
-      
+
       # ------------------------------------------------------------
       # Checkout
       # ------------------------------------------------------------
@@ -179,7 +192,7 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-      
+
       # ------------------------------------------------------------
       # Unity Secret 확인
       # ------------------------------------------------------------
@@ -189,29 +202,29 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        
+
         run: |
           echo "UNITY_LICENSE length: ${#UNITY_LICENSE}"
           echo "UNITY_EMAIL length: ${#UNITY_EMAIL}"
           echo "UNITY_PASSWORD length: ${#UNITY_PASSWORD}"
-          
+
           if [ -z "$UNITY_LICENSE" ]; then
             echo "::error::UNITY_LICENSE is missing or empty"
             exit 1
           fi
-          
+
           if [ -z "$UNITY_EMAIL" ]; then
             echo "::error::UNITY_EMAIL is missing or empty"
             exit 1
           fi
-          
+
           if [ -z "$UNITY_PASSWORD" ]; then
             echo "::error::UNITY_PASSWORD is missing or empty"
             exit 1
           fi
-          
+
           echo "All Unity secrets are configured."
-      
+
       # ------------------------------------------------------------
       # Unity Library 캐시
       # 플랫폼별로 캐시를 분리
@@ -220,7 +233,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Library
-          
+
           key: >-
             Library-${{ runner.os }}-${{ matrix.targetPlatform }}-${{
             hashFiles(
@@ -228,11 +241,11 @@ jobs:
             'Packages/packages-lock.json',
             'ProjectSettings/ProjectVersion.txt'
             ) }}
-          
+
           restore-keys: |
             Library-${{ runner.os }}-${{ matrix.targetPlatform }}-
             Library-${{ runner.os }}-
-      
+
       # ------------------------------------------------------------
       # Unity Windows 빌드
       # ------------------------------------------------------------
@@ -243,14 +256,14 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        
+
         with:
           projectPath: .
           targetPlatform: StandaloneWindows64
           buildName: SecondWindGames
           buildsPath: Builds
           versioning: Semantic
-      
+
       # ------------------------------------------------------------
       # Unity Android APK 빌드
       # ------------------------------------------------------------
@@ -261,20 +274,20 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        
+
         with:
           projectPath: .
           targetPlatform: Android
-          
+
           # androidPackage: APK
           # androidAppBundle: AAB
           androidExportType: androidPackage
-          
+
           androidVersionCode: ${{ github.run_number }}
           buildName: SecondWindGames
           buildsPath: Builds
           versioning: Semantic
-      
+
       # ------------------------------------------------------------
       # 빌드 결과물 업로드
       # ------------------------------------------------------------
@@ -284,11 +297,11 @@ jobs:
         with:
           name: >-
             ${{ matrix.artifactName }}-${{ github.run_number }}
-          
+
           path: ${{ matrix.artifactPath }}
           if-no-files-found: error
           retention-days: 14
-      
+
       # ------------------------------------------------------------
       # Discord: 빌드 성공
       # ------------------------------------------------------------
@@ -307,18 +320,31 @@ jobs:
           ACTOR: ${{ github.actor }}
           RUN_NUMBER: ${{ github.run_number }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        
+
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ] && [ -z "$DISCORD_WEBHOOK_URL_2" ]; then
             echo "::warning::Discord webhook URLs are missing. Discord notification skipped."
             exit 0
           fi
-          
+
+          case "$PLATFORM_NAME" in
+            Windows)
+              PLATFORM_EMOJI="🪟"
+              ;;
+            Android)
+              PLATFORM_EMOJI="🤖"
+              ;;
+            *)
+              PLATFORM_EMOJI="🎮"
+              ;;
+          esac
+
           SHORT_SHA="${COMMIT_SHA:0:7}"
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          
+
           PAYLOAD=$(jq -n \
             --arg platform "$PLATFORM_NAME" \
+            --arg platformEmoji "$PLATFORM_EMOJI" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -331,7 +357,7 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: ("✅ Unity " + $platform + " 빌드 완료"),
+                  title: ("✅ " + $platformEmoji + " Unity " + $platform + " 빌드 완료"),
                   description: (
                     "SecondWindGames " + $platform
                     + " 빌드가 완료되었습니다."
@@ -401,7 +427,7 @@ jobs:
                 }
               ]
             }')
-          
+
           for WEBHOOK_URL in "$DISCORD_WEBHOOK_URL" "$DISCORD_WEBHOOK_URL_2"; do
             if [ -n "$WEBHOOK_URL" ]; then
               curl \
@@ -413,7 +439,7 @@ jobs:
                 "$WEBHOOK_URL"
             fi
           done
-      
+
       # ------------------------------------------------------------
       # Discord: 빌드 실패
       # ------------------------------------------------------------
@@ -431,18 +457,31 @@ jobs:
           ACTOR: ${{ github.actor }}
           RUN_NUMBER: ${{ github.run_number }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        
+
         run: |
           if [ -z "$DISCORD_WEBHOOK_URL" ] && [ -z "$DISCORD_WEBHOOK_URL_2" ]; then
             echo "::warning::Discord webhook URLs are missing. Discord notification skipped."
             exit 0
           fi
-          
+
+          case "$PLATFORM_NAME" in
+            Windows)
+              PLATFORM_EMOJI="🪟"
+              ;;
+            Android)
+              PLATFORM_EMOJI="🤖"
+              ;;
+            *)
+              PLATFORM_EMOJI="🎮"
+              ;;
+          esac
+
           SHORT_SHA="${COMMIT_SHA:0:7}"
           TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          
+
           PAYLOAD=$(jq -n \
             --arg platform "$PLATFORM_NAME" \
+            --arg platformEmoji "$PLATFORM_EMOJI" \
             --arg repository "$REPOSITORY" \
             --arg branch "$BRANCH_NAME" \
             --arg commit "$SHORT_SHA" \
@@ -454,7 +493,7 @@ jobs:
               username: "SecondWindGames Build",
               embeds: [
                 {
-                  title: ("❌ Unity " + $platform + " 빌드 실패"),
+                  title: ("❌ " + $platformEmoji + " Unity " + $platform + " 빌드 실패"),
                   description: (
                     "SecondWindGames " + $platform
                     + " 빌드에 실패했습니다. "
@@ -514,7 +553,7 @@ jobs:
                 }
               ]
             }')
-          
+
           for WEBHOOK_URL in "$DISCORD_WEBHOOK_URL" "$DISCORD_WEBHOOK_URL_2"; do
             if [ -n "$WEBHOOK_URL" ]; then
               curl \
@@ -526,5 +565,3 @@ jobs:
                 "$WEBHOOK_URL"
             fi
           done
-  
-  
