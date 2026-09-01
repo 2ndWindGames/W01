@@ -41,8 +41,8 @@ namespace _01.Scripts.Manager
 
 		public void Init()
 	    {
-	        Start = LoadSingleXml<StartData>("StartData");
-	        SalaryNegotiation = LoadSingleXml<SalaryNegotiationData>("SalaryNegotiationData");
+	        // Start = LoadSingleXml<StartData>("StartData");
+	        // SalaryNegotiation = LoadSingleXml<SalaryNegotiationData>("SalaryNegotiationData");
 
 			// Shops = LoadXml<ShopDataLoader, int, ShopData>("ShopData").MakeDic();
 			// Texts = LoadXml<TextDataLoader, int, TextData>("TextData").MakeDic();
@@ -53,14 +53,14 @@ namespace _01.Scripts.Manager
 	  //       Endings = LoadXml<EndingDataLoader, int, EndingData>("EndingData").MakeDic();
 
 			// Collection
-			var collectionLoader = LoadXml<CollectionDataLoader, int, CollectionData>("CollectionData");
-			StatCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Stat).ToList();
-			WealthCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Wealth).ToList();
-			LevelCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Level).ToList();
-			ProjectCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Project).ToList();
-			BattleCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Battle).ToList();
-
-			Collections = collectionLoader.MakeDic();
+			// var collectionLoader = LoadXml<CollectionDataLoader, int, CollectionData>("CollectionData");
+			// StatCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Stat).ToList();
+			// WealthCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Wealth).ToList();
+			// LevelCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Level).ToList();
+			// ProjectCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Project).ToList();
+			// BattleCollections = collectionLoader._collectionData.Where(c => c.type == CollectionType.Battle).ToList();
+			//
+			// Collections = collectionLoader.MakeDic();
 
 			// Dialogue
 			// var dialogueLoader = LoadXml<DialogueEventDataLoader, int, DialogueEventData>("DialogueEventData");
@@ -68,8 +68,8 @@ namespace _01.Scripts.Manager
 	  //       SuperiorEvents = dialogueLoader._dialogueEventData.Where(e => e.enemyType == 0).ToList();        
 	  //       Dialogues = dialogueLoader.MakeDic();
 
-	        var loader = LoadXml<BlockEventDataLoader, int, BlockEventData>("BlockEventData");
-	        BlockEvents = loader.MakeDic();
+	        // var loader = LoadXml<BlockEventDataLoader, int, BlockEventData>("BlockEventData");
+	        // BlockEvents = loader.MakeDic();
 
 	    }
 

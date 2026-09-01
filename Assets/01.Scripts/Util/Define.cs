@@ -17,9 +17,7 @@ public class Define
 	{
 		Unknown,
 		Intro,
-		Dev,
 		Game,
-		
 	}
 
 	public enum Sound

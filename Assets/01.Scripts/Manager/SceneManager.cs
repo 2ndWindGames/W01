@@ -20,7 +20,7 @@ namespace _01.Scripts.Manager
             set => m_CurSceneType = value;
         }
 
-        private static BaseScene CurrentScene => GameObject.Find("Scene").GetComponent<BaseScene>();
+        public static BaseScene CurrentScene => GameObject.Find("Scene").GetComponent<BaseScene>();
 
         public void Init()
         {
