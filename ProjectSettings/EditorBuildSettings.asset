@@ -9,7 +9,10 @@ EditorBuildSettings:
     path: Assets/00.Scene/00.Intro.unity
     guid: 118fbcceedff4ae44bb7f74047b5920e
   - enabled: 1
-    path: Assets/MiniGameKit/Samples/TapGame/MiniGameKitTapSample.unity
+    path: Assets/00.Scene/00_Intro.unity
+    guid: 747804f6637cb0a44bb8d6b40cd3fb17
+  - enabled: 1
+    path: Assets/00.Scene/01_Game.unity
     guid: 8f9a0b1c23456778899aabbccddeeff0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

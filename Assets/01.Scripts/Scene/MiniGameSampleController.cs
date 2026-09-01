@@ -67,7 +67,7 @@ namespace MiniGameKit.Samples.TapGame
 
             EnsureSceneServices();
             EnsureConfig();
-            BuildPlayfield();
+            // BuildPlayfield();
             BuildView();
             SetupPool();
 
