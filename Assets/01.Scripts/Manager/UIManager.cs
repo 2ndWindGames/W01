@@ -29,8 +29,20 @@ namespace _01.Scripts.Manager
 		public void SetCanvas(GameObject go, bool sort = true)
 		{
 			var canvas = Utils.GetOrAddComponent<Canvas>(go);
-			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+			Camera uiCamera = Camera.main;
+			if (uiCamera == null)
+				uiCamera = Object.FindAnyObjectByType<Camera>();
+
+			canvas.renderMode = RenderMode.ScreenSpaceCamera;
+			canvas.worldCamera = uiCamera;
+			// Gameplay sprites are around Z = 0 and the camera is around Z = -10.
+			// Keep the camera-space canvas behind those sprites so SpriteRenderer
+			// sorting can place gameplay targets above the UI background.
+			canvas.planeDistance = 100f;
 			canvas.overrideSorting = true;
+
+			if (uiCamera == null)
+				Debug.LogWarning($"{go.name}: Screen Space - Camera에 연결할 Camera가 없습니다.", go);
 
 			if (sort)
 			{

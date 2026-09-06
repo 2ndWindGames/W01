@@ -196,6 +196,7 @@ MonoBehaviour:
   mGameFlow: {fileID: 1002}
   mTargetPool: {fileID: 1003}
   mConfig: {fileID: 11400000, guid: 7f8a9b0c1234566778899aabbccddeef, type: 2}
+  bestScore: 0
 --- !u!1 &1658781071
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,8 +210,8 @@ GameObject:
   - component: {fileID: 1658781072}
   - component: {fileID: 1658781075}
   m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
+  m_Name: MainCamera
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 1658781071}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540, y: 1170, z: -1772.6082}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

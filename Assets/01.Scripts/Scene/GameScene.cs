@@ -60,23 +60,20 @@ namespace _01.Scripts.Scene
 			if (!base.Init())
 				return false;
 
-			
-			sceneType = Define.Scene.Game;
-			m_UiGamePopup = Managers.UI.ShowPopupUI<UI_GamePopup>();
-			m_UiGamePopup.Initialize();
-			
-			Debug.Log("Init");
 			InitGameScene();
-			
 			return true;
 		}
 
 		private void InitGameScene()
 		{
+			sceneType = Define.Scene.Game;
+			m_UiGamePopup = Managers.UI.ShowPopupUI<UI_GamePopup>();
+			m_UiGamePopup.Initialize();
+			
 			EnsureSceneServices();
 			EnsureConfig();
 			SetupPool();
-
+			
 			m_BestText = m_UiGamePopup.GetTextBest();
 			m_StatusText = m_UiGamePopup.GetTextStatus();
 			m_TimerText = m_UiGamePopup.GetTextTime();
@@ -102,6 +99,14 @@ namespace _01.Scripts.Scene
 			if (mTargetPool == null)
 			{
 				mTargetPool = gameObject.AddComponent<GameObjectPool>();
+			}
+
+			m_MainCamera = Camera.main;
+			if (m_MainCamera == null)
+			{
+				GameObject cameraObject = new GameObject("MainCamera");
+				m_MainCamera = cameraObject.AddComponent<Camera>();
+				cameraObject.tag = "MainCamera";
 			}
 		}
 
@@ -135,12 +140,12 @@ namespace _01.Scripts.Scene
 			glowRenderer.sprite = m_TargetSprite;
 			glowRenderer.color = new Color(0.3f, 0.85f, 1f, 0.16f);
 			glowRenderer.transform.localScale = Vector3.one * 1.7f;
-			glowRenderer.sortingOrder = -1;
+			glowRenderer.sortingOrder = 99;
 
 			SpriteRenderer renderer = target.AddComponent<SpriteRenderer>();
 			renderer.sprite = m_TargetSprite;
 			renderer.color = TargetColors[0];
-			renderer.sortingOrder = 0;
+			renderer.sortingOrder = 100;
 
 			CircleCollider2D collider = target.AddComponent<CircleCollider2D>();
 			collider.radius = 0.5f;

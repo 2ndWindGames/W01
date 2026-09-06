@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _01.Scripts.Scene;
 using MiniGameKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -60,6 +61,8 @@ namespace MiniGameKit.Samples.TapGame
         private float m_FeverRemaining;
         private bool m_FeverTriggered;
 
+        private GameScene m_GameScene;
+
         private void Awake()
         {
             m_SolidSprite = CreateSolidSprite();
@@ -77,6 +80,9 @@ namespace MiniGameKit.Samples.TapGame
             m_Timer.Completed += HandleTimerCompleted;
             m_GameFlow.StateChanged += HandleFlowStateChanged;
             HandleFlowStateChanged(m_GameFlow.State);
+            
+            
+            
         }
 
         private void Update()
