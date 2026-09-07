@@ -25,22 +25,22 @@ namespace _01.Scripts.Manager
 			PrepareAds();
 		}
 
-		// ½ÇÁ¦ Ãâ½ÃÇÏ±â Àü¿¡ Å×½ºÆ®·Î »ç¿ëÇÏ´Â IDµé.
-		// Ãâ½Ã Àü¿¡ ½ÇÁ¦ ID ¹ÚÀ¸¸é Á¤Áö »çÀ¯°¡ µÇ´Ï Á¶½ÉÇÏÀÚ.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ IDï¿½ï¿½.
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		const string TEST_APP_ID = "ca-app-pub-3940256099942544~3347511713";
 		const string TEST_ANDROID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
 		const string TEST_ANDROID_REWARDED = "ca-app-pub-3940256099942544/5224354917";
 		const string TEST_IOS_INTERSTITIAL = "ca-app-pub-3940256099942544/4411468910";
 		const string TEST_IOS_REWARDED = "ca-app-pub-3940256099942544/1712485313";
 
-		// ½ÇÁ¦ Ãâ½Ã¿ë IDµé
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¿ï¿½ IDï¿½ï¿½
 		const string ANDROID_APP_ID = "";
 		const string IOS_APP_ID = "";
 
 		public void PrepareAds()
 		{
 	#if UNITY_ANDROID
-			string interstitial = "ca-app-pub-4385483914896399/1780279477"; // Android_Interstitial
+				string interstitial = "ca-app-pub-4385483914896399/1780279477"; // Android_Interstitial
 			string rewarded = ""; // Android_Rewarded
 			string interstitialTest = TEST_ANDROID_INTERSTITIAL;
 			string rewardedTest = TEST_ANDROID_REWARDED;
@@ -88,7 +88,7 @@ namespace _01.Scripts.Manager
 			PrepareAds();
 		}
 
-		// Rewarded ±¤°í º¸»ó Ã³¸®
+		// Rewarded ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 		public void HandleUserEarnedReward(object sender, EventArgs args)
 		{
 			Debug.Log("HandleUserEarnedReward");

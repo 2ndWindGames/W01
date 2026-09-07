@@ -15,6 +15,8 @@ namespace _01.Scripts.UI.Popup
 			txtBestValue,
 			txtTimeValue,
 			txtStart,
+			txtComboValue,
+			txtResultValue
 		}
 		
 		enum Buttons
@@ -73,5 +75,7 @@ namespace _01.Scripts.UI.Popup
 		public TextMeshProUGUI GetTextBest() => GetText((int)Texts.txtBestValue);
 		public TextMeshProUGUI GetTextStatus() => GetText((int)Texts.txtStatus);
 		public TextMeshProUGUI GetTextScore() => GetText((int)Texts.txtScoreValue);
+		public TextMeshProUGUI GetTextCombo() => GetText((int)Texts.txtComboValue);
+		public TextMeshProUGUI GetTextResult() => GetText((int)Texts.txtResultValue);
 	}
 }

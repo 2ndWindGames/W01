@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _01.Scripts.Manager;
 using _01.Scripts.UI.Popup;
+using _01.Scripts.Util;
 using MiniGameKit;
 using MiniGameKit.Samples.TapGame;
 using TMPro;
@@ -12,6 +13,8 @@ namespace _01.Scripts.Scene
 {
 	public class GameScene : BaseScene
 	{
+		private const string BestScoreKey = "MiniGameKit.TapGame.BestScore";
+		
 		private static readonly Color[] TargetColors =
 		{
 			new Color(0.24f, 0.83f, 1f),
@@ -22,6 +25,9 @@ namespace _01.Scripts.Scene
 		
 		private readonly CountdownTimer m_Timer = new();
 		private readonly List<MiniGameTarget> m_ActiveTargets = new();
+
+		[SerializeField] private Collider2D mSpawnArea;
+		[SerializeField, Min(0f)] private float mSpawnMargin = 0.5f;
 		
 		[SerializeField]
 		private GameFlow mGameFlow;
@@ -35,12 +41,17 @@ namespace _01.Scripts.Scene
 		private UI_GamePopup m_UiGamePopup;
 		
 		private Camera m_MainCamera;
+		
+		private Sprite m_SolidSprite;
 		private Sprite m_TargetSprite;
 		
 		private TextMeshProUGUI m_BestText;
 		private TextMeshProUGUI m_StatusText;
 		private TextMeshProUGUI m_ScoreText;
 		private TextMeshProUGUI m_TimerText;
+
+		private TextMeshProUGUI m_ComboText;
+		private TextMeshProUGUI m_ResultText;
 		
 		private Button m_StartButton;
 		
@@ -70,6 +81,9 @@ namespace _01.Scripts.Scene
 			m_UiGamePopup = Managers.UI.ShowPopupUI<UI_GamePopup>();
 			m_UiGamePopup.Initialize();
 			
+			m_SolidSprite = CreateSolidSprite();
+			m_TargetSprite = CreateCircleSprite(96);
+			
 			EnsureSceneServices();
 			EnsureConfig();
 			SetupPool();
@@ -78,14 +92,22 @@ namespace _01.Scripts.Scene
 			m_StatusText = m_UiGamePopup.GetTextStatus();
 			m_TimerText = m_UiGamePopup.GetTextTime();
 			m_ScoreText = m_UiGamePopup.GetTextScore();
+			m_ComboText = m_UiGamePopup.GetTextCombo();
+			m_ResultText = m_UiGamePopup.GetTextResult();
+			
+			bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+			m_BestText.text = bestScore.ToString("00");
+			
 
 			m_StartButton = m_UiGamePopup.GetButtonStart();
 			
 			// m_UiGamePopup.BindEventStartButton(StartRound);
-			// m_BestText.text = BestScore.ToString("00");
+			
 
 			m_Timer.Completed += HandleTimerCompleted;
 			mGameFlow.StateChanged += HandleFlowStateChanged;
+			m_ComboText.text = "STREAK x0";
+				
 			HandleFlowStateChanged(mGameFlow.State);
 		}
 		
@@ -272,7 +294,7 @@ namespace _01.Scripts.Scene
                 m_BombsTapped++;
                 m_Combo = 0;
                 m_Timer.AddTime(-2f);
-                // m_ComboText.text = "BOMB!  -2.0 SEC";
+                m_ComboText.text = "BOMB!  -2.0 SEC";
                 mTargetPool.Despawn(target.gameObject);
                 m_ActiveTargets.Remove(target);
                 RefillTargets();
@@ -298,9 +320,9 @@ namespace _01.Scripts.Scene
                 m_FeverRemaining = mConfig.feverDuration;
             }
             m_ScoreText.text = m_Score.ToString("00");
-            // m_ComboText.text = m_FeverRemaining > 0f ? "FEVER!  x" + multiplier + "  •  STREAK " + m_Combo
-            //     : target.Type == TapTargetType.TimeBonus ? "+1.0 SEC  •  STREAK " + m_Combo
-            //     : "STREAK " + m_Combo + "  •  SCORE x" + multiplier;
+            m_ComboText.text = m_FeverRemaining > 0f ? "FEVER!  x" + multiplier + "  •  STREAK " + m_Combo
+                : target.Type == TapTargetType.TimeBonus ? "+1.0 SEC  •  STREAK " + m_Combo
+                : "STREAK " + m_Combo + "  •  SCORE x" + multiplier;
             mTargetPool.Despawn(target.gameObject);
             m_ActiveTargets.Remove(target);
             RefillTargets();
@@ -317,7 +339,7 @@ namespace _01.Scripts.Scene
             {
                 m_Misses++;
                 m_Combo = 0;
-                // m_ComboText.text = "MISSED  •  STREAK LOST";
+                m_ComboText.text = "MISSED  •  STREAK LOST";
             }
 
             mTargetPool.Despawn(target.gameObject);
@@ -327,6 +349,12 @@ namespace _01.Scripts.Scene
 		
 		private Vector3 GetSpawnPosition()
 		{
+			if (mSpawnArea != null)
+			{
+				Vector2 point = mSpawnArea.GetRandomPointInsideWorld(mSpawnMargin);
+				return new Vector3(point.x, point.y, 0f);
+			}
+
 			var halfHeight = m_MainCamera.orthographicSize;
 			var halfWidth = halfHeight * Mathf.Max(0.55f, m_MainCamera.aspect);
 			var minX = -Mathf.Max(1.15f, halfWidth - 0.7f);
@@ -385,14 +413,14 @@ namespace _01.Scripts.Scene
 				m_Timer.Stop();
 				ClearTargets();
 				bestScore = Mathf.Max(bestScore, m_Score);
-				// PlayerPrefs.SetInt(BestScoreKey, m_BestScore);
-				// PlayerPrefs.Save();
+				PlayerPrefs.SetInt(BestScoreKey, bestScore);
+				PlayerPrefs.Save();
 				m_BestText.text = bestScore.ToString("00");
-				// m_ResultText.text = "SCORE  " + m_Score.ToString("00")
-				//                               + "\nBEST  " + m_BestScore.ToString("00")
-				//                               + "\nMAX STREAK  " + m_MaxCombo
-				//                               + "\nACCURACY  " + GetAccuracy().ToString("0") + "%"
-				//                               + "\nGRADE  " + GetGrade();
+				m_ResultText.text = "SCORE  " + m_Score.ToString("00")
+				                              + "\nBEST  " + bestScore.ToString("00")
+				                              + "\nMAX STREAK  " + m_MaxCombo
+				                              + "\nACCURACY  " + GetAccuracy().ToString("0") + "%"
+				                              + "\nGRADE  " + GetGrade();
 			}
 		}
 		
@@ -433,6 +461,52 @@ namespace _01.Scripts.Scene
 			}
 
 			mGameFlow.Retry();
+		}
+		
+		private static Sprite CreateSolidSprite()
+		{
+			return Sprite.Create(Texture2D.whiteTexture, new Rect(0f, 0f, 1f, 1f),
+				new Vector2(0.5f, 0.5f), 1f);
+		}
+
+		private static Sprite CreateCircleSprite(int size)
+		{
+			Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+			texture.name = "PrototypeTargetCircle";
+			texture.filterMode = FilterMode.Bilinear;
+			texture.wrapMode = TextureWrapMode.Clamp;
+			Color[] pixels = new Color[size * size];
+			float center = (size - 1) * 0.5f;
+			float radius = center - 1f;
+			for (int y = 0; y < size; y++)
+			{
+				for (int x = 0; x < size; x++)
+				{
+					float distance = Vector2.Distance(new Vector2(x, y), new Vector2(center, center));
+					float alpha = Mathf.Clamp01(radius + 1f - distance);
+					pixels[y * size + x] = new Color(1f, 1f, 1f, alpha);
+				}
+			}
+
+			texture.SetPixels(pixels);
+			texture.Apply(false, true);
+			return Sprite.Create(texture, new Rect(0f, 0f, size, size),
+				new Vector2(0.5f, 0.5f), size);
+		}
+		
+		private float GetAccuracy()
+		{
+			int attempts = m_Hits + m_Misses + m_BombsTapped;
+			return attempts > 0 ? m_Hits * 100f / attempts : 0f;
+		}
+		
+		private string GetGrade()
+		{
+			float accuracy = GetAccuracy();
+			if (m_Score >= 70 && accuracy >= 92f) return "S";
+			if (m_Score >= 50 && accuracy >= 85f) return "A";
+			if (m_Score >= 30 && accuracy >= 72f) return "B";
+			return m_Score >= 15 ? "C" : "D";
 		}
 	}
 }
