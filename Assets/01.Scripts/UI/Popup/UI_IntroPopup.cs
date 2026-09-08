@@ -1,5 +1,6 @@
 using System;
 using _01.Scripts.Manager;
+using _01.Scripts.UI.Intro;
 using _01.Scripts.Util;
 using _01.Scripts.Util.Logging;
 using UnityEngine;
@@ -22,36 +23,41 @@ namespace _01.Scripts.UI.Popup
 				return false;
 
 			BindButton(typeof(Buttons));
-			
+
 			GetButton((int)Buttons.btn_start).gameObject.BindEvent(OnClickBtnStart);
 			GetButton((int)Buttons.btn_setting).gameObject.BindEvent(OnClickBtnSetting);
 			GetButton((int)Buttons.btn_sound).gameObject.BindEvent(OnClickBtnSound);
 			GetButton((int)Buttons.btn_easteregg).gameObject.BindEvent(OnClickBtnEasterEgg);
-			
+
+			var motionAnimator = GetComponent<IntroMotionAnimator>();
+			if (motionAnimator == null)
+				motionAnimator = gameObject.AddComponent<IntroMotionAnimator>();
+			motionAnimator.Initialize();
+
 			return true;
 		}
-		
+
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void OnClickBtnStart()
 		{
 			GameLog.Debug("OnClickBtnStart");
 			Managers.Scene.ChangeScene(Define.Scene.Game);
 		}
-		
+
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void OnClickBtnSetting()
 		{
 			GameLog.Debug("OnClickBtnSetting");
 			Managers.UI.ShowPopupUI<UI_SettingPopup>();
 		}
-		
+
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void OnClickBtnSound()
 		{
 			GameLog.Debug("OnClickBtnSound");
 			Managers.UI.ShowPopupUI<UI_SoundPopup>();
 		}
-		
+
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void OnClickBtnEasterEgg()
 		{

@@ -276,7 +276,10 @@ namespace _01.Scripts.Scene
 				: type == TapTargetType.TimeBonus ? new Color(1f, 0.78f, 0.2f)
 				: type == TapTargetType.Bomb ? new Color(1f, 0.2f, 0.3f)
 				: TargetColors[m_Hits % TargetColors.Length];
-			target.SetVisual(m_TargetSprite, color);
+			
+			var sprite = target.SetRandomSprite(target.GetComponent<SpriteRenderer>());
+			target.SetVisual(sprite, color);
+			
 			target.Bind(type, lifetime, scale, HandleTargetTapped, HandleTargetMissed);
 			m_ActiveTargets.Add(target);
 		}

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 namespace MiniGameKit.Samples.TapGame
 {
@@ -22,6 +23,9 @@ namespace MiniGameKit.Samples.TapGame
         private float m_PulsePhase;
         private float m_Lifetime;
         private float m_RemainingLifetime;
+        
+        private static Sprite[] s_CircleSprites;
+        private static bool s_CircleLoadErrorLogged;
 
         public TapTargetType Type { get; private set; }
 
@@ -77,14 +81,43 @@ namespace MiniGameKit.Samples.TapGame
             if (m_Renderer != null)
             {
                 m_Renderer.sprite = sprite;
-                m_Renderer.color = color;
+                // m_Renderer.color = color;
+                m_Renderer.color = Color.white;
             }
 
             if (m_GlowRenderer != null)
             {
                 m_GlowRenderer.sprite = sprite;
-                m_GlowRenderer.color = new Color(color.r, color.g, color.b, 0.16f);
+                // m_GlowRenderer.color = new Color(color.r, color.g, color.b, 0.16f);
+                m_GlowRenderer.color = Color.white;
             }
+        }
+
+        public Sprite SetRandomSprite(SpriteRenderer renderer)
+        {
+            renderer.sprite = GetRandomCircleSprite();
+            return renderer.sprite;
+        }
+        
+        private Sprite GetRandomCircleSprite()
+        {
+            if (s_CircleSprites == null)
+            {
+                s_CircleSprites = Resources.LoadAll<Sprite>("Circle");
+            }
+
+            if (s_CircleSprites.Length == 0)
+            {
+                if (!s_CircleLoadErrorLogged)
+                {
+                    Debug.LogError("No circle sprites were found in Assets/Resources/Circle.", this);
+                    s_CircleLoadErrorLogged = true;
+                }
+
+                return null;
+            }
+
+            return s_CircleSprites[Random.Range(0, s_CircleSprites.Length)];
         }
 
         public void OnPointerClick(PointerEventData eventData)

@@ -22,7 +22,7 @@ namespace MiniGameKit
         public float minimumTargetLifetime = 0.65f;
 
         [Range(0.25f, 1.5f)]
-        public float minimumTargetScale = 0.58f;
+        public float minimumTargetScale = 0.8f;
 
         [Header("Fever")]
         [Min(2)]
