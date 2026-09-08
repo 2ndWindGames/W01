@@ -6,10 +6,12 @@ using UnityEditor;
 public sealed class IntroUITexturePostprocessor : AssetPostprocessor
 {
     private const string IntroVisualsPath = "Assets/Resources/UI/Intro/Visuals/";
+    private const string IntroTitlePath = "Assets/Resources/UI/Intro/title/";
 
     private void OnPreprocessTexture()
     {
-        if (!assetPath.StartsWith(IntroVisualsPath, System.StringComparison.Ordinal))
+        if (!assetPath.StartsWith(IntroVisualsPath, System.StringComparison.Ordinal) &&
+            !assetPath.StartsWith(IntroTitlePath, System.StringComparison.Ordinal))
             return;
 
         var importer = (TextureImporter)assetImporter;

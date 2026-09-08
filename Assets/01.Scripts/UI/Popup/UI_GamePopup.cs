@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts.Manager;
 using _01.Scripts.Scene;
 using _01.Scripts.Util;
 using TMPro;
@@ -59,6 +60,7 @@ namespace _01.Scripts.UI.Popup
 			GetButton((int)Buttons.btnStart).gameObject.BindEvent(mGameScene.StartRound);
 			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(mGameScene.RetryRound);
 			GetText((int)Texts.txtBestValue).text = mGameScene.bestScore.ToString("00");
+			
 			
 			
 			IsInitialized = true;

@@ -35,7 +35,6 @@ namespace _01.Scripts.UI.Popup
 		private void OnClickBtnStart()
 		{
 			GameLog.Debug("OnClickBtnStart");
-			
 			Managers.Scene.ChangeScene(Define.Scene.Game);
 		}
 		
@@ -43,12 +42,14 @@ namespace _01.Scripts.UI.Popup
 		private void OnClickBtnSetting()
 		{
 			GameLog.Debug("OnClickBtnSetting");
+			Managers.UI.ShowPopupUI<UI_SettingPopup>();
 		}
 		
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void OnClickBtnSound()
 		{
 			GameLog.Debug("OnClickBtnSound");
+			Managers.UI.ShowPopupUI<UI_SoundPopup>();
 		}
 		
 		// ReSharper disable Unity.PerformanceAnalysis
