@@ -13,6 +13,7 @@ namespace _01.Scripts.Scene
 
 			sceneType = Define.Scene.Intro;
 			Managers.UI.ShowPopupUI<UI_IntroPopup>();
+			Managers.Sound.Play(Define.Sound.Bgm, "BGM/Intro_NeonAwakening", 0.42f);
 			Debug.Log("Init");
 			return true;
 		}

@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -122,6 +123,7 @@ namespace MiniGameKit.Samples.TapGame
 
         public void OnPointerClick(PointerEventData eventData)
         {
+			Managers.Sound.Play(Define.Sound.Effect, "SFX/Target_NeonTap", 0.72f);
             var tapped = m_OnTapped;
             m_OnTapped = null;
             m_OnMissed = null;

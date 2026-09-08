@@ -5,6 +5,7 @@ namespace _01.Scripts.Manager
 {
     public class SoundManager
     {
+		private const string ResourcesRoot = "Sounds/";
         private readonly AudioSource[] m_AudioSources = new AudioSource[(int)Define.Sound.Max];
         private readonly Dictionary<string, AudioClip> m_AudioClips = new Dictionary<string, AudioClip>();
 
@@ -12,31 +13,35 @@ namespace _01.Scripts.Manager
 
         public void Init()
         {
-		    if (m_SoundRoot == null)
-		    {
-			    m_SoundRoot = GameObject.Find("@SoundRoot");
-			    if (m_SoundRoot == null)
-			    {
-				    m_SoundRoot = new GameObject { name = "@SoundRoot" };
-				    Object.DontDestroyOnLoad(m_SoundRoot);
+			if (m_SoundRoot == null)
+			{
+				m_SoundRoot = GameObject.Find("@SoundRoot");
+				if (m_SoundRoot == null)
+					m_SoundRoot = new GameObject { name = "@SoundRoot" };
 
-				    string[] soundTypeNames = System.Enum.GetNames(typeof(Define.Sound));
-				    for (int count = 0; count < soundTypeNames.Length - 1; count++)
-				    {
-					    GameObject go = new GameObject { name = soundTypeNames[count] };
-					    m_AudioSources[count] = go.AddComponent<AudioSource>();
-					    go.transform.parent = m_SoundRoot.transform;
-				    }
+				Object.DontDestroyOnLoad(m_SoundRoot);
+			}
 
-				    m_AudioSources[(int)Define.Sound.Bgm].loop = true;
-			    }
-		    }
+			string[] soundTypeNames = System.Enum.GetNames(typeof(Define.Sound));
+			for (int count = 0; count < soundTypeNames.Length - 1; count++)
+			{
+				Transform child = m_SoundRoot.transform.Find(soundTypeNames[count]);
+				GameObject go = child != null ? child.gameObject : new GameObject(soundTypeNames[count]);
+				go.transform.SetParent(m_SoundRoot.transform, false);
+				m_AudioSources[count] = go.GetComponent<AudioSource>();
+				if (m_AudioSources[count] == null)
+					m_AudioSources[count] = go.AddComponent<AudioSource>();
+				m_AudioSources[count].playOnAwake = false;
+			}
+
+			m_AudioSources[(int)Define.Sound.Bgm].loop = true;
 	    }
 
         public void Clear()
         {
             foreach (var audioSource in m_AudioSources)
-                audioSource.Stop();
+				if (audioSource != null)
+					audioSource.Stop();
             m_AudioClips.Clear();
         }
 
@@ -55,8 +60,16 @@ namespace _01.Scripts.Manager
                 return false;
 
             AudioSource audioSource = m_AudioSources[(int)type];
-            if (!path.Contains("Sound/"))
-                path = $"Sound/{path}";
+			if (audioSource == null)
+			{
+				Debug.LogError($"SoundManager AudioSource가 초기화되지 않았습니다: {type}");
+				return false;
+			}
+
+			if (path.StartsWith("Sound/"))
+				path = ResourcesRoot + path.Substring("Sound/".Length);
+			else if (!path.StartsWith(ResourcesRoot))
+				path = ResourcesRoot + path;
 
             audioSource.volume = volume;
 
@@ -66,7 +79,10 @@ namespace _01.Scripts.Manager
                 {
                     AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
                     if (audioClip == null)
+					{
+						Debug.LogError($"BGM을 찾을 수 없습니다: Resources/{path}");
                         return false;
+					}
 
                     if (audioSource.isPlaying)
                         audioSource.Stop();
@@ -80,7 +96,10 @@ namespace _01.Scripts.Manager
                 {
                     AudioClip audioClip = GetAudioClip(path);
                     if (audioClip == null)
+					{
+						Debug.LogError($"효과음을 찾을 수 없습니다: Resources/{path}");
                         return false;
+					}
 
                     audioSource.pitch = pitch;
                     audioSource.PlayOneShot(audioClip);
@@ -128,8 +147,9 @@ namespace _01.Scripts.Manager
             if (m_AudioClips.TryGetValue(path, out var audioClip))
                 return audioClip;
 
-            audioClip = Managers.Resource.Load<AudioClip>(path);
-            m_AudioClips.Add(path, audioClip);
+			audioClip = Managers.Resource.Load<AudioClip>(path);
+			if (audioClip != null)
+				m_AudioClips.Add(path, audioClip);
             return audioClip;
         }
     }

@@ -406,6 +406,7 @@ namespace _01.Scripts.Scene
 
 			if (isReady)
 			{
+				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Game_NeonLobby", 0.38f);
 				m_Timer.Stop();
 				m_TimerText.text = mConfig.roundDuration.ToString("0.0");
 				// m_TimerCard.color = PanelColor;
@@ -414,6 +415,7 @@ namespace _01.Scripts.Scene
 			}
 			else if (isPlaying)
 			{
+				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Gameplay_NeonRush", 0.46f);
 				ClearTargets();
 				for (int i = 0; i < mConfig.initialTargetCount; i++)
 				{
@@ -422,6 +424,7 @@ namespace _01.Scripts.Scene
 			}
 			else if (isResult)
 			{
+				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Game_NeonLobby", 0.38f);
 				m_Timer.Stop();
 				ClearTargets();
 				bestScore = Mathf.Max(bestScore, m_Score);

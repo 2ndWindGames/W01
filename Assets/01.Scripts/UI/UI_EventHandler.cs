@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -21,6 +23,9 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDown
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
+		if (GetComponent<Button>() != null)
+			Managers.Sound.Play(Define.Sound.Effect, "SFX/Button_Click", 0.65f);
+
 		OnClickHandler?.Invoke();
 	}
 
