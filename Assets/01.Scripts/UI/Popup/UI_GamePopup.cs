@@ -21,7 +21,8 @@ namespace _01.Scripts.UI.Popup
 		
 		enum Buttons
 		{
-			btnStart
+			btnStart,
+			btnRetry
 		}
 		
 		private GameScene mGameScene;
@@ -56,19 +57,25 @@ namespace _01.Scripts.UI.Popup
 			}
 			
 			GetButton((int)Buttons.btnStart).gameObject.BindEvent(mGameScene.StartRound);
-
+			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(mGameScene.RetryRound);
 			GetText((int)Texts.txtBestValue).text = mGameScene.bestScore.ToString("00");
-
+			
 			
 			IsInitialized = true;
 		}
 		
 		
 		public Button GetButtonStart() => GetButton((int)Buttons.btnStart);
+		public Button GetButtonRetry() => GetButton((int)Buttons.btnRetry);
 
 		public void BindEventStartButton(Action action)
 		{
 			GetButton((int)Buttons.btnStart).gameObject.BindEvent(action);
+		}
+		
+		public void BindEventRetryButton(Action action)
+		{
+			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(action);
 		} 
 		
 		public TextMeshProUGUI GetTextTime() => GetText((int)Texts.txtTimeValue);

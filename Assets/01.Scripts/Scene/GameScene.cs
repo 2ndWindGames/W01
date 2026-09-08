@@ -54,6 +54,7 @@ namespace _01.Scripts.Scene
 		private TextMeshProUGUI m_ResultText;
 		
 		private Button m_StartButton;
+		private Button m_RetryButton;
 		
 		private int m_Score;
 		[HideInInspector] public int bestScore;
@@ -100,9 +101,7 @@ namespace _01.Scripts.Scene
 			
 
 			m_StartButton = m_UiGamePopup.GetButtonStart();
-			
-			// m_UiGamePopup.BindEventStartButton(StartRound);
-			
+			m_RetryButton = m_UiGamePopup.GetButtonRetry();
 
 			m_Timer.Completed += HandleTimerCompleted;
 			mGameFlow.StateChanged += HandleFlowStateChanged;
@@ -186,6 +185,16 @@ namespace _01.Scripts.Scene
 			m_Timer.Tick(Time.deltaTime);
 			UpdateFever();
 			UpdateTimerVisual();
+		}
+		
+		private void OnDestroy()
+		{
+			if (mGameFlow != null)
+			{
+				mGameFlow.StateChanged -= HandleFlowStateChanged;
+			}
+
+			m_Timer.Completed -= HandleTimerCompleted;
 		}
 		
 		private void UpdateFever()
@@ -282,7 +291,7 @@ namespace _01.Scripts.Scene
 			return TapTargetType.Normal;
 		}
 		
-		        private void HandleTargetTapped(MiniGameTarget target)
+		private void HandleTargetTapped(MiniGameTarget target)
         {
             if (mGameFlow.State != GameFlowState.Playing)
             {
@@ -388,7 +397,7 @@ namespace _01.Scripts.Scene
 					: "ROUND COMPLETE";
 			m_StatusText.color = isResult ? new Color(1f, 0.78f, 0.38f) : Color.white;
 			m_StartButton.gameObject.SetActive(isReady);
-			// m_RetryButton.gameObject.SetActive(isResult);
+			m_RetryButton.gameObject.SetActive(isResult);
 			// m_ResultPanel.gameObject.SetActive(isResult);
 			// m_HintText.gameObject.SetActive(!isResult);
 
@@ -397,7 +406,7 @@ namespace _01.Scripts.Scene
 				m_Timer.Stop();
 				m_TimerText.text = mConfig.roundDuration.ToString("0.0");
 				// m_TimerCard.color = PanelColor;
-				// m_ComboText.text = "STREAK x0";
+				m_ComboText.text = "STREAK x0";
 				ClearTargets();
 			}
 			else if (isPlaying)
@@ -446,14 +455,14 @@ namespace _01.Scripts.Scene
 			m_FeverRemaining = 0f;
 			m_FeverTriggered = false;
 			m_ScoreText.text = "00";
-			// m_ComboText.text = "STREAK x0";
-			// m_ResultText.text = string.Empty;
+			m_ComboText.text = "STREAK x0";
+			m_ResultText.text = string.Empty;
 			mGameFlow.StartGame();
 			m_Timer.Start(mConfig.roundDuration);
 			UpdateTimerVisual();
 		}
-
-		private void RetryRound()
+		
+		public void RetryRound()
 		{
 			if (mGameFlow.State != GameFlowState.Result)
 			{
