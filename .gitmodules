@@ -1,0 +1,3 @@
+[submodule "Assets/SWGUnity2DCore"]
+	path = Assets/SWGUnity2DCore
+	url = https://github.com/2ndWindGames/SWGUnity2DCore.git
