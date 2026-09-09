@@ -1,0 +1,14 @@
+{
+  "aab": "C:\\Users\\rlatmdwp5\\Documents\\GitHub\\W01\\w01.aab",
+  "aab_sha256": "79dd3e6b93fb8262d9f5de724d8905ddebe869c3032ed4f5c0627cc5a152ed37",
+  "symbols_zip": "C:\\Users\\rlatmdwp5\\Documents\\GitHub\\W01\\output\\release-symbols\\w01-79dd3e6b93fb.symbols.zip",
+  "verified_build_ids": {
+    "arm64-v8a/libc++_shared.so": "b04675a35ad96f8a9dcaa073e3bd31d4536f00ad",
+    "arm64-v8a/libgame.so": "f30c73752eda07c646822c3a2c91c71eabbc448b",
+    "arm64-v8a/libil2cpp.so": "21b40fd0fd44d7a720fe4c0bc6c3fbb8e01774d1",
+    "arm64-v8a/libmain.so": "c5498ab8c791f1473a54c79a9d3c5b738ff6d941",
+    "arm64-v8a/libswappywrapper.so": "eb35d7aa47573ee1da77b30d559d530735f2f41f",
+    "arm64-v8a/libunity.so": "72d062c076ab1145"
+  },
+  "libraries_without_available_symbols": []
+}

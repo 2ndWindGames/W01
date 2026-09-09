@@ -41,6 +41,9 @@ namespace _01.Scripts.Scene
 		private UI_GamePopup m_UiGamePopup;
 		
 		private Camera m_MainCamera;
+		private Rect m_OriginalCameraRect;
+		private bool m_AdsAttached;
+		private bool m_RoundInProgress;
 		
 		private Sprite m_SolidSprite;
 		private Sprite m_TargetSprite;
@@ -86,6 +89,10 @@ namespace _01.Scripts.Scene
 			m_TargetSprite = CreateCircleSprite(96);
 			
 			EnsureSceneServices();
+			m_OriginalCameraRect = m_MainCamera.rect;
+			Managers.Ads.BannerHeightChanged += ApplyBannerSpace;
+			m_AdsAttached = true;
+			Managers.Ads.EnterGameScene();
 			EnsureConfig();
 			SetupPool();
 			
@@ -189,12 +196,29 @@ namespace _01.Scripts.Scene
 		
 		private void OnDestroy()
 		{
+			if (m_AdsAttached)
+			{
+				Managers.Ads.BannerHeightChanged -= ApplyBannerSpace;
+				Managers.Ads.ExitGameScene();
+				if (m_MainCamera != null) m_MainCamera.rect = m_OriginalCameraRect;
+			}
 			if (mGameFlow != null)
 			{
 				mGameFlow.StateChanged -= HandleFlowStateChanged;
 			}
 
 			m_Timer.Completed -= HandleTimerCompleted;
+		}
+
+		private void ApplyBannerSpace(float pixels)
+		{
+			if (m_MainCamera == null) return;
+			float bottom = Mathf.Clamp(pixels / Mathf.Max(1, Screen.height), 0, 0.25f);
+			var rect = m_OriginalCameraRect;
+			float newBottom = Mathf.Max(rect.yMin, bottom);
+			rect.height = Mathf.Max(0.1f, rect.yMax - newBottom);
+			rect.y = newBottom;
+			m_MainCamera.rect = rect;
 		}
 		
 		private void UpdateFever()
@@ -415,6 +439,7 @@ namespace _01.Scripts.Scene
 			}
 			else if (isPlaying)
 			{
+				m_RoundInProgress = true;
 				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Gameplay_NeonRush", 0.46f);
 				ClearTargets();
 				for (int i = 0; i < mConfig.initialTargetCount; i++)
@@ -436,6 +461,15 @@ namespace _01.Scripts.Scene
 				                              + "\nMAX STREAK  " + m_MaxCombo
 				                              + "\nACCURACY  " + GetAccuracy().ToString("0") + "%"
 				                              + "\nGRADE  " + GetGrade();
+
+				// ranking 기록
+				Managers.Rank.SetProfile("mangpeng", "kor", "penguin");
+				Managers.Rank.SubmitScore(m_Score);
+				if (m_RoundInProgress)
+				{
+					m_RoundInProgress = false;
+					Managers.Ads.RecordCompletedRound();
+				}
 			}
 		}
 		
@@ -447,6 +481,7 @@ namespace _01.Scripts.Scene
 		
 		public void StartRound()
 		{
+			if (Managers.Ads.IsShowingInterstitial) return;
 			if (mGameFlow.State != GameFlowState.Ready)
 			{
 				return;
@@ -470,6 +505,7 @@ namespace _01.Scripts.Scene
 		
 		public void RetryRound()
 		{
+			if (Managers.Ads.IsShowingInterstitial) return;
 			if (mGameFlow.State != GameFlowState.Result)
 			{
 				return;

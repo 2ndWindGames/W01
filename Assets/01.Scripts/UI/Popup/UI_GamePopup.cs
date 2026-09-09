@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using _01.Scripts.Manager;
 using _01.Scripts.Scene;
 using _01.Scripts.Util;
@@ -22,6 +23,7 @@ namespace _01.Scripts.UI.Popup
 		
 		enum Buttons
 		{
+			btnBack,
 			btnStart,
 			btnRetry
 		}
@@ -57,16 +59,21 @@ namespace _01.Scripts.UI.Popup
 				return;
 			}
 			
+			GetButton((int)Buttons.btnBack).gameObject.BindEvent(ClickBackButton);
 			GetButton((int)Buttons.btnStart).gameObject.BindEvent(mGameScene.StartRound);
 			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(mGameScene.RetryRound);
 			GetText((int)Texts.txtBestValue).text = mGameScene.bestScore.ToString("00");
 			
-			
-			
 			IsInitialized = true;
 		}
-		
-		
+
+		private void ClickBackButton()
+		{
+			if (Managers.Ads.IsShowingInterstitial) return;
+			Managers.Scene.ChangeScene(Define.Scene.Intro);
+		}
+
+
 		public Button GetButtonStart() => GetButton((int)Buttons.btnStart);
 		public Button GetButtonRetry() => GetButton((int)Buttons.btnRetry);
 

@@ -15,6 +15,7 @@ namespace _01.Scripts.Manager
         private static readonly ResourceManager s_resourceManager = new ResourceManager();
         private static readonly SceneManagerEx s_sceneManager = new SceneManagerEx();
         private static readonly SoundManager s_soundManager = new SoundManager();
+        private static readonly RankManager s_rankManager = new RankManager();
 
         public static AdsManager Ads { get { Init(); return s_adsManager; } }
 //        public static GameManagerEx Game { get { Init(); return s_gameManager; } }
@@ -24,6 +25,7 @@ namespace _01.Scripts.Manager
         public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
         public static SceneManagerEx Scene { get { Init(); return s_sceneManager; } }
         public static SoundManager Sound {  get { Init(); return s_soundManager; } }
+        public static RankManager Rank {  get { Init(); return s_rankManager; } }
 
         public static string GetText(int id)
 	    {
@@ -37,6 +39,11 @@ namespace _01.Scripts.Manager
         private void Start()
         {
             Init();
+        }
+
+        private void Update()
+        {
+            s_adsManager.Tick();
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
@@ -57,9 +64,9 @@ namespace _01.Scripts.Manager
             s_resourceManager.Init();
             s_sceneManager.Init();
             s_soundManager.Init();
+            s_rankManager.Init();
                 
             Application.targetFrameRate = 60;
         }
     }
 }
-

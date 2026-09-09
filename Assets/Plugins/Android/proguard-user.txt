@@ -1,0 +1,5 @@
+# This project uses play-services-ads (the standard Google Mobile Ads SDK).
+# The Unity plugin also bundles optional Next-Gen wrappers, whose SDK is absent.
+# Suppress missing types only for that unused SDK; keep other R8 diagnostics.
+# Remove this rule if the project switches to the Next-Gen SDK.
+-dontwarn com.google.android.libraries.ads.mobile.sdk.**

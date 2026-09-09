@@ -1,0 +1,3 @@
+Built-in image edit requested neutral white. Final tintable RGB normalized to pure white with original alpha retained exactly to preserve the existing geometry and translucent fill. Unity metadata unchanged.
+
+Edit this Unity back-button sprite to neutral white for runtime tinting. Preserve exactly the left-pointing triangle silhouette, size, placement and transparent margins. Replace all blue/purple RGB with pure white #FFFFFF. Preserve translucent interior and more opaque thin border in alpha: interior approximately 45% opacity and border 85%. No hue, no shadows, no lighting, no new geometry. Output true RGBA transparent PNG. This is a white tintable UI mask, not a mockup.

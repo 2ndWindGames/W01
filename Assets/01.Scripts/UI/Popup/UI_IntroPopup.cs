@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using _01.Scripts.Manager;
 using _01.Scripts.UI.Intro;
 using _01.Scripts.Util;
@@ -14,6 +15,7 @@ namespace _01.Scripts.UI.Popup
 			btn_start,
 			btn_setting,
 			btn_sound,
+			btn_rank,
 			btn_easteregg,
 		}
 
@@ -27,6 +29,7 @@ namespace _01.Scripts.UI.Popup
 			GetButton((int)Buttons.btn_start).gameObject.BindEvent(OnClickBtnStart);
 			GetButton((int)Buttons.btn_setting).gameObject.BindEvent(OnClickBtnSetting);
 			GetButton((int)Buttons.btn_sound).gameObject.BindEvent(OnClickBtnSound);
+			GetButton((int)Buttons.btn_rank).gameObject.BindEvent(OnClickBtnRank);
 			GetButton((int)Buttons.btn_easteregg).gameObject.BindEvent(OnClickBtnEasterEgg);
 
 			var motionAnimator = GetComponent<IntroMotionAnimator>();
@@ -48,14 +51,37 @@ namespace _01.Scripts.UI.Popup
 		private void OnClickBtnSetting()
 		{
 			GameLog.Debug("OnClickBtnSetting");
-			Managers.UI.ShowPopupUI<UI_SettingPopup>();
+			
+			var popUp = Managers.UI.FindPopup<UI_SettingPopup>();
+			if (popUp == null)
+			{
+				Managers.UI.ShowPopupUI<UI_SettingPopup>();	
+				Managers.Rank.GetTopNPlayers(10);
+			}
 		}
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void OnClickBtnSound()
 		{
 			GameLog.Debug("OnClickBtnSound");
-			Managers.UI.ShowPopupUI<UI_SoundPopup>();
+			
+			var popUp = Managers.UI.FindPopup<UI_SoundPopup>();
+			if (popUp == null)
+			{
+				Managers.UI.ShowPopupUI<UI_SoundPopup>();	
+			}
+
+		}
+		
+		private void OnClickBtnRank()
+		{
+			GameLog.Debug("OnClickBtnRank");
+			
+			var popUp = Managers.UI.FindPopup<UI_RankPopup>();
+			if (popUp == null)
+			{
+				Managers.UI.ShowPopupUI<UI_RankPopup>();	
+			}
 		}
 
 		// ReSharper disable Unity.PerformanceAnalysis

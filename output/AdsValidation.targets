@@ -1,0 +1,6 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Remove="Assets\01.Scripts\Manager\InterstitialSchedule.cs" />
+    <Compile Include="$(MSBuildProjectDirectory)\Assets\01.Scripts\Manager\InterstitialSchedule.cs" />
+  </ItemGroup>
+</Project>

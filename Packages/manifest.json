@@ -1,5 +1,13 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": ["com.google"]
+    }
+  ],
   "dependencies": {
+    "com.google.ads.mobile": "11.5.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.device-simulator.devices": "1.0.1",
     "com.unity.ide.rider": "3.0.40",
@@ -8,6 +16,7 @@
     "com.unity.mobile.android-logcat": "1.4.7",
     "com.unity.multiplayer.center": "1.0.1",
     "com.unity.purchasing": "5.4.2",
+    "com.unity.services.leaderboards": "2.3.4",
     "com.unity.ugui": "2.0.0",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.adaptiveperformance": "1.0.0",
