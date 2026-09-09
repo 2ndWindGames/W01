@@ -17,6 +17,38 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "com.secondwind.ads.admob": {
+      "version": "file:../LocalPackages/SWGUnity2DCore/Packages/com.secondwind.ads.admob",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.google.ads.mobile": "11.5.0",
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.modules.audio": "1.0.0"
+      }
+    },
+    "com.secondwind.core": {
+      "version": "file:../LocalPackages/SWGUnity2DCore/Packages/com.secondwind.core",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
+      }
+    },
+    "com.secondwind.leaderboards.ugs": {
+      "version": "file:../LocalPackages/SWGUnity2DCore/Packages/com.secondwind.leaderboards.ugs",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.services.leaderboards": "2.3.4",
+        "com.unity.services.authentication": "3.7.4",
+        "com.unity.services.core": "1.18.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.2"
+      }
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -87,7 +119,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.2",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

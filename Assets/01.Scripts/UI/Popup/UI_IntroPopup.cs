@@ -44,7 +44,7 @@ namespace _01.Scripts.UI.Popup
 		private void OnClickBtnStart()
 		{
 			GameLog.Debug("OnClickBtnStart");
-			Managers.Scene.ChangeScene(Define.Scene.Game);
+			Managers.Scene.ChangeScene(_01.Scripts.Scene.W01SceneType.Game);
 		}
 
 		// ReSharper disable Unity.PerformanceAnalysis

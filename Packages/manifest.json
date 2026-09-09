@@ -7,6 +7,9 @@
     }
   ],
   "dependencies": {
+    "com.secondwind.core": "file:../LocalPackages/SWGUnity2DCore/Packages/com.secondwind.core",
+    "com.secondwind.ads.admob": "file:../LocalPackages/SWGUnity2DCore/Packages/com.secondwind.ads.admob",
+    "com.secondwind.leaderboards.ugs": "file:../LocalPackages/SWGUnity2DCore/Packages/com.secondwind.leaderboards.ugs",
     "com.google.ads.mobile": "11.5.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.device-simulator.devices": "1.0.1",

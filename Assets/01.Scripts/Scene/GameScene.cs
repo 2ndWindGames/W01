@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _01.Scripts.Game;
-using _01.Scripts.Pool;
+using SWGUnity2DCore.Pool;
 using _01.Scripts.UI.Popup;
 using SWGUnity2DCore;
 using SWGUnity2DCore.Manager;
@@ -83,7 +83,7 @@ namespace _01.Scripts.Scene
 
 		private void InitGameScene()
 		{
-			sceneType = Define.Scene.Game;
+			sceneType = _01.Scripts.Scene.W01SceneType.Game;
 			m_UiGamePopup = Managers.UI.ShowPopupUI<UI_GamePopup>();
 			m_UiGamePopup.Initialize();
 			

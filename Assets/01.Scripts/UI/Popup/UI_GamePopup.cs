@@ -70,7 +70,7 @@ namespace _01.Scripts.UI.Popup
 		private void ClickBackButton()
 		{
 			if (Managers.Ads.IsShowingInterstitial) return;
-			Managers.Scene.ChangeScene(Define.Scene.Intro);
+			Managers.Scene.ChangeScene(_01.Scripts.Scene.W01SceneType.Intro);
 		}
 
 

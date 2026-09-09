@@ -56,3 +56,6 @@ crashlytics-build.properties
 # Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 /[Ss]erver[Dd]ata/
+
+# Local package-extraction build verification artifacts
+/output/core-validation/
