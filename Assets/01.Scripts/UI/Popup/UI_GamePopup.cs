@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using _01.Scripts.Manager;
 using _01.Scripts.Scene;
-using _01.Scripts.Util;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Util;
 using TMPro;
 using UnityEngine.UI;
 
@@ -52,7 +52,7 @@ namespace _01.Scripts.UI.Popup
 			BindText(typeof(Texts));
 			BindButton(typeof(Buttons));
 
-			var curScene = Manager.SceneManagerEx.CurrentScene;
+			var curScene = SceneManagerEx.CurrentScene;
 			mGameScene = curScene.GetComponent<GameScene>();
 			if (mGameScene == null)
 			{

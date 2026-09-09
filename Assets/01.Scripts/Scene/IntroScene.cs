@@ -1,5 +1,7 @@
-﻿using _01.Scripts.Manager;
-using _01.Scripts.UI.Popup;
+﻿using _01.Scripts.UI.Popup;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Scene;
+using SWGUnity2DCore.Util;
 using UnityEngine;
 
 namespace _01.Scripts.Scene

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using _01.Scripts.Manager;
-using _01.Scripts.Util;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Util;
 using UnityEngine;
-using static Define;
+using static SWGUnity2DCore.Util.Define;
 
 namespace _01.Scripts.UI.Popup
 {

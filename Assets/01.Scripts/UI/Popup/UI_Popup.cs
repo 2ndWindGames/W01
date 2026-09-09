@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using _01.Scripts.Manager;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.UI;
 using UnityEngine;
 
 public class UI_Popup : UI_Base

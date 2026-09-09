@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using _01.Scripts.Manager;
+using _01.Scripts.Game;
+using _01.Scripts.Pool;
 using _01.Scripts.UI.Popup;
-using _01.Scripts.Util;
-using MiniGameKit;
-using MiniGameKit.Samples.TapGame;
+using SWGUnity2DCore;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Scene;
+using SWGUnity2DCore.Util;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +26,7 @@ namespace _01.Scripts.Scene
 		};
 		
 		private readonly CountdownTimer m_Timer = new();
-		private readonly List<MiniGameTarget> m_ActiveTargets = new();
+		private readonly List<CircleTarget> m_ActiveTargets = new();
 
 		[SerializeField] private Collider2D mSpawnArea;
 		[SerializeField, Min(0f)] private float mSpawnMargin = 0.5f;
@@ -177,7 +179,7 @@ namespace _01.Scripts.Scene
 
 			CircleCollider2D collider = target.AddComponent<CircleCollider2D>();
 			collider.radius = 0.5f;
-			target.AddComponent<MiniGameTarget>();
+			target.AddComponent<CircleTarget>();
 			target.SetActive(false);
 			return target;
 		}
@@ -279,7 +281,7 @@ namespace _01.Scripts.Scene
 				return;
 			}
 
-			MiniGameTarget target = instance.GetComponent<MiniGameTarget>();
+			CircleTarget target = instance.GetComponent<CircleTarget>();
 			if (!target)
 			{
 				Debug.LogError("The target prefab needs MiniGameTarget.", instance);
@@ -318,7 +320,7 @@ namespace _01.Scripts.Scene
 			return TapTargetType.Normal;
 		}
 		
-		private void HandleTargetTapped(MiniGameTarget target)
+		private void HandleTargetTapped(CircleTarget target)
         {
             if (mGameFlow.State != GameFlowState.Playing)
             {
@@ -364,7 +366,7 @@ namespace _01.Scripts.Scene
             RefillTargets();
         }
 
-        private void HandleTargetMissed(MiniGameTarget target)
+        private void HandleTargetMissed(CircleTarget target)
         {
             if (mGameFlow.State != GameFlowState.Playing)
             {

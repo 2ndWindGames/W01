@@ -1,8 +1,8 @@
 using System;
-using _01.Scripts.Manager;
 using _01.Scripts.UI.SubItem;
-using _01.Scripts.Util;
-using _01.Scripts.Util.Logging;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Util;
+using SWGUnity2DCore.Util.Logging;
 using UnityEngine;
 using UnityEngine.UI;
 

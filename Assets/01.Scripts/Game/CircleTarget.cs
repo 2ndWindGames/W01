@@ -1,10 +1,11 @@
 using System;
-using _01.Scripts.Manager;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Util;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-namespace MiniGameKit.Samples.TapGame
+namespace _01.Scripts.Game
 {
     public enum TapTargetType
     {
@@ -14,10 +15,10 @@ namespace MiniGameKit.Samples.TapGame
         Bomb
     }
 
-    public sealed class MiniGameTarget : MonoBehaviour, IPointerClickHandler
+    public sealed class CircleTarget : MonoBehaviour, IPointerClickHandler
     {
-        private Action<MiniGameTarget> m_OnTapped;
-        private Action<MiniGameTarget> m_OnMissed;
+        private Action<CircleTarget> m_OnTapped;
+        private Action<CircleTarget> m_OnMissed;
         private SpriteRenderer m_Renderer;
         private SpriteRenderer m_GlowRenderer;
         private Vector3 m_BaseScale;
@@ -66,7 +67,7 @@ namespace MiniGameKit.Samples.TapGame
         }
 
         public void Bind(TapTargetType type, float lifetime, float scale,
-            Action<MiniGameTarget> onTapped, Action<MiniGameTarget> onMissed)
+            Action<CircleTarget> onTapped, Action<CircleTarget> onMissed)
         {
             Type = type;
             m_Lifetime = Mathf.Max(0.1f, lifetime);

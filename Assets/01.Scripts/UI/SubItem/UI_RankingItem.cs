@@ -1,3 +1,4 @@
+using SWGUnity2DCore.UI;
 using UnityEngine;
 
 namespace _01.Scripts.UI.SubItem

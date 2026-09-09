@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MiniGameKit
+namespace _01.Scripts.Pool
 {
     /// <summary>
     /// A single-prefab pool. Loading and asset lookup are intentionally outside this class.

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace MiniGameKit
+namespace _01.Scripts.Game
 {
     public enum GameFlowState
     {
