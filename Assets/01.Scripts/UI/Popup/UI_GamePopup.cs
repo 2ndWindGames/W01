@@ -24,11 +24,13 @@ namespace _01.Scripts.UI.Popup
 		enum Buttons
 		{
 			btnBack,
+			btnAds,
 			btnStart,
 			btnRetry
 		}
 		
 		private GameScene mGameScene;
+		private Button mAdsButton;
 
 		public bool IsInitialized { get; private set; }
 		
@@ -60,6 +62,12 @@ namespace _01.Scripts.UI.Popup
 			}
 			
 			GetButton((int)Buttons.btnBack).gameObject.BindEvent(ClickBackButton);
+			mAdsButton = GetButton((int)Buttons.btnAds);
+			mAdsButton.gameObject.BindEvent(ClickAdsButton);
+			Managers.IAP.NoAdsChanged += OnNoAdsChanged;
+			Managers.IAP.StoreReadyChanged += OnStoreReadyChanged;
+			Managers.IAP.PurchaseFailed += OnPurchaseFailed;
+			RefreshAdsButton();
 			GetButton((int)Buttons.btnStart).gameObject.BindEvent(mGameScene.StartRound);
 			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(mGameScene.RetryRound);
 			GetText((int)Texts.txtBestValue).text = mGameScene.bestScore.ToString("00");
@@ -71,6 +79,30 @@ namespace _01.Scripts.UI.Popup
 		{
 			if (Managers.Ads.IsShowingInterstitial) return;
 			Managers.Scene.ChangeScene(_01.Scripts.Scene.W01SceneType.Intro);
+		}
+		
+		private void ClickAdsButton()
+		{
+			if (Managers.IAP.PurchaseRemoveAds())
+				mAdsButton.interactable = false;
+		}
+
+		private void OnNoAdsChanged(bool noAds) => RefreshAdsButton();
+		private void OnStoreReadyChanged(bool ready) => RefreshAdsButton();
+		private void OnPurchaseFailed(string message) => RefreshAdsButton();
+
+		private void RefreshAdsButton()
+		{
+			if (mAdsButton == null) return;
+			mAdsButton.gameObject.SetActive(!Managers.IAP.IsNoAds);
+			mAdsButton.interactable = Managers.IAP.IsStoreReady && !Managers.IAP.IsPurchasing;
+		}
+
+		private void OnDestroy()
+		{
+			Managers.IAP.NoAdsChanged -= OnNoAdsChanged;
+			Managers.IAP.StoreReadyChanged -= OnStoreReadyChanged;
+			Managers.IAP.PurchaseFailed -= OnPurchaseFailed;
 		}
 
 

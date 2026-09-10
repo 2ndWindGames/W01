@@ -5,6 +5,7 @@ namespace SWGUnity2DCore.Manager
     {
         private readonly InterstitialSchedule m_Schedule = new InterstitialSchedule();
         private bool m_InGame;
+        public bool AdsDisabled { get; private set; }
 
         public W01AdsManager(AdMobOptions options) : base(options)
         {
@@ -14,7 +15,7 @@ namespace SWGUnity2DCore.Manager
         public void EnterGameScene()
         {
             m_InGame = true;
-            ShowBanner();
+            if (!AdsDisabled) ShowBanner();
         }
 
         public void ExitGameScene()
@@ -25,13 +26,23 @@ namespace SWGUnity2DCore.Manager
 
         public void RecordCompletedRound()
         {
+            if (AdsDisabled) return;
             m_Schedule.RecordRound();
             ShowInterstitialAds();
         }
 
+        public void SetAdsDisabled(bool disabled)
+        {
+            AdsDisabled = disabled;
+            if (disabled)
+                HideBanner();
+            else if (m_InGame)
+                ShowBanner();
+        }
+
         public new void ShowInterstitialAds()
         {
-            if (m_InGame && m_Schedule.CanShow(UnityEngine.Time.realtimeSinceStartupAsDouble))
+            if (!AdsDisabled && m_InGame && m_Schedule.CanShow(UnityEngine.Time.realtimeSinceStartupAsDouble))
                 base.ShowInterstitialAds();
         }
     }
