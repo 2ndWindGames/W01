@@ -303,7 +303,7 @@ namespace _01.Scripts.Scene
 				: type == TapTargetType.Bomb ? new Color(1f, 0.2f, 0.3f)
 				: TargetColors[m_Hits % TargetColors.Length];
 			
-			var sprite = target.SetRandomSprite(target.GetComponent<SpriteRenderer>());
+			var sprite = target.GetSprite(type);
 			target.SetVisual(sprite, color);
 			
 			target.Bind(type, lifetime, scale, HandleTargetTapped, HandleTargetMissed);

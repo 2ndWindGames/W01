@@ -3,7 +3,6 @@ using SWGUnity2DCore.Manager;
 using SWGUnity2DCore.Util;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Random = UnityEngine.Random;
 
 namespace _01.Scripts.Game
 {
@@ -26,8 +25,15 @@ namespace _01.Scripts.Game
         private float m_Lifetime;
         private float m_RemainingLifetime;
         
-        private static Sprite[] s_CircleSprites;
-        private static bool s_CircleLoadErrorLogged;
+        private static readonly Sprite[] s_TargetSprites = new Sprite[4];
+        private static readonly string[] s_TargetResourcePaths =
+        {
+            "UI/NeonSignalPack/Targets/target_normal",
+            "UI/NeonSignalPack/Targets/target_quick",
+            "UI/NeonSignalPack/Targets/target_time",
+            "UI/NeonSignalPack/Targets/target_danger"
+        };
+        private static bool s_TargetLoadErrorLogged;
 
         public TapTargetType Type { get; private set; }
 
@@ -95,31 +101,26 @@ namespace _01.Scripts.Game
             }
         }
 
-        public Sprite SetRandomSprite(SpriteRenderer renderer)
+        public Sprite GetSprite(TapTargetType type)
         {
-            renderer.sprite = GetRandomCircleSprite();
-            return renderer.sprite;
-        }
-        
-        private Sprite GetRandomCircleSprite()
-        {
-            if (s_CircleSprites == null)
+            int index = (int)type;
+            if (index < 0 || index >= s_TargetSprites.Length)
             {
-                s_CircleSprites = Resources.LoadAll<Sprite>("Circle");
+                index = 0;
             }
 
-            if (s_CircleSprites.Length == 0)
+            if (s_TargetSprites[index] == null)
             {
-                if (!s_CircleLoadErrorLogged)
-                {
-                    Debug.LogError("No circle sprites were found in Assets/Resources/Circle.", this);
-                    s_CircleLoadErrorLogged = true;
-                }
-
-                return null;
+                s_TargetSprites[index] = Resources.Load<Sprite>(s_TargetResourcePaths[index]);
             }
 
-            return s_CircleSprites[Random.Range(0, s_CircleSprites.Length)];
+            if (s_TargetSprites[index] == null && !s_TargetLoadErrorLogged)
+            {
+                Debug.LogError("Neon Signal target sprites could not be loaded from Resources/UI/NeonSignalPack/Targets.", this);
+                s_TargetLoadErrorLogged = true;
+            }
+
+            return s_TargetSprites[index];
         }
 
         public void OnPointerClick(PointerEventData eventData)
