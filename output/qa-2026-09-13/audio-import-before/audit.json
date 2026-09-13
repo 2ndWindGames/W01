@@ -1,0 +1,92 @@
+[
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\BGM\\Game_NeonLobby.wav",
+    "Expected": "Streaming Vorbis",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\BGM\\Gameplay_NeonRush.wav",
+    "Expected": "Streaming Vorbis",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\BGM\\Intro_NeonAwakening.wav",
+    "Expected": "Streaming Vorbis",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Button_Click.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Fever_End.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Fever_Quick.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Fever_Start.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Fever_Tap.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Fever_TimeBonus.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\New_Best.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Round_Complete.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Round_Start.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Target_Bomb.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Target_Miss.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Target_NeonTap.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Target_Quick.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Target_TimeBonus.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": true
+  },
+  {
+    "File": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\Sounds\\SFX\\Timer_Tick.wav",
+    "Expected": "Preloaded PCM",
+    "Pass": false
+  }
+]

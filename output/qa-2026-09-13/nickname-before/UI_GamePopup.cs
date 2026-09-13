@@ -1,0 +1,394 @@
+using System;
+using System.Collections;
+using System.Threading.Tasks;
+using _01.Scripts.Scene;
+using SWGUnity2DCore.Manager;
+using SWGUnity2DCore.Util;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace _01.Scripts.UI.Popup
+{
+	public class UI_GamePopup : UI_Popup
+	{
+		enum Texts
+		{
+			txtStatus,
+			txtScoreValue,
+			txtBestValue,
+			txtTimeValue,
+			txtStart,
+			txtComboValue,
+			txtResultValue
+		}
+		
+		enum Buttons
+		{
+			btnBack,
+			btnAds,
+			btnStart,
+			btnRetry
+		}
+		
+		private GameScene mGameScene;
+		private Button mAdsButton;
+		private IAPManager mIapManager;
+		private W01AdsManager mAdsManager;
+		private GameObject mNicknamePrompt;
+		private TMP_InputField mNicknameInput;
+		private Action<string> mNicknameConfirmed;
+		private Image mFeverOverlay;
+		private TextMeshProUGUI mFeverBanner;
+		private Coroutine mMessageRoutine;
+
+		public bool IsInitialized { get; private set; }
+		
+		public override bool Init()
+		{
+			if (!base.Init())
+				return false;
+
+
+			if (IsInitialized)
+			{
+				return true;
+			} 
+			
+			Initialize();
+			return true;
+		}
+
+		public void Initialize()
+		{
+			if (IsInitialized) return;
+
+			BindText(typeof(Texts));
+			BindButton(typeof(Buttons));
+			GameLocalization.ApplyFont(this);
+
+			var curScene = SceneManagerEx.CurrentScene;
+			mGameScene = curScene.GetComponent<GameScene>();
+			if (mGameScene == null)
+			{
+				return;
+			}
+			
+			GetButton((int)Buttons.btnBack).gameObject.BindEvent(ClickBackButton);
+			mAdsButton = GetButton((int)Buttons.btnAds);
+			mAdsButton.gameObject.BindEvent(ClickAdsButton);
+			mIapManager = Managers.IAP;
+			mAdsManager = Managers.Ads;
+			mIapManager.NoAdsChanged += OnNoAdsChanged;
+			mIapManager.StoreReadyChanged += OnStoreReadyChanged;
+			mIapManager.PurchaseFailed += OnPurchaseFailed;
+			RefreshAdsButton();
+			GetButton((int)Buttons.btnStart).gameObject.BindEvent(mGameScene.StartRound);
+			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(mGameScene.RetryRound);
+			GetText((int)Texts.txtBestValue).text = mGameScene.bestScore.ToString("00");
+			SetStaticLabels();
+			EnsureFeverPresentation();
+			
+			IsInitialized = true;
+		}
+
+		private void SetStaticLabels()
+		{
+			GetText((int)Texts.txtStart).text = GameLocalization.T("START ROUND", "게임 시작");
+			var retryLabel = GetButton((int)Buttons.btnRetry).GetComponentInChildren<TextMeshProUGUI>(true);
+			if (retryLabel != null) retryLabel.text = GameLocalization.T("RETRY", "다시 하기");
+			SetNamedLabel("txtScoreTitle", GameLocalization.T("SCORE", "점수"));
+			SetNamedLabel("txtBestTitle", GameLocalization.T("BEST", "최고 기록"));
+			SetNamedLabel("txtTimeTitle", GameLocalization.T("TIME", "시간"));
+		}
+
+		private void SetNamedLabel(string objectName, string value)
+		{
+			foreach (var label in GetComponentsInChildren<TextMeshProUGUI>(true))
+			{
+				if (label.name != objectName) continue;
+				label.text = value;
+				return;
+			}
+		}
+
+		private void ClickBackButton()
+		{
+			if (mAdsManager != null && mAdsManager.IsShowingInterstitial) return;
+			Managers.Scene.ChangeScene(_01.Scripts.Scene.W01SceneType.Intro);
+		}
+		
+		private void ClickAdsButton()
+		{
+			if (mIapManager != null && mIapManager.PurchaseRemoveAds())
+				mAdsButton.interactable = false;
+		}
+
+		private void OnNoAdsChanged(bool noAds)
+		{
+			RefreshAdsButton();
+			if (noAds) ShowTransientStatus(GameLocalization.T("ADS REMOVED", "광고가 제거되었습니다"));
+		}
+		private void OnStoreReadyChanged(bool ready) => RefreshAdsButton();
+		private void OnPurchaseFailed(string message)
+		{
+			RefreshAdsButton();
+			ShowTransientStatus(message);
+		}
+
+		private void RefreshAdsButton()
+		{
+			if (mAdsButton == null || mIapManager == null) return;
+			mAdsButton.gameObject.SetActive(!mIapManager.IsNoAds);
+			mAdsButton.interactable = mIapManager.IsStoreReady && !mIapManager.IsPurchasing;
+		}
+
+		private void OnDestroy()
+		{
+			if (mIapManager == null) return;
+
+			mIapManager.NoAdsChanged -= OnNoAdsChanged;
+			mIapManager.StoreReadyChanged -= OnStoreReadyChanged;
+			mIapManager.PurchaseFailed -= OnPurchaseFailed;
+			mIapManager = null;
+			mAdsManager = null;
+		}
+
+		private void ShowTransientStatus(string message)
+		{
+			if (string.IsNullOrWhiteSpace(message)) return;
+			if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
+			mMessageRoutine = StartCoroutine(ShowTransientStatusRoutine(message));
+		}
+
+		private IEnumerator ShowTransientStatusRoutine(string message)
+		{
+			var status = GetText((int)Texts.txtStatus);
+			string previous = status.text;
+			Color previousColor = status.color;
+			status.text = message;
+			status.color = new Color(1f, 0.78f, 0.28f);
+			yield return new WaitForSecondsRealtime(2.5f);
+			if (status != null)
+			{
+				status.text = previous;
+				status.color = previousColor;
+			}
+			mMessageRoutine = null;
+		}
+
+		private void EnsureFeverPresentation()
+		{
+			if (mFeverOverlay != null) return;
+			var overlayObject = CreateUiObject("FeverPulseOverlay", transform);
+			var rect = overlayObject.GetComponent<RectTransform>();
+			rect.anchorMin = Vector2.zero;
+			rect.anchorMax = Vector2.one;
+			rect.offsetMin = Vector2.zero;
+			rect.offsetMax = Vector2.zero;
+			mFeverOverlay = overlayObject.AddComponent<Image>();
+			mFeverOverlay.raycastTarget = false;
+			mFeverOverlay.color = new Color(0.55f, 0.05f, 1f, 0f);
+			mFeverBanner = CreateLabel(overlayObject.transform, "FeverBanner",
+				GameLocalization.T("FEVER MODE", "피버 모드"), 38f, new Vector2(0f, -450f),
+				new Vector2(700f, 70f), new Color(0.92f, 0.7f, 1f, 0f));
+			mFeverBanner.rectTransform.anchorMin = new Vector2(0.5f, 1f);
+			mFeverBanner.rectTransform.anchorMax = new Vector2(0.5f, 1f);
+			overlayObject.SetActive(false);
+		}
+
+		public void SetFeverPresentation(bool active, float intensity = 0f)
+		{
+			EnsureFeverPresentation();
+			mFeverOverlay.gameObject.SetActive(active);
+			if (!active) return;
+			float pulse = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 8f);
+			mFeverOverlay.color = new Color(0.5f, 0.06f, 1f, Mathf.Lerp(0.035f, 0.1f, pulse));
+			mFeverBanner.color = new Color(0.94f, 0.72f, 1f, Mathf.Lerp(0.35f, 0.9f, intensity));
+			mFeverBanner.rectTransform.localScale = Vector3.one * Mathf.Lerp(0.96f, 1.08f, pulse);
+		}
+
+		public void SetFeverTime(float remaining)
+		{
+			if (mFeverBanner != null)
+				mFeverBanner.text = GameLocalization.T("FEVER  ", "피버  ") + Mathf.Max(0f, remaining).ToString("0.0");
+		}
+
+		public void ShowNicknamePrompt(string defaultNickname, Action<string> onConfirmed)
+		{
+			EnsureNicknamePrompt();
+			mNicknameConfirmed = onConfirmed;
+			mNicknameInput.text = defaultNickname ?? string.Empty;
+			mNicknamePrompt.SetActive(true);
+			mNicknamePrompt.transform.SetAsLastSibling();
+			mNicknameInput.Select();
+			mNicknameInput.ActivateInputField();
+		}
+
+		private void EnsureNicknamePrompt()
+		{
+			if (mNicknamePrompt != null) return;
+
+			mNicknamePrompt = CreateUiObject("NicknamePrompt", transform);
+			var overlayRect = mNicknamePrompt.GetComponent<RectTransform>();
+			overlayRect.anchorMin = Vector2.zero;
+			overlayRect.anchorMax = Vector2.one;
+			overlayRect.offsetMin = Vector2.zero;
+			overlayRect.offsetMax = Vector2.zero;
+			var overlay = mNicknamePrompt.AddComponent<Image>();
+			overlay.color = new Color(0.01f, 0.02f, 0.08f, 0.9f);
+
+			var panel = CreateUiObject("NicknamePanel", mNicknamePrompt.transform);
+			SetCenteredRect(panel.GetComponent<RectTransform>(), 760f, 500f, Vector2.zero);
+			var panelImage = panel.AddComponent<Image>();
+			panelImage.color = new Color(0.055f, 0.075f, 0.2f, 0.98f);
+			var panelSprite = Resources.Load<Sprite>("UI/NeonSignalPack/NineSlice/Panels/panel_popup");
+			if (panelSprite != null)
+			{
+				panelImage.sprite = panelSprite;
+				panelImage.type = Image.Type.Sliced;
+			}
+
+			CreateLabel(panel.transform, "Title", GameLocalization.T("NEW PERSONAL BEST", "새로운 최고 기록"), 42f,
+				new Vector2(0f, 155f), new Vector2(660f, 70f), new Color(0.45f, 0.9f, 1f));
+			CreateLabel(panel.transform, "Guide", GameLocalization.T("ENTER A NICKNAME", "닉네임을 입력하세요"), 25f,
+				new Vector2(0f, 92f), new Vector2(660f, 50f), Color.white);
+
+			var inputObject = CreateUiObject("NicknameInput", panel.transform);
+			SetCenteredRect(inputObject.GetComponent<RectTransform>(), 620f, 105f, new Vector2(0f, 15f));
+			var inputBackground = inputObject.AddComponent<Image>();
+			inputBackground.color = new Color(0.015f, 0.025f, 0.09f, 0.98f);
+
+			var viewport = CreateUiObject("Text Area", inputObject.transform);
+			var viewportRect = viewport.GetComponent<RectTransform>();
+			viewportRect.anchorMin = Vector2.zero;
+			viewportRect.anchorMax = Vector2.one;
+			viewportRect.offsetMin = new Vector2(28f, 10f);
+			viewportRect.offsetMax = new Vector2(-28f, -10f);
+			viewport.AddComponent<RectMask2D>();
+
+			var text = CreateLabel(viewport.transform, "Text", string.Empty, 29f,
+				Vector2.zero, Vector2.zero, Color.white);
+			var textRect = text.rectTransform;
+			textRect.anchorMin = Vector2.zero;
+			textRect.anchorMax = Vector2.one;
+			textRect.offsetMin = Vector2.zero;
+			textRect.offsetMax = Vector2.zero;
+			text.alignment = TextAlignmentOptions.MidlineLeft;
+
+			mNicknameInput = inputObject.AddComponent<TMP_InputField>();
+			mNicknameInput.targetGraphic = inputBackground;
+			mNicknameInput.textViewport = viewportRect;
+			mNicknameInput.textComponent = text;
+			mNicknameInput.characterLimit = 50;
+			mNicknameInput.lineType = TMP_InputField.LineType.SingleLine;
+			mNicknameInput.contentType = TMP_InputField.ContentType.Standard;
+			mNicknameInput.interactable = true;
+			mNicknameInput.readOnly = false;
+			mNicknameInput.onFocusSelectAll = true;
+
+			var confirmObject = CreateUiObject("btnNicknameConfirm", panel.transform);
+			SetCenteredRect(confirmObject.GetComponent<RectTransform>(), 360f, 100f, new Vector2(0f, -145f));
+			var confirmImage = confirmObject.AddComponent<Image>();
+			confirmImage.color = Color.white;
+			var buttonSprite = Resources.Load<Sprite>("UI/NeonSignalPack/NineSlice/Buttons/button_primary_normal");
+			if (buttonSprite != null)
+			{
+				confirmImage.sprite = buttonSprite;
+				confirmImage.type = Image.Type.Sliced;
+			}
+			var confirmButton = confirmObject.AddComponent<Button>();
+			confirmButton.onClick.AddListener(ConfirmNickname);
+			CreateLabel(confirmObject.transform, "Label", GameLocalization.T("REGISTER", "등록"), 30f,
+				Vector2.zero, new Vector2(320f, 70f), Color.white);
+
+			mNicknameInput.onSubmit.AddListener(_ => ConfirmNickname());
+			var touchHandler = inputObject.AddComponent<NicknameInputTouchHandler>();
+			touchHandler.Initialize(mNicknameInput);
+			mNicknamePrompt.SetActive(false);
+		}
+
+		private void ConfirmNickname()
+		{
+			if (mNicknamePrompt == null || !mNicknamePrompt.activeSelf) return;
+
+			string nickname = mNicknameInput.text.Trim();
+			mNicknamePrompt.SetActive(false);
+			var confirmed = mNicknameConfirmed;
+			mNicknameConfirmed = null;
+			confirmed?.Invoke(nickname);
+		}
+
+		private static GameObject CreateUiObject(string name, Transform parent)
+		{
+			var gameObject = new GameObject(name, typeof(RectTransform));
+			gameObject.layer = 5;
+			gameObject.transform.SetParent(parent, false);
+			return gameObject;
+		}
+
+		private static void SetCenteredRect(RectTransform rect, float width, float height, Vector2 position)
+		{
+			rect.anchorMin = new Vector2(0.5f, 0.5f);
+			rect.anchorMax = new Vector2(0.5f, 0.5f);
+			rect.pivot = new Vector2(0.5f, 0.5f);
+			rect.sizeDelta = new Vector2(width, height);
+			rect.anchoredPosition = position;
+		}
+
+		private static TextMeshProUGUI CreateLabel(Transform parent, string name, string value, float fontSize,
+			Vector2 position, Vector2 size, Color color)
+		{
+			var labelObject = CreateUiObject(name, parent);
+			SetCenteredRect(labelObject.GetComponent<RectTransform>(), size.x, size.y, position);
+			var label = labelObject.AddComponent<TextMeshProUGUI>();
+			label.text = value;
+			label.fontSize = fontSize;
+			label.color = color;
+			label.alignment = TextAlignmentOptions.Center;
+			label.raycastTarget = false;
+			GameLocalization.ApplyFont(label);
+			return label;
+		}
+
+
+		public Button GetButtonStart() => GetButton((int)Buttons.btnStart);
+		public Button GetButtonRetry() => GetButton((int)Buttons.btnRetry);
+
+		public void BindEventStartButton(Action action)
+		{
+			GetButton((int)Buttons.btnStart).gameObject.BindEvent(action);
+		}
+		
+		public void BindEventRetryButton(Action action)
+		{
+			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(action);
+		} 
+		
+		public TextMeshProUGUI GetTextTime() => GetText((int)Texts.txtTimeValue);
+		public TextMeshProUGUI GetTextBest() => GetText((int)Texts.txtBestValue);
+		public TextMeshProUGUI GetTextStatus() => GetText((int)Texts.txtStatus);
+		public TextMeshProUGUI GetTextScore() => GetText((int)Texts.txtScoreValue);
+		public TextMeshProUGUI GetTextCombo() => GetText((int)Texts.txtComboValue);
+		public TextMeshProUGUI GetTextResult() => GetText((int)Texts.txtResultValue);
+	}
+
+	public sealed class NicknameInputTouchHandler : MonoBehaviour, IPointerClickHandler
+	{
+		private TMP_InputField mInputField;
+
+		public void Initialize(TMP_InputField inputField)
+		{
+			mInputField = inputField;
+		}
+
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			if (mInputField == null || !mInputField.interactable) return;
+
+			mInputField.Select();
+			mInputField.ActivateInputField();
+		}
+	}
+}

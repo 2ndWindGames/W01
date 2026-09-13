@@ -1,0 +1,17 @@
+PASS Nickname replacing help keeps round and target timers paused
+Nickname parsed codepoints: 003C 0062 003E C548 B155 003C 002F 0062 003E 200B
+PASS Nickname input displays markup as literal text
+PASS Nickname blocks underlying btnBack
+PASS Nickname blocks underlying btnHelp
+PASS Nickname modal rejects direct target contacts
+PASS Nickname confirmation receives input
+PASS Nickname callback is literal and runs exactly once
+PASS Confirming nickname preserves the independent application pause
+PASS Round resumes after all modal and app pauses clear
+PASS Open nickname prevents restarting behind the result modal
+PASS Open nickname prevents starting a round behind the modal
+PASS Disabling game UI releases nickname pause and callback
+PASS Inactive UI rejects a delayed record prompt
+PASS Re-enabling UI does not resurrect a stale record prompt
+PASS Fresh prompt can reopen after UI lifecycle change
+PASS No runtime errors in nickname modal lifecycle QA

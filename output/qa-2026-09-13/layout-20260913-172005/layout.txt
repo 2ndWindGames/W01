@@ -1,0 +1,31 @@
+Screen 540x2340 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait
+Editor GameView main size=(540.00, 2340.00)
+TimeScale=1 effects=True haptics=True
+CAMERA Main Camera rect=(x:0.00, y:0.25, width:1.00, height:0.50) pixels=(x:0.00, y:585.00, width:540.00, height:1170.00) size=10
+CAMERA Screen Surround rect=(x:0.00, y:0.00, width:1.00, height:1.00) pixels=(x:0.00, y:0.00, width:540.00, height:2340.00) size=5
+CANVAS UI_SoundPopup mode=ScreenSpaceCamera camera=Main Camera scale=0.5 rect=(x:-540.00, y:-1170.00, width:1080.00, height:2340.00)
+CANVAS UI_IntroPopup mode=ScreenSpaceCamera camera=Main Camera scale=0.5 rect=(x:-540.00, y:-1170.00, width:1080.00, height:2340.00)
+HelpOpen=False
+PASS Text fits: btn_start/Text (TMP)
+PASS Text fits: btn_rank/text
+PASS Text fits: btnBgm/txtBgm
+PASS Text fits: btn_sound/text
+PASS Text fits: btn_easteregg/Text (TMP)
+PASS Text fits: UI_SoundPopup/txtTitle
+PASS Text fits: UI_IntroPopup/txt_right
+PASS Text fits: btnClose/txtClose
+PASS Text fits: btnEffect/txtEffect
+PASS Button inside viewport: btn_rank
+RAYCAST btn_rank => ModalBackdrop
+PASS Button inside viewport: btnEffect
+RAYCAST btnEffect => btnEffect
+PASS Button inside viewport: btn_easteregg
+RAYCAST btn_easteregg => ModalBackdrop
+PASS Button inside viewport: btn_sound
+RAYCAST btn_sound => ModalBackdrop
+PASS Button inside viewport: btnBgm
+RAYCAST btnBgm => btnBgm
+PASS Button inside viewport: btn_start
+RAYCAST btn_start => ModalBackdrop
+PASS Button inside viewport: btnClose
+RAYCAST btnClose => btnClose

@@ -1,0 +1,52 @@
+PASS English help does not overlap btnBack
+PASS English help does not overlap btnStart
+PASS English help has a large screen-space touch area
+PASS English resized start control receives input
+PASS English footer help receives input
+PASS English guide preserves the active round
+PASS English guide text fits: HelpPanel/Title
+PASS English guide text fits: HelpPanel/Hint
+PASS English guide text fits: btnHelpDismiss/Label
+PASS English guide text fits: CardNormal/Name
+PASS English guide text fits: CardNormal/Description
+PASS English guide text fits: CardQuick/Name
+PASS English guide text fits: CardQuick/Description
+PASS English guide text fits: CardTime/Name
+PASS English guide text fits: CardTime/Description
+PASS English guide text fits: CardBomb/Name
+PASS English guide text fits: CardBomb/Description
+PASS English guide text fits: CardFever/Name
+PASS English guide text fits: CardFever/Description
+PASS English guide text fits: btnHelpEffects/Label
+PASS English guide text fits: btnHelpHaptics/Label
+PASS English guide text fits: btnHelpClose/Label
+PASS English scroll exposes preview CardNormal
+PASS English scroll exposes preview CardQuick
+PASS English scroll exposes preview CardTime
+PASS English scroll exposes preview CardBomb
+PASS English scroll exposes preview CardFever
+PASS English scrolling reaches the last card
+PASS English previews and scrolling never advance gameplay
+PASS English fixed effects control receives input
+PASS English effects setting toggles
+PASS English effects setting restores
+PASS English fixed haptics control receives input
+PASS English haptics setting toggles
+PASS English haptics setting restores
+PASS English fixed return control receives input
+PASS English return resumes the round
+PASS English reopened guide starts at the first card
+PASS English header close control receives input
+PASS Korean help does not overlap btnBack
+PASS Korean help does not overlap btnStart
+PASS Korean help has a large screen-space touch area
+PASS Korean resized start control receives input
+PASS Korean footer help receives input
+PASS Korean guide preserves the active round
+PASS Korean guide text fits: HelpPanel/Title
+PASS Korean guide text fits: HelpPanel/Hint
+FAIL Korean guide text fits: btnHelpDismiss/Label
+FAIL System.InvalidOperationException: Korean guide text fits: btnHelpDismiss/Label
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1654 
+  at VioletTapQaRunner+<HelpLayoutScenarios>d__32.MoveNext () [0x0048b] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:458 
+  at VioletTapQaRunner.Tick () [0x0049b] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:308 

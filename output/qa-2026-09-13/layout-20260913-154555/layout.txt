@@ -1,0 +1,20 @@
+Screen 1920x1080 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait
+Editor GameView main size=(1920.00, 1080.00)
+TimeScale=1 effects=True haptics=True
+CAMERA Main Camera rect=(x:0.22, y:0.00, width:0.32, height:1.00) pixels=(x:416.25, y:0.00, width:607.50, height:1080.00) size=10
+CAMERA Screen Surround rect=(x:0.00, y:0.00, width:1.00, height:1.00) pixels=(x:0.00, y:0.00, width:1920.00, height:1080.00) size=5
+CANVAS UI_IntroPopup mode=ScreenSpaceCamera camera=Main Camera scale=0.4615385 rect=(x:-658.13, y:-1170.00, width:1316.25, height:2340.00)
+HelpOpen=False
+PASS Text fits: btn_sound/text
+FAIL Text fits: UI_IntroPopup/txt_right
+PASS Text fits: btn_start/Text (TMP)
+PASS Text fits: btn_easteregg/Text (TMP)
+PASS Text fits: btn_rank/text
+PASS Button inside viewport: btn_sound
+RAYCAST btn_sound => text
+PASS Button inside viewport: btn_rank
+RAYCAST btn_rank => text
+PASS Button inside viewport: btn_start
+RAYCAST btn_start => Text (TMP)
+PASS Button inside viewport: btn_easteregg
+RAYCAST btn_easteregg => Text (TMP)

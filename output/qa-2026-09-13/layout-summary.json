@@ -1,0 +1,67 @@
+[
+  {
+    "Run": "layout-20260913-154555",
+    "Screen": "Screen 1920x1080 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=False",
+    "PassCount": 8,
+    "Failures": [
+      "FAIL Text fits: UI_IntroPopup/txt_right"
+    ]
+  },
+  {
+    "Run": "layout-20260913-154924",
+    "Screen": "Screen 1920x1080 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=False",
+    "PassCount": 9,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-154957",
+    "Screen": "Screen 1920x1080 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=False",
+    "PassCount": 15,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-155013",
+    "Screen": "Screen 1920x1080 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=True",
+    "PassCount": 36,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-155137",
+    "Screen": "Screen 1536x2048 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=True",
+    "PassCount": 36,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-155152",
+    "Screen": "Screen 1536x2048 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=False",
+    "PassCount": 15,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-155341",
+    "Screen": "Screen 540x2340 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=False",
+    "PassCount": 15,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-155415",
+    "Screen": "Screen 540x2340 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=True",
+    "PassCount": 36,
+    "Failures": []
+  },
+  {
+    "Run": "layout-20260913-155459",
+    "Screen": "Screen 1440x2960 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait",
+    "Help": "HelpOpen=True",
+    "PassCount": 36,
+    "Failures": []
+  }
+]

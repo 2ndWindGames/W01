@@ -34,6 +34,18 @@ namespace SWGUnity2DCore
         [Min(1)]
         public int feverTargetCount = 2;
 
+        [Min(2)]
+        public int feverScoreMultiplier = 3;
+
+        [Min(0f)]
+        public float feverBonusTimePerTap = 0.12f;
+
+        [Min(1f)]
+        public float feverMaximumDuration = 8f;
+
+        [Range(0.4f, 1f)]
+        public float feverTargetLifetimeMultiplier = 0.78f;
+
         public GameObject targetPrefab;
     }
 }

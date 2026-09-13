@@ -1,0 +1,6 @@
+PASS Newest transient notice is displayed immediately
+FAIL Overlapping notices restore READY instead of a stale notice
+FAIL System.InvalidOperationException: Overlapping notices restore READY instead of a stale notice
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:580 
+  at VioletTapQaRunner+<StatusScenarios>d__18.MoveNext () [0x0020a] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:164 
+  at VioletTapQaRunner.Tick () [0x0017a] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:141 

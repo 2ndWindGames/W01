@@ -1,0 +1,54 @@
+{
+  "resource_file_count": 172,
+  "source_bytes": 76483466,
+  "duplicate_resource_keys": {},
+  "missing_meta": [],
+  "duplicate_asset_guids": {},
+  "missing_serialized_guids": [
+    {
+      "from": "Assets/_Recovery/0.unity",
+      "guid": "6f7a8b9c01234566778899aabbccddee"
+    }
+  ],
+  "literal_resource_loads": [
+    {
+      "from": "Assets/01.Scripts/Manager/Managers.cs",
+      "key": "Fonts/NotoSansKR-Variable"
+    },
+    {
+      "from": "Assets/01.Scripts/UI/Popup/UI_GameHelp.cs",
+      "key": "UI/NeonSignalPack/NineSlice/Panels/panel_popup"
+    },
+    {
+      "from": "Assets/01.Scripts/UI/Popup/UI_GameHelp.cs",
+      "key": "UI/NeonSignalPack/NineSlice/Buttons/button_primary_normal"
+    },
+    {
+      "from": "Assets/01.Scripts/UI/Popup/UI_GamePopup.cs",
+      "key": "UI/NeonSignalPack/NineSlice/Panels/panel_popup"
+    },
+    {
+      "from": "Assets/01.Scripts/UI/Popup/UI_GamePopup.cs",
+      "key": "UI/NeonSignalPack/NineSlice/Buttons/button_primary_normal"
+    }
+  ],
+  "missing_literal_loads": [],
+  "reference_sources": [
+    {
+      "path": "Assets/Resources/References",
+      "files": 0,
+      "bytes": 0
+    },
+    {
+      "path": "Assets/Resources/UI/NeonSignalPack/Concepts",
+      "files": 0,
+      "bytes": 0
+    },
+    {
+      "path": "Assets/Resources/UI/NeonSignalPack/Sources",
+      "files": 0,
+      "bytes": 0
+    }
+  ],
+  "reference_sources_used_elsewhere": []
+}

@@ -1,0 +1,31 @@
+PASS English loads the saved best into the HUD
+HUD English txtScoreValue value=0 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=59.32x55.86
+HUD English txtBestValue value=0 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=59.32x55.86
+HUD English txtScoreValue value=191 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=90.73x55.86
+HUD English txtBestValue value=191 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=90.73x55.86
+HUD English txtScoreValue value=999 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=90.73x55.86
+HUD English txtBestValue value=999 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=90.73x55.86
+HUD English txtScoreValue value=9999 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=122.13x55.86
+HUD English txtBestValue value=9999 fits=True font=LiberationSans SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=122.13x55.86
+HUD English txtScoreValue value=100000 fits=False font=LiberationSans SDF size=43.25 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=184.95x55.86
+HUD English txtBestValue value=100000 fits=False font=LiberationSans SDF size=43.25 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=184.95x55.86
+PASS English updates the HUD across the four-digit boundary
+RESULT English text=SCORE  1002 | BEST  100000 | MAX STREAK  999 | ACCURACY  100% | GRADE  S overflow=False lines=5 font=50 rect=(x:-360.00, y:-215.00, width:720.00, height:430.00) preferred=433.99x285.84
+PASS Korean loads the saved best into the HUD
+HUD Korean txtScoreValue value=0 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=55.61x72.41
+HUD Korean txtBestValue value=0 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=55.61x72.41
+HUD Korean txtScoreValue value=191 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=85.16x72.41
+HUD Korean txtBestValue value=191 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=85.16x72.41
+HUD Korean txtScoreValue value=999 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=85.16x72.41
+HUD Korean txtBestValue value=999 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=85.16x72.41
+HUD Korean txtScoreValue value=9999 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=114.71x72.41
+HUD Korean txtBestValue value=9999 fits=True font=NotoSansKR Runtime SDF size=48.3 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=114.71x72.41
+HUD Korean txtScoreValue value=100000 fits=False font=NotoSansKR Runtime SDF size=46 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=173.81x72.41
+HUD Korean txtBestValue value=100000 fits=False font=NotoSansKR Runtime SDF size=46 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-80.00, y:-35.00, width:160.00, height:70.00) preferred=173.81x72.41
+PASS Korean updates the HUD across the four-digit boundary
+RESULT Korean text=점수  1002 | 최고 기록  100000 | 최대 연속 터치  999 | 정확도  100% | 등급  S overflow=False lines=5 font=50 rect=(x:-360.00, y:-215.00, width:720.00, height:430.00) preferred=440.14x362.01
+FAIL Scores and best values through 100000 fit as complete single lines
+FAIL System.InvalidOperationException: Scores and best values through 100000 fit as complete single lines
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1365 
+  at VioletTapQaRunner+<HudScenarios>d__29.MoveNext () [0x0076a] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:418 
+  at VioletTapQaRunner.Tick () [0x003e1] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:263 

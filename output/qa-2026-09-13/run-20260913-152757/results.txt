@@ -1,0 +1,11 @@
+PASS Newest transient notice is displayed immediately
+PASS Overlapping notices restore READY instead of a stale notice
+PASS Notice expiry preserves the new PLAYING state
+PASS Notice expiry preserves FEVER guidance and color
+PASS Notice expiry preserves the end of FEVER
+PASS Notice expiry preserves RESULT guidance and color
+FAIL Notice expiry preserves the retried round state
+FAIL System.InvalidOperationException: Notice expiry preserves the retried round state
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:580 
+  at VioletTapQaRunner+<StatusScenarios>d__18.MoveNext () [0x005bb] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:195 
+  at VioletTapQaRunner.Tick () [0x0017a] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:141 

@@ -21,4 +21,8 @@ MonoBehaviour:
   feverCombo: 10
   feverDuration: 5
   feverTargetCount: 2
+  feverScoreMultiplier: 3
+  feverBonusTimePerTap: 0.12
+  feverMaximumDuration: 8
+  feverTargetLifetimeMultiplier: 0.78
   targetPrefab: {fileID: 0}

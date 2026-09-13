@@ -1,6 +1,6 @@
 # Neon Signal Production Asset Pack
 
-인트로, 게임, 설정, 사운드, 랭킹 UI 프리팹에 연결된 제작용 리소스 세트입니다.
+인트로, 게임, 사운드, 랭킹 UI 프리팹에 연결된 제작용 리소스 세트입니다.
 
 ## 폴더
 
@@ -13,11 +13,13 @@
 - `Progress`: 에너지, 콤보, 등급, 상위 랭크 배지
 - `Decorations`: 인트로 코어, 궤도, 발판, 장식선, 배지
 - `Branding`: 게임 타이틀과 회사 로고
-- `Concepts`: 전체 씬 및 UI 시안 이미지 5장
-- `Sources`: 생성 원본 아틀라스. 실제 UI에서는 분리 파일을 사용
+
+전체 씬 시안은 `Assets/ArtSource/NeonSignalPack/Concepts`, 원본 아틀라스는
+`Assets/ArtSource/NeonSignalPack/Sources`, 이전 참고 자료는 `Assets/ArtSource/References`에 보관합니다.
+제작용 원본을 런타임 `Resources`와 분리해 앱에 자동 포함되지 않도록 합니다.
 
 모든 분리 리소스는 텍스트가 없는 PNG입니다. 화면 문구는 TMP로 구성합니다.
-`NeonSignalAssetImporter`가 이 폴더의 PNG를 Sprite로 가져오고, `NineSlice` 폴더에 Border를 설정합니다.
+`NeonSignalAssetImporter`가 이 폴더의 PNG를 Sprite로 가져옵니다. Nine-slice Border는 Sprite Editor에서 설정한 값을 보존합니다.
 
 ## 현재 적용 위치
 

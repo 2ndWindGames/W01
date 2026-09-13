@@ -1,0 +1,5 @@
+FAIL Application pause freezes round time
+FAIL System.InvalidOperationException: Application pause freezes round time
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:751 
+  at VioletTapQaRunner+<BackgroundScenarios>d__20.MoveNext () [0x002df] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:242 
+  at VioletTapQaRunner.Tick () [0x0020e] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:164 

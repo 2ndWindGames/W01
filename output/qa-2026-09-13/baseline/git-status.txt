@@ -1,0 +1,104 @@
+ M .utmp/tools/release/arm64-v8a/compile_commands.json
+ M Assets/00.Scene/Game.unity
+ M Assets/00.Scene/Intro.unity
+ M Assets/01.Scripts/Game/CircleTarget.cs
+ M Assets/01.Scripts/Game/GameConfig.cs
+ M Assets/01.Scripts/Manager/IAPManager.cs
+ M Assets/01.Scripts/Manager/Managers.cs
+ M Assets/01.Scripts/Scene/GameScene.cs
+ M Assets/01.Scripts/UI/Popup/UI_GamePopup.cs
+ M Assets/01.Scripts/UI/Popup/UI_IntroPopup.cs
+ M Assets/01.Scripts/UI/Popup/UI_RankPopup.cs
+ D Assets/01.Scripts/UI/Popup/UI_SettingPopup.cs
+ D Assets/01.Scripts/UI/Popup/UI_SettingPopup.cs.meta
+ M Assets/01.Scripts/UI/Popup/UI_SoundPopup.cs
+ M Assets/01.Scripts/UI/SubItem/UI_RankingItem.cs
+ M Assets/03.Data/GameConfig.asset
+ M "Assets/Build Profiles/Android\342\204\242.asset"
+ M Assets/Editor/NeonSignalAssetImporter.cs
+ M Assets/Resources/Prefabs/UI/Popup/UI_GamePopup.prefab
+ M Assets/Resources/Prefabs/UI/Popup/UI_IntroPopup.prefab
+ M Assets/Resources/Prefabs/UI/Popup/UI_Rankpopup.prefab
+ D Assets/Resources/Prefabs/UI/Popup/UI_SettingPopup.prefab
+ D Assets/Resources/Prefabs/UI/Popup/UI_SettingPopup.prefab.meta
+ M Assets/Resources/Prefabs/UI/Popup/UI_SoundPopup.prefab
+ M Assets/Resources/Prefabs/UI/SubItem/itemRanking.prefab
+ M Assets/Resources/UI/NeonSignalPack/Branding/title_neon_touch.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_back.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_check.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_close.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_home.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_info.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_language.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_play.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_privacy.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_ranking.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_remove_ads.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_restore.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_retry.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_settings.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_sound_off.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_sound_on.png
+ M Assets/Resources/UI/NeonSignalPack/Icons/icon_vibration.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/button_compact.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/button_primary_disabled.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/button_primary_normal.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/button_primary_pressed.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/icon_button_disabled.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/icon_button_disabled.png.meta
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/icon_button_normal.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/icon_button_normal.png.meta
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/icon_button_pressed.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Buttons/icon_button_pressed.png.meta
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Lists/list_row_normal.png.meta
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Panels/hud_card.png
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Panels/hud_card.png.meta
+ M Assets/Resources/UI/NeonSignalPack/NineSlice/Panels/panel_popup.png.meta
+ M Assets/Resources/UI/NeonSignalPack/README.md
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_danger.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_danger.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_moving.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_moving.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_normal.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_normal.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_overload.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_overload.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_precision.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_precision.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_quick.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_quick.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_safe.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_safe.png.meta
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_time.png
+ M Assets/Resources/UI/NeonSignalPack/Targets/target_time.png.meta
+ m LocalPackages/SWGUnity2DCore
+ M ProjectSettings/ProjectSettings.asset
+ M Tools/ApplyNeonSignalResources.ps1
+ M Tools/BuildNeonSignalAssets.ps1
+ M Tools/GenerateNeonSignalMeta.ps1
+ M violettap_mapping.txt
+?? .utmp/RelWithDebInfo/4m1u6i2u/
+?? Assets/01.Scripts/UI/ResponsiveGameViewport.cs
+?? Assets/01.Scripts/UI/ResponsiveGameViewport.cs.meta
+?? Assets/01.Scripts/UI/ViewportCanvasScaler.cs
+?? Assets/01.Scripts/UI/ViewportCanvasScaler.cs.meta
+?? Assets/ArtSource.meta
+?? Assets/ArtSource/
+?? Assets/Editor/VioletTapGameViewCapture.cs
+?? Assets/Editor/VioletTapGameViewCapture.cs.meta
+?? Assets/Resources/Fonts.meta
+?? Assets/Resources/Fonts/
+?? Assets/Resources/UI/Game/Icons/icon_remove_ads_google_play.png
+?? Assets/Resources/UI/Game/Icons/icon_remove_ads_google_play.png.meta
+?? BuildArtifacts/
+?? SocialMedia/
+?? StoreListing/
+?? Tools/BuildCapturedStoreAssets.ps1
+?? Tools/GenerateFeatureGraphic.ps1
+?? Tools/GenerateStoreScreenshots.ps1
+?? Tools/NormalizeNeonSignalButtons.ps1
+?? Tools/build_social_videos.py
+?? output/qa-2026-09-13/
+?? violettap-3.3-v6-IL2CPP.symbols.zip
+?? violettap-3.4-v7-IL2CPP.symbols.zip
+?? violettap_BackUpThisFolder_ButDontShipItWithYourGame/

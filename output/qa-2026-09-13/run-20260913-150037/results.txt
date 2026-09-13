@@ -1,0 +1,13 @@
+PASS Nickname field is editable
+RAYCAST Caret@1000 > NicknameInput@1000 > NicknamePanel@1000 > NicknamePrompt@1000 > Scene@0 > img_bg@-19
+PASS Nickname field receives the pointer ahead of the spawn collider
+PASS Clicking the field retains keyboard focus
+PASS Keyboard characters replace the default name
+PASS Backspace edits the nickname
+PASS Korean characters are accepted
+PASS Nickname font renders Hangul in the current interface language
+PASS Register button receives the pointer ahead of the spawn collider
+PASS Confirmation forwards edited text exactly once to a local test callback
+PASS Confirmation closes the dialog
+PASS Reopened dialog focuses the same input correctly
+PASS No runtime errors in nickname input checks

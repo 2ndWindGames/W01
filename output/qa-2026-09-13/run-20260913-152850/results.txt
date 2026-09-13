@@ -1,0 +1,36 @@
+PASS Newest transient notice is displayed immediately
+PASS Overlapping notices restore READY instead of a stale notice
+PASS Notice expiry preserves the new PLAYING state
+PASS Notice expiry preserves FEVER guidance and color
+PASS Notice expiry preserves the end of FEVER
+PASS Notice expiry preserves RESULT guidance and color
+PASS Notice expiry preserves READY after retry
+PASS Repeated help open pauses round 0
+PASS Repeated help close resumes round 0
+PASS Repeated help open pauses round 1
+PASS Repeated help close resumes round 1
+PASS Repeated help open pauses round 2
+PASS Repeated help close resumes round 2
+PASS Repeated help open pauses round 3
+PASS Repeated help close resumes round 3
+PASS Repeated help open pauses round 4
+PASS Repeated help close resumes round 4
+PASS Repeated help open pauses round 5
+PASS Repeated help close resumes round 5
+PASS Repeated help open pauses round 6
+PASS Repeated help close resumes round 6
+PASS Repeated help open pauses round 7
+PASS Repeated help close resumes round 7
+PASS Repeated help open pauses round 8
+PASS Repeated help close resumes round 8
+PASS Repeated help open pauses round 9
+PASS Repeated help close resumes round 9
+PASS Help cycles preserve global time scale and round time
+PASS Help cycles preserve sound and vibration preferences
+PASS Help cycles reuse the existing canvas
+PASS Disabling help releases round pause
+FAIL Re-enabled help cannot leave a visible unpaused modal
+FAIL System.InvalidOperationException: Re-enabled help cannot leave a visible unpaused modal
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:581 
+  at VioletTapQaRunner+<StatusScenarios>d__18.MoveNext () [0x007e2] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:219 
+  at VioletTapQaRunner.Tick () [0x0017a] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:141 

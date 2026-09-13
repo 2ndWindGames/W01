@@ -1,0 +1,25 @@
+Screen 540x2340 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait
+Editor GameView main size=(540.00, 2340.00)
+TimeScale=1 effects=True haptics=True
+CAMERA MainCamera rect=(x:0.00, y:0.00, width:1.00, height:1.00) pixels=(x:0.00, y:0.00, width:540.00, height:2340.00) size=10
+CAMERA Screen Surround rect=(x:0.00, y:0.00, width:1.00, height:1.00) pixels=(x:0.00, y:0.00, width:540.00, height:2340.00) size=5
+CANVAS UI_GamePopup mode=ScreenSpaceCamera camera=MainCamera scale=0.5 rect=(x:-540.00, y:-2340.00, width:1080.00, height:4680.00)
+HelpOpen=False
+PASS Text fits: btnHelp/Label
+PASS Text fits: best/txtBestTitle
+PASS Text fits: score/txtScoreTitle
+PASS Text fits: score/txtScoreValue
+PASS Text fits: best/txtBestValue
+PASS Text fits: combo/txtComboValue
+PASS Text fits: time/txtTimeValue
+PASS Text fits: UI_GamePopup/txtStatus
+PASS Text fits: time/txtTimeTitle
+PASS Text fits: btnStart/txtStart
+PASS Text fits: result/txtResultValue
+PASS Text fits: combo/txtComboTitle
+PASS Button inside viewport: btnHelp
+RAYCAST btnHelp => btnHelp
+PASS Button inside viewport: btnStart
+RAYCAST btnStart => txtStart
+PASS Button inside viewport: btnBack
+RAYCAST btnBack => btnBack

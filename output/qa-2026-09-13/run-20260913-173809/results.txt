@@ -1,0 +1,9 @@
+PASS Korean visible glyphs stay within txtRank: 01
+PASS Korean visible glyphs stay within txtNicName: 망펭
+PASS Korean visible glyphs stay within txtScore: 2147483647
+PASS Korean visible glyphs stay within txtRank: ▶ 02
+FAIL Korean visible glyphs stay within txtNicName: ★  가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가  [나]
+FAIL System.InvalidOperationException: Korean visible glyphs stay within txtNicName: ★  가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가  [나]
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1011 
+  at VioletTapQaRunner+<RankingScenarios>d__24.MoveNext () [0x004d8] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:311 
+  at VioletTapQaRunner.Tick () [0x002a7] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:204 

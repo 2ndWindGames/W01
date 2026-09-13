@@ -3,13 +3,17 @@ Add-Type -AssemblyName System.Drawing
 
 $sourceRoot = 'C:/Users/rlatm/.codex/generated_images/01a04851-0e1c-7553-83f1-9dd881d3f3f8'
 $outputRoot = Join-Path $PSScriptRoot '../Assets/Resources/UI/NeonSignalPack'
+$archiveRoot = Join-Path $PSScriptRoot '../Assets/ArtSource/NeonSignalPack'
 
 $folders = @(
     'Backgrounds', 'NineSlice/Panels', 'NineSlice/Buttons', 'NineSlice/Lists',
-    'Controls', 'Icons', 'Targets', 'VFX', 'Progress', 'Decorations', 'Branding', 'Concepts', 'Sources'
+    'Controls', 'Icons', 'Targets', 'VFX', 'Progress', 'Decorations', 'Branding'
 )
 foreach ($folder in $folders) {
     New-Item -ItemType Directory -Path (Join-Path $outputRoot $folder) -Force | Out-Null
+}
+foreach ($folder in @('Concepts', 'Sources')) {
+    New-Item -ItemType Directory -Path (Join-Path $archiveRoot $folder) -Force | Out-Null
 }
 
 Add-Type -ReferencedAssemblies @(
@@ -218,18 +222,22 @@ Get-ChildItem (Join-Path $outputRoot 'Decorations') -Filter '*.png' | ForEach-Ob
 Copy-Item (Join-Path $sourceRoot 'exec-29fdcfc4-3511-4171-aa9d-24f5342e3d9a.png') (Join-Path $outputRoot 'Backgrounds/background_intro.png') -Force
 Copy-Item (Join-Path $sourceRoot 'exec-6dda6313-90a4-4283-8daa-076f29736a84.png') (Join-Path $outputRoot 'Backgrounds/background_game.png') -Force
 
-Copy-Item (Join-Path $PSScriptRoot '../Assets/Resources/UI/Intro/title.png') (Join-Path $outputRoot 'Branding/title_neon_touch.png') -Force
+Copy-Item (Join-Path $PSScriptRoot '../Assets/ArtSource/NeonSignal/title_neon_touch_transparent.png') (Join-Path $outputRoot 'Branding/title_neon_touch.png') -Force
+
+& (Join-Path $PSScriptRoot 'NormalizeNeonSignalButtons.ps1') -ProjectRoot (Split-Path -Parent $PSScriptRoot)
 Copy-Item (Join-Path $PSScriptRoot '../Assets/Resources/SecondWindGamesLogo.png') (Join-Path $outputRoot 'Branding/logo_secondwindgames.png') -Force
 
-$conceptSource = Join-Path $PSScriptRoot '../Assets/Resources/References/NeonSignalConcept'
-Copy-Item (Join-Path $conceptSource '*') (Join-Path $outputRoot 'Concepts') -Recurse -Force
+$conceptSource = Join-Path $PSScriptRoot '../Assets/ArtSource/References/NeonSignalConcept'
+Get-ChildItem -LiteralPath $conceptSource -File | Where-Object { $_.Extension -ne '.meta' } | ForEach-Object {
+    Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $archiveRoot ('Concepts/' + $_.Name)) -Force
+}
 
-Copy-Item $frameAtlas (Join-Path $outputRoot 'Sources/source_frames.png') -Force
-Copy-Item $controlAtlas (Join-Path $outputRoot 'Sources/source_controls.png') -Force
-Copy-Item $iconAtlas (Join-Path $outputRoot 'Sources/source_icons.png') -Force
-Copy-Item $targetAtlas (Join-Path $outputRoot 'Sources/source_targets.png') -Force
-Copy-Item $vfxAtlas (Join-Path $outputRoot 'Sources/source_vfx.png') -Force
-Copy-Item $decorAtlas (Join-Path $outputRoot 'Sources/source_decorations.png') -Force
-Copy-Item $progressAtlas (Join-Path $outputRoot 'Sources/source_progress.png') -Force
+Copy-Item $frameAtlas (Join-Path $archiveRoot 'Sources/source_frames.png') -Force
+Copy-Item $controlAtlas (Join-Path $archiveRoot 'Sources/source_controls.png') -Force
+Copy-Item $iconAtlas (Join-Path $archiveRoot 'Sources/source_icons.png') -Force
+Copy-Item $targetAtlas (Join-Path $archiveRoot 'Sources/source_targets.png') -Force
+Copy-Item $vfxAtlas (Join-Path $archiveRoot 'Sources/source_vfx.png') -Force
+Copy-Item $decorAtlas (Join-Path $archiveRoot 'Sources/source_decorations.png') -Force
+Copy-Item $progressAtlas (Join-Path $archiveRoot 'Sources/source_progress.png') -Force
 
 Write-Output "Neon Signal assets generated at $outputRoot"

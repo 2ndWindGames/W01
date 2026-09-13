@@ -17,7 +17,7 @@ function Get-StableGuid([string]$assetPath) {
 function Get-SpriteBorder([string]$relativePath) {
     $name = [IO.Path]::GetFileNameWithoutExtension($relativePath)
     if ($relativePath -match '^NineSlice[/\\]Panels') {
-        if ($name -eq 'hud_card') { return '40, 28, 40, 28' }
+        if ($name -eq 'hud_card') { return '55, 45, 55, 45' }
         if ($name -eq 'header_strip') { return '64, 24, 64, 24' }
         return '64, 64, 64, 64'
     }

@@ -1,0 +1,6 @@
+PASS Nickname replacing help keeps round and target timers paused
+FAIL Nickname input displays markup as literal text
+FAIL System.InvalidOperationException: Nickname input displays markup as literal text
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1279 
+  at VioletTapQaRunner+<ModalScenarios>d__28.MoveNext () [0x00332] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:383 
+  at VioletTapQaRunner.Tick () [0x003a3] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:248 

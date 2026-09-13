@@ -8,7 +8,7 @@ namespace SWGUnity2DCore.Manager
 {
     public sealed class IAPManager
     {
-        public const string RemoveAdsProductId = "com.secondwindgames.violettap.removeads";
+        public const string RemoveAdsProductId = "com.secondwindgames.violettap.removeads_v2";
         private const string RemoveAdsPlayerPrefsKey = "VioletTap.IAP.RemoveAds";
 
         private readonly W01AdsManager m_AdsManager;
@@ -16,6 +16,7 @@ namespace SWGUnity2DCore.Manager
         private bool m_Initialized;
         private bool m_Initializing;
         private bool m_Purchasing;
+        private bool m_LocalStateLoaded;
 
         public bool IsNoAds { get; private set; }
         public bool IsStoreReady { get; private set; }
@@ -29,15 +30,23 @@ namespace SWGUnity2DCore.Manager
         public IAPManager(W01AdsManager adsManager)
         {
             m_AdsManager = adsManager ?? throw new ArgumentNullException(nameof(adsManager));
-            IsNoAds = PlayerPrefs.GetInt(RemoveAdsPlayerPrefsKey, 0) == 1;
-            m_AdsManager.SetAdsDisabled(IsNoAds);
         }
 
         public void Init()
         {
+            LoadLocalState();
             if (m_Initialized || m_Initializing) return;
             m_Initializing = true;
             InitializeStore();
+        }
+
+        private void LoadLocalState()
+        {
+            if (m_LocalStateLoaded) return;
+
+            m_LocalStateLoaded = true;
+            IsNoAds = PlayerPrefs.GetInt(RemoveAdsPlayerPrefsKey, 0) == 1;
+            m_AdsManager.SetAdsDisabled(IsNoAds);
         }
 
         private async void InitializeStore()
@@ -57,10 +66,11 @@ namespace SWGUnity2DCore.Manager
                 await m_StoreController.Connect();
                 m_Initialized = true;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 m_Initializing = false;
-                ReportFailure("스토어 연결에 실패했습니다: " + exception.Message);
+                ReportFailure(GameLocalization.T("Could not connect to the store. Please try again.",
+                    "스토어에 연결하지 못했습니다. 다시 시도해 주세요."));
             }
         }
 
@@ -83,7 +93,8 @@ namespace SWGUnity2DCore.Manager
             var product = products.FirstOrDefault(item => item.definition.id == RemoveAdsProductId);
             if (product == null || !product.availableToPurchase)
             {
-                ReportFailure("광고 제거 상품을 스토어에서 찾을 수 없습니다.");
+                ReportFailure(GameLocalization.T("The Remove Ads product is currently unavailable.",
+                    "광고 제거 상품을 현재 이용할 수 없습니다."));
                 return;
             }
 
@@ -95,7 +106,8 @@ namespace SWGUnity2DCore.Manager
         private void OnProductsFetchFailed(ProductFetchFailed failure)
         {
             SetStoreReady(false);
-            ReportFailure("상품 정보를 가져오지 못했습니다: " + failure.FailureReason);
+            ReportFailure(GameLocalization.T("Could not load product information. Please try again.",
+                "상품 정보를 불러오지 못했습니다. 다시 시도해 주세요."));
         }
 
         public bool PurchaseRemoveAds()
@@ -103,7 +115,8 @@ namespace SWGUnity2DCore.Manager
             if (IsNoAds) return false;
             if (!IsStoreReady || m_Purchasing || m_StoreController == null)
             {
-                ReportFailure("스토어가 아직 준비되지 않았습니다. 잠시 후 다시 시도해 주세요.");
+                ReportFailure(GameLocalization.T("The store is not ready yet. Please try again shortly.",
+                    "스토어가 아직 준비되지 않았습니다. 잠시 후 다시 시도해 주세요."));
                 return false;
             }
 
@@ -116,7 +129,8 @@ namespace SWGUnity2DCore.Manager
         {
             if (!IsStoreReady || m_StoreController == null)
             {
-                callback?.Invoke(false, "스토어가 아직 준비되지 않았습니다.");
+                callback?.Invoke(false, GameLocalization.T("The store is not ready yet.",
+                    "스토어가 아직 준비되지 않았습니다."));
                 return;
             }
 
@@ -136,13 +150,15 @@ namespace SWGUnity2DCore.Manager
         {
             m_Purchasing = false;
             if (order is FailedOrder failedOrder)
-                ReportFailure("구매 확정에 실패했습니다: " + failedOrder.Details);
+                ReportFailure(GameLocalization.T("The purchase could not be confirmed.",
+                    "구매를 확정하지 못했습니다."));
         }
 
         private void OnPurchaseFailed(FailedOrder order)
         {
             m_Purchasing = false;
-            ReportFailure($"구매에 실패했습니다: {order.FailureReason} ({order.Details})");
+            ReportFailure(GameLocalization.T("The purchase was not completed. Please try again.",
+                "구매가 완료되지 않았습니다. 다시 시도해 주세요."));
         }
 
         private void OnPurchaseDeferred(DeferredOrder order)

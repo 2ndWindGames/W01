@@ -1,0 +1,9 @@
+PASS Korean sound blocks underlying btn_start
+PASS Korean sound blocks underlying btn_sound
+PASS Korean sound blocks underlying btn_rank
+FAIL Korean sound blocks underlying btn_easteregg
+FAIL System.InvalidOperationException: Korean sound blocks underlying btn_easteregg
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:939 
+  at VioletTapQaRunner.CheckPopupBlocksIntro (UI_Popup popup, _01.Scripts.UI.Popup.UI_IntroPopup intro, System.String description) [0x00057] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:331 
+  at VioletTapQaRunner+<PopupScenarios>d__23.MoveNext () [0x001b0] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:269 
+  at VioletTapQaRunner.Tick () [0x00265] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:188 

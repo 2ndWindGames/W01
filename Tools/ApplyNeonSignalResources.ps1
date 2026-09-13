@@ -9,6 +9,7 @@ $sprite = @{
     Primary = 'bcede17e7a5653c27871a748074079ef'
     PrimaryPressed = '91e60154fac8235d3a92b8599481c00a'
     PrimaryDisabled = 'a7bb578b49ae98f1067bc553da3fc455'
+    Compact = '99dd921d4e851c17bf5ec0220fa10592'
     IconButton = 'e5e3b5c7cd02352774da658870d28b6b'
     IconButtonPressed = 'a3afde0af34e62100d65bb6660aa4a6d'
     IconButtonDisabled = '6e7b37f793528f3b4515cef40b5abcda'
@@ -62,7 +63,9 @@ function Update-Prefab([string]$relativePath, [hashtable]$imageMap, [hashtable]$
         if ($block -match '(?m)^  m_Sprite: ' -and $imageMap.ContainsKey($qualifiedName)) {
             $entry = $imageMap[$qualifiedName]
             $block = [regex]::Replace($block, '(?m)^  m_Sprite: .*$', "  m_Sprite: $(SpriteRef $entry[0])", 1)
-            if ($entry[1]) { $block = [regex]::Replace($block, '(?m)^  m_Type: \d+$', '  m_Type: 1', 1) }
+            if ($entry.Count -gt 1 -and [Convert]::ToBoolean($entry[1])) {
+                $block = [regex]::Replace($block, '(?m)^  m_Type: \d+$', '  m_Type: 1', 1)
+            }
         }
 
         if ($block -match '(?m)^  m_SpriteState:' -and $buttonMap.ContainsKey($name)) {
@@ -88,15 +91,12 @@ Update-Prefab 'Assets\Resources\Prefabs\UI\Popup\UI_IntroPopup.prefab' @{
     btn_start = @('Primary', $true)
     'btn_sound/icon' = @('Sound', $false)
     'btn_rank/icon' = @('Ranking', $false)
-    btn_setting = @('IconButton', $true)
-    'btn_setting/icon' = @('Settings', $false)
-    btn_sound = @('IconButton', $true)
-    btn_rank = @('IconButton', $true)
+    btn_sound = @('Compact', $true)
+    btn_rank = @('Compact', $true)
     img_bg = @('BackgroundIntro', $false)
     img_title = @('Title', $false)
 } @{
     btn_start = $primaryStates
-    btn_setting = $iconStates
     btn_sound = $iconStates
     btn_rank = $iconStates
 }
@@ -117,11 +117,11 @@ Update-Prefab 'Assets\Resources\Prefabs\UI\Popup\UI_GamePopup.prefab' @{
     btnRetry = $primaryStates
 }
 
-foreach ($popup in @('UI_Rankpopup.prefab', 'UI_SettingPopup.prefab', 'UI_SoundPopup.prefab')) {
+foreach ($popup in @('UI_Rankpopup.prefab', 'UI_SoundPopup.prefab')) {
     $popupImages = @{
         imgBg = @('Popup', $true)
         underline = @('Divider', $false)
-        btnClose = @('IconButton', $true)
+        btnClose = @('Compact', $true)
     }
     if ($popup -eq 'UI_Rankpopup.prefab') {
         $popupImages['Scrollbar Vertical'] = @('SliderTrack', $true)

@@ -1,0 +1,37 @@
+PASS Newest transient notice is displayed immediately
+PASS Overlapping notices restore READY instead of a stale notice
+PASS Notice expiry preserves the new PLAYING state
+PASS Notice expiry preserves FEVER guidance and color
+PASS Notice expiry preserves the end of FEVER
+PASS Notice expiry preserves RESULT guidance and color
+PASS Notice expiry preserves READY after retry
+PASS Repeated help open pauses round 0
+PASS Repeated help close resumes round 0
+PASS Repeated help open pauses round 1
+PASS Repeated help close resumes round 1
+PASS Repeated help open pauses round 2
+PASS Repeated help close resumes round 2
+PASS Repeated help open pauses round 3
+PASS Repeated help close resumes round 3
+PASS Repeated help open pauses round 4
+PASS Repeated help close resumes round 4
+PASS Repeated help open pauses round 5
+PASS Repeated help close resumes round 5
+PASS Repeated help open pauses round 6
+PASS Repeated help close resumes round 6
+PASS Repeated help open pauses round 7
+PASS Repeated help close resumes round 7
+PASS Repeated help open pauses round 8
+PASS Repeated help close resumes round 8
+PASS Repeated help open pauses round 9
+PASS Repeated help close resumes round 9
+PASS Help cycles preserve global time scale and round time
+PASS Help cycles preserve sound and vibration preferences
+PASS Help cycles reuse the existing canvas
+PASS Disabling help releases round pause
+PASS Inactive help rejects reopening
+PASS Re-enabled help cannot leave a visible unpaused modal
+PASS Help opens normally after re-enable
+PASS Disabled popup clears its transient notice
+PASS Re-enabled popup can display and clear a new notice
+PASS No runtime errors in status and help lifecycle checks
