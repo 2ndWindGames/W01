@@ -1,38 +1,31 @@
-# 네온터치 / VioletTap 홍보 패키지
+# 네온터치 / VioletTap 홍보 영상 패키지
 
-## 현재 상태 — 영상 미완료
+한국어·영어 홍보 영상 각 1편을 완성했습니다. 두 영상은 각각 59.93초, 세로 9:16, 1080×1920 MP4(H.264, AAC)입니다. 실제 Unity 게임 화면과 프로젝트의 음악·효과음, 해당 언어의 합성 나레이션 및 화면 자막을 사용했습니다.
 
-게시용 문구 4종과 한·영 60초 편집 대본이 준비되어 있습니다.
-최종 MP4, 녹음된 나레이션, 동기화된 SRT는 아직 없습니다. 이 폴더의 준비 파일을 완성 영상 납품으로 취급하지 마세요.
+## 완성 영상
 
-Unity 창 제어와 프로젝트에 설치된 영상·음성 도구 실행이 자동 승인 시스템 오류로 차단되어 촬영·음성 제작을 진행하지 못했습니다.
-오류 원문: “Automatic approval review failed: parent compaction checkpoint is incompatible with the Guardian review model or its compatibility is unknown”.
+- [한국어 영상](VioletTap_Promo_KO_1080x1920_60s.mp4) · [나레이션 SRT](VioletTap_Promo_KO.srt)
+- [English video](VioletTap_Promo_EN_1080x1920_60s.mp4) · [narration SRT](VioletTap_Promo_EN.srt)
+- [한국어 컷 미리보기](Production/Preview_KO.jpg) · [English shot preview](Production/Preview_EN.jpg)
+- [검증 결과](Production/Validation.md)
 
-이 오류를 우회하는 실행이나 시스템 설정 변경은 수행하지 않았습니다.
+영상에 쓰인 큰 자막은 화면에 포함되어 있습니다. SRT는 나레이션 실제 길이에 맞춘 별도 자막 파일입니다.
 
-## 게시 문구
+## 복사용 게시 문구
 
-- Posting/YouTube_Shorts_KO.txt — 한국어 제목·설명·해시태그·고정 댓글
-- Posting/YouTube_Shorts_EN.txt — English title, description, hashtags, pinned comment
-- Posting/Instagram_Reels_KO.txt — 한국어 첫 문장·전체 캡션·해시태그·고정 댓글
-- Posting/Instagram_Reels_EN.txt — English opening, full caption, hashtags, pinned comment
+각 파일에 제목 또는 첫 문장, 설명글·전체 캡션, 해시태그, 고정 댓글이 있습니다. 인스타그램의 ‘전체 캡션’은 첫 문장과 해시태그를 이미 포함하므로 한 번만 복사하면 됩니다. 유튜브는 ‘설명글’ 끝에 해시태그를 포함했습니다.
 
-각 파일에서 항목 제목을 제외한 본문만 복사하면 됩니다. 인스타그램 ‘전체 캡션’에는 첫 문장과 해시태그가 이미 포함되어 있으므로 중복해서 붙이지 마세요.
-유튜브 안내에는 ‘채널 프로필 링크 / channel profile link’, 인스타그램 안내에는 ‘프로필 링크 / profile link’를 사용했습니다. 설명과 고정 댓글 모두 게임 이름과 스토어 설치 경로를 포함합니다.
+- [유튜브 쇼츠 · 한국어](Posting/YouTube_Shorts_KO.txt)
+- [YouTube Shorts · English](Posting/YouTube_Shorts_EN.txt)
+- [인스타그램 릴스 · 한국어](Posting/Instagram_Reels_KO.txt)
+- [Instagram Reels · English](Posting/Instagram_Reels_EN.txt)
 
-## 제작 준비
+네 문구 모두 **네온터치(VioletTap)** 다운로드 링크를 선택해 스토어에서 설치하는 경로를 설명글과 고정 댓글에 명시합니다. 유튜브는 ‘채널 프로필 링크’, 인스타그램은 ‘프로필 링크’로 구분했습니다. 실제 프로필의 게임별 링크와 스토어 공개 상태는 확인되지 않았으므로 게시 직전에 눌러 확인해야 합니다.
 
-- Production/Storyboard_KO_EN.md — 60초 컷 구성, 두 언어 나레이션, 음성·화면 디렉션
-- Production/Feature_Check.md — 확인된 기능의 소스 근거와 제외한 주장
+## 출처와 제작상 한계
 
-게임 화면 녹화를 위한 에디터 전용 보조 스크립트의 CountdownTimer 네임스페이스 누락은 수정했고, 에디터 어셈블리 컴파일은 성공했습니다. 게임 규칙은 변경하지 않았습니다. 녹화 시작 요청은 생성하지 않았습니다.
+게임 플레이는 `output/qa-2026-09-13/gameplay-video/`의 Unity Game View 녹화 2개를 활용했습니다. 해당 QA 녹화는 촬영 당시 타겟 수명을 메모리에서 연장한 기록이 있으므로, 화면은 실제 게임 렌더링이지만 일반 플레이 속도를 실측한 자료는 아닙니다. 액션 컷은 편집으로 근접 화면을 사용하고, 한·영 UI 컷은 `output/play-store-3.7.1/`의 실제 게임 캡처를 사용했습니다. 한국어 50콤보 컷은 녹화 원본에서 직접 추출한 프레임입니다. 영어 영상의 액션 근접 화면에는 한국어 원본 UI의 작은 부분이 보일 수 있으며, 주요 기능 설명 컷에는 영어 UI 캡처를 사용했습니다.
 
-## 완성 전 필수 검증 — 미수행
+게임에 별도의 캐릭터가 없어 네온 타겟과 게임 타이틀을 중심 비주얼로 사용했습니다. 출시일·가격·순위·다운로드 수처럼 확인되지 않은 정보는 영상과 게시 문구에 넣지 않았습니다. Windows Microsoft Heami Desktop과 Zira Desktop으로 나레이션을 합성했습니다. 사람 성우 녹음으로 표기하지 않습니다.
 
-- 각 영상 59~60초, 1080×1920, 9:16 MP4
-- 해당 언어 게임 UI와 실제 플레이 사용
-- HUD·타겟·글자 잘림, 종횡비 왜곡 없음
-- 실제 음성에 맞춘 자막의 철자·타이밍 확인
-- 음성 발음·끝부분 잘림·클리핑·음악 대비 명료도 확인
-- 최종 파일 전체 디코딩 및 시작·중간·끝 재생 확인
-- 프로필의 해당 게임 링크와 스토어 접근 상태는 게시 담당자가 확인
+`Production/Storyboard_KO_EN.md`에 최종 컷 구성, `Production/Feature_Check.md`에 기능 근거, `Production/Voice/`에 나레이션 대본과 WAV, `Production/build_promo.py`에 재렌더링 절차가 있습니다.

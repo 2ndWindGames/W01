@@ -1,0 +1,15 @@
+<ko-KR>
+• 새로운 네온 앱 아이콘을 적용했습니다.
+• 빠른 연속 터치에서도 타깃이 정확히 인식되도록 개선했습니다.
+• 일부 화면 크기에서 순서 타깃 배치 실패로 진행이 멈추던 문제를 수정했습니다.
+• 랭킹에서 긴 닉네임과 큰 점수의 가독성을 개선했습니다.
+• 필요한 경우 설정 화면에 개인정보 설정 버튼이 표시됩니다.
+</ko-KR>
+
+<en-US>
+• Added a new neon app icon.
+• Improved target detection during rapid consecutive taps.
+• Fixed an issue that could stall gameplay when numbered targets could not fit on screen.
+• Improved leaderboard readability for long names and high scores.
+• Privacy options now appear in Settings when required.
+</en-US>

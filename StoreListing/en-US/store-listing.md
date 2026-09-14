@@ -33,10 +33,10 @@ How fast and accurate are you? Enter the arena and set a new record in Violet Ta
 3. Unleash Fever Mode — Keep your streak alive as more targets fill the screen.
 4. Climb the global ranking — Set a record and make your mark.
 
-## What's new — 3.7.1
+## What's new — 3.7.2
 
-- Added PULSE, SCAN, and SURGE phases with bomb avoidance and 1→2→3 target chains.
-- Added 10/50-combo score multipliers, sustained green/yellow glow, escalating music, and points beside targets.
-- Fever adds more targets without a separate score multiplier.
-- Beneficial targets now come in three sizes; smaller ones award more points or time. Bomb size stays fixed, and hourglasses show added seconds.
-- Enhanced the intro title's neon current and sparks, plus help screen readability.
+- Added a new neon app icon.
+- Improved target detection during rapid consecutive taps.
+- Fixed an issue that could stall gameplay when numbered targets could not fit on screen.
+- Improved leaderboard readability for long names and high scores.
+- Privacy options now appear in Settings when required.
