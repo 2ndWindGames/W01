@@ -1,0 +1,87 @@
+PASS Korean visible glyphs stay within txtRank: 01
+PASS Korean visible glyphs stay within txtNicName: 망펭
+PASS Korean visible glyphs stay within txtScore: 2147483647
+PASS Korean complete score remains visible: 2147483647
+PASS Korean visible glyphs stay within txtRank: ▶ 02
+PASS Korean visible glyphs stay within txtNicName: [나] 가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+PASS Korean visible glyphs stay within txtScore: 9999
+PASS Korean complete score remains visible: 9999
+PASS Korean visible glyphs stay within txtRank: 03
+PASS Korean visible glyphs stay within txtNicName: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+PASS Korean visible glyphs stay within txtScore: 9998
+PASS Korean complete score remains visible: 9998
+PASS Korean visible glyphs stay within txtRank: 04
+PASS Korean visible glyphs stay within txtNicName: <b>Hi</b>
+PASS Korean visible glyphs stay within txtScore: 9997
+PASS Korean complete score remains visible: 9997
+PASS Korean visible glyphs stay within txtRank: 05
+PASS Korean visible glyphs stay within txtNicName: Donut
+PASS Korean visible glyphs stay within txtScore: 9996
+PASS Korean complete score remains visible: 9996
+PASS Korean visible glyphs stay within txtRank: 06
+PASS Korean visible glyphs stay within txtNicName: 바이올렛탭
+PASS Korean visible glyphs stay within txtScore: 9995
+PASS Korean complete score remains visible: 9995
+PASS Korean visible glyphs stay within txtRank: 07
+PASS Korean visible glyphs stay within txtNicName: Soso
+PASS Korean visible glyphs stay within txtScore: 9994
+PASS Korean complete score remains visible: 9994
+PASS Korean visible glyphs stay within txtRank: 08
+PASS Korean visible glyphs stay within txtNicName: Neon
+PASS Korean visible glyphs stay within txtScore: 9993
+PASS Korean complete score remains visible: 9993
+PASS Korean visible glyphs stay within txtRank: 09
+PASS Korean visible glyphs stay within txtNicName: Tap
+PASS Korean visible glyphs stay within txtScore: 9992
+PASS Korean complete score remains visible: 9992
+PASS Korean visible glyphs stay within txtRank: 10
+PASS Korean visible glyphs stay within txtNicName: LastPlayer
+PASS Korean visible glyphs stay within txtScore: 9991
+PASS Korean complete score remains visible: 9991
+PASS Korean nickname markup displays literally
+PASS Korean current-player marker survives long nickname truncation
+PASS Korean nickname control characters cannot create extra rows
+PASS English visible glyphs stay within txtRank: 01
+PASS English visible glyphs stay within txtNicName: 망펭
+PASS English visible glyphs stay within txtScore: 2147483647
+PASS English complete score remains visible: 2147483647
+PASS English visible glyphs stay within txtRank: ▶ 02
+PASS English visible glyphs stay within txtNicName: [YOU] 가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+PASS English visible glyphs stay within txtScore: 9999
+PASS English complete score remains visible: 9999
+PASS English visible glyphs stay within txtRank: 03
+PASS English visible glyphs stay within txtNicName: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+PASS English visible glyphs stay within txtScore: 9998
+PASS English complete score remains visible: 9998
+PASS English visible glyphs stay within txtRank: 04
+PASS English visible glyphs stay within txtNicName: <b>Hi</b>
+PASS English visible glyphs stay within txtScore: 9997
+PASS English complete score remains visible: 9997
+PASS English visible glyphs stay within txtRank: 05
+PASS English visible glyphs stay within txtNicName: Donut
+PASS English visible glyphs stay within txtScore: 9996
+PASS English complete score remains visible: 9996
+PASS English visible glyphs stay within txtRank: 06
+PASS English visible glyphs stay within txtNicName: 바이올렛탭
+PASS English visible glyphs stay within txtScore: 9995
+PASS English complete score remains visible: 9995
+PASS English visible glyphs stay within txtRank: 07
+PASS English visible glyphs stay within txtNicName: Soso
+PASS English visible glyphs stay within txtScore: 9994
+PASS English complete score remains visible: 9994
+PASS English visible glyphs stay within txtRank: 08
+PASS English visible glyphs stay within txtNicName: Neon
+PASS English visible glyphs stay within txtScore: 9993
+PASS English complete score remains visible: 9993
+PASS English visible glyphs stay within txtRank: 09
+PASS English visible glyphs stay within txtNicName: Tap
+PASS English visible glyphs stay within txtScore: 9992
+PASS English complete score remains visible: 9992
+PASS English visible glyphs stay within txtRank: 10
+PASS English visible glyphs stay within txtNicName: LastPlayer
+PASS English visible glyphs stay within txtScore: 9991
+PASS English complete score remains visible: 9991
+PASS English nickname markup displays literally
+PASS English current-player marker survives long nickname truncation
+PASS English nickname control characters cannot create extra rows
+PASS No runtime errors during local ranking row QA

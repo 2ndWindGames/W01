@@ -1,0 +1,2 @@
+FAIL System.TimeoutException: QA exceeded 90 seconds
+  at VioletTapQaRunner.Tick () [0x00490] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:307 

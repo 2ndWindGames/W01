@@ -1,0 +1,13 @@
+PASS Existing initialization completed before the local delay fixture
+PASS New record result is reached while initialization is still pending
+DELAYED RECORD promptOpenedBeforeInitialization=True
+PASS An open record prompt blocks an underlying retry
+PASS The player can start another round before the delayed completion
+DELAYED COMPLETION state=Playing nicknameOpen=False paused=False
+PASS Late initialization cannot open an old record prompt over a restarted round
+PASS Nickname entry does not wait for network initialization
+PASS A later new record opens its prompt immediately
+PASS Initialization completion cannot replace an in-progress nickname
+PASS Late initialization after leaving Game cannot recreate its prompt
+PASS The delay fixture never changes the real profile metadata
+PASS No runtime errors during delayed nickname QA

@@ -1,0 +1,500 @@
+PASS Korean authored combo HUD hidden at Ready
+STATUS Korean Ready top=1120.47 HUD bottom=1126.84
+PASS Korean Ready status clears the score/time/best HUD
+PASS Korean combo card replaces overlapping top instruction
+PASS Korean 5 combo shows x2 and counter
+PASS Korean half-filled fever meter
+PASS Korean 10 combo triggers fever
+PASS Korean fever countdown replaces charge meter
+PASS Korean miss ends combo and fever
+PASS Korean failure displays exact lost combo
+PASS Korean failed fever returns to normal target count
+PASS Korean bomb break feedback
+PASS Difficulty ramps substantially with a reaction floor
+PASS Korean speed notice remains visible outside the combo card
+PASS Time bonus cannot reverse difficulty
+PASS Reaction floor: Normal
+PASS Reaction floor: Quick
+PASS Reaction floor: TimeBonus
+PASS Reaction floor: Bomb
+PASS Help pause freezes difficulty clock
+PASS Result clears targets and combo/failure HUD
+PASS Korean result title immediately replaces the previous speed notice
+STATUS Korean Result top=1120.47 HUD bottom=1126.84
+PASS Korean Result status clears the score/time/best HUD
+PASS Result clears all touch and miss afterimages
+PASS Korean local purchase-status notice survives round completion
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS Korean full ten-digit ranking score
+PASS Korean score column lies inside the actual list mask with padding
+PASS English authored combo HUD hidden at Ready
+STATUS English Ready top=1120.47 HUD bottom=1126.84
+PASS English Ready status clears the score/time/best HUD
+PASS English combo card replaces overlapping top instruction
+PASS English 5 combo shows x2 and counter
+PASS English half-filled fever meter
+PASS English 10 combo triggers fever
+PASS English fever countdown replaces charge meter
+PASS English miss ends combo and fever
+PASS English failure displays exact lost combo
+PASS English failed fever returns to normal target count
+PASS English bomb break feedback
+PASS Difficulty ramps substantially with a reaction floor
+PASS English speed notice remains visible outside the combo card
+PASS Time bonus cannot reverse difficulty
+PASS Reaction floor: Normal
+PASS Reaction floor: Quick
+PASS Reaction floor: TimeBonus
+PASS Reaction floor: Bomb
+PASS Help pause freezes difficulty clock
+PASS Result clears targets and combo/failure HUD
+PASS English result title immediately replaces the previous speed notice
+STATUS English Result top=1120.47 HUD bottom=1126.84
+PASS English Result status clears the score/time/best HUD
+PASS Result clears all touch and miss afterimages
+PASS English local purchase-status notice survives round completion
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS English full ten-digit ranking score
+PASS English score column lies inside the actual list mask with padding
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak pause preserves pacing
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak round leaves no targets
+PASS Soak result hides combo HUD
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak pause preserves pacing
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak round leaves no targets
+PASS Soak result hides combo HUD
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak pause preserves pacing
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak round leaves no targets
+PASS Soak result hides combo HUD
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Soak pause preserves pacing
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI
+PASS Target receives contact through combo/effect UI

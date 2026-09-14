@@ -1,0 +1,7 @@
+PASS Nickname field is editable
+RAYCAST Scene@0 > Caret@-19 > NicknameInput@-19 > NicknamePanel@-19 > NicknamePrompt@-19 > img_bg@-19
+FAIL Nickname field receives the pointer ahead of the spawn collider
+FAIL System.InvalidOperationException: Nickname field receives the pointer ahead of the spawn collider
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:321 
+  at VioletTapQaRunner+<NicknameScenarios>d__16.MoveNext () [0x0027c] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:130 
+  at VioletTapQaRunner.Tick () [0x000e7] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:103 

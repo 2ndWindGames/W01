@@ -1,0 +1,1 @@
+Signer certificate matches the previous AAB.

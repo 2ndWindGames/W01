@@ -1,9 +1,6 @@
 using System;
-using SWGUnity2DCore.Manager;
-using SWGUnity2DCore.Util;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Random = UnityEngine.Random;
 
 namespace _01.Scripts.Game
 {
@@ -15,7 +12,7 @@ namespace _01.Scripts.Game
         Bomb
     }
 
-    public sealed class CircleTarget : MonoBehaviour, IPointerClickHandler
+    public sealed class CircleTarget : MonoBehaviour, IPointerDownHandler
     {
         private Action<CircleTarget> m_OnTapped;
         private Action<CircleTarget> m_OnMissed;
@@ -25,9 +22,19 @@ namespace _01.Scripts.Game
         private float m_PulsePhase;
         private float m_Lifetime;
         private float m_RemainingLifetime;
+        private bool m_FeverMode;
+        private bool m_Paused;
+        private float m_Pace = 1f;
         
-        private static Sprite[] s_CircleSprites;
-        private static bool s_CircleLoadErrorLogged;
+        private static readonly Sprite[] s_TargetSprites = new Sprite[4];
+        private static readonly string[] s_TargetResourcePaths =
+        {
+            "UI/NeonSignalPack/Targets/target_normal",
+            "UI/NeonSignalPack/Targets/target_quick",
+            "UI/NeonSignalPack/Targets/target_time",
+            "UI/NeonSignalPack/Targets/target_danger"
+        };
+        private static bool s_TargetLoadErrorLogged;
 
         public TapTargetType Type { get; private set; }
 
@@ -46,22 +53,29 @@ namespace _01.Scripts.Game
 
         private void Update()
         {
-            float pulse = 1f + Mathf.Sin(Time.time * 5.5f + m_PulsePhase) * 0.08f;
+            if (m_Paused) return;
+            float pulseSpeed = (m_FeverMode ? 9.5f : 5.5f) * m_Pace;
+            float pulseAmount = m_FeverMode ? 0.14f : 0.08f;
+            float pulse = 1f + Mathf.Sin(Time.time * pulseSpeed + m_PulsePhase) * pulseAmount;
             float lifeRatio = m_Lifetime > 0f ? Mathf.Clamp01(m_RemainingLifetime / m_Lifetime) : 1f;
             float warningPulse = lifeRatio < 0.3f ? 1f + Mathf.Sin(Time.time * 18f) * 0.08f : 1f;
             transform.localScale = m_BaseScale * pulse * warningPulse;
             if (m_GlowRenderer != null)
             {
                 Color glowColor = m_GlowRenderer.color;
-                glowColor.a = 0.11f + (pulse - 0.92f) * 0.7f;
+                glowColor.a = (m_FeverMode ? 0.25f : 0.11f) + (pulse - 0.92f) * 0.7f;
                 m_GlowRenderer.color = glowColor;
             }
+
+            if (m_FeverMode)
+                transform.Rotate(0f, 0f, 32f * Time.deltaTime);
 
             m_RemainingLifetime -= Time.deltaTime;
             if (m_RemainingLifetime <= 0f)
             {
                 var missed = m_OnMissed;
                 m_OnMissed = null;
+                m_OnTapped = null;
                 missed?.Invoke(this);
             }
         }
@@ -76,6 +90,7 @@ namespace _01.Scripts.Game
             transform.localScale = m_BaseScale;
             m_OnTapped = onTapped;
             m_OnMissed = onMissed;
+            m_Paused = false;
         }
 
         public void SetVisual(Sprite sprite, Color color)
@@ -90,42 +105,46 @@ namespace _01.Scripts.Game
             if (m_GlowRenderer != null)
             {
                 m_GlowRenderer.sprite = sprite;
-                // m_GlowRenderer.color = new Color(color.r, color.g, color.b, 0.16f);
-                m_GlowRenderer.color = Color.white;
+                m_GlowRenderer.color = new Color(1f, 1f, 1f, 0.14f);
             }
         }
 
-        public Sprite SetRandomSprite(SpriteRenderer renderer)
+        public Sprite GetSprite(TapTargetType type)
         {
-            renderer.sprite = GetRandomCircleSprite();
-            return renderer.sprite;
-        }
-        
-        private Sprite GetRandomCircleSprite()
-        {
-            if (s_CircleSprites == null)
+            int index = (int)type;
+            if (index < 0 || index >= s_TargetSprites.Length)
             {
-                s_CircleSprites = Resources.LoadAll<Sprite>("Circle");
+                index = 0;
             }
 
-            if (s_CircleSprites.Length == 0)
+            if (s_TargetSprites[index] == null)
             {
-                if (!s_CircleLoadErrorLogged)
-                {
-                    Debug.LogError("No circle sprites were found in Assets/Resources/Circle.", this);
-                    s_CircleLoadErrorLogged = true;
-                }
-
-                return null;
+                s_TargetSprites[index] = Resources.Load<Sprite>(s_TargetResourcePaths[index]);
             }
 
-            return s_CircleSprites[Random.Range(0, s_CircleSprites.Length)];
+            if (s_TargetSprites[index] == null && !s_TargetLoadErrorLogged)
+            {
+                Debug.LogError("Neon Signal target sprites could not be loaded from Resources/UI/NeonSignalPack/Targets.", this);
+                s_TargetLoadErrorLogged = true;
+            }
+
+            return s_TargetSprites[index];
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void SetFeverMode(bool active)
         {
-			Managers.Sound.Play(Define.Sound.Effect, "SFX/Target_NeonTap", 0.72f);
+            m_FeverMode = active;
+        }
+
+        public void SetPaused(bool paused) => m_Paused = paused;
+        public void SetPace(float pace) => m_Pace = Mathf.Clamp(pace, 1f, 2f);
+
+        // Respond on contact. Waiting for release made fast taps feel disconnected.
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (m_Paused || (eventData != null && eventData.button != PointerEventData.InputButton.Left)) return;
             var tapped = m_OnTapped;
+            if (tapped == null) return;
             m_OnTapped = null;
             m_OnMissed = null;
             tapped?.Invoke(this);
@@ -135,6 +154,10 @@ namespace _01.Scripts.Game
         {
             m_OnTapped = null;
             m_OnMissed = null;
+            m_FeverMode = false;
+            m_Paused = false;
+            transform.rotation = Quaternion.identity;
+            m_Pace = 1f;
             transform.localScale = m_BaseScale;
         }
     }

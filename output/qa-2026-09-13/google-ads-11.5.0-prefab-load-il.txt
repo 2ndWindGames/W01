@@ -1,0 +1,26 @@
+System.Void GoogleMobileAds.Unity.BaseAdClient::LoadAndSetPrefabAd(System.String)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: call UnityEngine.Object UnityEngine.Resources::Load(System.String)
+IL_0007: isinst UnityEngine.GameObject
+IL_000c: stfld UnityEngine.GameObject GoogleMobileAds.Unity.BaseAdClient::prefabAd
+IL_0011: ldarg.0
+IL_0012: ldfld UnityEngine.GameObject GoogleMobileAds.Unity.BaseAdClient::prefabAd
+IL_0017: ldnull
+IL_0018: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_001d: brfalse IL_002d
+IL_0022: ldstr "No Prefab found"
+IL_0027: call System.Void UnityEngine.Debug::Log(System.Object)
+IL_002c: ret
+IL_002d: ldarg.0
+IL_002e: ldfld UnityEngine.GameObject GoogleMobileAds.Unity.BaseAdClient::prefabAd
+IL_0033: callvirt !!0 UnityEngine.GameObject::GetComponent<UnityEngine.Canvas>()
+IL_0038: stloc.0
+IL_0039: ldloc.0
+IL_003a: ldnull
+IL_003b: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0040: brfalse IL_0050
+IL_0045: ldloc.0
+IL_0046: ldc.i4 32767
+IL_004b: callvirt System.Void UnityEngine.Canvas::set_sortingOrder(System.Int32)
+IL_0050: ret

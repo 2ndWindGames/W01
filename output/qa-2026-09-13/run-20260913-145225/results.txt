@@ -1,0 +1,5 @@
+INITIAL AUDIO effectsEnabled=True, musicEnabled=True, listenerVolume=1, listenerPause=False
+PASS Contact starts loaded audible cue: Target_NeonTap
+FAIL System.NullReferenceException: Object reference not set to an instance of an object
+  at VioletTapQaRunner+<FeedbackScenarios>d__17.MoveNext () [0x0049f] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:166 
+  at VioletTapQaRunner.Tick () [0x00130] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:125 

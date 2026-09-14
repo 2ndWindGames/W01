@@ -1,0 +1,8 @@
+INITIAL AUDIO effectsEnabled=True, musicEnabled=True, listenerVolume=1, listenerPause=False
+PASS Contact starts loaded audible cue: Target_NeonTap
+SOURCE AUDIO Target_NeonTap peak=0.00000
+FAIL Audio samples are produced for Target_NeonTap
+FAIL System.InvalidOperationException: Audio samples are produced for Target_NeonTap
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:473 
+  at VioletTapQaRunner+<FeedbackScenarios>d__17.MoveNext () [0x00443] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:168 
+  at VioletTapQaRunner.Tick () [0x00130] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:125 

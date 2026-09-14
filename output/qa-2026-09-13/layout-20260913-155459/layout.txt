@@ -1,0 +1,53 @@
+Screen 1440x2960 safeArea=(x:0.00, y:0.00, width:1440.00, height:2898.00) orientation=Portrait
+Editor GameView main size=(1440.00, 2960.00)
+TimeScale=1 effects=True haptics=True
+CAMERA MainCamera rect=(x:0.00, y:0.00, width:1.00, height:0.98) pixels=(x:0.00, y:0.00, width:1440.00, height:2898.00) size=5
+CAMERA Screen Surround rect=(x:0.00, y:0.00, width:1.00, height:1.00) pixels=(x:0.00, y:0.00, width:1440.00, height:2960.00) size=5
+CANVAS UI_GamePopup mode=ScreenSpaceCamera camera=MainCamera scale=1.238461 rect=(x:-581.37, y:-1170.00, width:1162.73, height:2340.00)
+HelpOpen=True
+PASS Text fits: CardTime/Description
+PASS Text fits: best/txtBestTitle
+PASS Text fits: CardBomb/Name
+PASS Text fits: CardTime/Name
+PASS Text fits: CardNormal/Description
+PASS Text fits: score/txtScoreTitle
+PASS Text fits: score/txtScoreValue
+PASS Text fits: CardFever/Description
+PASS Text fits: CardQuick/Name
+PASS Text fits: btnHelpHaptics/Label
+PASS Text fits: CardBomb/Description
+PASS Text fits: HelpPanel/Hint
+PASS Text fits: best/txtBestValue
+PASS Text fits: combo/txtComboValue
+PASS Text fits: time/txtTimeValue
+PASS Text fits: UI_GamePopup/txtStatus
+PASS Text fits: time/txtTimeTitle
+PASS Text fits: HelpPanel/Title
+PASS Text fits: btnHelpEffects/Label
+PASS Text fits: CardQuick/Description
+PASS Text fits: CardFever/Name
+PASS Text fits: btnHelpClose/Label
+PASS Text fits: CardNormal/Name
+PASS Text fits: btnStart/txtStart
+PASS Text fits: result/txtResultValue
+PASS Text fits: combo/txtComboTitle
+PASS Button inside viewport: CardTime
+RAYCAST CardTime => CardTime
+PASS Button inside viewport: CardFever
+RAYCAST CardFever => CardFever
+PASS Button inside viewport: btnStart
+RAYCAST btnStart => HelpModal
+PASS Button inside viewport: btnHelpEffects
+RAYCAST btnHelpEffects => btnHelpEffects
+PASS Button inside viewport: btnBack
+RAYCAST btnBack => HelpModal
+PASS Button inside viewport: btnHelpHaptics
+RAYCAST btnHelpHaptics => btnHelpHaptics
+PASS Button inside viewport: CardBomb
+RAYCAST CardBomb => CardBomb
+PASS Button inside viewport: CardNormal
+RAYCAST CardNormal => CardNormal
+PASS Button inside viewport: CardQuick
+RAYCAST CardQuick => CardQuick
+PASS Button inside viewport: btnHelpClose
+RAYCAST btnHelpClose => btnHelpClose

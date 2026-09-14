@@ -32,6 +32,8 @@ namespace SWGUnity2DCore.Manager
         public void ChangeScene(_01.Scripts.Scene.W01SceneType type)
         {
             CurrentScene.Clear();
+            // Scene objects are destroyed by LoadScene, but the shared UI registry survives.
+            Managers.UI.Clear();
 
             m_CurSceneType = type;
             SceneManager.LoadScene(GetSceneName(type));

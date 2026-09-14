@@ -1,0 +1,19 @@
+PASS Fresh startup has a recoverable original-preference backup
+PLAY SETTINGS optionsEnabled=False options=None
+PASS Fresh Play starts on Intro
+PASS All three saved OFF preferences survive fresh manager initialization
+PASS Fresh startup creates one audio playback root
+PASS All initial music and effect voices honor saved mute
+PASS Intro music advances silently without bypassing the saved mute
+PASS English initial sound settings show both saved OFF values
+PASS English initial guide reflects saved effects and haptics OFF
+PASS English every normal and fever cue keeps its voice muted
+PASS English target previews do not re-enable saved haptics
+PASS English normal gameplay remains responsive with feedback muted
+PASS Korean initial sound settings show both saved OFF values
+PASS Korean initial guide reflects saved effects and haptics OFF
+PASS Korean every normal and fever cue keeps its voice muted
+PASS Korean target previews do not re-enable saved haptics
+PASS Korean normal gameplay remains responsive with feedback muted
+PASS Scene changes preserve all saved OFF preferences
+PASS No runtime errors during fresh muted startup QA

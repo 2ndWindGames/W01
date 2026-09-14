@@ -1,0 +1,164 @@
+[
+  {
+    "file": "BGM/Intro_NeonAwakening.wav",
+    "seconds": 18.4615,
+    "loop": true,
+    "sample_rate": 44100,
+    "peak_dbfs": -2.85,
+    "rms_dbfs": -16.65,
+    "seam_step": 0.0030034
+  },
+  {
+    "file": "BGM/Game_NeonLobby.wav",
+    "seconds": 16.0,
+    "loop": true,
+    "sample_rate": 44100,
+    "peak_dbfs": -2.85,
+    "rms_dbfs": -16.04,
+    "seam_step": 0.0069154
+  },
+  {
+    "file": "BGM/Gameplay_NeonRush.wav",
+    "seconds": 27.4286,
+    "loop": true,
+    "sample_rate": 44100,
+    "peak_dbfs": -2.85,
+    "rms_dbfs": -16.64,
+    "seam_step": 0.0010004
+  },
+  {
+    "file": "SFX/Button_Click.wav",
+    "seconds": 0.16,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -11.42,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Target_NeonTap.wav",
+    "seconds": 0.2,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -14.55,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Target_Quick.wav",
+    "seconds": 0.25,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -15.13,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Target_TimeBonus.wav",
+    "seconds": 0.62,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -16.92,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Target_Bomb.wav",
+    "seconds": 0.5,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -13.31,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Fever_Tap.wav",
+    "seconds": 0.23,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -14.36,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Fever_Quick.wav",
+    "seconds": 0.23,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -14.09,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Fever_TimeBonus.wav",
+    "seconds": 0.34,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -14.65,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Target_Miss.wav",
+    "seconds": 0.2,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -9.12,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Fever_Start.wav",
+    "seconds": 0.95,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -16.41,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Fever_End.wav",
+    "seconds": 0.48,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -15.59,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Round_Start.wav",
+    "seconds": 0.67,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -16.95,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Round_Complete.wav",
+    "seconds": 1.05,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -18.34,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/New_Best.wav",
+    "seconds": 1.4,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -17.75,
+    "seam_step": 0.0
+  },
+  {
+    "file": "SFX/Timer_Tick.wav",
+    "seconds": 0.1,
+    "loop": false,
+    "sample_rate": 44100,
+    "peak_dbfs": -3.35,
+    "rms_dbfs": -8.6,
+    "seam_step": 0.0
+  }
+]

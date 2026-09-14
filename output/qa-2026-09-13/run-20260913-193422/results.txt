@@ -1,0 +1,22 @@
+CAPTION English Normal text=STREAK 999  •  SCORE x3 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-20.58, 0.00, 0.00), Extents: (203.22, 18.49, 0.00)
+CAPTION English TimeBonus text=+1.0 SEC  •  STREAK 999 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-30.20, 0.00, 0.00), Extents: (193.60, 18.49, 0.00)
+PASS English fever entry preserves the triggering hit's pre-fever award
+CAPTION English FeverEntry text=FEVER!  x2  •  STREAK 10 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-23.47, 0.00, 0.00), Extents: (200.33, 18.49, 0.00)
+CAPTION English FeverLongStreak text=FEVER!  x3  •  STREAK 999 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-14.23, 0.00, 0.00), Extents: (209.57, 18.49, 0.00)
+CAPTION English FeverExit text=FEVER!  x3  •  STREAK 999 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-14.23, 0.00, 0.00), Extents: (209.57, 18.49, 0.00)
+CAPTION English Miss text=MISSED  •  STREAK LOST fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-22.89, 0.00, 0.00), Extents: (200.91, 18.49, 0.00)
+CAPTION English Bomb text=BOMB!  -2.0 SEC fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-93.52, 0.00, 0.00), Extents: (130.28, 18.49, 0.00)
+CAPTION Korean Normal text=연속 터치 999  •  점수 x3 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-60.31, 0.00, 0.00), Extents: (163.49, 23.96, 0.00)
+CAPTION Korean TimeBonus text=+1.0초  •  연속 터치 999 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-65.29, 0.00, 0.00), Extents: (158.51, 23.96, 0.00)
+PASS Korean fever entry preserves the triggering hit's pre-fever award
+CAPTION Korean FeverEntry text=피버!  x2  •  연속 터치 10 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-60.74, 0.00, 0.00), Extents: (163.06, 23.96, 0.00)
+CAPTION Korean FeverLongStreak text=피버!  x3  •  연속 터치 999 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-52.12, 0.00, 0.00), Extents: (171.68, 23.96, 0.00)
+CAPTION Korean FeverExit text=피버!  x3  •  연속 터치 999 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-52.12, 0.00, 0.00), Extents: (171.68, 23.96, 0.00)
+CAPTION Korean Miss text=놓침  •  연속 터치 초기화 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-59.95, 0.00, 0.00), Extents: (163.85, 23.96, 0.00)
+CAPTION Korean Bomb text=폭탄!  -2.0초 fits=True lines=1 rect=(x:-223.80, y:-49.29, width:447.60, height:98.57) rendered=Center: (-139.86, 0.00, 0.00), Extents: (83.94, 23.96, 0.00)
+PASS Gameplay captions fit their rect and viewport in both languages
+FAIL Fever entry caption reflects the now-active multiplier
+FAIL System.InvalidOperationException: Fever entry caption reflects the now-active multiplier
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1456 
+  at VioletTapQaRunner+<CaptionScenarios>d__30.MoveNext () [0x00649] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:449 
+  at VioletTapQaRunner.Tick () [0x0041f] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:278 

@@ -1,0 +1,30 @@
+INITIAL AUDIO effectsEnabled=False, musicEnabled=True, listenerVolume=1, listenerPause=False
+PASS Contact starts loaded audible cue: Target_NeonTap
+SOURCE AUDIO Target_NeonTap peak=0.47345
+PASS Audio samples are produced for Target_NeonTap
+PASS Contact starts loaded audible cue: Target_Quick
+SOURCE AUDIO Target_Quick peak=0.46309
+PASS Audio samples are produced for Target_Quick
+PASS Contact starts loaded audible cue: Target_TimeBonus
+SOURCE AUDIO Target_TimeBonus peak=0.49862
+PASS Audio samples are produced for Target_TimeBonus
+PASS Contact starts loaded audible cue: Target_Bomb
+SOURCE AUDIO Target_Bomb peak=0.49796
+PASS Audio samples are produced for Target_Bomb
+PASS Contact starts loaded audible cue: Fever_Tap
+SOURCE AUDIO Fever_Tap peak=0.52858
+PASS Audio samples are produced for Fever_Tap
+PASS Contact starts loaded audible cue: Fever_Quick
+SOURCE AUDIO Fever_Quick peak=0.52432
+PASS Audio samples are produced for Fever_Quick
+PASS Contact starts loaded audible cue: Fever_TimeBonus
+SOURCE AUDIO Fever_TimeBonus peak=0.51281
+PASS Audio samples are produced for Fever_TimeBonus
+PASS Contact starts loaded audible cue: Target_Bomb
+SOURCE AUDIO Target_Bomb peak=0.49796
+PASS Audio samples are produced for Target_Bomb
+FAIL Tap bursts reuse a fixed pool
+FAIL System.InvalidOperationException: Tap bursts reuse a fixed pool
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:473 
+  at VioletTapQaRunner+<FeedbackScenarios>d__17.MoveNext () [0x004e4] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:173 
+  at VioletTapQaRunner.Tick () [0x00130] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:125 

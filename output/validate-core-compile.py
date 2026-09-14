@@ -1,6 +1,6 @@
 """Compile package boundaries against installed Unity references without relying on IDE refresh."""
 from pathlib import Path
-import copy, subprocess, xml.etree.ElementTree as ET
+import copy, subprocess, sys, xml.etree.ElementTree as ET
 
 root = Path(__file__).resolve().parent.parent
 out = root / 'output/core-validation/compile'
@@ -16,14 +16,28 @@ jobs = [
     ('SWGUnity2DCore.Leaderboards.UGS', packages/'com.secondwind.leaderboards.ugs/Runtime', []),
     ('W01.Content', root/'Assets/01.Scripts', ['SWGUnity2DCore','SWGUnity2DCore.Ads.AdMob','SWGUnity2DCore.Leaderboards.UGS'])
 ]
+if '--editor-qa' in sys.argv:
+    if '--android-player' in sys.argv:
+        raise SystemExit('--editor-qa cannot be combined with --android-player')
+    jobs.append(('W01.EditorQa', root/'Assets/Editor', [
+        'SWGUnity2DCore', 'SWGUnity2DCore.Ads.AdMob', 'SWGUnity2DCore.Leaderboards.UGS', 'W01.Content']))
 for name, source, dependencies in jobs:
     project = copy.deepcopy(template)
+    if '--android-player' in sys.argv:
+        for define in project.findall('.//m:DefineConstants', ns):
+            values = [v for v in define.text.split(';') if not v.startswith('UNITY_EDITOR')]
+            if 'UNITY_ANDROID' not in values: values.append('UNITY_ANDROID')
+            define.text = ';'.join(values)
     for group in project.findall('m:ItemGroup',ns):
         for item in list(group):
             kind=item.tag.split('}')[-1]
             if kind not in ('Reference',):
                 group.remove(item)
                 continue
+            # This is compile-only validation; Unity already owns these dependencies.
+            private = item.find('m:Private', ns)
+            if private is None: private = ET.SubElement(item, tag('Private'))
+            private.text = 'False'
             hint=item.find('m:HintPath',ns)
             if hint is not None:
                 p=Path(hint.text)
@@ -44,6 +58,7 @@ for name, source, dependencies in jobs:
     for dep in dependencies:
         ref=ET.SubElement(group,tag('Reference'),{'Include':dep})
         ET.SubElement(ref,tag('HintPath')).text=str(out/'bin'/dep/(dep+'.dll'))
+        ET.SubElement(ref,tag('Private')).text='False'
     file=out/(name+'.csproj')
     ET.ElementTree(project).write(file,encoding='utf-8',xml_declaration=True)
     print('Compiling '+name,flush=True)

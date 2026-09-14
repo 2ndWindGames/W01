@@ -1,0 +1,17 @@
+{
+    "state": "FAILED_OR_INTERRUPTED",
+    "startedUtc": "2026-09-13T15:07:41.4283592Z",
+    "updatedUtc": "2026-09-13T15:07:42.3666281Z",
+    "endedUtc": "2026-09-13T15:07:42.3666281Z",
+    "activeSeconds": 0.0,
+    "timingVersion": 1,
+    "legacyStartupAllowanceSeconds": 0.0,
+    "verifiedFullSpeedSeconds": 0.0,
+    "currentTimeScale": 1.0,
+    "frames": 22,
+    "rounds": 0,
+    "contacts": 0,
+    "checks": 1,
+    "managedBytes": 48668672,
+    "error": "System.Exception: Korean Ready status clears the score/time/best HUD\r\n  at VioletTapComboQa.Check (System.Boolean condition, System.String message) [0x00009] in C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Editor\\VioletTapComboQa.cs:366 \r\n  at VioletTapComboQa.CheckStatusBelowHud (_01.Scripts.UI.Popup.UI_GamePopup ui, System.String phase) [0x00087] in C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Editor\\VioletTapComboQa.cs:293 \r\n  at VioletTapComboQa+<Run>d__22.MoveNext () [0x00287] in C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Editor\\VioletTapComboQa.cs:175 \r\n  at VioletTapComboQa.Tick () [0x0015b] in C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Editor\\VioletTapComboQa.cs:95 "
+}

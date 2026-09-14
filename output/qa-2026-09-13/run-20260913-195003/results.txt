@@ -1,0 +1,16 @@
+PASS Music mute stays independent of effects
+PASS Return request happens while both music streams are crossfading
+FADE RETURN samples=22579->0 volume=0.2899318->0 phaseKept=False volumeKept=False
+PASS Interrupted fade settles to one lobby stream at the requested volume
+PASS Unmuting music preserves its advancing playback position
+PASS New effects inherit effects mute without muting music
+PASS Both disabled preferences and voice mutes survive entering Game
+PASS Round music and new start effects remain muted
+PASS Stopping mid-fade cannot restart an outgoing stream
+PASS Music can restart after Stop while retaining mute
+PASS Returning to Intro preserves both disabled settings
+FAIL Returning to the outgoing music preserves phrase and volume continuity
+FAIL System.InvalidOperationException: Returning to the outgoing music preserves phrase and volume continuity
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1543 
+  at VioletTapQaRunner+<MusicScenarios>d__31.MoveNext () [0x008ee] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:462 
+  at VioletTapQaRunner.Tick () [0x0045d] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:293 

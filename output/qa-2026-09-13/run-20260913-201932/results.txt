@@ -1,0 +1,14 @@
+PASS English help does not overlap btnBack
+PASS English help does not overlap btnStart
+PASS English help has a large screen-space touch area
+FAIL UnityEngine.MissingComponentException: There is no 'CanvasRenderer' attached to the "btnHelp" game object, but a script is trying to access it.
+You probably need to add a CanvasRenderer to the game object "btnHelp". Or your script needs to check if the component is attached before using it.
+  at UnityEngine.Object+MarshalledUnityObject.TryThrowEditorNullExceptionObject (UnityEngine.Object unityObj, System.String parameterName) [0x000e2] in <4188a0f79dff4b4191dbeaff03bfe462>:0 
+  at UnityEngine.Bindings.ThrowHelper.ThrowNullReferenceException (System.Object obj) [0x00010] in <4188a0f79dff4b4191dbeaff03bfe462>:0 
+  at UnityEngine.CanvasRenderer.get_cull () [0x00006] in <0985ab683fec4c17a74dd368c72088ab>:0 
+  at UnityEngine.UI.GraphicRaycaster.Raycast (UnityEngine.Canvas canvas, UnityEngine.Camera eventCamera, UnityEngine.Vector2 pointerPosition, System.Collections.Generic.IList`1[T] foundGraphics, System.Collections.Generic.List`1[T] results) [0x00018] in .\Library\PackageCache\com.unity.ugui@27635d171b1a\Runtime\UGUI\UI\Core\GraphicRaycaster.cs:324 
+  at UnityEngine.UI.GraphicRaycaster.Raycast (UnityEngine.EventSystems.PointerEventData eventData, System.Collections.Generic.List`1[T] resultAppendList) [0x002c5] in .\Library\PackageCache\com.unity.ugui@27635d171b1a\Runtime\UGUI\UI\Core\GraphicRaycaster.cs:225 
+  at UnityEngine.EventSystems.EventSystem.RaycastAll (UnityEngine.EventSystems.PointerEventData eventData, System.Collections.Generic.List`1[T] raycastResults) [0x0003f] in .\Library\PackageCache\com.unity.ugui@27635d171b1a\Runtime\UGUI\EventSystem\EventSystem.cs:277 
+  at VioletTapQaRunner.ClickVisible (UnityEngine.GameObject target, System.String description) [0x0003c] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1388 
+  at VioletTapQaRunner+<HelpLayoutScenarios>d__32.MoveNext () [0x0034a] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:448 
+  at VioletTapQaRunner.Tick () [0x0049b] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:308 

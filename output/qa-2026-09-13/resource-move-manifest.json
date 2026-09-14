@@ -1,0 +1,1177 @@
+[
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\0.png",
+    "Sha256": "4252DE5A0D62FE7C12BCA3F2A8FF0AE4392727050BD89EA06423871653265266",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\0.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\0.png.meta",
+    "Sha256": "7667C60C7E8C6E80D8DB811562084B5C3DF12170BE6F315C6EA58A44435BC34A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\0.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\1.png",
+    "Sha256": "2C2B1210E039704E0DCC7A55D716653149EF363885D5DA1EC51C0AA97A76AE0B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\1.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\1.png.meta",
+    "Sha256": "289FB806CA78F5E2831D88C9F28123FA2077D26E49DF8322AF5488A6B7E77BC5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\1.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\2.png",
+    "Sha256": "0DEC6A4E1665F6C2623AAA9FB3FC530EDC1829EAF0A42B56754163E59BFF12CE",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\2.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\2.png.meta",
+    "Sha256": "081EA713FB0115FC3581EDD3E9779ED704476040349BF4CBD1F72633482CBCD3",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\2.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept.meta",
+    "Sha256": "AA5B4CED9A7CCCBC65D41FF1990A2DA28C20D939445CD069E62BE6B9FD6F663D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction.meta",
+    "Sha256": "B94D72664736AE3D54EC1AD679F88F230EB85DE8037ACC0A43E9C66011F2712D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\popup_ui_concept_v2.png",
+    "Sha256": "FEC5A1E8F29E25CE44D62F1336D2DC1C01A08DFB03973043E625ECD20EC136A2",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\popup_ui_concept_v2.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\popup_ui_concept_v2.png.meta",
+    "Sha256": "FA6B15B7DE5BB1219BBC22622AABA5FB6BB2383492D3BAEBB772FA8F71E5876C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\popup_ui_concept_v2.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\popup_ui_concept.png",
+    "Sha256": "15113DB5D0ABD5F6B2A55F5992E2939ACD24284B498314818965474121D7D8ED",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\popup_ui_concept.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\popup_ui_concept.png.meta",
+    "Sha256": "786D6C264298EEF62C6636D4CF036688677AB25317700570EF32EBC53E86237E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\popup_ui_concept.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants.meta",
+    "Sha256": "8BDD6B036FC8710478ADAAFA33A8EC32559A11E6E0C858CE83E833BCCD036F0A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\touch_target_concept_sheet.png",
+    "Sha256": "9D8D902129B84A9FD8C51B0730EF41747E753A211BE5023A70189F664710E945",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\touch_target_concept_sheet.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\touch_target_concept_sheet.png.meta",
+    "Sha256": "E4388EC932437E4FB9613988E2B3DEFD484155AC23853A24BA6316A7978FD893",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\touch_target_concept_sheet.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\01_intro_scene.png",
+    "Sha256": "5C8BD1B3B0F2F79FD0EC47BB0283C9A795C3DC37C73868185CA0694B354DF2A6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\01_intro_scene.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\01_intro_scene.png.meta",
+    "Sha256": "44C3DF106319A2BD17CADF2804D87CC2F6831935531C1437C191ED18DEEF5941",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\01_intro_scene.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\02_gameplay_states.png",
+    "Sha256": "AB9D2DE40469406C70DE61254128DE38DDBD9BF1BF2CEA7A404FB8EC16380DC2",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\02_gameplay_states.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\02_gameplay_states.png.meta",
+    "Sha256": "BA70740860EBC8A3335495C2C02785B51489AFE11E1F0CC266130F0D90605619",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\02_gameplay_states.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\03_popup_suite.png",
+    "Sha256": "48CA05818E6233FBC2937C03107A2ABF684D38557A1D79D8869E4711521F3F2E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\03_popup_suite.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\03_popup_suite.png.meta",
+    "Sha256": "3CD6743FB1B2D70B606B865325D6017FAA6EF2A46E2063F54339EC8692837D1B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\03_popup_suite.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\04_targets_and_vfx.png",
+    "Sha256": "8F5A366165E1A6CAB43C7147D339E9DB5B6CD5DDCAC1010C71DE249671C00CE5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\04_targets_and_vfx.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\04_targets_and_vfx.png.meta",
+    "Sha256": "481132DC6659929F71FDA29E8F42F286323D8DE063FDC8B74FEB1A32C46AD1FC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\04_targets_and_vfx.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\05_ui_kit.png",
+    "Sha256": "BB481866B745AE966BEC9A7397669D50FD62B1797CFAB5F490E2E2791CA05897",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\05_ui_kit.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\05_ui_kit.png.meta",
+    "Sha256": "EAC31146A772F2A714A99D5F62329D302A3FF4EB7E94B11AC3BF7F1C3DC9AF21",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\05_ui_kit.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\README.md",
+    "Sha256": "D451859172D002091DF5DE5364352C934340727EB6AB07B07317810EAD4E6669",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\README.md"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalConcept\\README.md.meta",
+    "Sha256": "78F128ECC4D4D8F643802C3339461D693EC1CB40B93F5E6C32F904763B7B42DD",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalConcept\\README.md.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Backgrounds.meta",
+    "Sha256": "61CCAACCD11E3C691B7BA1D31B31AF47BEA4C97FB4DD8A2E0324103F0CC373C8",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Backgrounds.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Branding.meta",
+    "Sha256": "4A90EA4188FA69CA777EE4CC56DCFFC6DC42E99A890BC25934E099005306FB8C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Branding.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts.meta",
+    "Sha256": "166BD921DDCCB930D3DF9F85252DFA930A3B871E4DFF0703FD67292391E3088D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls.meta",
+    "Sha256": "573F0F1C3073A1355610B8246F760E126BE2B3D3F39B212A81019EDDF515CF10",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations.meta",
+    "Sha256": "74A4D641E3DD98D2D19E297310A815F31FCB277FE0555AE79A88C850C2B5E5B5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons.meta",
+    "Sha256": "A3E642E3132A77202D6E6417F5E69BDD230048DBD92DAE1A57204B7909CEB6AC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice.meta",
+    "Sha256": "0B7C201FD521ABDB0F5F5BEC300E50A8D9CF6ADB11C6D496C5225AFE71ED4608",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources.meta",
+    "Sha256": "32E916434FBD33641BFCE8A30D2F0683B24B593C658D2B7A48D6D66E8960BF00",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets.meta",
+    "Sha256": "7783A95884DF4A1DEBDDE58A5EC968BF1861798580A2DB16B002A9E0DEE2F8EC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX.meta",
+    "Sha256": "CE9BEC7DE4C65B9F2ED7A36857C38C84EC3DE578C98EEFC4786FBBBA9FA54F24",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_game.png",
+    "Sha256": "8D58B65BF616A9902D5427AF1464F07A23BA0201D76835B3F090C963D05C051A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_game.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_game.png.meta",
+    "Sha256": "FDD407E7BBC7AF11EB854B87970FE2358A400310AB7BA374A215B47D6A3B9596",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_game.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_intro.png",
+    "Sha256": "887543050F98EF93D0933F023B9C8A7DAA88AE4EA5C2767F7726CA5DB4679C3B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_intro.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_intro.png.meta",
+    "Sha256": "BBA08FF067972B964897AE2A736DD5FBF525F7D936BBB54EC758F963DF90D348",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Backgrounds\\background_intro.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Branding\\logo_secondwindgames.png",
+    "Sha256": "529337272D99D7D5255D01CFA5ED0EF253C79A0E7199215F559DD3B2755A2DC5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Branding\\logo_secondwindgames.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Branding\\logo_secondwindgames.png.meta",
+    "Sha256": "19F20440D86E4CE69A8A8BB63B1093F8B63F57FEB68741CF05975DCFEF6BEF57",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Branding\\logo_secondwindgames.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Branding\\title_neon_touch.png",
+    "Sha256": "7993F92F6EC15902D95A8FE5F8FC05BC3823F74F8684AC20373DC26BF0D17581",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Branding\\title_neon_touch.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Branding\\title_neon_touch.png.meta",
+    "Sha256": "A11C0936C1FF6CEBA0C2361E0B1AD9B135C3DEA07A553AB50AEFBEA88232BDCB",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Branding\\title_neon_touch.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\01_intro_scene.png",
+    "Sha256": "5C8BD1B3B0F2F79FD0EC47BB0283C9A795C3DC37C73868185CA0694B354DF2A6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\01_intro_scene.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\01_intro_scene.png.meta",
+    "Sha256": "CF99239E4D6376D800315A2DF22273C0E0E18A4041D0DDBBE7A3CABEF52A859E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\01_intro_scene.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\02_gameplay_states.png",
+    "Sha256": "AB9D2DE40469406C70DE61254128DE38DDBD9BF1BF2CEA7A404FB8EC16380DC2",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\02_gameplay_states.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\02_gameplay_states.png.meta",
+    "Sha256": "674D04A704795582CC64CCF007E6BF0BBAE85CF08D0AA4C405916F3E19E86F9E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\02_gameplay_states.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\03_popup_suite.png",
+    "Sha256": "48CA05818E6233FBC2937C03107A2ABF684D38557A1D79D8869E4711521F3F2E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\03_popup_suite.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\03_popup_suite.png.meta",
+    "Sha256": "B652BFDE0A3A8C93DB6D77DE2B5DFD9119ABF28D498C19291FC5D8D7C6B5FD95",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\03_popup_suite.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\04_targets_and_vfx.png",
+    "Sha256": "8F5A366165E1A6CAB43C7147D339E9DB5B6CD5DDCAC1010C71DE249671C00CE5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\04_targets_and_vfx.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\04_targets_and_vfx.png.meta",
+    "Sha256": "2A08FDE6B9DE1623E65DD16BAC37BA7190F6F6DF6301908DC851D3ECE5688740",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\04_targets_and_vfx.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\05_ui_kit.png",
+    "Sha256": "BB481866B745AE966BEC9A7397669D50FD62B1797CFAB5F490E2E2791CA05897",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\05_ui_kit.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\05_ui_kit.png.meta",
+    "Sha256": "4FD4A96D1B474DE9DBEDFF363DE761932D99FA1B551617BAD4A0683F3F71A694",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\05_ui_kit.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\README.md",
+    "Sha256": "D451859172D002091DF5DE5364352C934340727EB6AB07B07317810EAD4E6669",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\README.md"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Concepts\\README.md.meta",
+    "Sha256": "D5D8963B4D0E163FADC7B91F6006A4420E1368F6F7A758C9C5FD68B29D5092E4",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Concepts\\README.md.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_checked.png",
+    "Sha256": "C7903C6EE5F9EB12BB97163AC8435FB7F9BF1DC97A3A3480FD7C161626EC95AF",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_checked.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_checked.png.meta",
+    "Sha256": "911C6DD8EDC5035C98D81CF340050947F42CF6984F554A2BACF8A47ED5F47713",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_checked.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_empty.png",
+    "Sha256": "D2DAFB8231C5775943A12DB261B4F4ABAEA455B8C1278E5D26A1224D900E6255",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_empty.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_empty.png.meta",
+    "Sha256": "53BCA4022F7833719036E40458878949E9788850FAB27726A69D7E384AF81F0D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\checkbox_empty.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\scrollbar_handle.png",
+    "Sha256": "4BEA839FCEAAD26E0D742BA9DD66B37FDF217C856029631965872E9E09BB06CD",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\scrollbar_handle.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\scrollbar_handle.png.meta",
+    "Sha256": "48814EC3EBE09EADBC08EA78D46CC812FC36D3B53C95AFF216A1B3CAE99C3161",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\scrollbar_handle.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\slider_knob.png",
+    "Sha256": "D8C1BA7E825EC9D7EA416FF5BE359A802DF4D99AAF417C3B293F96588D3EA1BA",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\slider_knob.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\slider_knob.png.meta",
+    "Sha256": "BCD313E8EC3B2A76760929BBCF14058D1109B27A172D69CAE23BF9BEE3C2D381",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\slider_knob.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_empty.png",
+    "Sha256": "D43EE8925554C8A1B3F4E99F741DFE9EA3CB68ECDFE823635A7B2597BA65EEDD",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_empty.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_empty.png.meta",
+    "Sha256": "A4C0B587BC38A4EA0ACBF1E28DD0FD4DEE84D288C9D44736135EFA3A9C8878A4",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_empty.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_fill.png",
+    "Sha256": "92DB48E06CC993AAFA705C27F50D4D4A82555E7EBAEF03AC5B4176C172883523",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_fill.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_fill.png.meta",
+    "Sha256": "8659A006D5D0825C69B5B476874496D2900A233DEEF46B42D6C529DF216A0216",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\slider_track_fill.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\toggle_off.png",
+    "Sha256": "760E78212BE4D1BA5CEE8406F33F27B77577793A9C9FDADC827006197C2596CF",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\toggle_off.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\toggle_off.png.meta",
+    "Sha256": "BF01DF9E9CDD1735A42934B39F92642C71297BA2C3194BB734994D0C48F676C7",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\toggle_off.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\toggle_on.png",
+    "Sha256": "EB56FC74AC62475415278205622093813C65B7BEF3C388E05AE8C6774D646357",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\toggle_on.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Controls\\toggle_on.png.meta",
+    "Sha256": "5109DA547A8531D3AC18809A09C7C115559DBA91B8DCF62C2100F0D08C58C4E1",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Controls\\toggle_on.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\divider_diamond.png",
+    "Sha256": "E910C698F90B0C1EDEE59AD95216C6AD4B7B95AC97F8245C44FA2E3736405032",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\divider_diamond.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\divider_diamond.png.meta",
+    "Sha256": "C62B7EAA67DFCAFA6F93AAFB1B9E2DB1928828A813506C5A202C46E46C3E50FC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\divider_diamond.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\divider_long.png",
+    "Sha256": "16696A405B1EF6A4BCB9CF4617CD10069AC9A6084DA6AD38B1C8416B8C2A3A81",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\divider_long.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\divider_long.png.meta",
+    "Sha256": "8C37D07DA689CBB999BB25F48A48654FD79D89D0BBCF1F084A5D940EE553FCB3",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\divider_long.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\fever_edge_flare.png",
+    "Sha256": "06462A8ECB9EE55ECDA27983511578517086239936D474E097AF34A0C53913E8",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\fever_edge_flare.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\fever_edge_flare.png.meta",
+    "Sha256": "9E5207B6E1B51660ADE690950009FF4103C6003565FAC827F76D208978C3BC3F",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\fever_edge_flare.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\grade_badge_empty.png",
+    "Sha256": "E2797021485DCA33A10E93DB819C9B26D0DA737B0EDA77D10BCB8596F4DA62E8",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\grade_badge_empty.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\grade_badge_empty.png.meta",
+    "Sha256": "1B1531DB166E92F0946ED07A4DD9AD5CFBD2D4B207B4338A5103C392BA837CC8",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\grade_badge_empty.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\header_ornament.png",
+    "Sha256": "6E9B258D03FD91A017E310936A901AD53C1D3655C4741A50705BF7DE7137B63B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\header_ornament.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\header_ornament.png.meta",
+    "Sha256": "243CF3276DE948251D8EB055A6707DB1714A8D686091DC9C66571D3CC47E6F84",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\header_ornament.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\intro_energy_core.png",
+    "Sha256": "2BCD574C99B6B69C34DA943F288CB989CB4D70235C047B4E4BFDF005DFBD89B6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\intro_energy_core.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\intro_energy_core.png.meta",
+    "Sha256": "FC950EB30E91A6FECA35855E49812F84DB8A819706E5FE46A572E7EDC7778D36",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\intro_energy_core.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\intro_orbit_ring.png",
+    "Sha256": "26E8DCF4C403A22042BB87A65E7959E5195D178F33BBB84F37F8166F3994D018",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\intro_orbit_ring.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\intro_orbit_ring.png.meta",
+    "Sha256": "FB41C5052B309F1A261BECFACBDF1EC68DE5BB1F6540741227F52EDB344AE6E7",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\intro_orbit_ring.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\intro_platform_glow.png",
+    "Sha256": "299612DB94F3F08EBFDDDEA105C3153F17CB0330FD5B631E86BB2E62EFEB0881",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\intro_platform_glow.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\intro_platform_glow.png.meta",
+    "Sha256": "39BCC95434BF4C401EC0286DE7158547AB2EE4AE945E976BE478C2784748CD7D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\intro_platform_glow.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\tutorial_tap.png",
+    "Sha256": "E4DFDD6481415023A518C0C2B0C27DA1983B96F3DB2BA38C523CDE66E53BF52A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\tutorial_tap.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\tutorial_tap.png.meta",
+    "Sha256": "234D7A05ECC8E16DFD2AFFF9730494CA7283BC73479FE61634D1EBD307FADB74",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\tutorial_tap.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\warning_badge_frame.png",
+    "Sha256": "A7A6A0D8F8C266F219E9FD936CBB01E428A882638E86F53833844203CBDF2DE1",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\warning_badge_frame.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Decorations\\warning_badge_frame.png.meta",
+    "Sha256": "C07DD773D5353E7F8DCD8E6565E1F0FB310C3D612125740045B8ED6EBFD9643A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Decorations\\warning_badge_frame.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_back.png",
+    "Sha256": "EED65D9C368535683E19826CE734996804BA1F34AF5763D3D3FE01D2ADABE18E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_back.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_back.png.meta",
+    "Sha256": "9770999940097CC2669ED96B2AA99946A7172AB1F78D68B6509783F6279DA370",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_back.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_check.png",
+    "Sha256": "9158156716514EA602143CCC35D0D3CC1E35210E166CD934F0D475EA14699A54",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_check.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_check.png.meta",
+    "Sha256": "329E644FD5B3DDB55927D6B0133AFB084D172E6D04E2FD69C04C2088AB053130",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_check.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_close.png",
+    "Sha256": "EF167302856B73FF4E0CD15B75774F17C6914E5A5164D2706F85B44388FAB42B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_close.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_close.png.meta",
+    "Sha256": "DC43419828F333E85CC2A3E6E5AFD67FB9386311DDEE86B9E0E7A960BF1D70D9",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_close.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_home.png",
+    "Sha256": "F7C410EE36082A62E42972A5E39C513DD48FBEB0C3072E9992EC400DE6F34D0E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_home.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_home.png.meta",
+    "Sha256": "9DD94894DDE67C9A67A6EB64F3476B704BAE28751A76FD510E481E0864514473",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_home.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_info.png",
+    "Sha256": "7CB40BDA64332757ACFD1C500F2E0257FD7E23AC917A8315EF6F0C0E04DCDDAF",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_info.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_info.png.meta",
+    "Sha256": "A78B45849813C895083D791D384B2A7A48C81E7024ACB21FCD680CAEDDB3C441",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_info.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_language.png",
+    "Sha256": "A3047C55958EBFC39084C1563A523DE36306626F15F087CCBE1F7CF53F49AF34",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_language.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_language.png.meta",
+    "Sha256": "FD49EF7BB0DB226735DB6DDBD91C0D1C3366880CF907EF1C583ED461711F118F",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_language.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_play.png",
+    "Sha256": "9EC87DE8ED5C3FE34064BCA450976DA0FF4A82D09EF171AD4802DCB5C65F4501",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_play.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_play.png.meta",
+    "Sha256": "7C96CB20E8B42A9ED6E0E643A328E9EEB4E70DE8F4D684D6CE5ABD1E925443E2",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_play.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_privacy.png",
+    "Sha256": "92DAC57C0ABD6A74C0986F0CCFFE28BB8B4CE0CC42D393053840B794FEBC834C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_privacy.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_privacy.png.meta",
+    "Sha256": "88E405AAFFCBD6DF7BB6D3E2C3ECE2BDF50A1084D25B2116AB9C089823781324",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_privacy.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_ranking.png",
+    "Sha256": "E4EFDD941A89636FCFD4586EF87E8D6343DA59DB81BFF15788D93B1B67E1DAE5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_ranking.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_ranking.png.meta",
+    "Sha256": "7B0128B3D71C3CBC338E9F25B108708FB6D49594A4C9BBDC6C6093CAD4C1A188",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_ranking.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_remove_ads.png",
+    "Sha256": "D6AC5099824396237985C58ADD246BD914F66C64C9D39925C70397FE387401D6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_remove_ads.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_remove_ads.png.meta",
+    "Sha256": "D72E753F11877BC5B8244635F2FFE6AB5E7F4A3B0AC37EB94D0F14BE12A03C81",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_remove_ads.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_restore.png",
+    "Sha256": "38C7CE0F0D4338998C7F2E792C044699CD131664E784DBA72EA3C0CC5A5C56AB",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_restore.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_restore.png.meta",
+    "Sha256": "ADE0AF69F3375C87C7BD48E2FA921DC37202ED1EF16968BB370FA792A848A211",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_restore.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_retry.png",
+    "Sha256": "3924F48C303F3F5B23A38DBC1021D506834130C48B54CE772F128427E3FEF5DD",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_retry.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_retry.png.meta",
+    "Sha256": "B6A02F3763C968E84F71F33D3BC021F38822150F70308401772B038C9DA08F99",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_retry.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_settings.png",
+    "Sha256": "A77EE113C48CBE71CFF1A275516C930EC97F7CF999E53BA829F56182E4D91248",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_settings.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_settings.png.meta",
+    "Sha256": "1045DCF2D5B44AEEC20BB920B09AE0A87B5AF210594C43DFF97CC3DE994E6FB0",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_settings.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_off.png",
+    "Sha256": "FB5D4DCC2BDD05A9AD118DDA82A7D86FCD11BE4421BA573CC5FF63C43F2CBB6C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_off.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_off.png.meta",
+    "Sha256": "A2CA168E4F7FFB0D5432FD0530480AAEE7C55F93433FD77D22DB3120CB1CD242",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_off.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_on.png",
+    "Sha256": "3D43523744FC1EF8B9E9455FA1800A8A3F3715E92B4F5DA70FCA958A428465B5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_on.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_on.png.meta",
+    "Sha256": "866B2EE495C4EC46AB06303325EDC843754D435B2B2DCA3AE4D85DA494FCEF1E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_sound_on.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_vibration.png",
+    "Sha256": "AAC49A428BA384378CCDB37586F06E21D7EA1400C7458ABFDD984675F9956FBC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_vibration.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Icons\\icon_vibration.png.meta",
+    "Sha256": "01B85F253E0C9F2FA45A641FDA31B36C007664D674F3F73C96B1826EE6CC82B8",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Icons\\icon_vibration.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons.meta",
+    "Sha256": "EB85706432CB433842E4CF6693CD9C00BAFF106FFF7B2D38A60C0E98290E64BA",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists.meta",
+    "Sha256": "8F1E7FEFA2F2E84BB7E4BB87D8E23D4BE3CD86F75BAF3BEF5F9DA486F48F2B86",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels.meta",
+    "Sha256": "7F6A32D1264DFBF529C682192F0A0CD701FAF3258A29C390768819CEF9E4D840",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_compact.png",
+    "Sha256": "64B39DEB147E4E1328623DBC5D2B6BDA8066823DFCF1F8C75BE1049F53E25812",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_compact.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_compact.png.meta",
+    "Sha256": "FB242D785AD5F35852BB7304B36F1FA29B11F0DB2917531E256F80A431E153EF",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_compact.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_disabled.png",
+    "Sha256": "1B2FBEF61DFD4BF2FB65C61B05FDC051E32A8CE5194E0F5F695562E3C903D32A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_disabled.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_disabled.png.meta",
+    "Sha256": "6E574105031317FE21C2BDBC047D89EDB86AE7EBDD6645597BAFE33524DC9D7D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_disabled.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_normal.png",
+    "Sha256": "3FA5B1C1153E85374EEC6F11E965F9BDD8A78FD3F309140AE3CA167B3A0457E1",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_normal.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_normal.png.meta",
+    "Sha256": "BFD2BF155DE1EC3FA5E782B85F249A7BB846A19A9896ECACE779C2168D4A30AD",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_normal.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_pressed.png",
+    "Sha256": "B71CC9972C9BE0BC97826B3CE04F471C46AFB1FD3035F40B7C4B6C7DE965E1FA",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_pressed.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_pressed.png.meta",
+    "Sha256": "1C7733C65771A980C57C0485920B57719611383C723F83539B2C7533B56ABF3A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\button_primary_pressed.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_disabled.png",
+    "Sha256": "9E53A10FEB9F498729A6B69C14E2A095E3730397A37267B1F1F16D8BC6B617FC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_disabled.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_disabled.png.meta",
+    "Sha256": "A77AD02EAF6BA097220518968F2929B521B230BD3DFF01F2AB8A08C10E146CA6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_disabled.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_normal.png",
+    "Sha256": "559DD6BFFA315B260108009D91286063973088EB51740A052A9668F898111E73",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_normal.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_normal.png.meta",
+    "Sha256": "08FA4213D3AE593077F4DD92A4243E0B8F2F91547F4F2326D630BDC7B841B259",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_normal.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_pressed.png",
+    "Sha256": "A3BA503E82BA9F61D9C281B04D3C9C9884F3BD5B26B2AA34660B334F6AA41F80",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_pressed.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_pressed.png.meta",
+    "Sha256": "DCDB76F7471663F189226F4939DEE9E68B10A1929B7A0F9DAD42E6CF47055A42",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Buttons\\icon_button_pressed.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_normal.png",
+    "Sha256": "53851BDA5230E796EF7A555514F140A0C9692604B049B8CEA3FED60FC713D7CB",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_normal.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_normal.png.meta",
+    "Sha256": "BFF6B5E67B3944A776EEA290B014DBB413CA96853E846847AF387EB1B00BD75D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_normal.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_selected.png",
+    "Sha256": "2A08181EBB815F8011F1C0EA62C98ABE030B2CAFE47AF340D78C9FA79863BEA3",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_selected.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_selected.png.meta",
+    "Sha256": "B0662AA1202CC93292A701C7AB170FCCD6647EFA941C445909A8CC3571052AF6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_selected.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_top.png",
+    "Sha256": "8D72B81464C9D8A8FEF10D62C996EF1745535EA679D0F2F43F4FB6B314A003B4",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_top.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_top.png.meta",
+    "Sha256": "4259A650EDAD0227AC719E1419CF7F3550AFD64E0D977A9FFF27AB332212E034",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Lists\\list_row_top.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\header_strip.png",
+    "Sha256": "9B8C4D00DB3C3661992D7216593F944CB5D5998C1AB28778081C1270B892FB89",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\header_strip.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\header_strip.png.meta",
+    "Sha256": "778C7288851EC256432123A312C799B3BBEBE1B5B92B983029A36F30C9C17917",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\header_strip.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\hud_card.png",
+    "Sha256": "8FE470F103E724070980E509E25308C8EFFBAF94642499A693B8F760E03A80A1",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\hud_card.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\hud_card.png.meta",
+    "Sha256": "80361EE908CF09F1B79DE8A240FAC0D24FB9AA0E535788D52F29F01C8499BFFD",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\hud_card.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_medium.png",
+    "Sha256": "823E9AE25C2D20A4AFE0B0D1892D5FCDC3129BB8E289E4A288EAA236C08FB019",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_medium.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_medium.png.meta",
+    "Sha256": "93DD3946878C7DEDBAE48868952090ABF8F452ABEFEE725127E4B0851E88FE7A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_medium.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_popup.png",
+    "Sha256": "DAF8A79C4E77A6730B754491FC2EED920FCED4F617C328CB9EFCD33E500BAD86",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_popup.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_popup.png.meta",
+    "Sha256": "C405526CA604CCCB7DAEB605E85439E32743044929C89600427734FEE1F9C098",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\NineSlice\\Panels\\panel_popup.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_controls.png",
+    "Sha256": "A2A479F27CEAA80FAE7435729D14A2A726F0B6A9C7EE035D689A8388B59C8E47",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_controls.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_controls.png.meta",
+    "Sha256": "2EC90C0724973DBEAE7FC1D1D7682872F45ED79ABC50570BEC7770382DEF2D6C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_controls.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_decorations.png",
+    "Sha256": "23F86DBFBBD6254B275157CBE264D08469FE329B141C094C63858179F93929C0",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_decorations.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_decorations.png.meta",
+    "Sha256": "7AB948754EE8CDA9DF5C841461A1B822DEC31BD5CEE90FEE02F29A04E7D93CA6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_decorations.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_frames.png",
+    "Sha256": "8618B5FB0259BA5329066B90100FF919D66BF96EEC4C2A5FB3F3739644605506",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_frames.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_frames.png.meta",
+    "Sha256": "A106651CB1110AA993A55F5F6981ABF4699ADD8B4472C7F72BBC79444E3CE8F6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_frames.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_icons.png",
+    "Sha256": "B4A42209DB6D07CBC733EB40F5F875EE9AB22EEE22D43B7F9FAE3F6C869F6FA7",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_icons.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_icons.png.meta",
+    "Sha256": "5B92C222D87250AE08680BFB1DBE69331B2E5B54541A312480153E49B7F9F45C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_icons.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_targets.png",
+    "Sha256": "E511FF27B725A3BB59BA264632A3B4222E183DA1E028DF3DD62FE43A7F4ECF16",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_targets.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_targets.png.meta",
+    "Sha256": "107836156AE1FAF6FA75352EE138E0FA0A2E31C7B01E8C3884B68D3A0E23C200",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_targets.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_vfx.png",
+    "Sha256": "1C44E02CB4F241578EF1FC0F3182F736DEE7B9C17D4AD68EA818E367D8CB475D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_vfx.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Sources\\source_vfx.png.meta",
+    "Sha256": "537410C3DCEBA5462ADDF2834DFD73BF97E85A8FEBA71CDD5707F1DBF0971715",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Sources\\source_vfx.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_danger.png",
+    "Sha256": "7DABE1FAB3872958627E3610C65CA14607694591E5134A5D3CC2ECFA5409AA05",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_danger.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_danger.png.meta",
+    "Sha256": "483DCB3C8757AC0BCBCF0D314E3DF90863632FD9D7E6C91C20497848C983F0FC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_danger.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_moving.png",
+    "Sha256": "EB5FF0AD9FB3A50FE2B300E2672F291F979302A4D948A5751674B102B80BB179",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_moving.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_moving.png.meta",
+    "Sha256": "C8BD8F44747534323E81BEB663F5A007638F7300EFB0AB66260D7812D0BB263F",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_moving.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_normal.png",
+    "Sha256": "6C17F2FEF4D0A63172A522ED05DD49EB68AA7718F79F6A3CE3860A4434C48CC5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_normal.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_normal.png.meta",
+    "Sha256": "0E8A2B5F90B5111BD3B13955CA3AC13FA7D21A9B910ECC42F9214C34B9FCD614",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_normal.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_overload.png",
+    "Sha256": "76676F0D7EFF7A1C02983AE55AD718BC7784E67A369F9C02FA1869FA0D3EB182",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_overload.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_overload.png.meta",
+    "Sha256": "557B123629801FD425103A448B8A709CBF742F4CDB0F059F99549234D48E7446",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_overload.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_precision.png",
+    "Sha256": "7A9D7E50EE66F59D1973CA8676B2213AAB932850AE31E6409E6B01CD715AB355",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_precision.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_precision.png.meta",
+    "Sha256": "A75E07BA3D66F151D450ACF119DE0B75286C23A0081EE06A656BA25B3EFF9505",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_precision.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_quick.png",
+    "Sha256": "24DE7FCBC36155BEB337125CF8A248120E14536F2E6B9B6DCA092D0B9700C114",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_quick.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_quick.png.meta",
+    "Sha256": "4ABC628272B1717EBD72E65C51BE5B77A871E80F0630D2FE977DE4EB99818D8B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_quick.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_safe.png",
+    "Sha256": "4D0070E586C2B6FA3390CF034D84C429B74ABF665D795FE7FDD6491C480F0824",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_safe.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_safe.png.meta",
+    "Sha256": "FFECCE9E693F7404AA69B5B4060ABAABBC2CA4DAC0A8C254AA80F88DCFC621C3",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_safe.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_time.png",
+    "Sha256": "C5FAD2F021B0C2D7209091EBF71B80DA7ABE4822712A71DEA058E070F1948E23",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_time.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\Targets\\target_time.png.meta",
+    "Sha256": "88B30513EB72F4C5FF1715240B859965CBC9C1ECA367BCA6878E7F291AD94DED",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\Targets\\target_time.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_bomb.png",
+    "Sha256": "C169EAE9358D00D26A7CF81007C611C9649DB6547F37B750C056B6E099A64DF8",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_bomb.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_bomb.png.meta",
+    "Sha256": "ADC177778468C51D65CF601D29543B5E249450EEBD7D191350C45FD3FB6B1812",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_bomb.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_combo.png",
+    "Sha256": "6990F3EC4E02A4C0639F5E3BFF8E9289C3727B05E2B29258D664F32A5325B27E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_combo.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_combo.png.meta",
+    "Sha256": "267655818FEBE8769DFAAC2772725F8217FCE52B3285B9091D84B7E714AD77E1",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_combo.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_fever.png",
+    "Sha256": "F2F4C9EB356DD451C1E94C23FC41CB316538177B7AFD38F76C470D4490324726",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_fever.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_fever.png.meta",
+    "Sha256": "EC2EFD7800F8EDA62A6635FAD9A6C1CB9C660958B3A9599C435BD2A7A6DD0709",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_fever.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_hit.png",
+    "Sha256": "A8374E3A63533E2B811F70628CED3C1EE8DE4995E36E616ADBFA52FE58EF315C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_hit.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_hit.png.meta",
+    "Sha256": "1E0B22B241A4E0CF06570EBB6B615840677FA1A0C754721ACF1D0830B0511896",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_hit.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_miss.png",
+    "Sha256": "CA73C894DA24AB947A8B1F7CC2DC2A2DEDF4989488AB1AE9D7E6E2842D19AAEC",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_miss.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_miss.png.meta",
+    "Sha256": "677939FD1252CCE30737168A740331A84AB0C890E8379B7B0B92301BD3620C83",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_miss.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_perfect.png",
+    "Sha256": "00A364280246DBACC315ED71C3908FDE3F12DFDC485D66AF566C24716A713A2B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_perfect.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_perfect.png.meta",
+    "Sha256": "C7FDB68FF375EF7D555E1BA7643DEBB57433ED37662EED926D0C9FD4A240FB5C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_perfect.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_tap_ripple.png",
+    "Sha256": "49DFC531D904362E041376BF447F065C0AB8EE27C4A033793A53703079B1E51C",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_tap_ripple.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_tap_ripple.png.meta",
+    "Sha256": "2371AEE975C677CD593B94546E24CDF327B7E24647522246DD210FAD3B208065",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_tap_ripple.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_time_bonus.png",
+    "Sha256": "C971E404FF3C9BCFF869C4C10B97893F7D82F858E7D57BB0C2B94DE4E16E0AD4",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_time_bonus.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\NeonSignalDraftExtraction\\VFX\\vfx_time_bonus.png.meta",
+    "Sha256": "8C971F438FE07E05371A9D2CE62C2BD5F197B6F0AC4F06E72485F4083D1E0E95",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\NeonSignalDraftExtraction\\VFX\\vfx_time_bonus.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants\\intro_title_variant_a_crisp.png",
+    "Sha256": "44E402626258F9D4DE63D55FEC6146DDE473890D9C6D287115BB04A6F9B15A4E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants\\intro_title_variant_a_crisp.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants\\intro_title_variant_a_crisp.png.meta",
+    "Sha256": "F656CCAD9EAAD35DEA0E755C83F60E9C80B410BE95F32945BEE5D2A602805811",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants\\intro_title_variant_a_crisp.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants\\intro_title_variant_b_violet.png",
+    "Sha256": "6D7C64EC66639FF1DA8D8744CC90D6CC2E6C64FBACE55C39AD6D32440BC9825F",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants\\intro_title_variant_b_violet.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants\\intro_title_variant_b_violet.png.meta",
+    "Sha256": "B27A1BA285A041F6CF661AC2CAB95A20EDD9720FEA89C0814569620AE25189C7",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants\\intro_title_variant_b_violet.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants\\intro_title_variant_c_contrast.png",
+    "Sha256": "380873B26EF0CB3DE641E86EEF30D5AF1CBDB96C380D62DEEE057E002184C138",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants\\intro_title_variant_c_contrast.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References\\TitleVariants\\intro_title_variant_c_contrast.png.meta",
+    "Sha256": "034EA0D7C98142BB48731FB99E88691AC5B9FB23C3C7B5DA0BE1485E358598BE",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References\\TitleVariants\\intro_title_variant_c_contrast.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\References.meta",
+    "Sha256": "B83DD55CFCA8208583F69084D54CE359CADF2A7E8314D725A19021B3F260EB02",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\References.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\01_intro_scene.png",
+    "Sha256": "5C8BD1B3B0F2F79FD0EC47BB0283C9A795C3DC37C73868185CA0694B354DF2A6",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\01_intro_scene.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\01_intro_scene.png.meta",
+    "Sha256": "978B97F9F887F2CAB4D5FD2C14AD66275043E2B7E94AB272A268C877EE677EA9",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\01_intro_scene.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\02_gameplay_states.png",
+    "Sha256": "AB9D2DE40469406C70DE61254128DE38DDBD9BF1BF2CEA7A404FB8EC16380DC2",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\02_gameplay_states.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\02_gameplay_states.png.meta",
+    "Sha256": "2E0EACD739CDD96491D306E0F449E72A17256AA7C219B1C4713797DA8944C719",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\02_gameplay_states.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\03_popup_suite.png",
+    "Sha256": "48CA05818E6233FBC2937C03107A2ABF684D38557A1D79D8869E4711521F3F2E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\03_popup_suite.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\03_popup_suite.png.meta",
+    "Sha256": "554AE6E1A8976F3056ED457F5070FD5FF564FD1EAF709794B34D47D768F06B5D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\03_popup_suite.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\04_targets_and_vfx.png",
+    "Sha256": "8F5A366165E1A6CAB43C7147D339E9DB5B6CD5DDCAC1010C71DE249671C00CE5",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\04_targets_and_vfx.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\04_targets_and_vfx.png.meta",
+    "Sha256": "DF31837D63D140CF601152871E0C24920EC18118D5179BD7DE8B211AD01EEA91",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\04_targets_and_vfx.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\05_ui_kit.png",
+    "Sha256": "BB481866B745AE966BEC9A7397669D50FD62B1797CFAB5F490E2E2791CA05897",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\05_ui_kit.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\05_ui_kit.png.meta",
+    "Sha256": "07FCFAF203A7EE2A09A3630A0FEE82D8F0F61FE0C04762D00692645E9A572FCF",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\05_ui_kit.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\README.md",
+    "Sha256": "D451859172D002091DF5DE5364352C934340727EB6AB07B07317810EAD4E6669",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\README.md"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts\\README.md.meta",
+    "Sha256": "89DAAA33E9D8DDC5D8157028B708E8914B98B86F6E8D817804BFC4A34E6E2364",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts\\README.md.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Concepts.meta",
+    "Sha256": "AF1BAA51D79CF0B198AC32B6607919A4910F7D1694B686D1CE5EAD1BBBB6EB9D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Concepts.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_controls.png",
+    "Sha256": "A2A479F27CEAA80FAE7435729D14A2A726F0B6A9C7EE035D689A8388B59C8E47",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_controls.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_controls.png.meta",
+    "Sha256": "980724DDE8F9CBD2D36827DED125EE2C1DB26A5570E8A814273BAE9AFF479569",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_controls.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_decorations.png",
+    "Sha256": "23F86DBFBBD6254B275157CBE264D08469FE329B141C094C63858179F93929C0",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_decorations.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_decorations.png.meta",
+    "Sha256": "4278AE35E36C94FD65047576C0BD07AC8D9AE59C4E486BDE8772E675CE571B1A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_decorations.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_frames.png",
+    "Sha256": "8618B5FB0259BA5329066B90100FF919D66BF96EEC4C2A5FB3F3739644605506",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_frames.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_frames.png.meta",
+    "Sha256": "33E5746B9706AD324A4BBB7298B2539723CAD45A0604086DFFCF83BDD8F8C75E",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_frames.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_icons.png",
+    "Sha256": "B4A42209DB6D07CBC733EB40F5F875EE9AB22EEE22D43B7F9FAE3F6C869F6FA7",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_icons.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_icons.png.meta",
+    "Sha256": "8922EF67E1A1FBD48DBB5C327D1C9F47912EC5CB27163FEE07DF01B29BA6466B",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_icons.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_progress.png",
+    "Sha256": "8D7FAD91F63050D28D3F8C903DD5F9868EA0C39256C3DB5470DB059C29F6C366",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_progress.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_progress.png.meta",
+    "Sha256": "828D9E10671A85B8184C1E823C01CE144AE276376CA15F03BCD987FF72FBB2C1",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_progress.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_targets.png",
+    "Sha256": "E511FF27B725A3BB59BA264632A3B4222E183DA1E028DF3DD62FE43A7F4ECF16",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_targets.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_targets.png.meta",
+    "Sha256": "ABD5582928D21F69DDEDD7BE527690DEFE148998D075FCC64E77372BB65D959D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_targets.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_vfx.png",
+    "Sha256": "1C44E02CB4F241578EF1FC0F3182F736DEE7B9C17D4AD68EA818E367D8CB475D",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_vfx.png"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources\\source_vfx.png.meta",
+    "Sha256": "5F7486A4EE40DB707575CD518D622679657908CE78C8694B6E52BD2C4F75890A",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources\\source_vfx.png.meta"
+  },
+  {
+    "From": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\Resources\\UI\\NeonSignalPack\\Sources.meta",
+    "Sha256": "9D37E007702CBD4A6A69BBFDD136D90C44983A17A386D49AC006757EECA1F0A0",
+    "To": "C:\\SecondWindGames\\Repositoires\\Unity\\W01\\Assets\\ArtSource\\NeonSignalPack\\Sources.meta"
+  }
+]

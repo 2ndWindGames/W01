@@ -1,0 +1,17 @@
+[
+  {
+    "taps_per_second": 6.9,
+    "peak_dbfs": -0.9845334943349209,
+    "clipped_samples": 0
+  },
+  {
+    "taps_per_second": 10,
+    "peak_dbfs": -1.1209921168626282,
+    "clipped_samples": 0
+  },
+  {
+    "taps_per_second": 12,
+    "peak_dbfs": -0.38092368956647465,
+    "clipped_samples": 0
+  }
+]

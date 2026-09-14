@@ -1,0 +1,89 @@
+CYCLE 0 popupOrder=-19 stack=2 hits=prfTarget@100 > Scene@0 > img_bg@-19
+PASS Target receives the top pointer hit after scene cycle 0
+PASS Routed target contact scores after scene cycle 0
+PASS Leaving an open guide releases game and touch objects 0
+PASS Procedural target texture is released after scene cycle 0
+PASS Scene cycling keeps one bounded audio voice pool 0
+CYCLE 1 popupOrder=-17 stack=4 hits=prfTarget@100 > Scene@0 > img_bg@-17
+PASS Target receives the top pointer hit after scene cycle 1
+PASS Routed target contact scores after scene cycle 1
+PASS Leaving an open guide releases game and touch objects 1
+PASS Procedural target texture is released after scene cycle 1
+PASS Scene cycling keeps one bounded audio voice pool 1
+CYCLE 2 popupOrder=-15 stack=6 hits=prfTarget@100 > Scene@0 > img_bg@-15
+PASS Target receives the top pointer hit after scene cycle 2
+PASS Routed target contact scores after scene cycle 2
+PASS Leaving an open guide releases game and touch objects 2
+PASS Procedural target texture is released after scene cycle 2
+PASS Scene cycling keeps one bounded audio voice pool 2
+CYCLE 3 popupOrder=-13 stack=8 hits=prfTarget@100 > Scene@0 > txtResultValue@-13 > img_bg@-13
+PASS Target receives the top pointer hit after scene cycle 3
+PASS Routed target contact scores after scene cycle 3
+PASS Leaving an open guide releases game and touch objects 3
+PASS Procedural target texture is released after scene cycle 3
+PASS Scene cycling keeps one bounded audio voice pool 3
+CYCLE 4 popupOrder=-11 stack=10 hits=prfTarget@100 > Scene@0 > txtResultValue@-11 > img_bg@-11
+PASS Target receives the top pointer hit after scene cycle 4
+PASS Routed target contact scores after scene cycle 4
+PASS Leaving an open guide releases game and touch objects 4
+PASS Procedural target texture is released after scene cycle 4
+PASS Scene cycling keeps one bounded audio voice pool 4
+CYCLE 5 popupOrder=-9 stack=12 hits=prfTarget@100 > Scene@0 > img_bg@-9
+PASS Target receives the top pointer hit after scene cycle 5
+PASS Routed target contact scores after scene cycle 5
+PASS Leaving an open guide releases game and touch objects 5
+PASS Procedural target texture is released after scene cycle 5
+PASS Scene cycling keeps one bounded audio voice pool 5
+CYCLE 6 popupOrder=-7 stack=14 hits=prfTarget@100 > Scene@0 > img_bg@-7
+PASS Target receives the top pointer hit after scene cycle 6
+PASS Routed target contact scores after scene cycle 6
+PASS Leaving an open guide releases game and touch objects 6
+PASS Procedural target texture is released after scene cycle 6
+PASS Scene cycling keeps one bounded audio voice pool 6
+CYCLE 7 popupOrder=-5 stack=16 hits=prfTarget@100 > Scene@0 > img_bg@-5
+PASS Target receives the top pointer hit after scene cycle 7
+PASS Routed target contact scores after scene cycle 7
+PASS Leaving an open guide releases game and touch objects 7
+PASS Procedural target texture is released after scene cycle 7
+PASS Scene cycling keeps one bounded audio voice pool 7
+CYCLE 8 popupOrder=-3 stack=18 hits=prfTarget@100 > Scene@0 > img_bg@-3
+PASS Target receives the top pointer hit after scene cycle 8
+PASS Routed target contact scores after scene cycle 8
+PASS Leaving an open guide releases game and touch objects 8
+PASS Procedural target texture is released after scene cycle 8
+PASS Scene cycling keeps one bounded audio voice pool 8
+CYCLE 9 popupOrder=-1 stack=20 hits=prfTarget@100 > Scene@0 > img_bg@-1
+PASS Target receives the top pointer hit after scene cycle 9
+PASS Routed target contact scores after scene cycle 9
+PASS Leaving an open guide releases game and touch objects 9
+PASS Procedural target texture is released after scene cycle 9
+PASS Scene cycling keeps one bounded audio voice pool 9
+CYCLE 10 popupOrder=1 stack=22 hits=prfTarget@100 > img_bg@1 > Scene@0
+PASS Target receives the top pointer hit after scene cycle 10
+PASS Routed target contact scores after scene cycle 10
+PASS Leaving an open guide releases game and touch objects 10
+PASS Procedural target texture is released after scene cycle 10
+PASS Scene cycling keeps one bounded audio voice pool 10
+CYCLE 11 popupOrder=3 stack=24 hits=prfTarget@100 > img_bg@3 > Scene@0
+PASS Target receives the top pointer hit after scene cycle 11
+PASS Routed target contact scores after scene cycle 11
+PASS Leaving an open guide releases game and touch objects 11
+PASS Procedural target texture is released after scene cycle 11
+PASS Scene cycling keeps one bounded audio voice pool 11
+CYCLE 12 popupOrder=5 stack=26 hits=prfTarget@100 > img_bg@5 > Scene@0
+PASS Target receives the top pointer hit after scene cycle 12
+PASS Routed target contact scores after scene cycle 12
+PASS Leaving an open guide releases game and touch objects 12
+PASS Procedural target texture is released after scene cycle 12
+PASS Scene cycling keeps one bounded audio voice pool 12
+CYCLE 13 popupOrder=7 stack=28 hits=prfTarget@100 > img_bg@7 > Scene@0
+PASS Target receives the top pointer hit after scene cycle 13
+PASS Routed target contact scores after scene cycle 13
+PASS Leaving an open guide releases game and touch objects 13
+PASS Procedural target texture is released after scene cycle 13
+PASS Scene cycling keeps one bounded audio voice pool 13
+FAIL Popup registry contains only the current intro
+FAIL System.InvalidOperationException: Popup registry contains only the current intro
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:828 
+  at VioletTapQaRunner+<SceneCycleScenarios>d__22.MoveNext () [0x00460] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:284 
+  at VioletTapQaRunner.Tick () [0x00223] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:173 

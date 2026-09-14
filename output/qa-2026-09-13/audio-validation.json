@@ -1,0 +1,174 @@
+{
+  "assets": [
+    {
+      "path": "BGM/Game_NeonLobby",
+      "seconds": 16.0,
+      "peak_dbfs": -2.8537035083195255,
+      "rms_dbfs": -16.043529655738045,
+      "loop_step": 0.006927490234375,
+      "mono_loss_db": -0.07324525483854363
+    },
+    {
+      "path": "BGM/Gameplay_NeonRush",
+      "seconds": 27.428571428571427,
+      "peak_dbfs": -2.8537035083195255,
+      "rms_dbfs": -16.64369032725642,
+      "loop_step": 0.0009765625,
+      "mono_loss_db": -0.02336867365747968
+    },
+    {
+      "path": "BGM/Intro_NeonAwakening",
+      "seconds": 18.46154195011338,
+      "peak_dbfs": -2.8537035083195255,
+      "rms_dbfs": -16.651107852221266,
+      "loop_step": 0.00299072265625,
+      "mono_loss_db": -0.08710074981052204
+    },
+    {
+      "path": "SFX/Button_Click",
+      "seconds": 0.16,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -11.424342430476583,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.015749314638078788
+    },
+    {
+      "path": "SFX/Fever_End",
+      "seconds": 0.48,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -15.594201985351127,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.05342824894045465
+    },
+    {
+      "path": "SFX/Fever_Quick",
+      "seconds": 0.23,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -14.093838745929464,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.0034013207405692485
+    },
+    {
+      "path": "SFX/Fever_Start",
+      "seconds": 0.95,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -16.410213823444593,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.1191322294085208
+    },
+    {
+      "path": "SFX/Fever_Tap",
+      "seconds": 0.23,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -14.361217267212535,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.0037046469750259877
+    },
+    {
+      "path": "SFX/Fever_TimeBonus",
+      "seconds": 0.34,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -14.64972202448816,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.016716723791327735
+    },
+    {
+      "path": "SFX/New_Best",
+      "seconds": 1.4,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -17.752328802320314,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.0857026456786615
+    },
+    {
+      "path": "SFX/Round_Complete",
+      "seconds": 1.05,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -18.336491185476635,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.07593961769322753
+    },
+    {
+      "path": "SFX/Round_Start",
+      "seconds": 0.67,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -16.94791557089645,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.04658272905518582
+    },
+    {
+      "path": "SFX/Target_Bomb",
+      "seconds": 0.5,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -13.308884481961197,
+      "loop_step": 0.0,
+      "mono_loss_db": 0.0
+    },
+    {
+      "path": "SFX/Target_Miss",
+      "seconds": 0.2,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -9.116084533366873,
+      "loop_step": 0.0,
+      "mono_loss_db": 0.0
+    },
+    {
+      "path": "SFX/Target_NeonTap",
+      "seconds": 0.2,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -14.555201765786975,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.0032547197313944716
+    },
+    {
+      "path": "SFX/Target_Quick",
+      "seconds": 0.25,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -15.129992852659818,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.029276342158441854
+    },
+    {
+      "path": "SFX/Target_TimeBonus",
+      "seconds": 0.62,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -16.916251464325136,
+      "loop_step": 0.0,
+      "mono_loss_db": -0.04521140296555193
+    },
+    {
+      "path": "SFX/Timer_Tick",
+      "seconds": 0.1,
+      "peak_dbfs": -3.349915301314036,
+      "rms_dbfs": -8.59866172126768,
+      "loop_step": 0.0,
+      "mono_loss_db": 0.0
+    }
+  ],
+  "references": [
+    "BGM/Game_NeonLobby",
+    "BGM/Gameplay_NeonRush",
+    "BGM/Intro_NeonAwakening",
+    "SFX/Button_Click",
+    "SFX/Fever_End",
+    "SFX/Fever_Quick",
+    "SFX/Fever_Start",
+    "SFX/Fever_Tap",
+    "SFX/Fever_TimeBonus",
+    "SFX/New_Best",
+    "SFX/Round_Complete",
+    "SFX/Round_Start",
+    "SFX/Target_Bomb",
+    "SFX/Target_Miss",
+    "SFX/Target_NeonTap",
+    "SFX/Target_Quick",
+    "SFX/Target_TimeBonus",
+    "SFX/Timer_Tick"
+  ],
+  "gameplay_mix": {
+    "hits_per_second": 6.8965517241379315,
+    "peak_dbfs": -1.2850883798988146,
+    "clipped_samples": 0
+  },
+  "status": "PASS"
+}

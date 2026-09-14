@@ -1,0 +1,45 @@
+Compiling SWGUnity2DCore
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:00.57
+
+워크로드 업데이트를 사용할 수 있습니다. 자세한 내용을 보려면 `dotnet workload list`을 실행하세요.
+Compiling SWGUnity2DCore.Ads.AdMob
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:00.57
+
+워크로드 업데이트를 사용할 수 있습니다. 자세한 내용을 보려면 `dotnet workload list`을 실행하세요.
+Compiling SWGUnity2DCore.Leaderboards.UGS
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:00.59
+
+워크로드 업데이트를 사용할 수 있습니다. 자세한 내용을 보려면 `dotnet workload list`을 실행하세요.
+Compiling W01.Content
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:00.70
+
+워크로드 업데이트를 사용할 수 있습니다. 자세한 내용을 보려면 `dotnet workload list`을 실행하세요.
+Compiling W01.EditorQa
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:00.90
+
+워크로드 업데이트를 사용할 수 있습니다. 자세한 내용을 보려면 `dotnet workload list`을 실행하세요.

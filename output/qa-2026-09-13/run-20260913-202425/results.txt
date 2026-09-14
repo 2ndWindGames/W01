@@ -1,0 +1,87 @@
+PASS English help does not overlap btnBack
+PASS English help does not overlap btnStart
+PASS English help has a large screen-space touch area
+PASS English help and start share the same footer baseline
+PASS English resized start control receives input
+PASS English footer help receives input
+PASS English guide preserves the active round
+PASS English guide text fits: HelpPanel/Title
+PASS English guide text fits: HelpPanel/Hint
+PASS English guide text fits: btnHelpDismiss/Label
+PASS English guide text fits: CardNormal/Name
+PASS English guide text fits: CardNormal/Description
+PASS English guide text fits: CardQuick/Name
+PASS English guide text fits: CardQuick/Description
+PASS English guide text fits: CardTime/Name
+PASS English guide text fits: CardTime/Description
+PASS English guide text fits: CardBomb/Name
+PASS English guide text fits: CardBomb/Description
+PASS English guide text fits: CardFever/Name
+PASS English guide text fits: CardFever/Description
+PASS English guide text fits: btnHelpEffects/Label
+PASS English guide text fits: btnHelpHaptics/Label
+PASS English guide text fits: btnHelpClose/Label
+PASS English scroll exposes preview CardNormal
+PASS English scroll exposes preview CardQuick
+PASS English scroll exposes preview CardTime
+PASS English scroll exposes preview CardBomb
+PASS English scroll exposes preview CardFever
+PASS English scrolling reaches the last card
+PASS English previews and scrolling never advance gameplay
+PASS English fixed effects control receives input
+PASS English effects setting toggles
+PASS English effects setting restores
+PASS English fixed haptics control receives input
+PASS English haptics setting toggles
+PASS English haptics setting restores
+PASS English fixed return control receives input
+PASS English return resumes the round
+PASS English reopened guide starts at the first card
+PASS English shorter available height enables guide scrolling
+PASS English scrolling a shorter guide exposes the last preview
+PASS English compact guide resets its scroll on reopen
+PASS English header close control receives input
+PASS Korean help does not overlap btnBack
+PASS Korean help does not overlap btnStart
+PASS Korean help has a large screen-space touch area
+PASS Korean help and start share the same footer baseline
+PASS Korean resized start control receives input
+PASS Korean footer help receives input
+PASS Korean guide preserves the active round
+PASS Korean guide text fits: HelpPanel/Title
+PASS Korean guide text fits: HelpPanel/Hint
+PASS Korean guide text fits: btnHelpDismiss/Label
+PASS Korean guide text fits: CardNormal/Name
+PASS Korean guide text fits: CardNormal/Description
+PASS Korean guide text fits: CardQuick/Name
+PASS Korean guide text fits: CardQuick/Description
+PASS Korean guide text fits: CardTime/Name
+PASS Korean guide text fits: CardTime/Description
+PASS Korean guide text fits: CardBomb/Name
+PASS Korean guide text fits: CardBomb/Description
+PASS Korean guide text fits: CardFever/Name
+PASS Korean guide text fits: CardFever/Description
+PASS Korean guide text fits: btnHelpEffects/Label
+PASS Korean guide text fits: btnHelpHaptics/Label
+PASS Korean guide text fits: btnHelpClose/Label
+PASS Korean scroll exposes preview CardNormal
+PASS Korean scroll exposes preview CardQuick
+PASS Korean scroll exposes preview CardTime
+PASS Korean scroll exposes preview CardBomb
+PASS Korean scroll exposes preview CardFever
+PASS Korean scrolling reaches the last card
+PASS Korean previews and scrolling never advance gameplay
+PASS Korean fixed effects control receives input
+PASS Korean effects setting toggles
+PASS Korean effects setting restores
+PASS Korean fixed haptics control receives input
+PASS Korean haptics setting toggles
+PASS Korean haptics setting restores
+PASS Korean fixed return control receives input
+PASS Korean return resumes the round
+PASS Korean reopened guide starts at the first card
+PASS Korean shorter available height enables guide scrolling
+PASS Korean scrolling a shorter guide exposes the last preview
+PASS Korean compact guide resets its scroll on reopen
+PASS Korean header close control receives input
+PASS No runtime errors during redesigned help QA
