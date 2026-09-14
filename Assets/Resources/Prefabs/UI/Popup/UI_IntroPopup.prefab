@@ -787,6 +787,7 @@ GameObject:
   - component: {fileID: 6063162988895229973}
   - component: {fileID: 7354418572703687506}
   - component: {fileID: 732093292081036888}
+  - component: {fileID: 9043373818759208641}
   m_Layer: 5
   m_Name: img_bg
   m_TagString: Untagged
@@ -1609,6 +1610,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9043373818759208641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102199985212489702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e536377659683f6448d96ce9177a1c2e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Intro.IntroBackgroundLaserAnimator
+  speed: 0.24
+  strength: 0.55
+  width: 0.025
 --- !u!1 &9131404903099755525
 GameObject:
   m_ObjectHideFlags: 0

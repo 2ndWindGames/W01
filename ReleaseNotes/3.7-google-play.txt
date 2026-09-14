@@ -1,0 +1,13 @@
+<ko-KR>
+• 인트로와 게임 화면에 움직이는 네온·스파크 배경 효과를 추가했습니다.
+• 콤보·연속 터치와 속도 상승 알림을 더 역동적으로 표시합니다.
+• 결과 화면 연출을 강화하고 타겟이 등장하는 플레이 영역을 넓혔습니다.
+• 한국어·영어 폰트 조합과 도움말 화면 구성을 개선했습니다.
+</ko-KR>
+
+<en-US>
+• Added animated neon and spark effects to the intro and gameplay backgrounds.
+• Made combo, streak, and speed-up feedback more dynamic.
+• Enhanced the result screen and expanded the target play area.
+• Improved English and Korean font options and the help screen layout.
+</en-US>

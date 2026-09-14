@@ -177,7 +177,7 @@ public static class VioletTapComboQa
             Check(!ui.GetTextStatus().enabled, locale + " combo card replaces overlapping top instruction");
             Time.timeScale = 0f;
             for (int i = 0; i < 5; i++) TapAs(game, TapTargetType.Normal);
-            Check(view.comboLabel.text.Contains("05") && view.multiplierLabel.text.Contains("x2"), locale + " 5 combo shows x2 and counter");
+            Check(view.comboLabel.text.Contains("5 COMBO!") && view.multiplierLabel.text.Contains("x2"), locale + " 5 combo shows x2 and counter");
             Check(Mathf.Approximately(view.progressFill.fillAmount, .5f), locale + " half-filled fever meter");
             Time.timeScale = 1f;
             double settle = EditorApplication.timeSinceStartup + .3;
@@ -204,7 +204,10 @@ public static class VioletTapComboQa
             Check(early > late * 2f && late >= game.Config.minimumReactionSeconds, "Difficulty ramps substantially with a reaction floor");
             Set(game, "m_RoundElapsed", 24f);
             ui.ShowPaceIncrease(3);
-            Check(ui.GetTextStatus().enabled, locale + " speed notice remains visible outside the combo card");
+            Check(!ui.GetTextStatus().enabled, locale + " speed cue leaves the gameplay status text hidden");
+            Check(view.failureRoot.gameObject.activeSelf
+                && view.failureLabel.text == GameLocalization.T("SPEED UP!  LEVEL 3", "스피드 업!  단계 3"),
+                locale + " speed level appears in the impact cue");
             float before = Get<float>(game, "m_RoundElapsed");
             TapAs(game, TapTargetType.TimeBonus);
             Check(Get<float>(game, "m_RoundElapsed") == before, "Time bonus cannot reverse difficulty");
@@ -221,8 +224,8 @@ public static class VioletTapComboQa
             for (int i = 0; i < 4; i++) yield return null;
             Check(Targets(game).Count == 0 && !view.card.gameObject.activeSelf && !view.failureRoot.gameObject.activeSelf,
                 "Result clears targets and combo/failure HUD");
-            Check(ui.GetTextStatus().enabled && ui.GetTextStatus().text == GameLocalization.T("ROUND COMPLETE", "게임 종료"),
-                locale + " result title immediately replaces the previous speed notice");
+            Check(ui.GetTextStatus().enabled && ui.GetTextStatus().text == GameLocalization.T("RESULT", "결과"),
+                locale + " result title appears after the speed cue");
             Capture("result-" + locale);
             for (int i = 0; i < 3; i++) yield return null;
             CheckStatusBelowHud(ui, locale + " Result");

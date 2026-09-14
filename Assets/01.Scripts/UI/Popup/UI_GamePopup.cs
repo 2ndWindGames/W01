@@ -22,7 +22,6 @@ namespace _01.Scripts.UI.Popup
 			txtBestValue,
 			txtTimeValue,
 			txtStart,
-			txtComboValue,
 			txtResultValue
 		}
 		
@@ -44,11 +43,11 @@ namespace _01.Scripts.UI.Popup
 		private Image mFeverOverlay;
 		private TextMeshProUGUI mFeverBanner;
 		private Coroutine mMessageRoutine;
-		private bool mMessageIsGameplayOnly;
 		private string mStatusMessage;
 		private Color mStatusColor = Color.white;
 		private UI_GameHelp mHelp;
 		private ComboStatusView mComboStatus;
+		private ResultRevealAnimator mResultReveal;
 		private Vector2 mStatusHomePosition;
 		private bool mPlayingWithComboHud;
 
@@ -103,6 +102,7 @@ namespace _01.Scripts.UI.Popup
 			SetStaticLabels();
 			ConfigureHudReadability();
 			mComboStatus = GetComponentInChildren<ComboStatusView>(true);
+			mResultReveal = GetComponentInChildren<ResultRevealAnimator>(true);
 			EnsureFeverPresentation();
 			mHelp = UI_GameHelp.Create(transform, mGameScene);
 			
@@ -111,7 +111,7 @@ namespace _01.Scripts.UI.Popup
 
 		private void SetStaticLabels()
 		{
-			GetText((int)Texts.txtStart).text = GameLocalization.T("START ROUND", "게임 시작");
+			GetText((int)Texts.txtStart).text = GameLocalization.T("START", "시작");
 			var retryLabel = GetButton((int)Buttons.btnRetry).GetComponentInChildren<TextMeshProUGUI>(true);
 			if (retryLabel != null) retryLabel.text = GameLocalization.T("RETRY", "다시 하기");
 			SetNamedLabel("txtScoreTitle", GameLocalization.T("SCORE", "점수"));
@@ -158,8 +158,8 @@ namespace _01.Scripts.UI.Popup
 			}
 
 			var result = GetTextResult();
-			SetCenteredRect((RectTransform)result.transform.parent, 720f, 430f, new Vector2(0f, 45f));
-			SetCenteredRect(result.rectTransform, 720f, 430f, Vector2.zero);
+			SetCenteredRect((RectTransform)result.transform.parent, 820f, 560f, new Vector2(0f, 45f));
+			SetCenteredRect(result.rectTransform, 720f, 440f, Vector2.zero);
 			result.color = new Color(.87f, .95f, 1f);
 			if (GameLocalization.IsKorean) result.fontStyle |= FontStyles.Bold;
 			result.enableAutoSizing = true;
@@ -232,8 +232,8 @@ namespace _01.Scripts.UI.Popup
 		private void RefreshStatusPlacement()
 		{
 			var status = GetTextStatus();
-			// During play the combo card replaces the old top instruction. Purchase/speed
-			// notices still appear, in the gap above the bottom status strip.
+			// During play the combo card replaces the old top instruction. Store
+			// notices still appear in the gap above the bottom status strip.
 			status.enabled = !mPlayingWithComboHud || mMessageRoutine != null;
 			status.rectTransform.anchoredPosition = mPlayingWithComboHud
 				? new Vector2(mStatusHomePosition.x, -((RectTransform)status.transform.parent).rect.height + 420f)
@@ -245,17 +245,15 @@ namespace _01.Scripts.UI.Popup
 			CloseNicknamePrompt();
 			if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
 			mMessageRoutine = null;
-			mMessageIsGameplayOnly = false;
 			if (IsInitialized) RestoreStatus();
 		}
 
-		private void ShowTransientStatus(string message) => BeginTransientStatus(message, false);
+		private void ShowTransientStatus(string message) => BeginTransientStatus(message);
 
-		private void BeginTransientStatus(string message, bool gameplayOnly)
+		private void BeginTransientStatus(string message)
 		{
 			if (string.IsNullOrWhiteSpace(message) || !isActiveAndEnabled) return;
 			if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
-			mMessageIsGameplayOnly = gameplayOnly;
 			mMessageRoutine = StartCoroutine(ShowTransientStatusRoutine(message));
 			RefreshStatusPlacement();
 		}
@@ -267,7 +265,6 @@ namespace _01.Scripts.UI.Popup
 			status.color = new Color(1f, 0.78f, 0.28f);
 			yield return new WaitForSecondsRealtime(2.5f);
 			mMessageRoutine = null;
-			mMessageIsGameplayOnly = false;
 			RestoreStatus();
 		}
 
@@ -314,22 +311,13 @@ namespace _01.Scripts.UI.Popup
 		{
 			mComboStatus?.SetState(combo, multiplier, nextFever, step, feverTime, feverMaximum, speedStage, playing);
 			mPlayingWithComboHud = playing && mComboStatus != null;
-			if (!playing && mMessageIsGameplayOnly)
-			{
-				// Pace notices belong to the round that triggered them. Store messages
-				// still remain visible across state changes until their normal timeout.
-				if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
-				mMessageRoutine = null;
-				mMessageIsGameplayOnly = false;
-				RestoreStatus();
-			}
 			RefreshStatusPlacement();
 		}
 
 		public void ShowComboFailure(int lostCombo, bool bomb) => mComboStatus?.ShowFailure(lostCombo, bomb);
 		public void PauseComboFeedback(bool paused) => mComboStatus?.SetPaused(paused);
-		public void ShowPaceIncrease(int stage) => BeginTransientStatus(
-			GameLocalization.T("SPEED UP!  LEVEL ", "스피드 업!  단계 ") + stage, true);
+		public void ShowPaceIncrease(int stage) => mComboStatus?.ShowPaceIncrease(stage);
+		public void PlayResultReveal(bool newBest) => mResultReveal?.Play(GetButtonRetry(), GetTextStatus(), newBest);
 
 		public void ShowNicknamePrompt(string defaultNickname, Action<string> onConfirmed)
 		{
@@ -507,7 +495,6 @@ namespace _01.Scripts.UI.Popup
 		public TextMeshProUGUI GetTextBest() => GetText((int)Texts.txtBestValue);
 		public TextMeshProUGUI GetTextStatus() => GetText((int)Texts.txtStatus);
 		public TextMeshProUGUI GetTextScore() => GetText((int)Texts.txtScoreValue);
-		public TextMeshProUGUI GetTextCombo() => GetText((int)Texts.txtComboValue);
 		public TextMeshProUGUI GetTextResult() => GetText((int)Texts.txtResultValue);
 	}
 

@@ -588,21 +588,18 @@ public static class VioletTapQaRunner
         game.StartRound();
         Tap(game, TapTargetType.Normal);
         Invoke(game, "HandleTimerCompleted");
-        bool openedImmediately = game.IsNicknamePromptOpen;
         // Never invoke the real confirmation callback in this scenario.
         Set(ui, "mNicknameConfirmed", null);
         Check(flow.State == GameFlowState.Result && !firstGate.Task.IsCompleted,
             "New record result is reached while initialization is still pending");
-        Results.Add("DELAYED RECORD promptOpenedBeforeInitialization=" + openedImmediately);
-        if (openedImmediately)
-        {
-            game.RetryRound();
-            Check(flow.State == GameFlowState.Result, "An open record prompt blocks an underlying retry");
-            Invoke(ui, "CloseNicknamePrompt");
-        }
+        Check(!game.IsNicknamePromptOpen, "New record waits for the result reveal before opening nickname entry");
         game.RetryRound();
         game.StartRound();
         Check(flow.State == GameFlowState.Playing, "The player can start another round before the delayed completion");
+        double revealDeadline = EditorApplication.timeSinceStartup + 1.2;
+        while (EditorApplication.timeSinceStartup < revealDeadline) yield return null;
+        Check(!game.IsNicknamePromptOpen && !game.IsGameplayPaused,
+            "Retry during result reveal prevents the old nickname prompt from opening");
         firstGate.SetResult(true);
         for (int i = 0; i < 5; i++)
         {
@@ -613,15 +610,20 @@ public static class VioletTapQaRunner
         Results.Add($"DELAYED COMPLETION state={flow.State} nicknameOpen={game.IsNicknamePromptOpen} paused={game.IsGameplayPaused}");
         Check(!game.IsNicknamePromptOpen && !game.IsGameplayPaused,
             "Late initialization cannot open an old record prompt over a restarted round");
-        Check(openedImmediately, "Nickname entry does not wait for network initialization");
 
         var secondGate = DelayInitialization();
         game.bestScore = 0;
         Tap(game, TapTargetType.Normal);
         Invoke(game, "HandleTimerCompleted");
         Set(ui, "mNicknameConfirmed", null);
+        Check(!game.IsNicknamePromptOpen && flow.State == GameFlowState.Result,
+            "A later new record also waits for the result reveal");
+        revealDeadline = EditorApplication.timeSinceStartup + 1.2;
+        while (EditorApplication.timeSinceStartup < revealDeadline) yield return null;
         Check(game.IsNicknamePromptOpen && flow.State == GameFlowState.Result,
-            "A later new record opens its prompt immediately");
+            "A later new record opens its prompt after the reveal without waiting for network initialization");
+        game.RetryRound();
+        Check(flow.State == GameFlowState.Result, "An open record prompt blocks an underlying retry");
         var input = Get<TMP_InputField>(ui, "mNicknameInput");
         input.text = "QA-LATE-INIT";
         secondGate.SetResult(true);
@@ -637,7 +639,8 @@ public static class VioletTapQaRunner
         Invoke(game, "HandleTimerCompleted");
         Set(ui, "mNicknameConfirmed", null);
         Managers.Scene.ChangeScene(W01SceneType.Intro);
-        for (int i = 0; i < 6; i++) yield return null;
+        revealDeadline = EditorApplication.timeSinceStartup + 1.2;
+        while (EditorApplication.timeSinceStartup < revealDeadline) yield return null;
         exitGate.SetResult(true);
         for (int i = 0; i < 4; i++) yield return null;
         Check(Object.FindFirstObjectByType<GameScene>() == null && GameObject.Find("NicknamePrompt") == null,
@@ -1059,18 +1062,21 @@ public static class VioletTapQaRunner
             for (int i = 0; i < 6; i++) yield return null;
             var game = Object.FindFirstObjectByType<GameScene>();
             var ui = Object.FindFirstObjectByType<UI_GamePopup>();
+            var comboView = ui.GetComponentInChildren<ComboStatusView>(true);
             game.bestScore = 100000;
             game.StartRound();
             void InspectCaption(string state)
             {
-                var label = ui.GetTextCombo();
-                label.ForceMeshUpdate();
-                var corners = new Vector3[4];
-                label.rectTransform.GetWorldCorners(corners);
-                bool inView = corners.All(c => Camera.main.pixelRect.Contains((Vector2)Camera.main.WorldToScreenPoint(c)));
-                bool fits = !label.isTextOverflowing && inView;
-                layoutFits &= fits;
-                Results.Add($"CAPTION {language} {state} text={label.text} fits={fits} lines={label.textInfo.lineCount} rect={label.rectTransform.rect} rendered={label.textBounds}");
+                foreach (var label in new[] { comboView.comboLabel, comboView.multiplierLabel })
+                {
+                    label.ForceMeshUpdate();
+                    var corners = new Vector3[4];
+                    label.rectTransform.GetWorldCorners(corners);
+                    bool inView = corners.All(c => Camera.main.pixelRect.Contains((Vector2)Camera.main.WorldToScreenPoint(c)));
+                    bool fits = !label.isTextOverflowing && inView;
+                    layoutFits &= fits;
+                    Results.Add($"CAPTION {language} {state} text={label.text} fits={fits} lines={label.textInfo.lineCount} rect={label.rectTransform.rect} rendered={label.textBounds}");
+                }
             }
             foreach (var type in new[] { TapTargetType.Normal, TapTargetType.TimeBonus })
             {
@@ -1086,7 +1092,7 @@ public static class VioletTapQaRunner
             Check(Get<int>(game, "m_Score") - before == 2 * game.Config.scorePerTap,
                 language + " fever entry preserves the triggering hit's pre-fever award");
             InspectCaption("FeverEntry");
-            entryMatches &= ui.GetTextCombo().text.Contains("x" + game.Config.feverScoreMultiplier);
+            entryMatches &= comboView.multiplierLabel.text.Contains("x" + game.Config.feverScoreMultiplier);
             Set(game, "m_Combo", 998);
             before = Get<int>(game, "m_Score");
             Tap(game, TapTargetType.Normal);
@@ -1100,7 +1106,7 @@ public static class VioletTapQaRunner
             while (Get<float>(game, "m_FeverRemaining") > 0f) yield return null;
             Time.timeScale = 0f;
             InspectCaption("FeverExit");
-            exitMatches &= !ui.GetTextCombo().text.Contains(GameLocalization.T("FEVER", "피버"));
+            exitMatches &= comboView.progressLabel.text.StartsWith(GameLocalization.T("FEVER IN", "피버까지"));
             var missed = Targets(game)[0];
             missed.Bind(TapTargetType.Normal, 100f, .82f, null, null);
             Invoke(game, "HandleTargetMissed", missed);
@@ -1114,7 +1120,7 @@ public static class VioletTapQaRunner
         for (int i = 0; i < 6; i++) yield return null;
         Check(layoutFits, "Gameplay captions fit their rect and viewport in both languages");
         Check(entryMatches, "Fever entry caption reflects the now-active multiplier");
-        Check(exitMatches, "Fever expiry removes the stale fever caption");
+        Check(exitMatches, "Fever expiry restores the normal combo state");
         Check(Errors.Count == 0, "No runtime errors during gameplay caption QA");
     }
 
@@ -1684,7 +1690,7 @@ public static class VioletTapQaRunner
         Invoke(game, "HandleTimerCompleted");
         until = EditorApplication.timeSinceStartup + 2.8;
         while (EditorApplication.timeSinceStartup < until) yield return null;
-        Check(status.text == GameLocalization.T("ROUND COMPLETE", "게임 종료")
+        Check(status.text == GameLocalization.T("RESULT", "결과")
             && status.color == new Color(1f, .78f, .38f), "Notice expiry preserves RESULT guidance and color");
         Invoke(ui, "ShowTransientStatus", "RETRY TEST NOTICE");
         game.RetryRound();

@@ -127,18 +127,20 @@ namespace SWGUnity2DCore.Manager
         private static void ApplyFont(TMP_Text text, bool forceKorean)
         {
             if (text == null) return;
-            SWGUnity2DCore.Manager.ApplyFont component = text.GetComponent<SWGUnity2DCore.Manager.ApplyFont>();
+            var component = text.GetComponent<ApplyFont>();
             TMP_FontAsset fontAsset = GetFont(
                 component == null ? GameFontRole.Body : component.FontCombination, forceKorean);
             if (fontAsset != null) text.font = fontAsset;
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public static void ApplyNicknameFont(TMP_Text text)
         {
             // Nicknames can mix Latin and Hangul regardless of interface language.
             ApplyFont(text, true);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private static TMP_FontAsset GetFont(GameFontRole role, bool forceKorean)
         {
             GameFontSettings settings = GetFontSettings();

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Game;
 using _01.Scripts.Manager;
@@ -69,8 +70,8 @@ namespace _01.Scripts.Scene
 		private TextMeshProUGUI m_ScoreText;
 		private TextMeshProUGUI m_TimerText;
 
-		private TextMeshProUGUI m_ComboText;
 		private TextMeshProUGUI m_ResultText;
+		private Coroutine m_NewBestPromptRoutine;
 		
 		private Button m_StartButton;
 		private Button m_RetryButton;
@@ -122,7 +123,6 @@ namespace _01.Scripts.Scene
 			m_BestText = m_UiGamePopup.GetTextBest();
 			m_TimerText = m_UiGamePopup.GetTextTime();
 			m_ScoreText = m_UiGamePopup.GetTextScore();
-			m_ComboText = m_UiGamePopup.GetTextCombo();
 			m_ResultText = m_UiGamePopup.GetTextResult();
 			
 			bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
@@ -134,7 +134,6 @@ namespace _01.Scripts.Scene
 
 			m_Timer.Completed += HandleTimerCompleted;
 			mGameFlow.StateChanged += HandleFlowStateChanged;
-			m_ComboText.text = GameLocalization.T("STREAK x0", "연속 터치 x0");
 				
 			HandleFlowStateChanged(mGameFlow.State);
 		}
@@ -418,7 +417,6 @@ namespace _01.Scripts.Scene
                 m_Timer.AddTime(-2f);
 				// AddTime can complete the round and clear every target synchronously.
 				if (mGameFlow.State != GameFlowState.Playing) return;
-				m_ComboText.text = GameLocalization.T("BOMB!  -2.0 SEC", "폭탄!  -2.0초");
 				m_UiGamePopup.ShowComboFailure(lostCombo, true);
 				RefreshComboPresentation();
                 mTargetPool.Despawn(target.gameObject);
@@ -450,7 +448,6 @@ namespace _01.Scripts.Scene
 				StartFever();
 			}
             m_ScoreText.text = m_Score.ToString("00");
-			UpdateComboText(target.Type == TapTargetType.TimeBonus);
 			RefreshComboPresentation();
             mTargetPool.Despawn(target.gameObject);
             m_ActiveTargets.Remove(target);
@@ -468,16 +465,6 @@ namespace _01.Scripts.Scene
 				mGameFlow.State == GameFlowState.Playing);
 		}
 
-		private void UpdateComboText(bool timeBonus = false)
-		{
-			int multiplier = GetScoreMultiplier();
-			m_ComboText.text = m_FeverRemaining > 0f
-				? GameLocalization.T("FEVER!  x", "피버!  x") + multiplier + GameLocalization.T("  •  STREAK ", "  •  연속 터치 ") + m_Combo
-				: timeBonus
-					? GameLocalization.T("+1.0 SEC  •  STREAK ", "+1.0초  •  연속 터치 ") + m_Combo
-					: GameLocalization.T("STREAK ", "연속 터치 ") + m_Combo + GameLocalization.T("  •  SCORE x", "  •  점수 x") + multiplier;
-		}
-
 		private void HandleTargetMissed(CircleTarget target)
         {
             if (IsGameplayPaused || mGameFlow.State != GameFlowState.Playing)
@@ -493,7 +480,6 @@ namespace _01.Scripts.Scene
 				m_Combo = 0;
 				m_NextFeverCombo = mConfig.feverCombo;
 				EndFever(false);
-				m_ComboText.text = GameLocalization.T("MISSED  •  STREAK LOST", "놓침  •  연속 터치 초기화");
 				m_UiGamePopup.ShowComboFailure(lostCombo, false);
 				RefreshComboPresentation();
             }
@@ -554,6 +540,11 @@ namespace _01.Scripts.Scene
 			var isReady = state == GameFlowState.Ready;
 			var isPlaying = state == GameFlowState.Playing;
 			var isResult = state == GameFlowState.Result;
+			if (!isResult && m_NewBestPromptRoutine != null)
+			{
+				StopCoroutine(m_NewBestPromptRoutine);
+				m_NewBestPromptRoutine = null;
+			}
 			RefreshComboPresentation();
 
 			
@@ -561,12 +552,11 @@ namespace _01.Scripts.Scene
 				? GameLocalization.T("READY  •  TAP START TO BEGIN", "준비  •  시작 버튼을 누르세요")
 				: isPlaying
 					? GameLocalization.T("TAP THE GLOWING TARGETS", "빛나는 타겟을 터치하세요")
-					: GameLocalization.T("ROUND COMPLETE", "게임 종료"),
+					: GameLocalization.T("RESULT", "결과"),
 				isResult ? new Color(1f, 0.78f, 0.38f) : Color.white);
 			m_StartButton.gameObject.SetActive(isReady);
 			m_RetryButton.gameObject.SetActive(isResult);
-			// m_ResultPanel.gameObject.SetActive(isResult);
-			// m_HintText.gameObject.SetActive(!isResult);
+			m_ResultText.transform.parent.gameObject.SetActive(isResult);
 
 			if (isReady)
 			{
@@ -576,7 +566,6 @@ namespace _01.Scripts.Scene
 				m_TimerText.text = mConfig.roundDuration.ToString("0.0");
 				m_TimerText.color = Color.white;
 				// m_TimerCard.color = PanelColor;
-				m_ComboText.text = GameLocalization.T("STREAK x0", "연속 터치 x0");
 				ClearTargets();
 			}
 			else if (isPlaying)
@@ -597,7 +586,6 @@ namespace _01.Scripts.Scene
 				m_Timer.Stop();
 				m_TimerText.text = Mathf.Max(0f, m_Timer.Remaining).ToString("0.0");
 				m_TimerText.color = Color.white;
-				m_ComboText.text = string.Empty;
 				ClearTargets();
 				bool isNewPersonalBest = m_Score > bestScore;
 				Managers.Sound.Play(Define.Sound.Effect,
@@ -613,15 +601,16 @@ namespace _01.Scripts.Scene
 					PlayerPrefs.Save();
 				}
 				m_BestText.text = bestScore.ToString("00");
-				m_ResultText.text = GameLocalization.T("SCORE  ", "점수  ") + m_Score.ToString("00")
+				m_ResultText.text = "<color=#FFE36E><b>" + GameLocalization.T("SCORE  ", "점수  ") + m_Score.ToString("00") + "</b></color>"
 				                              + GameLocalization.T("\nBEST  ", "\n최고 기록  ") + bestScore.ToString("00")
 				                              + GameLocalization.T("\nMAX STREAK  ", "\n최대 연속 터치  ") + m_MaxCombo
 				                              + GameLocalization.T("\nACCURACY  ", "\n정확도  ") + GetAccuracy().ToString("0") + "%"
-				                              + GameLocalization.T("\nGRADE  ", "\n등급  ") + GetGrade();
+				                              + "<color=#FF8AFF>" + GameLocalization.T("\nGRADE  ", "\n등급  ") + GetGrade() + "</color>";
+				m_UiGamePopup.PlayResultReveal(isNewPersonalBest);
 
 				if (isNewPersonalBest && persistResult)
 				{
-					RegisterNewPersonalBest(m_Score);
+					m_NewBestPromptRoutine = StartCoroutine(ShowNewBestPromptAfterReveal(m_Score));
 				}
 				if (m_RoundInProgress)
 				{
@@ -631,12 +620,19 @@ namespace _01.Scripts.Scene
 			}
 		}
 
+		private IEnumerator ShowNewBestPromptAfterReveal(int score)
+		{
+			yield return new WaitForSecondsRealtime(.95f);
+			m_NewBestPromptRoutine = null;
+			if (mGameFlow == null || mGameFlow.State != GameFlowState.Result || m_UiGamePopup == null) yield break;
+			RegisterNewPersonalBest(score);
+		}
+
 		private void RegisterNewPersonalBest(int score)
 		{
 			try
 			{
-				// Nickname entry is local; score submission already waits for service initialization.
-				// Waiting here could reopen an old result prompt after the player had retried.
+				// Nickname entry is local; the reveal coroutine has already checked that this result is still open.
 				const string defaultNickname = "NONAME";
 
 				if (this == null || m_UiGamePopup == null) return;
@@ -681,7 +677,6 @@ namespace _01.Scripts.Scene
 			m_FeverRemaining = 0f;
 			m_NextFeverCombo = mConfig.feverCombo;
 			m_ScoreText.text = "00";
-			m_ComboText.text = GameLocalization.T("STREAK x0", "연속 터치 x0");
 			m_ResultText.text = string.Empty;
 			m_Timer.Start(mConfig.roundDuration);
 			mGameFlow.StartGame();
@@ -712,7 +707,6 @@ namespace _01.Scripts.Scene
 			if (wasActive && mGameFlow != null && mGameFlow.State == GameFlowState.Playing)
 			{
 				m_UiGamePopup.SetStatus(GameLocalization.T("TAP THE GLOWING TARGETS", "빛나는 타겟을 터치하세요"), Color.white);
-				UpdateComboText();
 			}
 			if (wasActive && playSound) Managers.Sound.Play(Define.Sound.Effect, "SFX/Fever_End", 0.43f);
 		}
