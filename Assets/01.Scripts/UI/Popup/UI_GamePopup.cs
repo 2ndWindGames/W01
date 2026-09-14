@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using _01.Scripts.Manager;
 using _01.Scripts.Scene;
 using _01.Scripts.UI;
 using SWGUnity2DCore.Manager;

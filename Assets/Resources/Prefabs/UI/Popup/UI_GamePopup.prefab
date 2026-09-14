@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9151567632715171}
   - component: {fileID: 467294889616741858}
   - component: {fileID: 7550524308283498165}
+  - component: {fileID: 9154780836315467036}
   m_Layer: 5
   m_Name: txtComboTitle
   m_TagString: Untagged
@@ -67,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'COMBO: '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9154780836315467036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174710972703442763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &250758789535284318
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -250, y: -130.00006}
+  m_AnchoredPosition: {x: -250, y: -113}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3227255829548671391
@@ -300,6 +314,7 @@ GameObject:
   - component: {fileID: 2716187581855059764}
   - component: {fileID: 4724578880391034906}
   - component: {fileID: 2066669176299065828}
+  - component: {fileID: 1118509512078424842}
   m_Layer: 5
   m_Name: txtScoreTitle
   m_TagString: Untagged
@@ -356,8 +371,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SCORE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -426,6 +441,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1118509512078424842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821803101218320780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &893783999836973263
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +510,7 @@ GameObject:
   - component: {fileID: 8826784163810435958}
   - component: {fileID: 7514374516723572872}
   - component: {fileID: 6969357594546836476}
+  - component: {fileID: 5119337873551152428}
   m_Layer: 5
   m_Name: txtBestValue
   m_TagString: Untagged
@@ -538,8 +567,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -608,6 +637,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5119337873551152428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217975421868243476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &1885537435479718129
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +661,7 @@ GameObject:
   - component: {fileID: 1652533264646946350}
   - component: {fileID: 7356776841003828749}
   - component: {fileID: 8792355005634106475}
+  - component: {fileID: 540464962375786791}
   m_Layer: 5
   m_Name: txtRetry
   m_TagString: Untagged
@@ -675,8 +718,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: RETRY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -745,6 +788,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &540464962375786791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885537435479718129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &2519250657628032678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -85, y: -145.09991}
+  m_AnchoredPosition: {x: -85, y: -132}
   m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6872633107608365844
@@ -1246,6 +1302,7 @@ GameObject:
   - component: {fileID: 3403064279255313124}
   - component: {fileID: 86184501084174409}
   - component: {fileID: 2586915854583549585}
+  - component: {fileID: 7233332019670765192}
   m_Layer: 5
   m_Name: txtBestTitle
   m_TagString: Untagged
@@ -1302,8 +1359,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: BEST
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1372,6 +1429,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7233332019670765192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4325352316035339012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &4741439507712177061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,7 +1899,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -130.00006}
+  m_AnchoredPosition: {x: 0, y: -113}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3779672739554934577
@@ -1881,6 +1951,7 @@ GameObject:
   - component: {fileID: 3335579493515931791}
   - component: {fileID: 6491647394877840080}
   - component: {fileID: 3324041570966277937}
+  - component: {fileID: 628747346358824373}
   m_Layer: 5
   m_Name: Multiplier
   m_TagString: Untagged
@@ -1937,8 +2008,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: x2 SCORE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1957,7 +2028,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2007,6 +2078,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &628747346358824373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015921750915477850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &6047871206868890528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 250, y: -129.99994}
+  m_AnchoredPosition: {x: 250, y: -113}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &573040682979839130
@@ -2141,7 +2225,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 600
@@ -2183,6 +2267,7 @@ GameObject:
   - component: {fileID: 6465987311926993947}
   - component: {fileID: 4174809455920178300}
   - component: {fileID: 5063729575276116055}
+  - component: {fileID: 4979649762389968950}
   m_Layer: 5
   m_Name: txtTimeTitle
   m_TagString: Untagged
@@ -2239,8 +2324,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TIME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2309,6 +2394,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4979649762389968950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762899588658050006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &6953474711868946030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,6 +2418,7 @@ GameObject:
   - component: {fileID: 8189213331769598436}
   - component: {fileID: 1424272969491899368}
   - component: {fileID: 7443119797529100553}
+  - component: {fileID: 6102022785653403116}
   m_Layer: 5
   m_Name: txtScoreValue
   m_TagString: Untagged
@@ -2376,8 +2475,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2446,6 +2545,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6102022785653403116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953474711868946030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &7109904026417003713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,6 +2569,7 @@ GameObject:
   - component: {fileID: 6116343149609166656}
   - component: {fileID: 7884398826202806765}
   - component: {fileID: 6883532861525849917}
+  - component: {fileID: 4780983680718134017}
   m_Layer: 5
   m_Name: txtTimeValue
   m_TagString: Untagged
@@ -2513,8 +2626,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2583,6 +2696,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4780983680718134017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7109904026417003713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &7289481594057083898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2720,7 @@ GameObject:
   - component: {fileID: 1913972211656105793}
   - component: {fileID: 6321865292129078635}
   - component: {fileID: 7750198504692016989}
+  - component: {fileID: 2180118470461833738}
   m_Layer: 5
   m_Name: FailureMessage
   m_TagString: Untagged
@@ -2720,6 +2847,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2180118470461833738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289481594057083898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &7358081786156103553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,6 +2946,7 @@ GameObject:
   - component: {fileID: 7400221660233720346}
   - component: {fileID: 1643020562167449471}
   - component: {fileID: 8509261438189938139}
+  - component: {fileID: 4588166888100219143}
   m_Layer: 5
   m_Name: ComboCount
   m_TagString: Untagged
@@ -2862,8 +3003,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 05  COMBO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2882,7 +3023,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2932,6 +3073,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4588166888100219143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7360193921129922904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &7427422172050364074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,6 +3097,7 @@ GameObject:
   - component: {fileID: 3179915907660826413}
   - component: {fileID: 8132555547047405017}
   - component: {fileID: 3982940476825010984}
+  - component: {fileID: 1554629545290728214}
   m_Layer: 5
   m_Name: txtResultValue
   m_TagString: Untagged
@@ -2999,8 +3154,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3069,6 +3224,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1554629545290728214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7427422172050364074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &7523131412955807407
 GameObject:
   m_ObjectHideFlags: 0
@@ -3296,6 +3464,7 @@ GameObject:
   - component: {fileID: 6855490818192830017}
   - component: {fileID: 5951659669184364184}
   - component: {fileID: 6261212615107641544}
+  - component: {fileID: 420092951724375452}
   m_Layer: 5
   m_Name: ProgressLabel
   m_TagString: Untagged
@@ -3352,8 +3521,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "FEVER IN 5 TAPS   \u2022   SPEED 1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3372,7 +3541,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3422,6 +3591,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &420092951724375452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7917187841150916885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &8116457148343194406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3636,6 +3818,7 @@ GameObject:
   - component: {fileID: 4450725558016092404}
   - component: {fileID: 7890660844867184059}
   - component: {fileID: 4721522695874002348}
+  - component: {fileID: 3533109139539104612}
   m_Layer: 5
   m_Name: txtStart
   m_TagString: Untagged
@@ -3692,8 +3875,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START ROUND
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3762,6 +3945,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3533109139539104612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903081172090722143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0
 --- !u!1 &9059542484299644616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3910,6 +4106,7 @@ GameObject:
   - component: {fileID: 3246429807938709927}
   - component: {fileID: 3894716612734419091}
   - component: {fileID: 720870023795194753}
+  - component: {fileID: 2797965771643797487}
   m_Layer: 5
   m_Name: txtComboValue
   m_TagString: Untagged
@@ -3966,8 +4163,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: STREAK x0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  m_sharedMaterial: {fileID: 3424383117919975349, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4036,3 +4233,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2797965771643797487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183258010277146546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df30c9f081860d6409d22deb9261de18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SWGUnity2DCore.Manager.ApplyFont
+  fontCombination: 0

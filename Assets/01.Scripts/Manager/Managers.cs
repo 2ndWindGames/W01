@@ -1,4 +1,5 @@
-﻿using SWGUnity2DCore.Data;
+﻿using _01.Scripts.Manager;
+using SWGUnity2DCore.Data;
 using SWGUnity2DCore.Util;
 using TMPro;
 using UnityEngine;
@@ -95,7 +96,7 @@ namespace SWGUnity2DCore.Manager
 
     public static class GameLocalization
     {
-        private static TMP_FontAsset s_KoreanFont;
+        private static GameFontSettings s_FontSettings;
 
         public static bool IsKorean
         {
@@ -113,40 +114,55 @@ namespace SWGUnity2DCore.Manager
 
         public static void ApplyFont(Component root)
         {
-            if (!IsKorean || root == null) return;
-            TMP_FontAsset fontAsset = GetKoreanFont();
-            if (fontAsset == null) return;
+            if (root == null) return;
             foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true))
-                text.font = fontAsset;
+                ApplyFont(text);
         }
 
         public static void ApplyFont(TMP_Text text)
         {
-            if (!IsKorean || text == null) return;
-            TMP_FontAsset fontAsset = GetKoreanFont();
+            ApplyFont(text, false);
+        }
+
+        private static void ApplyFont(TMP_Text text, bool forceKorean)
+        {
+            if (text == null) return;
+            SWGUnity2DCore.Manager.ApplyFont component = text.GetComponent<SWGUnity2DCore.Manager.ApplyFont>();
+            TMP_FontAsset fontAsset = GetFont(
+                component == null ? GameFontRole.Body : component.FontCombination, forceKorean);
             if (fontAsset != null) text.font = fontAsset;
         }
 
         public static void ApplyNicknameFont(TMP_Text text)
         {
-            // Player names can contain Hangul even when the interface language is English.
-            if (text == null) return;
-            TMP_FontAsset fontAsset = GetKoreanFont();
-            if (fontAsset != null) text.font = fontAsset;
+            // Nicknames can mix Latin and Hangul regardless of interface language.
+            ApplyFont(text, true);
         }
 
-        private static TMP_FontAsset GetKoreanFont()
+        private static TMP_FontAsset GetFont(GameFontRole role, bool forceKorean)
         {
-            if (s_KoreanFont != null) return s_KoreanFont;
-            Font sourceFont = Resources.Load<Font>("Fonts/NotoSansKR-Variable");
-            if (sourceFont == null)
+            GameFontSettings settings = GetFontSettings();
+            if (settings == null) return null;
+
+            GameFontPair pair = settings.GetPair(role);
+            TMP_FontAsset english = pair.EnglishFont != null ? pair.EnglishFont : settings.BodyEnglishFont;
+            TMP_FontAsset korean = pair.KoreanFont != null ? pair.KoreanFont : settings.BodyKoreanFont;
+            if (english == null || korean == null)
             {
-                Debug.LogError("Korean font could not be loaded from Resources/Fonts/NotoSansKR-Variable.");
+                Debug.LogError("Assign both English Font and Korean Font in GameFontSettings.");
                 return null;
             }
-            s_KoreanFont = TMP_FontAsset.CreateFontAsset(sourceFont);
-            s_KoreanFont.name = "NotoSansKR Runtime SDF";
-            return s_KoreanFont;
+
+            return forceKorean || IsKorean ? korean : english;
+        }
+
+        private static GameFontSettings GetFontSettings()
+        {
+            if (s_FontSettings != null) return s_FontSettings;
+            s_FontSettings = Resources.Load<GameFontSettings>("Fonts/GameFontSettings");
+            if (s_FontSettings == null)
+                Debug.LogError("GameFontSettings could not be loaded from Resources/Fonts.");
+            return s_FontSettings;
         }
     }
 }

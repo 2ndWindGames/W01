@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e621b46d8f8e4a8aa0391607c4ec82da, type: 3}
+  m_Name: GameFontSettings
+  m_EditorClassIdentifier: 
+  englishFont: {fileID: 11400000, guid: 18b986227d45b1d44802a527a029e65a, type: 2}
+  koreanFont: {fileID: 11400000, guid: f84b3441360b9aa469cf48a927483f6d, type: 2}
+  h1:
+    englishFont: {fileID: 11400000, guid: 76adbe7778eb92141990d3d4312b09a1, type: 2}
+    koreanFont: {fileID: 11400000, guid: 807fb3762206c21448b34d0046405979, type: 2}
+  h2:
+    englishFont: {fileID: 11400000, guid: bba6e1cd239157d4a890998682828f6f, type: 2}
+    koreanFont: {fileID: 11400000, guid: f84b3441360b9aa469cf48a927483f6d, type: 2}
+  h3:
+    englishFont: {fileID: 11400000, guid: 01263c6c35b05e14cb0ce324a569d5d4, type: 2}
+    koreanFont: {fileID: 11400000, guid: a0f424bb3c85de845b18b3e45a9b7365, type: 2}
+  h4:
+    englishFont: {fileID: 11400000, guid: 2c690f734aa30474684615cf36f88f43, type: 2}
+    koreanFont: {fileID: 11400000, guid: 84a9bddee3d82384bbaa704e80fb232b, type: 2}

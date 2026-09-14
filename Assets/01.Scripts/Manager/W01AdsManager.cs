@@ -1,4 +1,6 @@
-namespace SWGUnity2DCore.Manager
+using SWGUnity2DCore.Manager;
+
+namespace _01.Scripts.Manager
 {
     /// <summary>VioletTap's placement policy. SDK mechanics live in the AdMob package.</summary>
     public sealed class W01AdsManager : AdsManager

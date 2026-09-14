@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _01.Scripts.Game;
+using _01.Scripts.Manager;
 using _01.Scripts.UI;
 using SWGUnity2DCore.Pool;
 using _01.Scripts.UI.Popup;
