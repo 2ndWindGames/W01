@@ -18,6 +18,7 @@ namespace _01.Scripts.Game
         }
 
         public static int Stage(float elapsed, GameConfig config) =>
-            Progress(elapsed, config) >= 0.75f ? 3 : Progress(elapsed, config) >= 0.35f ? 2 : 1;
+            elapsed >= Mathf.Max(config.scanStartSeconds + 1f, config.surgeStartSeconds) ? 3
+                : elapsed >= config.scanStartSeconds ? 2 : 1;
     }
 }

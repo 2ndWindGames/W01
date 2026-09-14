@@ -1,0 +1,29 @@
+[CoreBusinessMetrics] System persistent data directory not found: 
+[CoreBusinessMetrics] Unable to configure cache. Connection string was invalid or not specified.
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/staging' branch; Version is '6000.3.23f1 (09d2ecc7fb28) revision 643820'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'ko' Physical Memory: 32712 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-09-14T10:55:00Z
+[Licensing::IpcConnector] Connection to channel LicenseClient-rlatmdwp5 refused
+[Licensing::Module] Successfully launched the LicensingClient (PId: 44512)
+Assertion failed on expression: 'SUCCEEDED(hr)'
+Assertion failed on expression: 'SUCCEEDED(hr)'
+Assertion failed on expression: 'ERROR_SUCCESS == status'
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.3.23f1\Editor\Unity.exe
+-batchmode
+-nographics
+-quit
+-projectPath
+C:\Users\rlatmdwp5\Documents\GitHub\W01
+-executeMethod
+VioletTapQaRunner.CaptureAndroidSettings
+-logFile
+C:\Users\rlatmdwp5\Documents\GitHub\W01\output\gradle-isolation-smoke.log
+Successfully changed project path to: C:\Users\rlatmdwp5\Documents\GitHub\W01
+C:/Users/rlatmdwp5/Documents/GitHub/W01
+Exiting without the bug reporter. Application will terminate with return code 1

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,12 +13,20 @@ namespace _01.Scripts.Game
         Bomb
     }
 
+    public enum TargetSizeTier
+    {
+        Small,
+        Medium,
+        Large
+    }
+
     public sealed class CircleTarget : MonoBehaviour, IPointerDownHandler
     {
         private Action<CircleTarget> m_OnTapped;
         private Action<CircleTarget> m_OnMissed;
         private SpriteRenderer m_Renderer;
         private SpriteRenderer m_GlowRenderer;
+        private TextMeshPro m_SequenceLabel;
         private Vector3 m_BaseScale;
         private float m_PulsePhase;
         private float m_Lifetime;
@@ -37,6 +46,9 @@ namespace _01.Scripts.Game
         private static bool s_TargetLoadErrorLogged;
 
         public TapTargetType Type { get; private set; }
+        public TargetSizeTier SizeTier { get; private set; } = TargetSizeTier.Medium;
+        public float NominalScale => m_BaseScale.x;
+        public int SequenceOrder { get; private set; }
 
         private void Awake()
         {
@@ -49,6 +61,7 @@ namespace _01.Scripts.Game
         {
             m_PulsePhase = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
             transform.localScale = m_BaseScale;
+            ClearSequenceOrder();
         }
 
         private void Update()
@@ -81,9 +94,11 @@ namespace _01.Scripts.Game
         }
 
         public void Bind(TapTargetType type, float lifetime, float scale,
-            Action<CircleTarget> onTapped, Action<CircleTarget> onMissed)
+            Action<CircleTarget> onTapped, Action<CircleTarget> onMissed,
+            TargetSizeTier sizeTier = TargetSizeTier.Medium)
         {
             Type = type;
+            SizeTier = type == TapTargetType.Bomb ? TargetSizeTier.Medium : sizeTier;
             m_Lifetime = Mathf.Max(0.1f, lifetime);
             m_RemainingLifetime = m_Lifetime;
             m_BaseScale = Vector3.one * scale;
@@ -91,6 +106,54 @@ namespace _01.Scripts.Game
             m_OnTapped = onTapped;
             m_OnMissed = onMissed;
             m_Paused = false;
+            ClearSequenceOrder();
+        }
+
+        public void SetSequenceOrder(int order, TMP_FontAsset font)
+        {
+            if (order <= 0)
+            {
+                ClearSequenceOrder();
+                return;
+            }
+
+            if (m_SequenceLabel == null)
+            {
+                var labelObject = new GameObject("Sequence Order");
+                labelObject.transform.SetParent(transform, false);
+                labelObject.transform.localPosition = new Vector3(0f, 0f, -0.02f);
+                labelObject.transform.localScale = Vector3.one * 0.1f;
+                m_SequenceLabel = labelObject.AddComponent<TextMeshPro>();
+                m_SequenceLabel.alignment = TextAlignmentOptions.Center;
+                m_SequenceLabel.fontSize = 40f;
+                m_SequenceLabel.fontStyle = FontStyles.Bold;
+                m_SequenceLabel.color = new Color(1f, 0.97f, 0.78f, 1f);
+                m_SequenceLabel.textWrappingMode = TextWrappingModes.NoWrap;
+                m_SequenceLabel.rectTransform.sizeDelta = new Vector2(10f, 10f);
+            }
+
+            SequenceOrder = order;
+            // Keep numbered sequence labels legible on the smallest target.
+            m_SequenceLabel.transform.localScale = Vector3.one * (0.082f / Mathf.Max(0.5f, NominalScale));
+            m_SequenceLabel.font = font != null ? font : TMP_Settings.defaultFontAsset;
+            m_SequenceLabel.outlineColor = new Color32(5, 10, 26, 255);
+            m_SequenceLabel.outlineWidth = 0.22f;
+            m_SequenceLabel.text = order.ToString();
+            MeshRenderer labelRenderer = m_SequenceLabel.GetComponent<MeshRenderer>();
+            if (labelRenderer != null && m_Renderer != null)
+            {
+                labelRenderer.sortingLayerID = m_Renderer.sortingLayerID;
+                labelRenderer.sortingOrder = m_Renderer.sortingOrder + 1;
+            }
+
+            m_SequenceLabel.gameObject.SetActive(true);
+        }
+
+        private void ClearSequenceOrder()
+        {
+            SequenceOrder = 0;
+            if (m_SequenceLabel != null)
+                m_SequenceLabel.gameObject.SetActive(false);
         }
 
         public void SetVisual(Sprite sprite, Color color)
@@ -158,7 +221,9 @@ namespace _01.Scripts.Game
             m_Paused = false;
             transform.rotation = Quaternion.identity;
             m_Pace = 1f;
+            SizeTier = TargetSizeTier.Medium;
             transform.localScale = m_BaseScale;
+            ClearSequenceOrder();
         }
     }
 }

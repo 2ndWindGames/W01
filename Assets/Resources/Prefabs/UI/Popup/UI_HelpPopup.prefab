@@ -95,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 82.1
-  m_fontSizeBase: 82.1
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.008, g: 0.004, b: 0.03, a: 1}
+  m_Color: {r: 0.005, g: 0.007, b: 0.026, a: 0.88}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -416,8 +416,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16, y: 66}
-  m_SizeDelta: {x: 8, y: -568}
+  m_AnchoredPosition: {x: -16, y: 21}
+  m_SizeDelta: {x: 8, y: -658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7208305257893370941
 CanvasRenderer:
@@ -788,8 +788,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -904,24 +904,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2065614202968399741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 24
-  BorderWidth: 2
-  BorderColor: {r: 0.5215, g: 0.4242, b: 0.7285, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0.018, g: 0.008, b: 0.05, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f20a337db1f595277dafb979a20fc77e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &4987361576011565194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,8 +1063,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1174,24 +1177,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2302272150961914166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 22
-  BorderWidth: 2
-  BorderColor: {r: 0.66, g: 0.16, b: 1, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: 21300000, guid: 99dd921d4e851c17bf5ec0220fa10592, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6423976156923848479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1443,24 +1449,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2371797924288354642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 22
-  BorderWidth: 2
-  BorderColor: {r: 0.66, g: 0.16, b: 1, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: 21300000, guid: 99dd921d4e851c17bf5ec0220fa10592, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3217585752318742054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,24 +2172,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2876642833862073150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 24
-  BorderWidth: 2
-  BorderColor: {r: 0.7105, g: 0.34019998, b: 0.4065, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0.018, g: 0.008, b: 0.05, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f20a337db1f595277dafb979a20fc77e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8218927125242425654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2432,24 +2444,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 3112280041603516907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11, g: 0.025, b: 0.24, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 22
-  BorderWidth: 2
-  BorderColor: {r: 0.15, g: 0.9, b: 1, a: 1}
-  CutCorners: 1
-  InnerLine: 1
-  GlowWidth: 10
-  BottomColor: {r: 0, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: 21300000, guid: bcede17e7a5653c27871a748074079ef, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1135556612247078309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2627,24 +2642,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 3792593321457234729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 24
-  BorderWidth: 2
-  BorderColor: {r: 0.7105, g: 0.5782, b: 0.2945, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0.018, g: 0.008, b: 0.05, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f20a337db1f595277dafb979a20fc77e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1001030747738449690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3078,8 +3096,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -64, y: -56}
-  m_SizeDelta: {x: 736, y: 72}
+  m_AnchoredPosition: {x: -48, y: -116}
+  m_SizeDelta: {x: 704, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5771044271648290677
 CanvasRenderer:
@@ -3119,7 +3137,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294952928
-  m_fontColor: {r: 0.88, g: 0.78, b: 1, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3440,8 +3458,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3534,7 +3552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -84, y: -54}
+  m_AnchoredPosition: {x: -84, y: -114}
   m_SizeDelta: {x: 112, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &784955955850880994
@@ -3752,24 +3770,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6335431340445675904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 24
-  BorderWidth: 2
-  BorderColor: {r: 0.7105, g: 0.3822, b: 0.6725, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0.018, g: 0.008, b: 0.05, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f20a337db1f595277dafb979a20fc77e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8704305790186357595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3952,24 +3973,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6789621964670759989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.023, g: 0.008, b: 0.068, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 34
-  BorderWidth: 3
-  BorderColor: {r: 0.66, g: 0.16, b: 1, a: 1}
-  CutCorners: 1
-  InnerLine: 1
-  GlowWidth: 18
-  BottomColor: {r: 0.035, g: 0.012, b: 0.085, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 9218d2daad66b49c325948fa2bc16077, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7138104319151953966
 GameObject:
   m_ObjectHideFlags: 0
@@ -4179,24 +4203,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 7249022762048673897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.035, g: 0.014, b: 0.095, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 24
-  BorderWidth: 2
-  BorderColor: {r: 0.1155, g: 0.6342, b: 0.7285, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 5
-  BottomColor: {r: 0.018, g: 0.008, b: 0.05, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f20a337db1f595277dafb979a20fc77e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &4869915745926594051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4427,8 +4454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -156}
-  m_SizeDelta: {x: 864, y: 84}
+  m_AnchoredPosition: {x: 0, y: -244}
+  m_SizeDelta: {x: 800, y: 106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &129714504706317680
 CanvasRenderer:
@@ -4581,8 +4608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 66}
-  m_SizeDelta: {x: -64, y: -568}
+  m_AnchoredPosition: {x: 0, y: 21}
+  m_SizeDelta: {x: -64, y: -658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4347084178220349970
 CanvasRenderer:
@@ -4700,8 +4727,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -108.5}
-  m_SizeDelta: {x: -96, y: 3}
+  m_AnchoredPosition: {x: 0, y: -175}
+  m_SizeDelta: {x: -96, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7034659061902305542
 CanvasRenderer:
@@ -4720,24 +4747,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8673856972144870013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc65f24ebabccb459e3755120c9a543, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Popup.HelpSurface
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15, g: 0.9, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  Radius: 0
-  BorderWidth: 2
-  BorderColor: {r: 0.15, g: 0.9, b: 1, a: 1}
-  CutCorners: 1
-  InnerLine: 0
-  GlowWidth: 0
-  BottomColor: {r: 0, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: 21300000, guid: 367939f6b221548f703d082addb00b32, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8984877971153735537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4832,8 +4862,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -1,0 +1,80 @@
+PASS Signal phase fixture loads the game scene
+PASS PULSE opens with a target-free phase cue
+PASS PULSE cue freezes round time and leaves the field clear
+PASS PULSE cue ends with one safe target
+PASS Configured elapsed-time thresholds select PULSE, SCAN, then SURGE
+PASS SCAN transition clears existing targets during its cue
+PASS SCAN cue freezes round time and leaves the field clear
+PASS SCAN cue ends with a playable pair, never a lone bomb
+PASS SCAN refill 0 keeps two targets and at least one safe choice
+PASS SCAN refill 1 keeps two targets and at least one safe choice
+PASS SCAN refill 2 keeps two targets and at least one safe choice
+PASS SCAN refill 3 keeps two targets and at least one safe choice
+PASS SCAN refill 4 keeps two targets and at least one safe choice
+PASS SCAN refill 5 keeps two targets and at least one safe choice
+PASS SCAN refill 6 keeps two targets and at least one safe choice
+PASS SCAN refill 7 keeps two targets and at least one safe choice
+PASS SCAN refill 8 keeps two targets and at least one safe choice
+PASS SCAN refill 9 keeps two targets and at least one safe choice
+PASS SCAN refill 10 keeps two targets and at least one safe choice
+PASS SCAN refill 11 keeps two targets and at least one safe choice
+PASS SCAN refill 12 keeps two targets and at least one safe choice
+PASS SCAN refill 13 keeps two targets and at least one safe choice
+PASS SCAN refill 14 keeps two targets and at least one safe choice
+PASS SCAN refill 15 keeps two targets and at least one safe choice
+PASS SCAN refill 16 keeps two targets and at least one safe choice
+PASS SCAN refill 17 keeps two targets and at least one safe choice
+PASS SCAN refill 18 keeps two targets and at least one safe choice
+PASS SCAN refill 19 keeps two targets and at least one safe choice
+PASS SCAN refill 20 keeps two targets and at least one safe choice
+PASS SCAN refill 21 keeps two targets and at least one safe choice
+PASS SCAN refill 22 keeps two targets and at least one safe choice
+PASS SCAN refill 23 keeps two targets and at least one safe choice
+PASS SCAN refill 24 keeps two targets and at least one safe choice
+PASS SCAN refill 25 keeps two targets and at least one safe choice
+PASS SCAN refill 26 keeps two targets and at least one safe choice
+PASS SCAN refill 27 keeps two targets and at least one safe choice
+PASS SCAN refill 28 keeps two targets and at least one safe choice
+PASS SCAN refill 29 keeps two targets and at least one safe choice
+PASS SCAN refill 30 keeps two targets and at least one safe choice
+PASS SCAN refill 31 keeps two targets and at least one safe choice
+PASS SCAN refill 32 keeps two targets and at least one safe choice
+PASS SCAN refill 33 keeps two targets and at least one safe choice
+PASS SCAN refill 34 keeps two targets and at least one safe choice
+PASS SCAN refill 35 keeps two targets and at least one safe choice
+PASS SCAN refill 36 keeps two targets and at least one safe choice
+PASS SCAN refill 37 keeps two targets and at least one safe choice
+PASS SCAN refill 38 keeps two targets and at least one safe choice
+PASS SCAN refill 39 keeps two targets and at least one safe choice
+PASS SCAN refill 40 keeps two targets and at least one safe choice
+PASS SCAN refill 41 keeps two targets and at least one safe choice
+PASS SCAN refill 42 keeps two targets and at least one safe choice
+PASS SCAN refill 43 keeps two targets and at least one safe choice
+PASS SCAN refill 44 keeps two targets and at least one safe choice
+PASS SCAN refill 45 keeps two targets and at least one safe choice
+PASS SCAN refill 46 keeps two targets and at least one safe choice
+PASS SCAN refill 47 keeps two targets and at least one safe choice
+PASS SCAN refill 48 keeps two targets and at least one safe choice
+PASS SCAN refill 49 keeps two targets and at least one safe choice
+PASS SCAN refill 50 keeps two targets and at least one safe choice
+PASS SCAN refill 51 keeps two targets and at least one safe choice
+PASS SCAN refill 52 keeps two targets and at least one safe choice
+PASS SCAN refill 53 keeps two targets and at least one safe choice
+PASS SCAN refill 54 keeps two targets and at least one safe choice
+PASS SCAN refill 55 keeps two targets and at least one safe choice
+PASS SCAN refill 56 keeps two targets and at least one safe choice
+PASS SCAN refill 57 keeps two targets and at least one safe choice
+PASS SCAN refill 58 keeps two targets and at least one safe choice
+PASS SCAN refill 59 keeps two targets and at least one safe choice
+SCAN bomb-plus-safe pairs observed after refills: 58
+PASS SCAN actually spawns a bomb beside a safe target
+PASS SURGE transition clears existing targets during its cue
+PASS SURGE cue freezes round time and leaves the field clear
+PASS SURGE displays three numbered safe targets
+PASS Wrong sequence order breaks the streak and restores a playable SCAN-style pair
+PASS Correct sequence tap 1 advances the expected order
+PASS Correct sequence tap 2 advances the expected order
+PASS Completing 1→2→3 grants three two-point hits plus a flat five-point bonus
+PASS SURGE schedules another numbered burst after its interval
+PASS Result clears an unfinished sequence and its targets
+PASS No runtime errors during signal phase QA

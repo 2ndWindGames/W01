@@ -51,6 +51,9 @@ namespace _01.Scripts.UI.Intro
                 titleBasePosition = title.anchoredPosition;
                 titleBaseScale = title.localScale;
                 titleCanvasGroup = GetOrAddCanvasGroup(title.gameObject);
+                if (title.GetComponent<Image>() != null &&
+                    title.GetComponent<IntroTitleCurrentAnimator>() == null)
+                    title.gameObject.AddComponent<IntroTitleCurrentAnimator>();
             }
 
             if (startButton != null)

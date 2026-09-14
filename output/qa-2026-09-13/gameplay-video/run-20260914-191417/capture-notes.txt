@@ -1,0 +1,7 @@
+Editor-only scripted playthrough with real Game View frames and mixed game audio.
+Includes intro, start cue, actual target taps, sustained 10/50 combo visuals, and combo reset.
+Target lifetimes were extended in memory during capture to keep the showcase deterministic.
+Frames: 227
+Duration seconds: 24.93
+Game View: 1080x2340
+Audio PCM bytes: 4608000

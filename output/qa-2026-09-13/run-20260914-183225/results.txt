@@ -1,0 +1,45 @@
+PASS Score-rule fixture loads the game scene
+PASS Gameplay combo music controller is available
+PASS Quick target gives three base points below 10 combo
+PASS Time target gives two base points below 10 combo
+PASS Ninth normal hit still gives one point
+PASS Gameplay music remains at its base intensity below ten combo
+PASS Tenth normal hit starts the twofold combo award
+PASS Ten combo raises the gameplay music intensity
+PASS Ten-combo milestone starts a green screen glow
+PASS Combo aura uses two input-transparent shader rails instead of a full-screen wash
+PASS Ten-combo green glow renders over the playfield
+PASS Green glow remains visible after the ten-combo entry flash ends
+PASS Ten-combo music keeps its synchronized drive layer after the transition
+PASS Forty-ninth hit remains twofold without fever
+PASS Gameplay music holds the ten-combo intensity through combo forty-nine
+PASS Fiftieth hit starts the threefold combo award without fever
+PASS Fifty combo raises the gameplay music to its highest intensity
+PASS Fifty-combo milestone starts a yellow screen glow
+PASS Fifty-combo yellow glow renders over the playfield
+PASS Fifty-combo glow replaces every green edge with yellow
+PASS Fifty-combo aura switches fully to gold without a playfield wash
+PASS Yellow glow remains visible after the fifty-combo entry flash ends
+PASS Fifty-combo music replaces the drive rhythm with the rush layer
+PASS Fever adds targets but does not add score below 50 combo
+PASS Fever adds a target above the SCAN baseline too
+PASS Fiftieth hit during fever remains threefold
+PASS Quick target gives 3 base points times three at 50+ combo with fever
+PASS Neon-side popup shows the points actually earned for a quick hit
+PASS Time target gives 2 base points times three at 50+ combo with fever
+PASS Score-rule fixture opens a numbered sequence
+PASS Fever sequence hit 1 gives two base points times three
+PASS Numbered target 1 shows its actual earned points beside the hit
+PASS Fever sequence hit 2 gives two base points times three
+PASS Numbered target 2 shows its actual earned points beside the hit
+PASS Fever sequence hit 3 gives two base points times three plus five clear points
+PASS Numbered target 3 shows its actual earned points beside the hit
+PASS Miss clears the combo tier and fever
+PASS Miss returns gameplay music to its base intensity
+PASS Miss removes the persistent combo glow
+PASS Score returns to onefold immediately after a miss
+PASS Bomb fixture starts with the highest music intensity
+PASS Bomb clears the combo tier and fever
+PASS Bomb returns gameplay music to its base intensity
+PASS Bomb removes the persistent combo glow
+PASS No runtime errors during combo and fever score QA

@@ -73,6 +73,13 @@ def main():
     assert peak < .98, f"Busy gameplay mix clips: peak={peak}"
     report["gameplay_mix"] = {"hits_per_second": 1 / .145, "peak_dbfs": 20 * np.log10(peak),
                               "clipped_samples": int(np.count_nonzero(np.abs(mix) >= 1))}
+    for tier, name, gain in ((10, "BGM/Gameplay_ComboDrive", .23),
+                             (50, "BGM/Gameplay_ComboRush", .28)):
+        layer = audio[name]
+        assert len(layer) == len(music), f"Combo layer must have the gameplay song's exact loop length: {name}"
+        layered_peak = float(np.abs(mix + layer * gain).max())
+        assert layered_peak < .98, f"Busy {tier}-combo mix clips: peak={layered_peak}"
+        report["gameplay_mix"][f"combo_{tier}_peak_dbfs"] = 20 * np.log10(layered_peak)
     report["references"] = sorted(set(report["references"]))
     report["status"] = "PASS"
     args.report.parent.mkdir(parents=True, exist_ok=True)

@@ -95,7 +95,7 @@ namespace _01.Scripts.UI.Popup
                 RectTransform startRect = (RectTransform)start.transform;
                 RectTransform opener = (RectTransform)m_OpenButton.transform;
                 opener.anchoredPosition = startRect.anchoredPosition + new Vector2(
-                    startRect.rect.xMax + 68f, startRect.rect.center.y);
+                    startRect.rect.xMax + 100f, startRect.rect.center.y);
             }
 
             m_Modal.SetActive(false);
@@ -160,25 +160,29 @@ namespace _01.Scripts.UI.Popup
             var config = m_Game.Config;
             m_Title.text = GameLocalization.T("NEON FIELD GUIDE", "네온 터치 가이드");
             m_Hint.text = GameLocalization.T(
-                "Tap a card to try its sound and vibration.\nYour game stays paused while this guide is open.",
-                "카드를 눌러 소리·진동을 체험하세요.\n도움말을 보는 동안 게임은 멈춥니다.");
+                "PULSE: build a streak · SCAN: tap safe, avoid bomb.\nSURGE: tap 1 → 2 → 3; mistakes or misses reset the streak.\nTap cards for sound and vibration. Play pauses here.",
+                "펄스: 연속 터치 · 스캔: 안전 타깃 터치, 폭탄 피하기\n서지: 1 → 2 → 3 순서대로. 틀리거나 놓치면 연속 기록 초기화\n카드로 소리·진동 체험 · 도움말을 보는 동안 일시정지");
+            m_Hint.fontSize = 24f;
+            m_Hint.fontSizeMax = 24f;
+            m_Hint.fontSizeMin = 20f;
+            m_Hint.enableAutoSizing = true;
             m_ResumeLabel.text = GameLocalization.T("BACK TO GAME", "게임으로 돌아가기");
 
             SetCardText("Normal", GameLocalization.T("NEON", "네온"), GameLocalization.T(
-                $"+{config.scorePerTap} point before it fades.\nStreak 5: ×2 · Streak 20: ×3\nMissing a safe target resets your streak.",
-                $"사라지기 전에 터치하면 +{config.scorePerTap}점.\n5연속: 2배 · 20연속: 3배\n놓치면 연속 기록 초기화 · 폭탄 제외"));
+                $"Small +{config.scorePerTap + 2} · Mid +{config.scorePerTap + 1} · Large +{config.scorePerTap}.\nStreak 10: ×2 · Streak 50: ×3\nMissing a safe target resets your streak.",
+                $"작게 +{config.scorePerTap + 2}점 · 중간 +{config.scorePerTap + 1}점 · 크게 +{config.scorePerTap}점\n10연속: 2배 · 50연속: 3배\n놓치면 연속 기록 초기화 · 폭탄 제외"));
             SetCardText("Quick", GameLocalization.T("QUICK", "퀵"), GameLocalization.T(
-                "+3 points · Disappears faster.\nTap quickly to keep your streak!",
-                "+3점 · 더 빨리 사라져요.\n빠르게 터치해서 연속 기록을 이어가세요!"));
+                "Small +5 · Mid +4 · Large +3.\nDisappears faster—tap quickly!",
+                "작게 +5점 · 중간 +4점 · 크게 +3점\n빨리 사라지니 서둘러 터치하세요!"));
             SetCardText("Time", GameLocalization.T("TIME BONUS", "시간 보너스"), GameLocalization.T(
-                "+2 points and +1 second.\nKeep the round going!",
-                "+2점과 남은 시간 +1초.\n플레이 시간을 늘려보세요!"));
+                "Small +3s · Mid +2s · Large +1s.\n+2 points at every size.",
+                "작게 +3초 · 중간 +2초 · 크게 +1초\n크기와 관계없이 +2점"));
             SetCardText("Bomb", GameLocalization.T("BOMB · AVOID", "폭탄 · 피하세요"), GameLocalization.T(
-                "Tap: −2 seconds and a streak reset.\nLet bombs disappear untouched.",
-                "누르면 −2초, 연속 기록이 초기화돼요.\n터치하지 말고 사라지게 두세요."));
+                "Always appears with a safe target.\nTap: −2 seconds and a streak reset.\nLeave it untouched; tap the safe target.",
+                "항상 안전 타깃과 함께 등장해요.\n누르면 −2초, 연속 기록 초기화.\n폭탄을 피하고 안전 타깃을 터치하세요."));
             SetCardText("Fever", GameLocalization.T("FEVER", "피버"), GameLocalization.T(
-                $"{config.feverCombo} hits: ×{config.feverScoreMultiplier} points for {config.feverDuration:0} seconds.\n{config.feverTargetCount} targets; each hit extends fever.\nA miss or bomb ends fever!",
-                $"{config.feverCombo}연속 터치하면 {config.feverDuration:0}초간 점수 {config.feverScoreMultiplier}배.\n타깃 {config.feverTargetCount}개 · 터치할수록 피버 연장\n놓치거나 폭탄을 누르면 피버 종료!"));
+                $"{config.feverCombo} hits: extra targets for {config.feverDuration:0} seconds.\nHits extend fever; combo sets the score.\nA miss or bomb ends fever!",
+                $"{config.feverCombo}연속: 타깃이 늘어나는 {config.feverDuration:0}초 피버.\n터치할수록 연장 · 점수 배수는 콤보와 동일\n놓치거나 폭탄을 누르면 피버 종료!"));
         }
 
         private void SetCardText(string name, string heading, string description)
@@ -205,8 +209,9 @@ namespace _01.Scripts.UI.Popup
             m_LayoutSize = size;
             m_Panel.sizeDelta = size;
             m_Panel.localScale = Vector3.one;
-            m_Title.rectTransform.sizeDelta = new Vector2(size.x - 224f, 72f);
-            m_Hint.rectTransform.sizeDelta = new Vector2(size.x - 96f, 84f);
+            m_Title.rectTransform.anchoredPosition = new Vector2(-48f, -116f);
+            m_Title.rectTransform.sizeDelta = new Vector2(size.x - 256f, 72f);
+            m_Hint.rectTransform.sizeDelta = new Vector2(size.x - 160f, 106f);
             m_Content.sizeDelta = new Vector2(size.x - 84f, m_Cards.Count * (CardHeight + CardGap) - CardGap);
             float cardWidth = m_Content.sizeDelta.x;
             for (int i = 0; i < m_Cards.Count; i++)

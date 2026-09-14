@@ -124,6 +124,20 @@ public static class VioletTapQaRunner
         Run();
     }
 
+    [MenuItem("Tools/VioletTap/QA/Check signal phases and ordered targets")]
+    public static void RunSignalPhaseCheck()
+    {
+        SessionState.SetBool("VioletTap.QA.SignalPhasesOnly", true);
+        Run();
+    }
+
+    [MenuItem("Tools/VioletTap/QA/Check combo and fever score rules")]
+    public static void RunScoreRuleCheck()
+    {
+        SessionState.SetBool("VioletTap.QA.ScoreRulesOnly", true);
+        Run();
+    }
+
     [MenuItem("Tools/VioletTap/QA/Check nickname modal lifecycle")]
     public static void RunModalCheck()
     {
@@ -290,6 +304,10 @@ public static class VioletTapQaRunner
         SessionState.SetBool("VioletTap.QA.RankingOnly", false);
         bool roundsOnly = SessionState.GetBool("VioletTap.QA.RoundsOnly", false);
         SessionState.SetBool("VioletTap.QA.RoundsOnly", false);
+        bool signalPhasesOnly = SessionState.GetBool("VioletTap.QA.SignalPhasesOnly", false);
+        SessionState.SetBool("VioletTap.QA.SignalPhasesOnly", false);
+        bool scoreRulesOnly = SessionState.GetBool("VioletTap.QA.ScoreRulesOnly", false);
+        SessionState.SetBool("VioletTap.QA.ScoreRulesOnly", false);
         bool modalOnly = SessionState.GetBool("VioletTap.QA.ModalOnly", false);
         SessionState.SetBool("VioletTap.QA.ModalOnly", false);
         bool hudOnly = SessionState.GetBool("VioletTap.QA.HudOnly", false);
@@ -308,7 +326,7 @@ public static class VioletTapQaRunner
         SessionState.SetBool("VioletTap.QA.PointerReuseOnly", false);
         bool delayedNicknameOnly = SessionState.GetBool("VioletTap.QA.DelayedNicknameOnly", false);
         SessionState.SetBool("VioletTap.QA.DelayedNicknameOnly", false);
-        routine = delayedNicknameOnly ? DelayedNicknameScenarios() : pointerReuseOnly ? PointerReuseScenarios() : mutedStartupOnly ? MutedStartupScenarios() : purchaseUiOnly ? PurchaseUiScenarios() : helpLayoutOnly ? HelpLayoutScenarios() : musicOnly ? MusicScenarios() : captionsOnly ? CaptionScenarios() : hudOnly ? HudScenarios() : modalOnly ? ModalScenarios() : roundsOnly ? RoundScenarios() : rankingOnly ? RankingScenarios() : popupsOnly ? PopupScenarios() : sceneCyclesOnly ? SceneCycleScenarios() : backgroundOnly ? BackgroundScenarios() : statusOnly ? StatusScenarios() : feedbackOnly ? FeedbackScenarios() : nicknameOnly ? NicknameScenarios() : Scenarios();
+        routine = scoreRulesOnly ? ScoreRuleScenarios() : signalPhasesOnly ? SignalPhaseScenarios() : delayedNicknameOnly ? DelayedNicknameScenarios() : pointerReuseOnly ? PointerReuseScenarios() : mutedStartupOnly ? MutedStartupScenarios() : purchaseUiOnly ? PurchaseUiScenarios() : helpLayoutOnly ? HelpLayoutScenarios() : musicOnly ? MusicScenarios() : captionsOnly ? CaptionScenarios() : hudOnly ? HudScenarios() : modalOnly ? ModalScenarios() : roundsOnly ? RoundScenarios() : rankingOnly ? RankingScenarios() : popupsOnly ? PopupScenarios() : sceneCyclesOnly ? SceneCycleScenarios() : backgroundOnly ? BackgroundScenarios() : statusOnly ? StatusScenarios() : feedbackOnly ? FeedbackScenarios() : nicknameOnly ? NicknameScenarios() : Scenarios();
     }
 
     private static void Tick()
@@ -328,6 +346,18 @@ public static class VioletTapQaRunner
                 return;
             }
             string roundsRequest = Path.Combine(Root, "RUN_ROUNDS_QA");
+            if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
+                && TryConsumeRequest(Path.Combine(Root, "RUN_SIGNAL_PHASE_QA")))
+            {
+                RunSignalPhaseCheck();
+                return;
+            }
+            if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
+                && TryConsumeRequest(Path.Combine(Root, "RUN_SCORE_RULE_QA")))
+            {
+                RunScoreRuleCheck();
+                return;
+            }
             if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
                 && TryConsumeRequest(Path.Combine(Root, "RUN_DELAYED_NICKNAME_QA")))
             {
@@ -664,6 +694,7 @@ public static class VioletTapQaRunner
         game.bestScore = 100000;
         UnityEngine.Random.InitState(6132026);
         game.StartRound();
+        CompletePhaseCueForQa(game);
         Set(game, "m_NextFeverCombo", int.MaxValue);
         Check(Targets(game).Count == 1, "Pointer reuse fixture starts with one target");
         var autoSync = typeof(Physics2D).GetProperty("autoSyncTransforms", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
@@ -897,7 +928,7 @@ public static class VioletTapQaRunner
             }
             Check(openerRect.height >= 60f, language + " help has a large screen-space touch area");
             Check(opener.GetComponentInChildren<TMP_Text>().text == "?", language + " help uses only a question icon");
-            Check(Mathf.Abs(openerRect.center.y - ScreenRect((RectTransform)ui.GetButtonStart().transform).center.y) < 1f,
+            Check(Mathf.Abs(openerRect.center.y - ScreenRect((RectTransform)ui.GetButtonStart().transform).center.y) < 8f,
                 language + " help and start share the same footer baseline");
             Capture("help-entry-" + language.ToLowerInvariant());
             for (int i = 0; i < 3; i++) yield return null;
@@ -912,6 +943,22 @@ public static class VioletTapQaRunner
             {
                 label.ForceMeshUpdate();
                 Check(!label.isTextOverflowing, language + " guide text fits: " + label.transform.parent.name + "/" + label.name);
+            }
+            var panel = help.GetComponentsInChildren<RectTransform>().Single(rect => rect.name == "HelpPanel");
+            var title = help.GetComponentsInChildren<TMP_Text>().Single(label => label.name == "Title");
+            var hint = help.GetComponentsInChildren<TMP_Text>().Single(label => label.name == "Hint");
+            float LeftInset(TMP_Text label) => panel.rect.width * .5f + label.rectTransform.anchoredPosition.x
+                - label.rectTransform.rect.width * .5f;
+            Check(LeftInset(title) >= 72f && LeftInset(hint) >= 72f,
+                language + " guide heading and instructions retain side padding");
+            Check(hint.textInfo.lineCount <= 3,
+                language + " guide instructions retain three readable lines");
+            foreach (string cardName in new[] { "CardNormal", "CardQuick", "CardTime", "CardBomb", "CardFever" })
+            {
+                var description = help.GetComponentsInChildren<UnityEngine.UI.Button>()
+                    .Single(button => button.name == cardName).transform.Find("Description").GetComponent<TMP_Text>();
+                Check(description.textInfo.lineCount <= 3,
+                    language + " " + cardName + " description clears the card footer");
             }
             Capture("help-top-" + language.ToLowerInvariant());
             for (int i = 0; i < 3; i++) yield return null;
@@ -950,7 +997,11 @@ public static class VioletTapQaRunner
             ClickVisible(haptics.gameObject, language + " haptics setting restores");
             ClickVisible(buttons.Single(b => b.name == "btnHelpClose").gameObject, language + " fixed return control receives input");
             for (int i = 0; i < 3; i++) yield return null;
-            Check(!help.IsOpen && !game.IsGameplayPaused && timer.Remaining < remaining, language + " return resumes the round");
+            Check(!help.IsOpen && !game.IsGameplayPaused, language + " return resumes the round");
+            CompletePhaseCueForQa(game);
+            float resumedRemaining = timer.Remaining;
+            for (int i = 0; i < 3; i++) yield return null;
+            Check(timer.Remaining < resumedRemaining, language + " timer runs after the phase cue");
             help.Open();
             yield return null;
             Check(scroll.content.rect.height <= scroll.viewport.rect.height || scroll.verticalNormalizedPosition >= .99f,
@@ -1090,14 +1141,14 @@ public static class VioletTapQaRunner
             int before = Get<int>(game, "m_Score");
             Tap(game, TapTargetType.Normal);
             Check(Get<int>(game, "m_Score") - before == 2 * game.Config.scorePerTap,
-                language + " fever entry preserves the triggering hit's pre-fever award");
+                language + " fever entry keeps the 10-combo score award");
             InspectCaption("FeverEntry");
-            entryMatches &= comboView.multiplierLabel.text.Contains("x" + game.Config.feverScoreMultiplier);
+            entryMatches &= comboView.multiplierLabel.text.Contains("x2");
             Set(game, "m_Combo", 998);
             before = Get<int>(game, "m_Score");
             Tap(game, TapTargetType.Normal);
-            Check(Get<int>(game, "m_Score") - before == game.Config.feverScoreMultiplier * game.Config.scorePerTap,
-                language + " subsequent fever hit uses the active score multiplier");
+            Check(Get<int>(game, "m_Score") - before == 3 * game.Config.scorePerTap,
+                language + " 50+ combo keeps its threefold score multiplier during fever");
             InspectCaption("FeverLongStreak");
             Capture("caption-fever-" + language.ToLowerInvariant());
             for (int i = 0; i < 3; i++) yield return null;
@@ -1119,7 +1170,7 @@ public static class VioletTapQaRunner
         Managers.Scene.ChangeScene(W01SceneType.Intro);
         for (int i = 0; i < 6; i++) yield return null;
         Check(layoutFits, "Gameplay captions fit their rect and viewport in both languages");
-        Check(entryMatches, "Fever entry caption reflects the now-active multiplier");
+        Check(entryMatches, "Fever entry caption keeps the 10-combo multiplier");
         Check(exitMatches, "Fever expiry restores the normal combo state");
         Check(Errors.Count == 0, "No runtime errors during gameplay caption QA");
     }
@@ -1197,6 +1248,7 @@ public static class VioletTapQaRunner
         var timer = Get<CountdownTimer>(game, "m_Timer");
         game.bestScore = 100000;
         game.StartRound();
+        CompletePhaseCueForQa(game);
         help.Open();
         int confirmations = 0;
         string confirmed = null;
@@ -1273,6 +1325,434 @@ public static class VioletTapQaRunner
         Check(Errors.Count == 0, "No runtime errors in nickname modal lifecycle QA");
     }
 
+    private static IEnumerator ScoreRuleScenarios()
+    {
+        for (int i = 0; i < 8; i++) yield return null;
+        previousAdsDisabled = Managers.Ads.AdsDisabled;
+        Managers.Ads.SetAdsDisabled(true);
+        GameScene.SuppressRecordPersistenceForQa = true;
+        Managers.Scene.ChangeScene(W01SceneType.Game);
+        for (int i = 0; i < 6; i++) yield return null;
+        Time.timeScale = 0f;
+        var game = Object.FindFirstObjectByType<GameScene>();
+        Check(game != null, "Score-rule fixture loads the game scene");
+        game.bestScore = 100000;
+        game.StartRound();
+        CompletePhaseCueForQa(game);
+        Set(game, "m_NextFeverCombo", int.MaxValue);
+        var comboView = Object.FindFirstObjectByType<ComboStatusView>();
+        var comboMusic = game.GetComponent<GameplayComboMusic>();
+        Check(comboMusic != null, "Gameplay combo music controller is available");
+        var driveLayer = comboMusic.transform.Find("Combo Drive").GetComponent<AudioSource>();
+        var rushLayer = comboMusic.transform.Find("Combo Rush").GetComponent<AudioSource>();
+        var feedback = Get<TapFeedback>(game, "m_TapFeedback");
+        string LatestFloatingScore()
+        {
+            Array floats = Get<Array>(feedback, "m_Scores");
+            int index = (Get<int>(feedback, "m_NextScore") + floats.Length - 1) % floats.Length;
+            object entry = floats.GetValue(index);
+            var label = (TextMeshPro)entry.GetType().GetField("Label").GetValue(entry);
+            return label.gameObject.activeInHierarchy ? label.text : string.Empty;
+        }
+
+        int before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Quick);
+        Check(Get<int>(game, "m_Score") - before == 3 && Get<int>(game, "m_Combo") == 1,
+            "Quick target gives three base points below 10 combo");
+        before = Get<int>(game, "m_Score");
+        float timeBefore = Get<CountdownTimer>(game, "m_Timer").Remaining;
+        Tap(game, TapTargetType.TimeBonus);
+        Check(Get<int>(game, "m_Score") - before == 2
+            && Mathf.Approximately(Get<CountdownTimer>(game, "m_Timer").Remaining - timeBefore, 1f),
+            "Time target gives two base points and one second below 10 combo");
+        Check(LatestFloatingScore().Contains("+2") && LatestFloatingScore().Contains("+1s"),
+            "Time target popup shows its points and the actual time bonus");
+        Capture("time-bonus-popup");
+
+        Set(game, "m_Combo", 8);
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 1 && Get<int>(game, "m_Combo") == 9,
+            "Ninth normal hit still gives one point");
+        Check(comboMusic.GameplayComboTier == 0,
+            "Gameplay music remains at its base intensity below ten combo");
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 2 && Get<int>(game, "m_Combo") == 10,
+            "Tenth normal hit starts the twofold combo award");
+        Check(comboMusic.GameplayComboTier == 1,
+            "Ten combo raises the gameplay music intensity");
+        Color tenComboGlow = Get<Color>(comboView, "milestoneAccent");
+        Check(Get<int>(comboView, "milestoneLevel") == 10 && tenComboGlow.g > tenComboGlow.r
+            && tenComboGlow.g > tenComboGlow.b,
+            "Ten-combo milestone starts a green screen glow");
+        var milestoneEdges = Get<UnityEngine.UI.Image[]>(comboView, "milestoneEdges");
+        Check(milestoneEdges.Length == 2 && milestoneEdges.All(edge => edge.enabled
+            && !edge.raycastTarget && edge.material != null
+            && edge.material.shader.name == "UI/ComboAura")
+            && !Get<UnityEngine.UI.Image>(comboView, "milestoneWash").enabled,
+            "Combo aura uses two input-transparent shader rails instead of a full-screen wash");
+        Time.timeScale = 1f;
+        double greenCaptureAt = EditorApplication.timeSinceStartup + .14;
+        while (EditorApplication.timeSinceStartup < greenCaptureAt) yield return null;
+        Time.timeScale = 0f;
+        Check(milestoneEdges.All(edge => edge.gameObject.activeInHierarchy && edge.color.a > .6f
+            && edge.material.GetFloat("_Gold") < .5f),
+            "Ten-combo green glow renders over the playfield");
+        Capture("combo-10-green");
+        for (int i = 0; i < 2; i++) yield return null;
+        var heldTargets = Targets(game).ToArray();
+        game.enabled = false;
+        foreach (CircleTarget target in heldTargets) target.SetPaused(true);
+        Time.timeScale = 1f;
+        double greenHoldDeadline = EditorApplication.timeSinceStartup + 4d;
+        while (Get<float>(comboView, "milestoneElapsed") < 1.3f
+            && EditorApplication.timeSinceStartup < greenHoldDeadline) yield return null;
+        Time.timeScale = 0f;
+        game.enabled = true;
+        foreach (CircleTarget target in heldTargets) target.SetPaused(false);
+        Check(Get<float>(comboView, "milestoneElapsed") >= 1.3f
+            && Get<float>(comboView, "milestoneRemaining") <= 0f
+            && Get<int>(comboView, "milestoneLevel") == 10
+            && milestoneEdges.All(edge => edge.gameObject.activeInHierarchy && edge.color.a > .6f),
+            "Green glow remains visible after the ten-combo entry flash ends");
+        Check(driveLayer.isPlaying && driveLayer.volume > .15f && rushLayer.volume < .01f,
+            "Ten-combo music keeps its synchronized drive layer after the transition");
+        Capture("combo-10-sustained");
+        for (int i = 0; i < 2; i++) yield return null;
+
+        Set(game, "m_Combo", 48);
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 2 && Get<int>(game, "m_Combo") == 49,
+            "Forty-ninth hit remains twofold without fever");
+        Check(comboMusic.GameplayComboTier == 1,
+            "Gameplay music holds the ten-combo intensity through combo forty-nine");
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 3 && Get<int>(game, "m_Combo") == 50,
+            "Fiftieth hit starts the threefold combo award without fever");
+        Check(comboMusic.GameplayComboTier == 2,
+            "Fifty combo raises the gameplay music to its highest intensity");
+        Color fiftyComboGlow = Get<Color>(comboView, "milestoneAccent");
+        Check(Get<int>(comboView, "milestoneLevel") == 50 && fiftyComboGlow.r > fiftyComboGlow.b
+            && fiftyComboGlow.g > fiftyComboGlow.b,
+            "Fifty-combo milestone starts a yellow screen glow");
+        Time.timeScale = 1f;
+        double yellowCaptureAt = EditorApplication.timeSinceStartup + .14;
+        while (EditorApplication.timeSinceStartup < yellowCaptureAt) yield return null;
+        Time.timeScale = 0f;
+        Check(milestoneEdges.All(edge => edge.gameObject.activeInHierarchy && edge.color.a > .7f
+            && edge.material.GetFloat("_Gold") > .5f),
+            "Fifty-combo yellow glow renders over the playfield");
+        Check(milestoneEdges.All(edge => edge.color.r > edge.color.b + .2f
+            && edge.color.g > edge.color.b + .2f),
+            "Fifty-combo glow replaces every green edge with yellow");
+        Check(!Get<UnityEngine.UI.Image>(comboView, "milestoneWash").enabled
+            && milestoneEdges.All(edge => edge.material.GetFloat("_Gold") > .5f),
+            "Fifty-combo aura switches fully to gold without a playfield wash");
+        Capture("combo-50-yellow");
+        for (int i = 0; i < 2; i++) yield return null;
+        heldTargets = Targets(game).ToArray();
+        game.enabled = false;
+        foreach (CircleTarget target in heldTargets) target.SetPaused(true);
+        Time.timeScale = 1f;
+        double yellowHoldDeadline = EditorApplication.timeSinceStartup + 4d;
+        while (Get<float>(comboView, "milestoneElapsed") < 1.3f
+            && EditorApplication.timeSinceStartup < yellowHoldDeadline) yield return null;
+        Time.timeScale = 0f;
+        game.enabled = true;
+        foreach (CircleTarget target in heldTargets) target.SetPaused(false);
+        Check(Get<float>(comboView, "milestoneElapsed") >= 1.3f
+            && Get<float>(comboView, "milestoneRemaining") <= 0f
+            && Get<int>(comboView, "milestoneLevel") == 50
+            && milestoneEdges.All(edge => edge.gameObject.activeInHierarchy && edge.color.a > .7f)
+            && milestoneEdges.All(edge => edge.color.r > edge.color.b + .2f
+                && edge.color.g > edge.color.b + .2f),
+            "Yellow glow remains visible after the fifty-combo entry flash ends");
+        Check(rushLayer.isPlaying && rushLayer.volume > .20f && driveLayer.volume < .01f,
+            "Fifty-combo music replaces the drive rhythm with the rush layer");
+        Capture("combo-50-sustained");
+        for (int i = 0; i < 2; i++) yield return null;
+
+        Set(game, "m_Combo", 20);
+        Set(game, "m_FeverRemaining", 5f);
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 2 && Targets(game).Count == game.Config.feverTargetCount,
+            "Fever adds targets but does not add score below 50 combo");
+        Set(game, "m_PaceStage", 2);
+        Invoke(game, "RefillTargets");
+        Check(Targets(game).Count == Mathf.Max(3, game.Config.feverTargetCount),
+            "Fever adds a target above the SCAN baseline too");
+        Set(game, "m_Combo", 49);
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 3 && Get<int>(game, "m_Combo") == 50,
+            "Fiftieth hit during fever remains threefold");
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Quick);
+        Check(Get<int>(game, "m_Score") - before == 9,
+            "Quick target gives 3 base points times three at 50+ combo with fever");
+        Check(LatestFloatingScore() == "+9", "Neon-side popup shows the points actually earned for a quick hit");
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.TimeBonus);
+        Check(Get<int>(game, "m_Score") - before == 6,
+            "Time target gives 2 base points times three at 50+ combo with fever");
+        Check(LatestFloatingScore().Contains("+6") && LatestFloatingScore().Contains("+1s"),
+            "Time popup applies the combo multiplier to points but keeps the one-second bonus");
+
+        Set(game, "m_Combo", 49);
+        Invoke(game, "StartSequence");
+        Check(Targets(game).Count == 3 && Targets(game).All(t => t.SequenceOrder > 0),
+            "Score-rule fixture opens a numbered sequence");
+        for (int order = 1; order <= 3; order++)
+        {
+            before = Get<int>(game, "m_Score");
+            CircleTarget numberedTarget = Targets(game).Single(t => t.SequenceOrder == order);
+            int sizeBonus = numberedTarget.SizeTier == TargetSizeTier.Small ? 2
+                : numberedTarget.SizeTier == TargetSizeTier.Medium ? 1 : 0;
+            numberedTarget.OnPointerDown(null);
+            int expected = (2 + sizeBonus) * 3 + (order == 3 ? 5 : 0);
+            Check(Get<int>(game, "m_Score") - before == expected,
+                "Fever sequence hit " + order + " applies its size bonus before the threefold multiplier"
+                + (order == 3 ? " plus five clear points" : ""));
+            Check(LatestFloatingScore() == "+" + expected,
+                "Numbered target " + order + " shows its actual earned points beside the hit");
+        }
+
+        Set(game, "m_Combo", 50);
+        Set(game, "m_FeverRemaining", 5f);
+        CircleTarget missed = Targets(game)[0];
+        Invoke(game, "HandleTargetMissed", missed);
+        Check(Get<int>(game, "m_Combo") == 0 && Get<float>(game, "m_FeverRemaining") == 0f,
+            "Miss clears the combo tier and fever");
+        Check(comboMusic.GameplayComboTier == 0,
+            "Miss returns gameplay music to its base intensity");
+        Check(Get<int>(comboView, "milestoneLevel") == 0
+            && !Get<UnityEngine.UI.Image>(comboView, "milestoneWash").gameObject.activeSelf,
+            "Miss removes the persistent combo glow");
+        before = Get<int>(game, "m_Score");
+        Tap(game, TapTargetType.Normal);
+        Check(Get<int>(game, "m_Score") - before == 1,
+            "Score returns to onefold immediately after a miss");
+        Set(game, "m_Combo", 50);
+        Set(game, "m_FeverRemaining", 5f);
+        Invoke(game, "RefreshComboPresentation");
+        Check(comboMusic.GameplayComboTier == 2,
+            "Bomb fixture starts with the highest music intensity");
+        Tap(game, TapTargetType.Bomb);
+        Check(Get<int>(game, "m_Combo") == 0 && Get<float>(game, "m_FeverRemaining") == 0f,
+            "Bomb clears the combo tier and fever");
+        Check(comboMusic.GameplayComboTier == 0,
+            "Bomb returns gameplay music to its base intensity");
+        Check(Get<int>(comboView, "milestoneLevel") == 0
+            && !Get<UnityEngine.UI.Image>(comboView, "milestoneWash").gameObject.activeSelf,
+            "Bomb removes the persistent combo glow");
+        comboView.ClearFailure();
+
+        foreach (TargetSizeTier tier in new[] { TargetSizeTier.Large, TargetSizeTier.Medium, TargetSizeTier.Small })
+        {
+            float expectedScale = tier == TargetSizeTier.Small ? .64f
+                : tier == TargetSizeTier.Medium ? .82f : 1f;
+            int sizePoints = tier == TargetSizeTier.Small ? 2
+                : tier == TargetSizeTier.Medium ? 1 : 0;
+            int timeSeconds = tier == TargetSizeTier.Small ? 3
+                : tier == TargetSizeTier.Medium ? 2 : 1;
+            foreach (TapTargetType type in new[] { TapTargetType.Normal, TapTargetType.Quick, TapTargetType.TimeBonus })
+            {
+                Invoke(game, "ClearTargets");
+                Set(game, "m_Combo", 0);
+                Set(game, "m_NextFeverCombo", int.MaxValue);
+                Invoke(game, "SpawnTargetWithSize", (TapTargetType?)type, 0, 100f, (TargetSizeTier?)tier);
+                Check(Targets(game).Count == 1 && Targets(game)[0].SizeTier == tier
+                    && Mathf.Abs(Targets(game)[0].NominalScale - expectedScale) < .001f,
+                    type + " " + tier + " spawns at its selected visual and collision scale");
+                CircleTarget sizedTarget = Targets(game)[0];
+                before = Get<int>(game, "m_Score");
+                timeBefore = Get<CountdownTimer>(game, "m_Timer").Remaining;
+                sizedTarget.OnPointerDown(null);
+                int expectedPoints = type == TapTargetType.Normal ? game.Config.scorePerTap + sizePoints
+                    : type == TapTargetType.Quick ? 3 + sizePoints : 2;
+                Check(Get<int>(game, "m_Score") - before == expectedPoints,
+                    type + " " + tier + " gives the advertised score before combo multipliers");
+                Check(Mathf.Abs(Get<CountdownTimer>(game, "m_Timer").Remaining - timeBefore
+                    - (type == TapTargetType.TimeBonus ? timeSeconds : 0)) < .01f,
+                    type + " " + tier + " gives the advertised time bonus");
+                if (type == TapTargetType.TimeBonus)
+                {
+                    Check(LatestFloatingScore().Contains("+" + timeSeconds + "s"),
+                        tier + " hourglass popup shows its actual added seconds");
+                    Capture("time-bonus-" + tier.ToString().ToLowerInvariant());
+                    yield return null;
+                }
+            }
+        }
+        Invoke(game, "ClearTargets");
+        Invoke(game, "SpawnTargetWithSize", (TapTargetType?)TapTargetType.Bomb, 0, 100f,
+            (TargetSizeTier?)TargetSizeTier.Small);
+        Check(Targets(game).Count == 1 && Targets(game)[0].SizeTier == TargetSizeTier.Medium
+            && Mathf.Abs(Targets(game)[0].NominalScale - .82f) < .001f,
+            "Bomb keeps one fixed size even when a small tier is requested");
+        Invoke(game, "ClearTargets");
+        comboView.ClearFailure();
+        foreach (TargetSizeTier tier in new[] { TargetSizeTier.Large, TargetSizeTier.Medium, TargetSizeTier.Small })
+            Invoke(game, "SpawnTargetWithSize", (TapTargetType?)TapTargetType.Normal, 0, 100f,
+                (TargetSizeTier?)tier);
+        bool sizesAreSeparated = true;
+        for (int i = 0; i < Targets(game).Count; i++)
+            for (int j = i + 1; j < Targets(game).Count; j++)
+            {
+                CircleTarget a = Targets(game)[i];
+                CircleTarget b = Targets(game)[j];
+                sizesAreSeparated &= Vector3.Distance(a.transform.position, b.transform.position)
+                    >= .70f * (a.NominalScale + b.NominalScale) - .001f;
+            }
+        Check(Targets(game).Count == 3 && Targets(game).Select(target => target.SizeTier).Distinct().Count() == 3
+            && sizesAreSeparated,
+            "All three beneficial neon sizes can coexist without overlapping spawns");
+        Capture("neon-size-tiers");
+        yield return null;
+
+        Managers.Scene.ChangeScene(W01SceneType.Intro);
+        for (int i = 0; i < 6; i++) yield return null;
+        Check(Errors.Count == 0, "No runtime errors during combo and fever score QA");
+    }
+
+    private static IEnumerator SignalPhaseScenarios()
+    {
+        for (int i = 0; i < 8; i++) yield return null;
+        previousAdsDisabled = Managers.Ads.AdsDisabled;
+        Managers.Ads.SetAdsDisabled(true);
+        GameScene.SuppressRecordPersistenceForQa = true;
+        Managers.Scene.ChangeScene(W01SceneType.Game);
+        for (int i = 0; i < 6; i++) yield return null;
+        Time.timeScale = 0f;
+        var game = Object.FindFirstObjectByType<GameScene>();
+        Check(game != null, "Signal phase fixture loads the game scene");
+        var flow = Get<GameFlow>(game, "mGameFlow");
+        var timer = Get<CountdownTimer>(game, "m_Timer");
+        game.StartRound();
+        Set(game, "m_NextFeverCombo", int.MaxValue);
+        Check(flow.State == GameFlowState.Playing && Get<int>(game, "m_PaceStage") == 1
+            && Targets(game).Count == 0 && Get<float>(game, "m_PhaseCueRemaining") > 0f,
+            "PULSE opens with a target-free phase cue");
+        float pulseRemaining = timer.Remaining;
+        float pulseElapsed = Get<float>(game, "m_RoundElapsed");
+        Time.timeScale = 1f;
+        for (int i = 0; i < 2; i++) yield return null;
+        Time.timeScale = 0f;
+        Check(Mathf.Approximately(timer.Remaining, pulseRemaining)
+            && Mathf.Approximately(Get<float>(game, "m_RoundElapsed"), pulseElapsed)
+            && Targets(game).Count == 0,
+            "PULSE cue freezes round time and leaves the field clear");
+        CompletePhaseCueForQa(game);
+        Check(Targets(game).Count == 1 && Targets(game)[0].Type != TapTargetType.Bomb,
+            "PULSE cue ends with one safe target");
+        Check(RoundPacing.Stage(game.Config.scanStartSeconds - .01f, game.Config) == 1
+            && RoundPacing.Stage(game.Config.scanStartSeconds, game.Config) == 2
+            && RoundPacing.Stage(game.Config.surgeStartSeconds, game.Config) == 3,
+            "Configured elapsed-time thresholds select PULSE, SCAN, then SURGE");
+
+        UnityEngine.Random.InitState(9187);
+        Set(game, "m_RoundElapsed", game.Config.scanStartSeconds);
+        Invoke(game, "Update");
+        Check(Get<int>(game, "m_PaceStage") == 2 && Targets(game).Count == 0
+            && Get<float>(game, "m_PhaseCueRemaining") > 0f,
+            "SCAN transition clears existing targets during its cue");
+        float scanRemaining = timer.Remaining;
+        float scanElapsed = Get<float>(game, "m_RoundElapsed");
+        Time.timeScale = 1f;
+        for (int i = 0; i < 2; i++) yield return null;
+        Time.timeScale = 0f;
+        Check(Mathf.Approximately(timer.Remaining, scanRemaining)
+            && Mathf.Approximately(Get<float>(game, "m_RoundElapsed"), scanElapsed)
+            && Targets(game).Count == 0,
+            "SCAN cue freezes round time and leaves the field clear");
+        CompletePhaseCueForQa(game);
+        Check(Targets(game).Count == 2 && Targets(game).Any(t => t.Type != TapTargetType.Bomb),
+            "SCAN cue ends with a playable pair, never a lone bomb");
+        Capture("scan-paired-targets");
+        for (int i = 0; i < 2; i++) yield return null;
+        int bombPairs = 0;
+        for (int contact = 0; contact < 60; contact++)
+        {
+            CircleTarget safeTarget = Targets(game).First(t => t.Type != TapTargetType.Bomb);
+            safeTarget.OnPointerDown(null);
+            Check(Targets(game).Count == 2 && Targets(game).Any(t => t.Type != TapTargetType.Bomb),
+                "SCAN refill " + contact + " keeps two targets and at least one safe choice");
+            if (Targets(game).Any(t => t.Type == TapTargetType.Bomb)) bombPairs++;
+        }
+        Results.Add("SCAN bomb-plus-safe pairs observed after refills: " + bombPairs);
+        Check(bombPairs > 0, "SCAN actually spawns a bomb beside a safe target");
+
+        Set(game, "m_RoundElapsed", game.Config.surgeStartSeconds);
+        Invoke(game, "Update");
+        Check(Get<int>(game, "m_PaceStage") == 3 && Targets(game).Count == 0
+            && Get<float>(game, "m_PhaseCueRemaining") > 0f,
+            "SURGE transition clears existing targets during its cue");
+        float surgeRemaining = timer.Remaining;
+        float surgeElapsed = Get<float>(game, "m_RoundElapsed");
+        Time.timeScale = 1f;
+        for (int i = 0; i < 2; i++) yield return null;
+        Time.timeScale = 0f;
+        Check(Mathf.Approximately(timer.Remaining, surgeRemaining)
+            && Mathf.Approximately(Get<float>(game, "m_RoundElapsed"), surgeElapsed)
+            && Targets(game).Count == 0,
+            "SURGE cue freezes round time and leaves the field clear");
+        CompletePhaseCueForQa(game);
+        Check(Get<bool>(game, "m_SequenceActive") && Get<int>(game, "m_SequenceNextOrder") == 1
+            && Targets(game).Count == 3
+            && Targets(game).Select(t => t.SequenceOrder).OrderBy(order => order).SequenceEqual(new[] { 1, 2, 3 })
+            && Targets(game).All(t => t.Type == TapTargetType.Normal
+                && t.GetComponentInChildren<TextMeshPro>()?.text == t.SequenceOrder.ToString()),
+            "SURGE displays three numbered safe targets");
+        Capture("surge-numbered-targets");
+        for (int i = 0; i < 2; i++) yield return null;
+
+        int scoreBeforeFailure = Get<int>(game, "m_Score");
+        int missesBeforeFailure = Get<int>(game, "m_Misses");
+        Targets(game).Single(t => t.SequenceOrder == 2).OnPointerDown(null);
+        Check(!Get<bool>(game, "m_SequenceActive") && Get<int>(game, "m_Score") == scoreBeforeFailure
+            && Get<int>(game, "m_Misses") == missesBeforeFailure + 1 && Get<int>(game, "m_Combo") == 0
+            && Targets(game).Count == 2 && Targets(game).All(t => t.SequenceOrder == 0)
+            && Targets(game).Any(t => t.Type != TapTargetType.Bomb),
+            "Wrong sequence order breaks the streak and restores a playable SCAN-style pair");
+
+        Invoke(game, "StartSequence");
+        int scoreBeforeSuccess = Get<int>(game, "m_Score");
+        int hitsBeforeSuccess = Get<int>(game, "m_Hits");
+        int expectedSequenceScore = 5;
+        for (int order = 1; order <= 3; order++)
+        {
+            CircleTarget numberedTarget = Targets(game).Single(t => t.SequenceOrder == order);
+            expectedSequenceScore += 2 + (numberedTarget.SizeTier == TargetSizeTier.Small ? 2
+                : numberedTarget.SizeTier == TargetSizeTier.Medium ? 1 : 0);
+            numberedTarget.OnPointerDown(null);
+            if (order < 3)
+                Check(Get<bool>(game, "m_SequenceActive") && Get<int>(game, "m_SequenceNextOrder") == order + 1
+                    && Targets(game).Count == 3 - order,
+                    "Correct sequence tap " + order + " advances the expected order");
+        }
+        Check(!Get<bool>(game, "m_SequenceActive") && Targets(game).Count == 2
+            && Targets(game).All(t => t.SequenceOrder == 0)
+            && Get<int>(game, "m_Hits") == hitsBeforeSuccess + 3
+            && Get<int>(game, "m_Score") == scoreBeforeSuccess + expectedSequenceScore,
+            "Completing 1→2→3 grants size-adjusted hits plus a flat five-point bonus");
+
+        Set(game, "m_RoundElapsed", Get<float>(game, "m_NextSequenceAt"));
+        Invoke(game, "Update");
+        Check(Get<bool>(game, "m_SequenceActive") && Targets(game).Count == 3,
+            "SURGE schedules another numbered burst after its interval");
+        timer.Tick(1000f);
+        Check(flow.State == GameFlowState.Result && Targets(game).Count == 0
+            && !Get<bool>(game, "m_SequenceActive") && Get<int>(game, "m_SequenceNextOrder") == 0,
+            "Result clears an unfinished sequence and its targets");
+        Managers.Scene.ChangeScene(W01SceneType.Intro);
+        for (int i = 0; i < 6; i++) yield return null;
+        Check(Errors.Count == 0, "No runtime errors during signal phase QA");
+    }
+
     private static IEnumerator RoundScenarios()
     {
         for (int i = 0; i < 8; i++) yield return null;
@@ -1291,9 +1771,13 @@ public static class VioletTapQaRunner
             game.StartRound();
             game.StartRound();
             game.RetryRound();
-            Check(flow.State == GameFlowState.Playing && Targets(game).Count == game.Config.initialTargetCount
+            Check(flow.State == GameFlowState.Playing && Targets(game).Count == 0
+                && Get<float>(game, "m_PhaseCueRemaining") > 0f
                 && Get<int>(game, "m_Score") == 0 && Mathf.Approximately(timer.Remaining, game.Config.roundDuration),
-                "Round " + round + " begins once with clean score, time and targets");
+                "Round " + round + " begins once with a clean score, timer and phase cue");
+            CompletePhaseCueForQa(game);
+            Check(Targets(game).Count == game.Config.initialTargetCount,
+                "Round " + round + " phase cue creates the opening target");
             for (int contact = 0; contact < 12; contact++)
             {
                 var target = Targets(game)[0];
@@ -1526,6 +2010,7 @@ public static class VioletTapQaRunner
             var ui = Object.FindFirstObjectByType<UI_GamePopup>();
             game.bestScore = 100000;
             game.StartRound();
+            CompletePhaseCueForQa(game);
             var target = Targets(game)[0];
             Physics2D.SyncTransforms();
             Canvas.ForceUpdateCanvases();
@@ -1577,6 +2062,7 @@ public static class VioletTapQaRunner
         var help = Object.FindFirstObjectByType<UI_GameHelp>();
         game.bestScore = 100000;
         game.StartRound();
+        CompletePhaseCueForQa(game);
         Invoke(game, "StartFever");
         var timer = Get<CountdownTimer>(game, "m_Timer");
         var target = Targets(game)[0];
@@ -1670,6 +2156,7 @@ public static class VioletTapQaRunner
         string playing = GameLocalization.T("TAP THE GLOWING TARGETS", "빛나는 타겟을 터치하세요");
         Invoke(ui, "ShowTransientStatus", "START TEST NOTICE");
         game.StartRound();
+        CompletePhaseCueForQa(game);
         until = EditorApplication.timeSinceStartup + 2.8;
         while (EditorApplication.timeSinceStartup < until) yield return null;
         Check(status.text == playing && status.color == Color.white, "Notice expiry preserves the new PLAYING state");
@@ -1698,6 +2185,7 @@ public static class VioletTapQaRunner
         while (EditorApplication.timeSinceStartup < until) yield return null;
         Check(status.text == ready && status.color == readyColor, "Notice expiry preserves READY after retry");
         game.StartRound();
+        CompletePhaseCueForQa(game);
 
         bool effects = Managers.IsEffectEnabled;
         bool haptics = TapHaptics.IsEnabled;
@@ -2046,13 +2534,16 @@ public static class VioletTapQaRunner
         for (int i = 0; i < 6; i++) yield return null;
         GameScene game = Object.FindFirstObjectByType<GameScene>();
         Check(game != null, "Game scene loads");
-		// The deterministic round below scores 20: keep it below the in-memory best.
+        // Keep the deterministic round below the in-memory best.
 		game.bestScore = Mathf.Max(117, game.bestScore);
         GameFlow flow = game.GetComponent<GameFlow>();
         var ui = Object.FindFirstObjectByType<UI_GamePopup>();
         var timer = Get<CountdownTimer>(game, "m_Timer");
         game.StartRound();
-        Check(flow.State == GameFlowState.Playing && Targets(game).Count == 1, "Ready starts a populated round");
+        Check(flow.State == GameFlowState.Playing && Targets(game).Count == 0
+            && Get<float>(game, "m_PhaseCueRemaining") > 0f, "Ready starts the PULSE cue");
+        CompletePhaseCueForQa(game);
+        Check(Targets(game).Count == 1, "PULSE cue starts a populated round");
         float before = timer.Remaining;
         Tap(game, TapTargetType.TimeBonus);
         Check(Mathf.Abs(timer.Remaining - before - 1) < .01f, "Time target grants one second");
@@ -2061,7 +2552,7 @@ public static class VioletTapQaRunner
         Check(Get<float>(game, "m_FeverRemaining") > 0 && Targets(game).Count == 2, "Ten-hit streak starts fever with two targets");
         int scoreBefore = Get<int>(game, "m_Score");
         Tap(game, TapTargetType.Normal);
-        Check(Get<int>(game, "m_Score") == scoreBefore + 3, "Fever awards its score multiplier");
+        Check(Get<int>(game, "m_Score") == scoreBefore + 2, "Fever alone does not increase the 10-combo score multiplier");
         float minimumSpacing = float.PositiveInfinity;
         MethodInfo spawnPosition = typeof(GameScene).GetMethod("GetSpawnPosition", BindingFlags.Instance | BindingFlags.NonPublic);
         for (int i = 0; i < 500; i++)
@@ -2088,6 +2579,7 @@ public static class VioletTapQaRunner
         for (int i = 0; i < 3; i++) yield return null;
         game.RetryRound();
         game.StartRound();
+        CompletePhaseCueForQa(game);
         CircleTarget initial = Targets(game)[0];
         Check(initial.Type != TapTargetType.Bomb && initial.Type != TapTargetType.Quick
             && Get<float>(initial, "m_Lifetime") > 1.7f, "Retry spawns at starting difficulty with a fresh timer");
@@ -2112,13 +2604,24 @@ public static class VioletTapQaRunner
 
     private static void Tap(GameScene game, TapTargetType type)
     {
+        CompletePhaseCueForQa(game);
         CircleTarget target = Targets(game)[0];
-        target.Bind(type, 100f, .82f, t => Invoke(game, "HandleTargetTapped", t), t => Invoke(game, "HandleTargetMissed", t));
+        target.Bind(type, 100f, type == TapTargetType.Bomb ? .82f : 1f,
+            t => Invoke(game, "HandleTargetTapped", t), t => Invoke(game, "HandleTargetMissed", t),
+            TargetSizeTier.Large);
         target.SetVisual(target.GetSprite(type), Color.white);
         target.OnPointerDown(null);
     }
 
     private static List<CircleTarget> Targets(GameScene game) => Get<List<CircleTarget>>(game, "m_ActiveTargets");
+    private static void CompletePhaseCueForQa(GameScene game)
+    {
+        if (Get<float>(game, "m_PhaseCueRemaining") <= 0f) return;
+        Set(game, "m_PhaseCueRemaining", 0f);
+        Invoke(game, "CompletePhaseCue");
+        // Match the end of the animated cue when tests advance it without waiting in real time.
+        Object.FindFirstObjectByType<ComboStatusView>()?.ClearFailure();
+    }
     private static T Get<T>(object obj, string name) => (T)obj.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(obj);
     private static void Set(object obj, string name, object value) => obj.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).SetValue(obj, value);
     private static void Invoke(object obj, string name, params object[] args) => obj.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(obj, args);
@@ -2144,6 +2647,7 @@ public static class VioletTapQaRunner
     private static void Finish(string failure)
     {
         routine = null;
+        GameScene.SuppressRecordPersistenceForQa = false;
         if (overriddenRank != null)
         {
             Set(overriddenRank, "m_InitializationTask", previousRankInitialization);

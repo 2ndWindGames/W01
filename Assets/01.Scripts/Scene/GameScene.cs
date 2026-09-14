@@ -19,6 +19,9 @@ namespace _01.Scripts.Scene
 	public class GameScene : BaseScene
 	{
 		private const string BestScoreKey = "MiniGameKit.TapGame.BestScore";
+		private const float SmallTargetScale = 0.64f;
+		private const float MediumTargetScale = 0.82f;
+		private const float LargeTargetScale = 1.00f;
 #if UNITY_EDITOR
 		public static bool SuppressRecordPersistenceForQa { get; set; }
 #endif
@@ -57,6 +60,7 @@ namespace _01.Scripts.Scene
 		private int m_LastCountdownSecond = -1;
 		private bool m_OwnsConfig;
 		private TapFeedback m_TapFeedback;
+		private GameplayComboMusic m_ComboMusic;
 		private bool m_ApplicationPaused;
 		private bool m_ApplicationFocused = true;
 		public bool IsHelpOpen { get; private set; }
@@ -79,6 +83,7 @@ namespace _01.Scripts.Scene
 		private int m_Score;
 		[HideInInspector] public int bestScore;
 		private int m_Combo;
+		private int m_LastComboMusicTier = -1;
 		private int m_Hits;
 		private int m_MaxCombo;
 		private int m_Misses;
@@ -87,6 +92,10 @@ namespace _01.Scripts.Scene
 		private int m_NextFeverCombo;
 		private float m_RoundElapsed;
 		private int m_PaceStage = 1;
+		private bool m_SequenceActive;
+		private int m_SequenceNextOrder;
+		private float m_NextSequenceAt = float.PositiveInfinity;
+		private float m_PhaseCueRemaining;
 		
 		
 		protected override bool Init()
@@ -110,6 +119,8 @@ namespace _01.Scripts.Scene
 			m_TapFeedback.Initialize(m_TargetSprite);
 			
 			EnsureSceneServices();
+			m_ComboMusic = GetComponent<GameplayComboMusic>();
+			if (m_ComboMusic == null) m_ComboMusic = gameObject.AddComponent<GameplayComboMusic>();
 			m_Viewport = m_MainCamera.GetComponent<ResponsiveGameViewport>();
 			if (m_Viewport == null) m_Viewport = m_MainCamera.gameObject.AddComponent<ResponsiveGameViewport>();
 			m_OriginalCameraColor = m_MainCamera.backgroundColor;
@@ -210,6 +221,12 @@ namespace _01.Scripts.Scene
 			{
 				return;
 			}
+			if (m_PhaseCueRemaining > 0f)
+			{
+				m_PhaseCueRemaining = Mathf.Max(0f, m_PhaseCueRemaining - Time.deltaTime);
+				if (m_PhaseCueRemaining <= 0f) CompletePhaseCue();
+				return;
+			}
 			
 			m_RoundElapsed += Time.deltaTime;
 			m_Timer.Tick(Time.deltaTime);
@@ -221,14 +238,38 @@ namespace _01.Scripts.Scene
 			if (stage > m_PaceStage)
 			{
 				m_PaceStage = stage;
-				m_UiGamePopup.ShowPaceIncrease(stage);
+				BeginPhaseCue(stage);
 				Managers.Sound.Play(Define.Sound.Effect, "SFX/Speed_Up", .45f);
+				return;
 			}
+			if (m_PaceStage == 3 && !m_SequenceActive && m_RoundElapsed >= m_NextSequenceAt
+			    && m_Timer.Remaining > mConfig.sequenceLifetimeSeconds + .5f)
+				StartSequence();
 			RefreshComboPresentation();
+		}
+
+		private void BeginPhaseCue(int stage)
+		{
+			ClearTargets();
+			m_PhaseCueRemaining = stage == 1 ? 1.4f : 1.75f;
+			m_UiGamePopup.ShowSignalPhase(stage);
+		}
+
+		private void CompletePhaseCue()
+		{
+			m_PhaseCueRemaining = 0f;
+			if (mGameFlow.State != GameFlowState.Playing) return;
+			if (m_PaceStage == 3)
+			{
+				StartSequence();
+				return;
+			}
+			RefillTargets();
 		}
 		
 		private void OnDestroy()
 		{
+			if (m_LastComboMusicTier > 0 && m_ComboMusic != null) m_ComboMusic.SetTier(0);
 			if (m_AdsAttached && m_AdsManager != null)
 			{
 				m_AdsManager.BannerHeightChanged -= ApplyBannerSpace;
@@ -275,7 +316,7 @@ namespace _01.Scripts.Scene
 			if (m_FeverRemaining <= 0f)
 			{
 				EndFever();
-				while (m_ActiveTargets.Count > mConfig.initialTargetCount)
+				while (!m_SequenceActive && m_ActiveTargets.Count > DesiredTargetCount())
 				{
 					var extra = m_ActiveTargets[^1];
 					m_ActiveTargets.RemoveAt(m_ActiveTargets.Count - 1);
@@ -305,20 +346,38 @@ namespace _01.Scripts.Scene
 		
 		private void RefillTargets()
 		{
-			// A bomb can end the round inside its tap callback before that callback reaches here.
-			if (mGameFlow.State != GameFlowState.Playing) return;
-			int desired = m_FeverRemaining > 0f ? mConfig.feverTargetCount : mConfig.initialTargetCount;
+			// A sequence owns all three targets until it is completed or broken.
+			if (mGameFlow.State != GameFlowState.Playing || m_SequenceActive || m_PhaseCueRemaining > 0f) return;
+			int desired = DesiredTargetCount();
 			while (m_ActiveTargets.Count < desired)
 			{
 				if (!SpawnTarget()) break;
 			}
 		}
+
+		private int DesiredTargetCount()
+		{
+			int phaseCount = m_PaceStage >= 2 ? Mathf.Max(2, mConfig.initialTargetCount) : mConfig.initialTargetCount;
+			return m_FeverRemaining > 0f ? Mathf.Max(phaseCount + 1, mConfig.feverTargetCount) : phaseCount;
+		}
 		
 		// ReSharper disable Unity.PerformanceAnalysis
-		private bool SpawnTarget()
+		private bool SpawnTarget() => SpawnTarget(null, 0, 0f);
+
+		private bool SpawnTarget(TapTargetType? forcedType, int sequenceOrder, float lifetimeOverride)
+			=> SpawnTargetWithSize(forcedType, sequenceOrder, lifetimeOverride, null);
+
+		// The explicit tier also lets editor QA exercise each reward deterministically.
+		private bool SpawnTargetWithSize(TapTargetType? forcedType, int sequenceOrder,
+			float lifetimeOverride, TargetSizeTier? forcedSizeTier)
 		{
 			if (mGameFlow.State != GameFlowState.Playing) return false;
-			GameObject instance = mTargetPool.Spawn(GetSpawnPosition(), Quaternion.identity);
+			TapTargetType type = forcedType ?? ChooseTargetType();
+			TargetSizeTier sizeTier = type == TapTargetType.Bomb ? TargetSizeTier.Medium
+				: forcedSizeTier ?? (TargetSizeTier)Random.Range(0, 3);
+			float scale = ScaleForSize(sizeTier);
+			if (!TryGetSpawnPosition(scale, out Vector3 spawnPosition)) return false;
+			GameObject instance = mTargetPool.Spawn(spawnPosition, Quaternion.identity);
 			if (!instance)
 			{
 				return false;
@@ -332,11 +391,10 @@ namespace _01.Scripts.Scene
 				return false;
 			}
 
-			TapTargetType type = ChooseTargetType();
 			float progress = RoundPacing.Progress(m_RoundElapsed, mConfig);
-			float lifetime = RoundPacing.Lifetime(m_RoundElapsed, type, m_FeverRemaining > 0f, mConfig);
+			float lifetime = lifetimeOverride > 0f ? lifetimeOverride
+				: RoundPacing.Lifetime(m_RoundElapsed, type, m_FeverRemaining > 0f, mConfig);
 
-			float scale = Mathf.Lerp(0.82f, mConfig.minimumTargetScale, progress);
 			Color color = type == TapTargetType.Quick ? TargetColors[1]
 				: type == TapTargetType.TimeBonus ? new Color(1f, 0.78f, 0.2f)
 				: type == TapTargetType.Bomb ? new Color(1f, 0.2f, 0.3f)
@@ -345,22 +403,75 @@ namespace _01.Scripts.Scene
 			var sprite = target.GetSprite(type);
 			target.SetVisual(sprite, color);
 			
-			target.Bind(type, lifetime, scale, HandleTargetTapped, HandleTargetMissed);
+			target.Bind(type, lifetime, scale, HandleTargetTapped, HandleTargetMissed, sizeTier);
+			if (sequenceOrder > 0)
+				target.SetSequenceOrder(sequenceOrder, m_UiGamePopup.GetTextStatus().font);
 			target.SetPace(Mathf.Lerp(1f, 1.65f, progress));
 			target.SetFeverMode(m_FeverRemaining > 0f);
 			target.SetPaused(IsGameplayPaused);
 			m_ActiveTargets.Add(target);
 			return true;
 		}
+
+		private static float ScaleForSize(TargetSizeTier tier) => tier == TargetSizeTier.Small
+			? SmallTargetScale : tier == TargetSizeTier.Large ? LargeTargetScale : MediumTargetScale;
+
+		private static int ScoreSizeBonus(TargetSizeTier tier) => tier == TargetSizeTier.Small ? 2
+			: tier == TargetSizeTier.Medium ? 1 : 0;
+
+		private static int TimeSizeBonus(TargetSizeTier tier) => tier == TargetSizeTier.Small ? 3
+			: tier == TargetSizeTier.Medium ? 2 : 1;
 		
 		private TapTargetType ChooseTargetType()
 		{
-			float elapsed = m_RoundElapsed;
 			float roll = Random.value;
-			if (elapsed >= 15f && roll < 0.12f) return TapTargetType.Bomb;
-			if (elapsed >= 8f && roll < 0.32f) return TapTargetType.Quick;
-			if (roll < 0.39f) return TapTargetType.TimeBonus;
+			if (m_PaceStage == 1) return roll < .12f ? TapTargetType.TimeBonus : TapTargetType.Normal;
+			bool hasSafeTarget = false;
+			foreach (CircleTarget active in m_ActiveTargets)
+				if (active != null && active.Type != TapTargetType.Bomb) { hasSafeTarget = true; break; }
+			if (hasSafeTarget && roll < .14f) return TapTargetType.Bomb;
+			if (roll < .36f) return TapTargetType.Quick;
+			if (roll < .44f) return TapTargetType.TimeBonus;
 			return TapTargetType.Normal;
+		}
+
+		private void StartSequence()
+		{
+			ClearTargets();
+			m_SequenceActive = true;
+			m_SequenceNextOrder = 1;
+			for (int order = 1; order <= 3; order++)
+			{
+				if (SpawnTarget(TapTargetType.Normal, order, mConfig.sequenceLifetimeSeconds)) continue;
+				ClearTargets();
+				m_NextSequenceAt = m_RoundElapsed + mConfig.sequenceIntervalSeconds;
+				RefillTargets();
+				return;
+			}
+		}
+
+		private void CompleteSequence()
+		{
+			m_SequenceActive = false;
+			m_SequenceNextOrder = 0;
+			m_NextSequenceAt = m_RoundElapsed + mConfig.sequenceIntervalSeconds;
+			m_UiGamePopup.ShowSequenceComplete();
+		}
+
+		private void FailSequence(CircleTarget target, bool wrongOrder)
+		{
+			int lostCombo = m_Combo;
+			m_TapFeedback.ShowMiss(target, lostCombo);
+			m_Misses++;
+			m_Combo = 0;
+			m_NextFeverCombo = mConfig.feverCombo;
+			EndFever(false);
+			if (wrongOrder) m_UiGamePopup.ShowSequenceFailure(lostCombo);
+			else m_UiGamePopup.ShowComboFailure(lostCombo, false);
+			DespawnActiveTargets();
+			m_NextSequenceAt = m_RoundElapsed + mConfig.sequenceIntervalSeconds;
+			RefreshComboPresentation();
+			RefillTargets();
 		}
 		
 		public void SetHelpOpen(bool open)
@@ -399,13 +510,20 @@ namespace _01.Scripts.Scene
 			m_UiGamePopup?.PauseComboFeedback(paused);
 		}
 
-		private void HandleTargetTapped(CircleTarget target)
+        private void HandleTargetTapped(CircleTarget target)
         {
             if (IsGameplayPaused || mGameFlow.State != GameFlowState.Playing)
             {
                 return;
             }
 
+            bool sequenceTap = m_SequenceActive && target.SequenceOrder > 0;
+            if (sequenceTap && target.SequenceOrder != m_SequenceNextOrder)
+            {
+				FailSequence(target, true);
+				return;
+            }
+            if (sequenceTap) m_SequenceNextOrder++;
             m_TapFeedback.Show(target, m_FeverRemaining > 0f);
             if (target.Type == TapTargetType.Bomb)
             {
@@ -428,14 +546,21 @@ namespace _01.Scripts.Scene
             m_Hits++;
             m_Combo++;
             m_MaxCombo = Mathf.Max(m_MaxCombo, m_Combo);
-            int baseScore = target.Type == TapTargetType.Quick ? 3
+            int baseScore = sequenceTap ? 2 : target.Type == TapTargetType.Quick ? 3
                 : target.Type == TapTargetType.TimeBonus ? 2
                 : mConfig.scorePerTap;
+            if (target.Type != TapTargetType.TimeBonus)
+                baseScore += ScoreSizeBonus(target.SizeTier);
+            int bonusSeconds = target.Type == TapTargetType.TimeBonus
+                ? TimeSizeBonus(target.SizeTier) : 0;
             int multiplier = GetScoreMultiplier();
-            m_Score += baseScore * multiplier;
+            int earnedScore = baseScore * multiplier;
+            if (sequenceTap && m_SequenceNextOrder > 3) earnedScore += 5;
+            m_Score += earnedScore;
+            m_TapFeedback.ShowScore(target, earnedScore, bonusSeconds);
             if (target.Type == TapTargetType.TimeBonus)
             {
-                m_Timer.AddTime(1f);
+                m_Timer.AddTime(bonusSeconds);
             }
 
 			if (m_FeverRemaining > 0f)
@@ -451,18 +576,24 @@ namespace _01.Scripts.Scene
 			RefreshComboPresentation();
             mTargetPool.Despawn(target.gameObject);
             m_ActiveTargets.Remove(target);
+            if (sequenceTap && m_SequenceNextOrder > 3) CompleteSequence();
             RefillTargets();
         }
 
-		private int GetScoreMultiplier() => m_FeverRemaining > 0f
-			? Mathf.Max(2, mConfig.feverScoreMultiplier)
-			: m_Combo >= 20 ? 3 : m_Combo >= 5 ? 2 : 1;
+		private int GetScoreMultiplier() => m_Combo >= 50 ? 3 : m_Combo >= 10 ? 2 : 1;
 
 		private void RefreshComboPresentation()
 		{
 			m_UiGamePopup.UpdateComboState(m_Combo, GetScoreMultiplier(), m_NextFeverCombo,
 				mConfig.feverCombo, m_FeverRemaining, mConfig.feverMaximumDuration, m_PaceStage,
 				mGameFlow.State == GameFlowState.Playing);
+			int musicTier = mGameFlow.State != GameFlowState.Playing ? 0
+				: m_Combo >= 50 ? 2 : m_Combo >= 10 ? 1 : 0;
+			if (musicTier != m_LastComboMusicTier)
+			{
+				m_ComboMusic?.SetTier(musicTier);
+				m_LastComboMusicTier = musicTier;
+			}
 		}
 
 		private void HandleTargetMissed(CircleTarget target)
@@ -471,6 +602,11 @@ namespace _01.Scripts.Scene
             {
                 return;
             }
+			if (m_SequenceActive && target.SequenceOrder > 0)
+			{
+				FailSequence(target, false);
+				return;
+			}
 
             if (target.Type != TapTargetType.Bomb)
             {
@@ -489,37 +625,48 @@ namespace _01.Scripts.Scene
             RefillTargets();
         }
 		
-		private Vector3 GetSpawnPosition()
+		private bool TryGetSpawnPosition(float targetScale, out Vector3 position)
 		{
-			// Fever targets must remain distinguishable, especially when one is a bomb.
-			float spacing = Mathf.Max(0.82f, mConfig.minimumTargetScale) * 1.65f;
+			// Pick the farthest candidate so a second target does not block the third.
+			// Prefer separate glows, but allow glow fringes to meet when the field is crowded.
 			Vector3 best = Vector3.zero;
-			float bestDistance = -1f;
-			for (int attempt = 0; attempt < 32; attempt++)
+			float bestClearance = -1f;
+			int samples = m_ActiveTargets.Count == 0 ? 1 : 64;
+			for (int attempt = 0; attempt < samples; attempt++)
 			{
-				Vector3 candidate = SampleSpawnPosition();
-				float nearest = float.PositiveInfinity;
+				Vector3 candidate = SampleSpawnPosition(targetScale);
+				float nearestClearance = float.PositiveInfinity;
 				foreach (CircleTarget active in m_ActiveTargets)
-					if (active != null) nearest = Mathf.Min(nearest, (candidate - active.transform.position).sqrMagnitude);
-				if (nearest >= spacing * spacing) return candidate;
-				if (nearest > bestDistance) { best = candidate; bestDistance = nearest; }
+				{
+					if (active == null) continue;
+					float combinedScale = targetScale + active.NominalScale;
+					float clearance = (candidate - active.transform.position).sqrMagnitude
+						/ (combinedScale * combinedScale);
+					nearestClearance = Mathf.Min(nearestClearance, clearance);
+				}
+				if (nearestClearance <= bestClearance) continue;
+				best = candidate;
+				bestClearance = nearestClearance;
 			}
-			// A very small/custom spawn area can be unable to fit all configured targets.
-			return best;
+			// A target's solid face is smaller than 0.70 × the combined nominal scales.
+			position = best;
+			return bestClearance >= 0.70f * 0.70f;
 		}
 
-		private Vector3 SampleSpawnPosition()
+		private Vector3 SampleSpawnPosition(float targetScale)
 		{
 			if (mSpawnArea != null)
 			{
-				Vector2 point = mSpawnArea.GetRandomPointInsideWorld(mSpawnMargin);
+				float margin = Mathf.Max(mSpawnMargin, targetScale * 0.9f);
+				Vector2 point = mSpawnArea.GetRandomPointInsideWorld(margin);
 				return new Vector3(point.x, point.y, 0f);
 			}
 
 			var halfHeight = m_MainCamera.orthographicSize;
 			var halfWidth = halfHeight * Mathf.Max(0.55f, m_MainCamera.aspect);
-			var minX = -Mathf.Max(1.15f, halfWidth - 0.7f);
-			var maxX = Mathf.Max(1.15f, halfWidth - 0.7f);
+			float edgeMargin = Mathf.Max(0.7f, targetScale * 0.9f);
+			var minX = -Mathf.Max(0f, halfWidth - edgeMargin);
+			var maxX = Mathf.Max(0f, halfWidth - edgeMargin);
 			var minY = -halfHeight + 1.45f;
 			var maxY = halfHeight - 2.35f;
 			
@@ -561,6 +708,8 @@ namespace _01.Scripts.Scene
 			if (isReady)
 			{
 				EndFever(false);
+				m_ComboMusic?.SetTier(0);
+				m_LastComboMusicTier = 0;
 				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Game_NeonLobby", 0.38f);
 				m_Timer.Stop();
 				m_TimerText.text = mConfig.roundDuration.ToString("0.0");
@@ -572,16 +721,16 @@ namespace _01.Scripts.Scene
 			{
 				m_RoundInProgress = true;
 				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Gameplay_NeonRush", 0.32f);
+				m_ComboMusic?.SetTier(0);
+				m_LastComboMusicTier = 0;
 				Managers.Sound.Play(Define.Sound.Effect, "SFX/Round_Start", 0.58f);
-				ClearTargets();
-				for (int i = 0; i < mConfig.initialTargetCount; i++)
-				{
-					SpawnTarget();
-				}
+				BeginPhaseCue(1);
 			}
 			else if (isResult)
 			{
 				EndFever(false);
+				m_ComboMusic?.SetTier(0);
+				m_LastComboMusicTier = 0;
 				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Game_NeonLobby", 0.38f);
 				m_Timer.Stop();
 				m_TimerText.text = Mathf.Max(0f, m_Timer.Remaining).ToString("0.0");
@@ -652,8 +801,16 @@ namespace _01.Scripts.Scene
 		private void ClearTargets()
 		{
 			m_TapFeedback?.Clear();
+			DespawnActiveTargets();
+			m_PhaseCueRemaining = 0f;
+		}
+
+		private void DespawnActiveTargets()
+		{
 			mTargetPool.DespawnAll();
 			m_ActiveTargets.Clear();
+			m_SequenceActive = false;
+			m_SequenceNextOrder = 0;
 		}
 		
 		public void StartRound()
@@ -674,6 +831,8 @@ namespace _01.Scripts.Scene
 			m_LastCountdownSecond = -1;
 			m_RoundElapsed = 0f;
 			m_PaceStage = 1;
+			m_NextSequenceAt = float.PositiveInfinity;
+			m_PhaseCueRemaining = 0f;
 			m_FeverRemaining = 0f;
 			m_NextFeverCombo = mConfig.feverCombo;
 			m_ScoreText.text = "00";

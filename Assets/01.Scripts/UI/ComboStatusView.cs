@@ -41,6 +41,14 @@ namespace _01.Scripts.UI
         private bool paceActive;
         private int lastCombo = -1, lastMultiplier, lastNextFever, lastStage, lastFeverTenth = -1;
         private bool lastPlaying;
+        private Image milestoneWash;
+        private Image[] milestoneEdges;
+        private readonly Material[] milestoneMaterials = new Material[2];
+        private float milestoneRemaining;
+        private float milestoneDuration;
+        private float milestoneElapsed;
+        private int milestoneLevel;
+        private Color milestoneAccent;
 
         private void Awake()
         {
@@ -50,7 +58,7 @@ namespace _01.Scripts.UI
             card.sizeDelta = new Vector2(860f, 180f);
             basePosition = card.anchoredPosition;
             comboLabel.rectTransform.anchoredPosition = new Vector2(0f, 35f);
-            comboLabel.rectTransform.sizeDelta = new Vector2(820f, 95f);
+            comboLabel.rectTransform.sizeDelta = new Vector2(820f, 125f);
             comboLabel.enableAutoSizing = false;
             comboLabel.fontSize = 72f;
             comboLabel.alignment = TextAlignmentOptions.Center;
@@ -60,6 +68,8 @@ namespace _01.Scripts.UI
             multiplierLabel.fontSize = 30f;
             multiplierLabel.alignment = TextAlignmentOptions.Center;
             failureBasePosition = failureRoot.anchoredPosition;
+            failureGroup.blocksRaycasts = false;
+            failureGroup.interactable = false;
             failureLabelBasePosition = failureLabel.rectTransform.anchoredPosition;
             failureLabelBaseSize = failureLabel.rectTransform.sizeDelta;
             failureLabelBaseAnchor = failureLabel.rectTransform.anchorMin;
@@ -73,6 +83,7 @@ namespace _01.Scripts.UI
             foreach (Image image in card.GetComponentsInChildren<Image>(true)) image.enabled = false;
             progressLabel.gameObject.SetActive(false);
             card.gameObject.SetActive(false);
+            CreateMilestoneOverlay();
         }
         public void SetPaused(bool value) => paused = value;
 
@@ -84,7 +95,21 @@ namespace _01.Scripts.UI
                 && speedStage == lastStage && tenth == lastFeverTenth && playing == lastPlaying) return;
             lastCombo = combo; lastMultiplier = multiplier; lastNextFever = nextFever;
             lastStage = speedStage; lastFeverTenth = tenth; lastPlaying = playing;
-            if (!playing) { ClearFailure(); previousCombo = 0; impactRemaining = 0f; card.gameObject.SetActive(false); return; }
+            if (!playing)
+            {
+                ClearFailure();
+                ClearMilestone();
+                previousCombo = 0;
+                impactRemaining = 0f;
+                card.gameObject.SetActive(false);
+                return;
+            }
+            int glowLevel = combo >= 50 ? 50 : combo >= 10 ? 10 : 0;
+            if (glowLevel != milestoneLevel)
+            {
+                if (glowLevel == 0) ClearMilestone();
+                else BeginMilestone(glowLevel);
+            }
             if (combo > previousCombo)
             {
                 impactRemaining = .68f;
@@ -97,10 +122,11 @@ namespace _01.Scripts.UI
             {
                 impactRemaining = 0f;
                 card.gameObject.SetActive(false);
+                ClearMilestone();
             }
             previousCombo = combo;
             bool fever = feverTime > 0f;
-            var accent = fever ? new Color(1f, .28f, .9f)
+            var accent = milestoneLevel > 0 ? milestoneAccent : fever ? new Color(1f, .28f, .9f)
                 : multiplier >= 2 ? new Color(1f, .8f, .18f) : new Color(.2f, .9f, 1f);
             comboLabel.text = combo + " COMBO!";
             comboLabel.color = Color.white;
@@ -160,6 +186,81 @@ namespace _01.Scripts.UI
             failureGroup.alpha = 0f;
         }
 
+        public void ShowSignalPhase(int phase)
+        {
+            if (phase < 1 || phase > 3) return;
+            ClearFailure();
+            impactRemaining = 0f;
+            card.gameObject.SetActive(false);
+            paceActive = true;
+            failureDuration = phase == 1 ? 1.4f : 1.75f;
+            failureRemaining = failureDuration;
+            feedbackAccent = phase == 3 ? new Color(1f, .42f, .9f) : new Color(.3f, .9f, 1f);
+            switch (phase)
+            {
+                case 1:
+                    failureLabel.text = GameLocalization.T(
+                        "PULSE\n<size=30>BUILD YOUR STREAK</size>",
+                        "펄스\n<size=30>연속 터치를 이어가세요</size>");
+                    break;
+                case 2:
+                    failureLabel.text = GameLocalization.T(
+                        "SCAN\n<size=30>TAP SAFE · AVOID BOMB</size>",
+                        "스캔\n<size=30>안전 타깃 터치 · 폭탄 피하기</size>");
+                    break;
+                default:
+                    failureLabel.text = GameLocalization.T(
+                        "SURGE\n<size=30>TAP 1 → 2 → 3</size>",
+                        "서지\n<size=30>1 → 2 → 3 순서대로 터치</size>");
+                    break;
+            }
+            failureLabel.color = feedbackAccent;
+            failureLabel.rectTransform.anchorMin = failureLabel.rectTransform.anchorMax = new Vector2(.5f, .5f);
+            failureLabel.rectTransform.anchoredPosition = new Vector2(0f, 120f);
+            failureLabel.rectTransform.sizeDelta = new Vector2(980f, 220f);
+            failureLabel.fontSize = 64f;
+            failureLabel.fontSizeMax = 64f;
+            failureLabel.enableAutoSizing = false;
+            EnsureGlowMaterial(failureLabel, ref feedbackMaterial, .12f, .2f);
+            failureRoot.gameObject.SetActive(true);
+            failureGroup.alpha = 0f;
+        }
+
+        public void ShowSequenceFailure(int lostCombo)
+        {
+            ClearFailure();
+            paceActive = false;
+            failureDuration = lostCombo >= 5 ? .85f : .7f;
+            failureRemaining = failureDuration;
+            shake = lostCombo >= 5 ? 14f : 10f;
+            feedbackAccent = new Color(1f, .27f, .36f);
+            failureLabel.text = GameLocalization.T("WRONG ORDER!", "순서가 틀렸어요!");
+            failureLabel.color = feedbackAccent;
+            EnsureGlowMaterial(failureLabel, ref feedbackMaterial, .08f, .14f);
+            failureRoot.gameObject.SetActive(true);
+            failureGroup.alpha = 1f;
+        }
+
+        public void ShowSequenceComplete()
+        {
+            ClearFailure();
+            paceActive = true;
+            failureDuration = 1.05f;
+            failureRemaining = failureDuration;
+            feedbackAccent = new Color(.95f, .82f, .25f);
+            failureLabel.text = GameLocalization.T("CHAIN CLEAR!  +5", "연쇄 성공!  +5");
+            failureLabel.color = feedbackAccent;
+            failureLabel.rectTransform.anchorMin = failureLabel.rectTransform.anchorMax = new Vector2(.5f, .5f);
+            failureLabel.rectTransform.anchoredPosition = new Vector2(0f, 120f);
+            failureLabel.rectTransform.sizeDelta = new Vector2(980f, 160f);
+            failureLabel.fontSize = 68f;
+            failureLabel.fontSizeMax = 68f;
+            failureLabel.enableAutoSizing = true;
+            EnsureGlowMaterial(failureLabel, ref feedbackMaterial, .12f, .2f);
+            failureRoot.gameObject.SetActive(true);
+            failureGroup.alpha = 0f;
+        }
+
         public void ClearFailure()
         {
             failureRemaining = 0f;
@@ -181,6 +282,7 @@ namespace _01.Scripts.UI
         private void Update()
         {
             if (paused) return;
+            AnimateMilestone();
             if (impactRemaining > 0f)
             {
                 impactRemaining = Mathf.Max(0f, impactRemaining - Time.deltaTime);
@@ -218,12 +320,117 @@ namespace _01.Scripts.UI
             }
             foreach (Image edge in failureEdges)
                 edge.color = paceActive
-                    ? new Color(.32f, .88f, 1f, .75f * Mathf.Exp(-age * 2.4f) * fade)
+                    ? new Color(feedbackAccent.r, feedbackAccent.g, feedbackAccent.b,
+                        .75f * Mathf.Exp(-age * 2.4f) * fade)
                     : new Color(1f, .09f, .18f, .6f * Mathf.Exp(-age * 4f));
             if (failureRemaining <= 0f) ClearFailure();
         }
 
-        private void OnDisable() => ClearFailure();
+        private void OnDisable()
+        {
+            ClearFailure();
+            ClearMilestone();
+            lastCombo = -1;
+        }
+
+        private void CreateMilestoneOverlay()
+        {
+            // Two narrow side strips give the aura a feathered falloff without tinting
+            // targets or the HUD. The root image remains as a non-rendering QA handle.
+            var root = new GameObject("ComboMilestoneGlow", typeof(RectTransform), typeof(Image));
+            root.layer = gameObject.layer;
+            root.transform.SetParent(transform, false);
+            root.transform.SetAsFirstSibling();
+            var rect = (RectTransform)root.transform;
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+            milestoneWash = root.GetComponent<Image>();
+            milestoneWash.raycastTarget = false;
+            milestoneWash.color = Color.clear;
+            milestoneWash.enabled = false;
+            milestoneEdges = new Image[2];
+            Shader shader = Resources.Load<Shader>("UI/NeonSignalPack/Shaders/ComboAura");
+            if (shader == null) Debug.LogError("Combo aura shader is missing from Resources.", this);
+            for (int side = 0; side < milestoneEdges.Length; side++)
+                milestoneEdges[side] = CreateMilestoneSide(rect, side, shader);
+            root.SetActive(false);
+        }
+
+        private Image CreateMilestoneSide(RectTransform parent, int side, Shader shader)
+        {
+            var edge = new GameObject(side == 0 ? "LeftCircuitAura" : "RightCircuitAura",
+                typeof(RectTransform), typeof(Image));
+            edge.layer = parent.gameObject.layer;
+            edge.transform.SetParent(parent, false);
+            var rect = (RectTransform)edge.transform;
+            float x = side == 0 ? 0f : 1f;
+            rect.anchorMin = new Vector2(x, 0f);
+            rect.anchorMax = new Vector2(x, 1f);
+            rect.pivot = new Vector2(x, .5f);
+            rect.sizeDelta = new Vector2(180f, 0f);
+            rect.anchoredPosition = Vector2.zero;
+            var image = edge.GetComponent<Image>();
+            image.raycastTarget = false;
+            image.color = Color.clear;
+            if (shader != null)
+            {
+                var material = new Material(shader) { name = edge.name + " Material" };
+                material.hideFlags = HideFlags.DontSave;
+                material.SetFloat("_Mirror", side);
+                milestoneMaterials[side] = material;
+                image.material = material;
+            }
+            else image.enabled = false;
+            return image;
+        }
+
+        private void BeginMilestone(int combo)
+        {
+            milestoneLevel = combo;
+            milestoneDuration = combo >= 50 ? 1.15f : .85f;
+            milestoneRemaining = milestoneDuration;
+            milestoneElapsed = 0f;
+            milestoneAccent = combo >= 50 ? new Color(1f, .83f, .12f) : new Color(.16f, 1f, .42f);
+            milestoneWash.color = new Color(milestoneAccent.r, milestoneAccent.g, milestoneAccent.b, .35f);
+            bool gold = combo >= 50;
+            for (int side = 0; side < milestoneEdges.Length; side++)
+            {
+                milestoneEdges[side].color = new Color(milestoneAccent.r,
+                    milestoneAccent.g, milestoneAccent.b, gold ? .86f : .82f);
+                if (milestoneMaterials[side] != null)
+                    milestoneMaterials[side].SetFloat("_Gold", gold ? 1f : 0f);
+            }
+            milestoneWash.gameObject.SetActive(true);
+        }
+
+        private void AnimateMilestone()
+        {
+            if (milestoneLevel == 0) return;
+            milestoneElapsed += Time.deltaTime;
+            milestoneRemaining = Mathf.Max(0f, milestoneRemaining - Time.deltaTime);
+            float flashAge = milestoneDuration - milestoneRemaining;
+            float flash = milestoneRemaining > 0f
+                ? Mathf.Clamp01(flashAge / .08f) * Mathf.Clamp01(milestoneRemaining / .42f)
+                : 0f;
+            // Materials animate in game time. Pausing this view freezes the glints too.
+            for (int side = 0; side < milestoneMaterials.Length; side++)
+            {
+                Material material = milestoneMaterials[side];
+                if (material == null) continue;
+                material.SetFloat("_Phase", milestoneElapsed);
+                material.SetFloat("_Burst", flash);
+            }
+        }
+
+        private void ClearMilestone()
+        {
+            milestoneLevel = 0;
+            milestoneRemaining = 0f;
+            milestoneElapsed = 0f;
+            if (milestoneWash != null) milestoneWash.gameObject.SetActive(false);
+        }
 
         private static void EnsureGlowMaterial(TextMeshProUGUI label, ref Material instance, float outline, float glow)
         {
@@ -272,6 +479,8 @@ namespace _01.Scripts.UI
 
         private void OnDestroy()
         {
+            for (int side = 0; side < milestoneMaterials.Length; side++)
+                if (milestoneMaterials[side] != null) Destroy(milestoneMaterials[side]);
             if (comboMaterial != null) Destroy(comboMaterial);
             if (streakMaterial != null) Destroy(streakMaterial);
             if (feedbackMaterial != null) Destroy(feedbackMaterial);

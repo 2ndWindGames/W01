@@ -19,11 +19,13 @@ MonoBehaviour:
   minimumTargetLifetime: 0.55
   difficultyRampSeconds: 26
   minimumReactionSeconds: 0.38
-  minimumTargetScale: 0.8
+  scanStartSeconds: 8
+  surgeStartSeconds: 18
+  sequenceIntervalSeconds: 4.5
+  sequenceLifetimeSeconds: 3.2
   feverCombo: 10
   feverDuration: 5
   feverTargetCount: 2
-  feverScoreMultiplier: 3
   feverBonusTimePerTap: 0.12
   feverMaximumDuration: 8
   feverTargetLifetimeMultiplier: 0.78

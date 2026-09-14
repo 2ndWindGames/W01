@@ -30,12 +30,13 @@ How fast and accurate are you? Enter the arena and set a new record in Violet Ta
 
 1. A neon reflex challenge — Tap fast. Build your streak.
 2. Read the signal. Tap fast. — Four targets. One split-second decision.
-3. Unleash Fever Mode — Keep your streak alive and multiply the score.
+3. Unleash Fever Mode — Keep your streak alive as more targets fill the screen.
 4. Climb the global ranking — Set a record and make your mark.
 
-## What's new — 3.7
+## What's new — 3.7.1
 
-- Added animated neon and spark effects to the intro and gameplay backgrounds.
-- Made combo, streak, and speed-up feedback more dynamic.
-- Enhanced the result screen and expanded the target play area.
-- Improved English and Korean font options and the help screen layout.
+- Added PULSE, SCAN, and SURGE phases with bomb avoidance and 1→2→3 target chains.
+- Added 10/50-combo score multipliers, sustained green/yellow glow, escalating music, and points beside targets.
+- Fever adds more targets without a separate score multiplier.
+- Beneficial targets now come in three sizes; smaller ones award more points or time. Bomb size stays fixed, and hourglasses show added seconds.
+- Enhanced the intro title's neon current and sparks, plus help screen readability.

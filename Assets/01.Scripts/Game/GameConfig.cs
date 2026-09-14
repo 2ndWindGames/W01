@@ -24,8 +24,11 @@ namespace SWGUnity2DCore
         [Min(1f)] public float difficultyRampSeconds = 26f;
         [Min(0.2f)] public float minimumReactionSeconds = 0.38f;
 
-        [Range(0.25f, 1.5f)]
-        public float minimumTargetScale = 0.8f;
+        [Header("Signal phases")]
+        [Min(1f)] public float scanStartSeconds = 8f;
+        [Min(2f)] public float surgeStartSeconds = 18f;
+        [Min(1f)] public float sequenceIntervalSeconds = 4.5f;
+        [Min(1f)] public float sequenceLifetimeSeconds = 3.2f;
 
         [Header("Fever")]
         [Min(2)]
@@ -34,11 +37,8 @@ namespace SWGUnity2DCore
         [Min(1f)]
         public float feverDuration = 5f;
 
-        [Min(1)]
+        [Min(1), Tooltip("Minimum targets during Fever; Fever also adds one above the current phase.")]
         public int feverTargetCount = 2;
-
-        [Min(2)]
-        public int feverScoreMultiplier = 3;
 
         [Min(0f)]
         public float feverBonusTimePerTap = 0.12f;

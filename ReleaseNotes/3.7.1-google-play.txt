@@ -1,0 +1,15 @@
+<ko-KR>
+• PULSE·SCAN·SURGE 구간과 폭탄 회피, 1→2→3 순서 터치를 추가했습니다.
+• 10·50콤보 점수 배수, 지속되는 초록·노랑 발광, 고조되는 음악과 타깃 옆 획득 점수를 추가했습니다.
+• 피버 중에는 별도 점수 배수 없이 타깃 수가 늘어납니다.
+• 이로운 네온은 3가지 크기로 등장하며 작을수록 점수나 추가 시간이 커집니다. 폭탄 크기는 고정이고 모래시계에는 추가 시간을 표시합니다.
+• 인트로 타이틀의 네온 전류·스파크 효과와 도움말 가독성을 개선했습니다.
+</ko-KR>
+
+<en-US>
+• Added PULSE, SCAN, and SURGE phases with bomb avoidance and 1→2→3 target chains.
+• Added 10/50-combo score multipliers, sustained green/yellow glow, escalating music, and points beside targets.
+• Fever adds more targets without a separate score multiplier.
+• Beneficial targets now come in three sizes; smaller ones award more points or time. Bomb size stays fixed, and hourglasses show added seconds.
+• Enhanced the intro title's neon current and sparks, plus help screen readability.
+</en-US>

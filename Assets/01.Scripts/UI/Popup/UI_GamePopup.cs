@@ -315,8 +315,11 @@ namespace _01.Scripts.UI.Popup
 		}
 
 		public void ShowComboFailure(int lostCombo, bool bomb) => mComboStatus?.ShowFailure(lostCombo, bomb);
+		public void ShowSequenceFailure(int lostCombo) => mComboStatus?.ShowSequenceFailure(lostCombo);
+		public void ShowSequenceComplete() => mComboStatus?.ShowSequenceComplete();
 		public void PauseComboFeedback(bool paused) => mComboStatus?.SetPaused(paused);
 		public void ShowPaceIncrease(int stage) => mComboStatus?.ShowPaceIncrease(stage);
+		public void ShowSignalPhase(int phase) => mComboStatus?.ShowSignalPhase(phase);
 		public void PlayResultReveal(bool newBest) => mResultReveal?.Play(GetButtonRetry(), GetTextStatus(), newBest);
 
 		public void ShowNicknamePrompt(string defaultNickname, Action<string> onConfirmed)
