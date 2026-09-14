@@ -1,0 +1,10 @@
+Started: 2026-09-14T20:49:56.4924552+09:00
+Output: C:\Users\rlatmdwp5\Documents\GitHub\W01\Builds\Android\violettap-3.7.1-releaseqa.aab
+Gradle user home: C:\Users\rlatmdwp5\Documents\GitHub\W01\Library\GradleUserHome
+Scenes: Assets/00.Scene/Intro.unity, Assets/00.Scene/Game.unity
+Result: Failed
+Errors: 4
+Warnings: 1
+Reported bytes: 949297065
+File bytes: 0
+Ended: 2026-09-14T20:54:11.3780652+09:00

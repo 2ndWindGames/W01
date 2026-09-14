@@ -1,0 +1,13 @@
+PASS Music mute stays independent of effects
+PASS Return request happens while both music streams are crossfading
+FADE RETURN samples=24460->24460 volume=0.2980313->0.2980313 phaseKept=True volumeKept=True
+PASS Interrupted fade settles to one lobby stream at the requested volume
+PASS Unmuting music preserves its advancing playback position
+PASS New effects inherit effects mute without muting music
+PASS Both disabled preferences and voice mutes survive entering Game
+PASS Round music and new start effects remain muted
+PASS Stopping mid-fade cannot restart an outgoing stream
+PASS Music can restart after Stop while retaining mute
+PASS Returning to Intro preserves both disabled settings
+PASS Returning to the outgoing music preserves phrase and volume continuity
+PASS No runtime errors during interrupted music and mute QA

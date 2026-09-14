@@ -1,0 +1,9 @@
+Started: 2026-09-14T22:13:28.7185321+09:00
+Previous runInBackground: False
+QA runInBackground: True
+Application focused: True
+Editor paused: False
+Game view: 1080x2340
+Finished: 2026-09-14T22:13:30.6285235+09:00
+Restored runInBackground: False
+Final frame: 31

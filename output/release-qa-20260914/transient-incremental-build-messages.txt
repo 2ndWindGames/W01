@@ -1,0 +1,2 @@
+Error: Saving Prefab to immutable folder is not allowed: Packages/com.google.ads.mobile/GoogleMobileAds/Editor/Resources/PlaceholderAds/Interstitials/768x1024.prefab
+Warning: Plugin 'Packages/com.google.ads.mobile/Plugins/iOS/unity-plugin-library.xcframework' is not supported on Android, please deselect it in Plugin Inspector

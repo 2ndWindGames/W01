@@ -1,0 +1,7 @@
+Started: 2026-09-14T22:39:50.4120197+09:00
+Result: Succeeded
+Errors: 0
+Warnings: 1
+Output: C:/Users/rlatmdwp5/Documents/GitHub/W01/Builds/Android/violettap-3.7.1-finalqa.aab
+File bytes: 110048539
+Ended: 2026-09-14T22:40:27.9586389+09:00

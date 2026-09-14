@@ -1,0 +1,147 @@
+PASS Pointer reuse fixture starts with one target
+PHYSICS autoSync=False simulation=FixedUpdate
+PASS Right-button contact does not consume target 0
+PASS Left contact scores exactly once 0
+PASS Contact reuses one pooled target 0
+RECYCLED 0 frame=15 old=(0.12, -0.42, 0.00) new=(0.80, 0.93, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 0
+PASS A second pointer can hit the new position before physics advances 0
+PASS Right-button contact does not consume target 1
+PASS Left contact scores exactly once 1
+PASS Contact reuses one pooled target 1
+RECYCLED 1 frame=15 old=(-0.15, 2.13, 0.00) new=(1.19, -1.61, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 1
+PASS A second pointer can hit the new position before physics advances 1
+PASS Right-button contact does not consume target 2
+PASS Left contact scores exactly once 2
+PASS Contact reuses one pooled target 2
+RECYCLED 2 frame=15 old=(-0.06, 0.93, 0.00) new=(-0.88, -1.43, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 2
+PASS A second pointer can hit the new position before physics advances 2
+PASS Right-button contact does not consume target 3
+PASS Left contact scores exactly once 3
+PASS Contact reuses one pooled target 3
+RECYCLED 3 frame=15 old=(1.10, -1.92, 0.00) new=(0.08, 0.69, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 3
+PASS A second pointer can hit the new position before physics advances 3
+PASS Right-button contact does not consume target 4
+PASS Left contact scores exactly once 4
+PASS Contact reuses one pooled target 4
+RECYCLED 4 frame=15 old=(0.88, -0.74, 0.00) new=(0.54, 1.07, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 4
+PASS A second pointer can hit the new position before physics advances 4
+PASS Right-button contact does not consume target 5
+PASS Left contact scores exactly once 5
+PASS Contact reuses one pooled target 5
+RECYCLED 5 frame=15 old=(-0.39, -1.78, 0.00) new=(-0.78, -1.37, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 5
+PASS A second pointer can hit the new position before physics advances 5
+PASS Right-button contact does not consume target 6
+PASS Left contact scores exactly once 6
+PASS Contact reuses one pooled target 6
+RECYCLED 6 frame=15 old=(-0.56, 1.65, 0.00) new=(-0.95, -1.53, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 6
+PASS A second pointer can hit the new position before physics advances 6
+PASS Right-button contact does not consume target 7
+PASS Left contact scores exactly once 7
+PASS Contact reuses one pooled target 7
+RECYCLED 7 frame=15 old=(0.47, 1.53, 0.00) new=(-1.08, -0.32, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 7
+PASS A second pointer can hit the new position before physics advances 7
+PASS Right-button contact does not consume target 8
+PASS Left contact scores exactly once 8
+PASS Contact reuses one pooled target 8
+RECYCLED 8 frame=15 old=(0.39, 0.49, 0.00) new=(-0.24, 1.41, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 8
+PASS A second pointer can hit the new position before physics advances 8
+PASS Right-button contact does not consume target 9
+PASS Left contact scores exactly once 9
+PASS Contact reuses one pooled target 9
+RECYCLED 9 frame=15 old=(1.20, -1.14, 0.00) new=(0.52, -1.70, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 9
+PASS A second pointer can hit the new position before physics advances 9
+PASS Right-button contact does not consume target 10
+PASS Left contact scores exactly once 10
+PASS Contact reuses one pooled target 10
+RECYCLED 10 frame=15 old=(-1.01, 0.27, 0.00) new=(0.16, 0.06, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 10
+PASS A second pointer can hit the new position before physics advances 10
+PASS Right-button contact does not consume target 11
+PASS Left contact scores exactly once 11
+PASS Contact reuses one pooled target 11
+RECYCLED 11 frame=15 old=(-0.87, -1.50, 0.00) new=(0.00, -1.86, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 11
+PASS A second pointer can hit the new position before physics advances 11
+PASS Right-button contact does not consume target 12
+PASS Left contact scores exactly once 12
+PASS Contact reuses one pooled target 12
+RECYCLED 12 frame=15 old=(-1.03, -1.65, 0.00) new=(-1.06, -1.04, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 12
+PASS A second pointer can hit the new position before physics advances 12
+PASS Right-button contact does not consume target 13
+PASS Left contact scores exactly once 13
+PASS Contact reuses one pooled target 13
+RECYCLED 13 frame=15 old=(1.21, -2.02, 0.00) new=(-0.09, 1.68, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 13
+PASS A second pointer can hit the new position before physics advances 13
+PASS Right-button contact does not consume target 14
+PASS Left contact scores exactly once 14
+PASS Contact reuses one pooled target 14
+RECYCLED 14 frame=15 old=(-0.17, -1.16, 0.00) new=(0.80, 0.36, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 14
+PASS A second pointer can hit the new position before physics advances 14
+PASS Right-button contact does not consume target 15
+PASS Left contact scores exactly once 15
+PASS Contact reuses one pooled target 15
+RECYCLED 15 frame=15 old=(0.06, -2.07, 0.00) new=(-0.15, 1.13, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 15
+PASS A second pointer can hit the new position before physics advances 15
+PASS Right-button contact does not consume target 16
+PASS Left contact scores exactly once 16
+PASS Contact reuses one pooled target 16
+RECYCLED 16 frame=15 old=(0.30, -1.09, 0.00) new=(0.28, -0.09, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 16
+PASS A second pointer can hit the new position before physics advances 16
+PASS Right-button contact does not consume target 17
+PASS Left contact scores exactly once 17
+PASS Contact reuses one pooled target 17
+RECYCLED 17 frame=15 old=(-0.32, -0.83, 0.00) new=(-0.05, 0.46, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 17
+PASS A second pointer can hit the new position before physics advances 17
+PASS Right-button contact does not consume target 18
+PASS Left contact scores exactly once 18
+PASS Contact reuses one pooled target 18
+RECYCLED 18 frame=15 old=(-0.57, -1.72, 0.00) new=(0.29, 2.00, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 18
+PASS A second pointer can hit the new position before physics advances 18
+PASS Right-button contact does not consume target 19
+PASS Left contact scores exactly once 19
+PASS Contact reuses one pooled target 19
+RECYCLED 19 frame=15 old=(-0.06, -1.03, 0.00) new=(0.43, -1.88, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 19
+PASS A second pointer can hit the new position before physics advances 19
+PASS Right-button contact does not consume target 20
+PASS Left contact scores exactly once 20
+PASS Contact reuses one pooled target 20
+RECYCLED 20 frame=15 old=(-0.97, -0.06, 0.00) new=(0.70, -0.25, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 20
+PASS A second pointer can hit the new position before physics advances 20
+PASS Right-button contact does not consume target 21
+PASS Left contact scores exactly once 21
+PASS Contact reuses one pooled target 21
+PASS A second pointer can hit the new position before physics advances 21
+PASS Right-button contact does not consume target 22
+PASS Left contact scores exactly once 22
+PASS Contact reuses one pooled target 22
+RECYCLED 22 frame=15 old=(-0.36, -0.35, 0.00) new=(1.02, 0.19, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 22
+PASS A second pointer can hit the new position before physics advances 22
+PASS Right-button contact does not consume target 23
+PASS Left contact scores exactly once 23
+PASS Contact reuses one pooled target 23
+RECYCLED 23 frame=15 old=(-0.78, -1.70, 0.00) new=(-0.97, 1.84, 0.00) oldHit=none
+PASS A second pointer cannot hit the recycled target at its old position 23
+PASS A second pointer can hit the new position before physics advances 23
+PASS At least 20 non-overlapping recycled positions were checked
+PASS All contact pairs ran in one frame without extra physics synchronization
+PASS No runtime errors during pooled pointer reuse QA

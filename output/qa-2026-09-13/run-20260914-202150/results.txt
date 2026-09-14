@@ -1,0 +1,91 @@
+PASS Destroyed popup does not prevent reopening its type
+PASS Scene cleanup tolerates destroyed entries and restores the configured UI order
+PASS Leaving before popup initialization cannot shift the next scene UI order
+PASS Imported stereo clip: Gameplay_ComboDrive.wav
+PASS Android audio import policy: Gameplay_ComboDrive.wav
+PASS Imported stereo clip: Gameplay_ComboRush.wav
+PASS Android audio import policy: Gameplay_ComboRush.wav
+PASS Imported stereo clip: Gameplay_NeonRush.wav
+PASS Android audio import policy: Gameplay_NeonRush.wav
+PASS Imported stereo clip: Game_NeonLobby.wav
+PASS Android audio import policy: Game_NeonLobby.wav
+PASS Imported stereo clip: Intro_NeonAwakening.wav
+PASS Android audio import policy: Intro_NeonAwakening.wav
+PASS Imported stereo clip: Button_Click.wav
+PASS Android audio import policy: Button_Click.wav
+PASS Imported stereo clip: Combo_Break.wav
+PASS Android audio import policy: Combo_Break.wav
+PASS Imported stereo clip: Fever_End.wav
+PASS Android audio import policy: Fever_End.wav
+PASS Imported stereo clip: Fever_Quick.wav
+PASS Android audio import policy: Fever_Quick.wav
+PASS Imported stereo clip: Fever_Start.wav
+PASS Android audio import policy: Fever_Start.wav
+PASS Imported stereo clip: Fever_Tap.wav
+PASS Android audio import policy: Fever_Tap.wav
+PASS Imported stereo clip: Fever_TimeBonus.wav
+PASS Android audio import policy: Fever_TimeBonus.wav
+PASS Imported stereo clip: New_Best.wav
+PASS Android audio import policy: New_Best.wav
+PASS Imported stereo clip: Round_Complete.wav
+PASS Android audio import policy: Round_Complete.wav
+PASS Imported stereo clip: Round_Start.wav
+PASS Android audio import policy: Round_Start.wav
+PASS Imported stereo clip: Speed_Up.wav
+PASS Android audio import policy: Speed_Up.wav
+PASS Imported stereo clip: Target_Bomb.wav
+PASS Android audio import policy: Target_Bomb.wav
+PASS Imported stereo clip: Target_Miss.wav
+PASS Android audio import policy: Target_Miss.wav
+PASS Imported stereo clip: Target_NeonTap.wav
+PASS Android audio import policy: Target_NeonTap.wav
+PASS Imported stereo clip: Target_Quick.wav
+PASS Android audio import policy: Target_Quick.wav
+PASS Imported stereo clip: Target_TimeBonus.wav
+PASS Android audio import policy: Target_TimeBonus.wav
+PASS Imported stereo clip: Timer_Tick.wav
+PASS Android audio import policy: Timer_Tick.wav
+PASS IAP product ID preserved
+PASS Clip length accepts the same resource paths as playback
+PASS Overlapping effects preserve earlier gain and pitch
+PASS SFX mute covers all voices
+PASS Burst playback stays within 12 effects plus 2 music voices
+PASS Stop effects clears every voice
+PASS Music crossfade completes while gameplay time is paused
+PASS Requesting current BGM does not restart the track
+PASS Crossfade stops the outgoing stream
+PASS An unbound repeated pointer click cannot score twice
+PASS Expired targets cannot accept a stale click
+PASS Target sprite: Normal
+PASS Target sprite: Quick
+PASS Target sprite: TimeBonus
+PASS Target sprite: Bomb
+PASS Safe area/banner geometry: (1080.00, 2340.00)
+PASS Safe area/banner geometry: (1440.00, 2960.00)
+PASS Safe area/banner geometry: (1080.00, 1920.00)
+PASS Safe area/banner geometry: (1536.00, 2048.00)
+PASS Safe area/banner geometry: (2400.00, 1080.00)
+PASS Safe area/banner geometry: (540.00, 2340.00)
+PASS Stale portrait safe area cannot shift a landscape viewport
+PASS Valid asymmetric cutout and banner insets remain honored
+PASS Empty safe area falls back to the current display
+PASS Non-finite safe area cannot produce invalid camera coordinates
+PASS Narrow window keeps artwork and HUD together at the original playfield ratio
+PASS Narrow playfield centers above the banner and inside safe insets
+PASS Normal portrait layout keeps its existing dimensions
+PASS Game scene loads
+PASS Ready starts the PULSE cue
+PASS PULSE cue starts a populated round
+PASS Time target grants one second
+PASS Time target grants two base points
+PASS Ten-hit streak starts fever with two targets
+PASS Fever alone does not increase the 10-combo score multiplier
+PASS 500 candidate spawns keep fever target faces separated at every size
+PASS Fever expiry removes the extra target
+PASS Fever expiry restores normal guidance
+PASS Bomb at one second ends round without refilling targets
+FAIL Retry spawns at starting difficulty with a fresh timer
+FAIL System.InvalidOperationException: Retry spawns at starting difficulty with a fresh timer
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:2641 
+  at VioletTapQaRunner+<Scenarios>d__69.MoveNext () [0x01254] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:2592 
+  at VioletTapQaRunner.Tick () [0x00512] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:484 

@@ -40,6 +40,19 @@ namespace _01.Scripts.UI.SubItem
             if (IsInitialized) return;
             BindText(typeof(Texts));
 			GameLocalization.ApplyFont(this);
+
+			var rankText = GetText((int)Texts.txtRank);
+			var nicknameText = GetText((int)Texts.txtNicName);
+			var scoreText = GetText((int)Texts.txtScore);
+			rankText.textWrappingMode = TextWrappingModes.NoWrap;
+			nicknameText.textWrappingMode = TextWrappingModes.NoWrap;
+			nicknameText.overflowMode = TextOverflowModes.Ellipsis;
+			nicknameText.richText = false;
+			nicknameText.parseCtrlCharacters = false;
+			scoreText.textWrappingMode = TextWrappingModes.NoWrap;
+			scoreText.enableAutoSizing = true;
+			scoreText.fontSizeMin = 20f;
+			scoreText.fontSizeMax = 36f;
 			
 			m_Background = GetComponent<Image>();
 			if (m_Background != null)

@@ -1,0 +1,38 @@
+[
+  {
+    "Library": "libc++_shared.so",
+    "LoadSegments": 4,
+    "MinAlignmentBytes": 16384.0,
+    "Pass16K": true
+  },
+  {
+    "Library": "libgame.so",
+    "LoadSegments": 3,
+    "MinAlignmentBytes": 16384.0,
+    "Pass16K": true
+  },
+  {
+    "Library": "libil2cpp.so",
+    "LoadSegments": 4,
+    "MinAlignmentBytes": 16384.0,
+    "Pass16K": true
+  },
+  {
+    "Library": "libmain.so",
+    "LoadSegments": 4,
+    "MinAlignmentBytes": 16384.0,
+    "Pass16K": true
+  },
+  {
+    "Library": "libswappywrapper.so",
+    "LoadSegments": 3,
+    "MinAlignmentBytes": 16384.0,
+    "Pass16K": true
+  },
+  {
+    "Library": "libunity.so",
+    "LoadSegments": 4,
+    "MinAlignmentBytes": 16384.0,
+    "Pass16K": true
+  }
+]

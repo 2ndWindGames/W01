@@ -410,6 +410,9 @@ namespace _01.Scripts.Scene
 			target.SetFeverMode(m_FeverRemaining > 0f);
 			target.SetPaused(IsGameplayPaused);
 			m_ActiveTargets.Add(target);
+			// A pooled target can be tapped again before the next physics step.
+			// Publish its new collider position before another pointer is raycast.
+			Physics2D.SyncTransforms();
 			return true;
 		}
 
@@ -444,6 +447,8 @@ namespace _01.Scripts.Scene
 			{
 				if (SpawnTarget(TapTargetType.Normal, order, mConfig.sequenceLifetimeSeconds)) continue;
 				ClearTargets();
+				m_SequenceActive = false;
+				m_SequenceNextOrder = 0;
 				m_NextSequenceAt = m_RoundElapsed + mConfig.sequenceIntervalSeconds;
 				RefillTargets();
 				return;

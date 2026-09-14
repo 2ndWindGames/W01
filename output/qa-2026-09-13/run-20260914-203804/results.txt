@@ -1,0 +1,166 @@
+PASS Round 0 begins once with a clean score, timer and phase cue
+PASS Round 0 phase cue creates the opening target
+PASS Round 0 contact 0 reaches its visible target
+PASS Round 0 contact 1 reaches its visible target
+PASS Round 0 contact 2 reaches its visible target
+PASS Round 0 contact 3 reaches its visible target
+PASS Round 0 contact 4 reaches its visible target
+PASS Round 0 contact 5 reaches its visible target
+PASS Round 0 contact 6 reaches its visible target
+PASS Round 0 contact 7 reaches its visible target
+PASS Round 0 contact 8 reaches its visible target
+PASS Round 0 contact 9 reaches its visible target
+PASS Round 0 contact 10 reaches its visible target
+PASS Round 0 contact 11 reaches its visible target
+PASS Round 0 counts each contact once and has unique targets
+PASS Round 0 ends once and rejects stale contacts
+PASS Round 0 target pool remains bounded
+PASS Round 0 repeated retry stays ready
+PASS Round 1 begins once with a clean score, timer and phase cue
+PASS Round 1 phase cue creates the opening target
+PASS Round 1 contact 0 reaches its visible target
+PASS Round 1 contact 1 reaches its visible target
+PASS Round 1 contact 2 reaches its visible target
+PASS Round 1 contact 3 reaches its visible target
+PASS Round 1 contact 4 reaches its visible target
+PASS Round 1 contact 5 reaches its visible target
+PASS Round 1 contact 6 reaches its visible target
+PASS Round 1 contact 7 reaches its visible target
+PASS Round 1 contact 8 reaches its visible target
+PASS Round 1 contact 9 reaches its visible target
+CONTACT REQUERY round=1 tap=9 localDistance=0.4736216 radius=0.5 old=(-0.60, 1.73, 0.00) next=(-1.08, 1.74, 0.00) colliderCenter=(-1.08, 1.74, 0.00) nextId=-470574 oldId=-470574 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 1 contact 10 reaches its visible target
+PASS Round 1 contact 11 reaches its visible target
+PASS Round 1 counts each contact once and has unique targets
+PASS Round 1 ends once and rejects stale contacts
+PASS Round 1 target pool remains bounded
+PASS Round 1 repeated retry stays ready
+PASS Round 2 begins once with a clean score, timer and phase cue
+PASS Round 2 phase cue creates the opening target
+PASS Round 2 contact 0 reaches its visible target
+CONTACT REQUERY round=2 tap=0 localDistance=0.2426852 radius=0.5 old=(0.17, -1.01, 0.00) next=(-0.03, -0.99, 0.00) colliderCenter=(-0.03, -0.99, 0.00) nextId=-470574 oldId=-470574 nextScale=(0.82, 0.82, 0.82) active=1
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 2 contact 1 reaches its visible target
+PASS Round 2 contact 2 reaches its visible target
+PASS Round 2 contact 3 reaches its visible target
+PASS Round 2 contact 4 reaches its visible target
+PASS Round 2 contact 5 reaches its visible target
+PASS Round 2 contact 6 reaches its visible target
+PASS Round 2 contact 7 reaches its visible target
+PASS Round 2 contact 8 reaches its visible target
+PASS Round 2 contact 9 reaches its visible target
+PASS Round 2 contact 10 reaches its visible target
+CONTACT REQUERY round=2 tap=10 localDistance=0.3531912 radius=0.5 old=(-0.36, -2.05, 0.00) next=(-0.71, -2.01, 0.00) colliderCenter=(-0.71, -2.01, 0.00) nextId=-470608 oldId=-470608 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 2 contact 11 reaches its visible target
+CONTACT REQUERY round=2 tap=11 localDistance=0.2067628 radius=0.5 old=(0.98, 2.16, 0.00) next=(1.06, 1.97, 0.00) colliderCenter=(1.06, 1.97, 0.00) nextId=-470574 oldId=-470574 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 2 counts each contact once and has unique targets
+PASS Round 2 ends once and rejects stale contacts
+PASS Round 2 target pool remains bounded
+PASS Round 2 repeated retry stays ready
+PASS Round 3 begins once with a clean score, timer and phase cue
+PASS Round 3 phase cue creates the opening target
+PASS Round 3 contact 0 reaches its visible target
+PASS Round 3 contact 1 reaches its visible target
+PASS Round 3 contact 2 reaches its visible target
+PASS Round 3 contact 3 reaches its visible target
+CONTACT REQUERY round=3 tap=3 localDistance=0.3973455 radius=0.5 old=(-0.02, 0.09, 0.00) next=(-0.19, 0.29, 0.00) colliderCenter=(-0.19, 0.29, 0.00) nextId=-470574 oldId=-470574 nextScale=(0.64, 0.64, 0.64) active=1
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 3 contact 4 reaches its visible target
+PASS Round 3 contact 5 reaches its visible target
+PASS Round 3 contact 6 reaches its visible target
+PASS Round 3 contact 7 reaches its visible target
+PASS Round 3 contact 8 reaches its visible target
+PASS Round 3 contact 9 reaches its visible target
+CONTACT REQUERY round=3 tap=9 localDistance=0.1976043 radius=0.5 old=(-1.11, 2.13, 0.00) next=(-0.98, 2.13, 0.00) colliderCenter=(-0.98, 2.13, 0.00) nextId=-470574 oldId=-470574 nextScale=(0.64, 0.64, 0.64) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 3 contact 10 reaches its visible target
+CONTACT REQUERY round=3 tap=10 localDistance=0.2177967 radius=0.5 old=(0.82, -2.06, 0.00) next=(0.62, -1.98, 0.00) colliderCenter=(0.62, -1.98, 0.00) nextId=-470608 oldId=-470608 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 3 contact 11 reaches its visible target
+CONTACT REQUERY round=3 tap=11 localDistance=0.2637045 radius=0.5 old=(-0.98, 2.13, 0.00) next=(-0.76, 1.98, 0.00) colliderCenter=(-0.76, 1.98, 0.00) nextId=-470574 oldId=-470574 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 3 counts each contact once and has unique targets
+PASS Round 3 ends once and rejects stale contacts
+PASS Round 3 target pool remains bounded
+PASS Round 3 repeated retry stays ready
+PASS Round 4 begins once with a clean score, timer and phase cue
+PASS Round 4 phase cue creates the opening target
+PASS Round 4 contact 0 reaches its visible target
+PASS Round 4 contact 1 reaches its visible target
+PASS Round 4 contact 2 reaches its visible target
+CONTACT REQUERY round=4 tap=2 localDistance=0.3593446 radius=0.5 old=(-0.25, 1.14, 0.00) next=(-0.18, 0.85, 0.00) colliderCenter=(-0.18, 0.85, 0.00) nextId=-470574 oldId=-470574 nextScale=(0.82, 0.82, 0.82) active=1
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 4 contact 3 reaches its visible target
+PASS Round 4 contact 4 reaches its visible target
+PASS Round 4 contact 5 reaches its visible target
+PASS Round 4 contact 6 reaches its visible target
+PASS Round 4 contact 7 reaches its visible target
+PASS Round 4 contact 8 reaches its visible target
+PASS Round 4 contact 9 reaches its visible target
+PASS Round 4 contact 10 reaches its visible target
+CONTACT REQUERY round=4 tap=10 localDistance=0.2236068 radius=0.5 old=(1.01, -2.21, 0.00) next=(1.08, -2.09, 0.00) colliderCenter=(1.08, -2.09, 0.00) nextId=-470608 oldId=-470608 nextScale=(0.64, 0.64, 0.64) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 4 contact 11 reaches its visible target
+CONTACT REQUERY round=4 tap=11 localDistance=0.2397781 radius=0.5 old=(-0.90, 2.20, 0.00) next=(-1.04, 2.14, 0.00) colliderCenter=(-1.04, 2.14, 0.00) nextId=-470574 oldId=-470574 nextScale=(0.64, 0.64, 0.64) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 4 counts each contact once and has unique targets
+PASS Round 4 ends once and rejects stale contacts
+PASS Round 4 target pool remains bounded
+PASS Round 4 repeated retry stays ready
+PASS Round 5 begins once with a clean score, timer and phase cue
+PASS Round 5 phase cue creates the opening target
+PASS Round 5 contact 0 reaches its visible target
+PASS Round 5 contact 1 reaches its visible target
+PASS Round 5 contact 2 reaches its visible target
+PASS Round 5 contact 3 reaches its visible target
+PASS Round 5 contact 4 reaches its visible target
+PASS Round 5 contact 5 reaches its visible target
+PASS Round 5 contact 6 reaches its visible target
+PASS Round 5 contact 7 reaches its visible target
+PASS Round 5 contact 8 reaches its visible target
+PASS Round 5 contact 9 reaches its visible target
+PASS Round 5 contact 10 reaches its visible target
+PASS Round 5 contact 11 reaches its visible target
+CONTACT REQUERY round=5 tap=11 localDistance=0.2239775 radius=0.5 old=(0.87, 2.25, 0.00) next=(0.78, 2.04, 0.00) colliderCenter=(0.78, 2.04, 0.00) nextId=-470574 oldId=-470574 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 5 counts each contact once and has unique targets
+PASS Round 5 ends once and rejects stale contacts
+PASS Round 5 target pool remains bounded
+PASS Round 5 repeated retry stays ready
+PASS Round 6 begins once with a clean score, timer and phase cue
+PASS Round 6 phase cue creates the opening target
+PASS Round 6 contact 0 reaches its visible target
+PASS Round 6 contact 1 reaches its visible target
+PASS Round 6 contact 2 reaches its visible target
+PASS Round 6 contact 3 reaches its visible target
+PASS Round 6 contact 4 reaches its visible target
+PASS Round 6 contact 5 reaches its visible target
+PASS Round 6 contact 6 reaches its visible target
+PASS Round 6 contact 7 reaches its visible target
+PASS Round 6 contact 8 reaches its visible target
+PASS Round 6 contact 9 reaches its visible target
+CONTACT REQUERY round=6 tap=9 localDistance=0.2936735 radius=0.5 old=(-0.80, -1.70, 0.00) next=(-1.08, -1.78, 0.00) colliderCenter=(-1.08, -1.78, 0.00) nextId=-470574 oldId=-470574 nextScale=(1.00, 1.00, 1.00) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 6 contact 10 reaches its visible target
+CONTACT REQUERY round=6 tap=10 localDistance=0.1329215 radius=0.5 old=(0.96, 2.08, 0.00) next=(1.03, 1.99, 0.00) colliderCenter=(1.03, 1.99, 0.00) nextId=-470608 oldId=-470608 nextScale=(0.82, 0.82, 0.82) active=2
+PASS Recycled contact never remains clickable at its previous position
+PASS Round 6 contact 11 reaches its visible target
+PASS Round 6 counts each contact once and has unique targets
+PASS Round 6 ends once and rejects stale contacts
+PASS Round 6 target pool remains bounded
+PASS Round 6 repeated retry stays ready
+PASS Round 7 begins once with a clean score, timer and phase cue
+PASS Round 7 phase cue creates the opening target
+PASS Round 7 contact 0 reaches its visible target
+PASS Round 7 contact 1 reaches its visible target
+PASS Round 7 contact 2 reaches its visible target
+PASS Round 7 contact 3 reaches its visible target
+CONTACT REQUERY round=7 tap=3 localDistance=0.7348844 radius=0.5 old=(-0.57, -1.67, 0.00) next=(-0.36, -2.09, 0.00) colliderCenter=(-0.36, -2.09, 0.00) nextId=-470574 oldId=-470574 nextScale=(0.64, 0.64, 0.64) active=1
+FAIL Recycled contact never remains clickable at its previous position
+FAIL System.InvalidOperationException: Recycled contact never remains clickable at its previous position
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:2648 
+  at VioletTapQaRunner+<RoundScenarios>d__59.MoveNext () [0x00484] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:1808 
+  at VioletTapQaRunner.Tick () [0x00512] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:484 

@@ -748,7 +748,7 @@ public static class VioletTapQaRunner
                 "A second pointer can hit the new position before physics advances " + sample);
         }
         Check(oldPositionChecks >= 20, "At least 20 non-overlapping recycled positions were checked");
-        Check(Time.frameCount == inputFrame, "All contact pairs ran in one frame without extra physics synchronization");
+        Check(Time.frameCount == inputFrame, "All contact pairs ran without advancing a physics frame");
         Managers.Scene.ChangeScene(W01SceneType.Intro);
         for (int i = 0; i < 6; i++) yield return null;
         Check(Errors.Count == 0, "No runtime errors during pooled pointer reuse QA");
@@ -1740,6 +1740,25 @@ public static class VioletTapQaRunner
             && Get<int>(game, "m_Score") == scoreBeforeSuccess + expectedSequenceScore,
             "Completing 1→2→3 grants size-adjusted hits plus a flat five-point bonus");
 
+        Collider2D normalSpawnArea = Get<Collider2D>(game, "mSpawnArea");
+        var crampedSpawnArea = new GameObject("QA cramped signal spawn area").AddComponent<BoxCollider2D>();
+        crampedSpawnArea.size = Vector2.one * 1.81f;
+        try
+        {
+            Set(game, "mSpawnArea", crampedSpawnArea);
+            Invoke(game, "StartSequence");
+            Check(!Get<bool>(game, "m_SequenceActive") && Get<int>(game, "m_SequenceNextOrder") == 0
+                && Targets(game).Count > 0 && Targets(game).All(t => t.SequenceOrder == 0),
+                "An unplaceable numbered burst falls back to playable ordinary targets");
+        }
+        finally
+        {
+            Set(game, "mSpawnArea", normalSpawnArea);
+            Object.Destroy(crampedSpawnArea.gameObject);
+        }
+        Invoke(game, "RefillTargets");
+        Check(Targets(game).Count == 2, "Normal target count recovers after cramped burst fallback");
+
         Set(game, "m_RoundElapsed", Get<float>(game, "m_NextSequenceAt"));
         Invoke(game, "Update");
         Check(Get<bool>(game, "m_SequenceActive") && Targets(game).Count == 3,
@@ -1801,7 +1820,10 @@ public static class VioletTapQaRunner
                 {
                     var collider = next.GetComponent<CircleCollider2D>();
                     float distance = Vector2.Distance(next.transform.InverseTransformPoint(oldPosition), collider.offset);
-                    Results.Add($"CONTACT REQUERY round={round} tap={contact} localDistance={distance} radius={collider.radius}");
+                    Results.Add($"CONTACT REQUERY round={round} tap={contact} localDistance={distance} radius={collider.radius}"
+                        + $" old={oldPosition} next={next.transform.position} colliderCenter={collider.bounds.center}"
+                        + $" nextId={next.GetInstanceID()} oldId={target.GetInstanceID()}"
+                        + $" nextScale={next.transform.lossyScale} active={Targets(game).Count}");
                     Check(distance <= collider.radius + .01f, "Recycled contact never remains clickable at its previous position");
                 }
                 yield return null;
@@ -2553,15 +2575,23 @@ public static class VioletTapQaRunner
         int scoreBefore = Get<int>(game, "m_Score");
         Tap(game, TapTargetType.Normal);
         Check(Get<int>(game, "m_Score") == scoreBefore + 2, "Fever alone does not increase the 10-combo score multiplier");
-        float minimumSpacing = float.PositiveInfinity;
-        MethodInfo spawnPosition = typeof(GameScene).GetMethod("GetSpawnPosition", BindingFlags.Instance | BindingFlags.NonPublic);
+        float minimumClearance = float.PositiveInfinity;
+        int sampledSpawns = 0;
+        const float candidateScale = .82f;
+        MethodInfo spawnPosition = typeof(GameScene).GetMethod("TryGetSpawnPosition", BindingFlags.Instance | BindingFlags.NonPublic);
+        if (spawnPosition == null) throw new MissingMethodException(nameof(GameScene), "TryGetSpawnPosition");
         for (int i = 0; i < 500; i++)
         {
-            Vector3 candidate = (Vector3)spawnPosition.Invoke(game, null);
+            object[] arguments = { candidateScale, Vector3.zero };
+            if (!(bool)spawnPosition.Invoke(game, arguments)) continue;
+            sampledSpawns++;
+            Vector3 candidate = (Vector3)arguments[1];
             foreach (CircleTarget active in Targets(game))
-                minimumSpacing = Mathf.Min(minimumSpacing, Vector3.Distance(candidate, active.transform.position));
+                minimumClearance = Mathf.Min(minimumClearance,
+                    Vector3.Distance(candidate, active.transform.position) / (candidateScale + active.NominalScale));
         }
-        Check(minimumSpacing >= 1.35f, "500 candidate spawns keep fever targets separated");
+        Check(sampledSpawns > 0 && minimumClearance >= .70f - .001f,
+            "500 candidate spawns keep fever target faces separated at every size");
         Invoke(game, "UpdateFever");
         Capture("fever");
         for (int i = 0; i < 3; i++) yield return null;
@@ -2576,13 +2606,20 @@ public static class VioletTapQaRunner
         Check(flow.State == GameFlowState.Result && Targets(game).Count == 0 && timer.Remaining == 0, "Bomb at one second ends round without refilling targets");
         RestoreBest();
         Capture("result");
+        double revealEnd = EditorApplication.timeSinceStartup + 1.25;
+        while (EditorApplication.timeSinceStartup < revealEnd) yield return null;
+        Capture("result-settled");
         for (int i = 0; i < 3; i++) yield return null;
         game.RetryRound();
         game.StartRound();
         CompletePhaseCueForQa(game);
         CircleTarget initial = Targets(game)[0];
         Check(initial.Type != TapTargetType.Bomb && initial.Type != TapTargetType.Quick
-            && Get<float>(initial, "m_Lifetime") > 1.7f, "Retry spawns at starting difficulty with a fresh timer");
+            && Mathf.Abs(Get<float>(initial, "m_Lifetime")
+                - RoundPacing.Lifetime(0f, initial.Type, false, game.Config)) < .01f
+            && Mathf.Abs(timer.Remaining - game.Config.roundDuration) < .01f
+            && Get<int>(game, "m_PaceStage") == 1,
+            "Retry spawns at starting difficulty with a fresh timer");
         timer.Tick(100f);
         Check(flow.State == GameFlowState.Result && Targets(game).Count == 0, "Natural timer completion clears gameplay");
         RestoreBest();

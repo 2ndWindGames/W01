@@ -1,0 +1,7 @@
+PASS Korean visible glyphs stay within txtRank: 01
+PASS Korean ranking font includes all rank characters
+FAIL Korean visible glyphs stay within txtNicName: 망펭
+FAIL System.InvalidOperationException: Korean visible glyphs stay within txtNicName: 망펭
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:2645 
+  at VioletTapQaRunner+<RankingScenarios>d__60.MoveNext () [0x00490] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:1881 
+  at VioletTapQaRunner.Tick () [0x00512] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:484 

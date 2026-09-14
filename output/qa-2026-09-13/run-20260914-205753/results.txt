@@ -1,0 +1,27 @@
+PASS Korean sound blocks underlying btn_start
+PASS Korean sound blocks underlying btn_sound
+PASS Korean sound blocks underlying btn_rank
+PASS Korean sound blocks underlying btn_easteregg
+PASS Korean sound text fits: txtTitle
+PASS Korean sound text fits: txtBgm
+PASS Korean sound text fits: txtEffect
+PASS Korean sound text fits: txtClose
+PASS Korean music toggle receives input
+PASS Korean music OFF persists and mutes playback
+PASS Korean effects toggle receives input
+PASS Korean effects OFF persists and mutes playback
+PASS Korean sound close receives input
+PASS Korean sound close returns to the original intro
+FAIL Korean reopened settings show both saved OFF states
+FAIL System.InvalidOperationException: Korean reopened settings show both saved OFF states
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:2746 
+  at VioletTapQaRunner+<PopupScenarios>d__63.MoveNext () [0x0040d] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:2052 
+  at VioletTapQaRunner.Tick () [0x00574] in C:\Users\rlatmdwp5\Documents\GitHub\W01\Assets\Editor\VioletTapQaRunner.cs:496 
+RUNTIME ERROR NullReferenceException: Object reference not set to an instance of an object
+_01.Scripts.UI.Popup.UI_SoundPopup.Init () (at Assets/01.Scripts/UI/Popup/UI_SoundPopup.cs:38)
+SWGUnity2DCore.UI.UI_Base.Start () (at ./LocalPackages/SWGUnity2DCore/Packages/com.secondwind.core/Runtime/UI/UI_Base.cs:26)
+
+RUNTIME ERROR NullReferenceException: Object reference not set to an instance of an object
+_01.Scripts.UI.Popup.UI_SoundPopup.Init () (at Assets/01.Scripts/UI/Popup/UI_SoundPopup.cs:38)
+SWGUnity2DCore.UI.UI_Base.Start () (at ./LocalPackages/SWGUnity2DCore/Packages/com.secondwind.core/Runtime/UI/UI_Base.cs:26)
+
