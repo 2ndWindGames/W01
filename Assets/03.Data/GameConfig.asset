@@ -15,8 +15,10 @@ MonoBehaviour:
   roundDuration: 30
   scorePerTap: 1
   initialTargetCount: 1
-  startingTargetLifetime: 1.8
-  minimumTargetLifetime: 0.65
+  startingTargetLifetime: 1.55
+  minimumTargetLifetime: 0.55
+  difficultyRampSeconds: 26
+  minimumReactionSeconds: 0.38
   minimumTargetScale: 0.8
   feverCombo: 10
   feverDuration: 5

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using _01.Scripts.Game;
 using _01.Scripts.Scene;
 using _01.Scripts.UI;
@@ -23,7 +24,16 @@ public static class VioletTapQaRunner
 {
     private const string PendingKey = "VioletTap.QA.Pending";
     private const string BestKey = "MiniGameKit.TapGame.BestScore";
+    private const string MutedStartupKey = "VioletTap.QA.MutedStartupOnly";
     private static readonly string Root = Path.GetFullPath("output/qa-2026-09-13");
+    private static readonly string[] StartupPreferenceKeys = { "VioletTap.Audio.BgmEnabled", "VioletTap.Audio.EffectEnabled", TapHaptics.EnabledKey };
+    private static string StartupBackupPath => Path.Combine(Root, "startup-preferences-backup.json");
+    [Serializable]
+    private sealed class StartupPreferenceBackup
+    {
+        public bool[] Present;
+        public int[] Values;
+    }
     private static readonly List<string> Results = new();
     private static readonly List<string> Errors = new();
     private static IEnumerator routine;
@@ -31,16 +41,21 @@ public static class VioletTapQaRunner
     private static double started;
     private static int lastFrame = -1;
     private static float previousTimeScale;
+    private static bool previousRunInBackground;
     private static UnityEngine.Random.State previousRandom;
     private static bool? previousAdsDisabled;
+    private static RankManager overriddenRank;
+    private static Task previousRankInitialization;
 
     static VioletTapQaRunner()
     {
         EditorApplication.update += Tick;
+        EditorApplication.delayCall += RecoverStartupPreferencesInEditMode;
         EditorApplication.playModeStateChanged += state =>
         {
             if (state == PlayModeStateChange.EnteredPlayMode && SessionState.GetBool(PendingKey, false)) Begin();
             if (state == PlayModeStateChange.ExitingPlayMode && routine != null) Finish("Interrupted by leaving Play mode");
+            if (state == PlayModeStateChange.EnteredEditMode) RecoverStartupPreferencesInEditMode();
         };
     }
 
@@ -144,6 +159,87 @@ public static class VioletTapQaRunner
         Run();
     }
 
+    [MenuItem("Tools/VioletTap/QA/Check purchase UI callbacks without transactions")]
+    public static void RunPurchaseUiCheck()
+    {
+        SessionState.SetBool("VioletTap.QA.PurchaseUiOnly", true);
+        Run();
+    }
+
+    [MenuItem("Tools/VioletTap/QA/Check pooled target contacts within one frame")]
+    public static void RunPointerReuseCheck()
+    {
+        SessionState.SetBool("VioletTap.QA.PointerReuseOnly", true);
+        Run();
+    }
+
+    [MenuItem("Tools/VioletTap/QA/Check delayed nickname initialization without score submission")]
+    public static void RunDelayedNicknameCheck()
+    {
+        SessionState.SetBool("VioletTap.QA.DelayedNicknameOnly", true);
+        Run();
+    }
+
+    [MenuItem("Tools/VioletTap/QA/Check saved OFF preferences on fresh startup")]
+    public static void RunMutedStartupCheck()
+    {
+        if (routine != null || EditorApplication.isPlayingOrWillChangePlaymode
+            || EditorApplication.isCompiling || EditorApplication.isUpdating) return;
+        RecoverStartupPreferencesInEditMode();
+        Directory.CreateDirectory(Root);
+        var backup = new StartupPreferenceBackup
+        {
+            Present = StartupPreferenceKeys.Select(PlayerPrefs.HasKey).ToArray(),
+            Values = StartupPreferenceKeys.Select(key => PlayerPrefs.GetInt(key)).ToArray(),
+        };
+        // A disk backup also survives an Editor restart; restore absent keys as absent.
+        File.WriteAllText(StartupBackupPath, JsonUtility.ToJson(backup, true));
+        SessionState.SetBool(MutedStartupKey, true);
+        try
+        {
+            foreach (string key in StartupPreferenceKeys) PlayerPrefs.SetInt(key, 0);
+            PlayerPrefs.Save();
+            Run();
+        }
+        catch
+        {
+            RecoverStartupPreferencesInEditMode();
+            throw;
+        }
+    }
+
+    private static void RecoverStartupPreferencesInEditMode()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode || !File.Exists(StartupBackupPath)) return;
+        RestoreStartupPreferences(Path.Combine(Root, "startup-preferences-recovery.txt"));
+        SessionState.SetBool(MutedStartupKey, false);
+        SessionState.SetBool(PendingKey, false);
+    }
+
+    private static void RestoreStartupPreferences(string reportPath)
+    {
+        if (!File.Exists(StartupBackupPath)) return;
+        var backup = JsonUtility.FromJson<StartupPreferenceBackup>(File.ReadAllText(StartupBackupPath));
+        if (backup?.Present?.Length != StartupPreferenceKeys.Length || backup.Values?.Length != StartupPreferenceKeys.Length)
+            throw new InvalidDataException("Invalid startup preference backup; leaving it intact for recovery.");
+        for (int i = 0; i < StartupPreferenceKeys.Length; i++)
+        {
+            if (backup.Present[i]) PlayerPrefs.SetInt(StartupPreferenceKeys[i], backup.Values[i]);
+            else PlayerPrefs.DeleteKey(StartupPreferenceKeys[i]);
+        }
+        PlayerPrefs.Save();
+        var restored = new List<string> { "Restored: " + DateTime.Now.ToString("O") };
+        for (int i = 0; i < StartupPreferenceKeys.Length; i++)
+        {
+            bool matches = PlayerPrefs.HasKey(StartupPreferenceKeys[i]) == backup.Present[i]
+                && (!backup.Present[i] || PlayerPrefs.GetInt(StartupPreferenceKeys[i]) == backup.Values[i]);
+            restored.Add((matches ? "PASS " : "FAIL ") + "Original preference restored: " + StartupPreferenceKeys[i]);
+            if (!matches) throw new InvalidOperationException("Could not restore " + StartupPreferenceKeys[i]);
+        }
+        File.WriteAllLines(reportPath, restored);
+        File.Delete(StartupBackupPath);
+    }
+
     private static void Begin()
     {
         SessionState.SetBool(PendingKey, false);
@@ -152,6 +248,20 @@ public static class VioletTapQaRunner
         Results.Clear();
         Errors.Clear();
         previousTimeScale = Time.timeScale;
+        previousRunInBackground = Application.runInBackground;
+        // Keep automated Editor scenarios advancing while another app has focus.
+        // Device pause/focus behavior is tested separately and is not changed by this fixture.
+        Application.runInBackground = true;
+        lastFrame = -1;
+        File.WriteAllLines(Path.Combine(runDirectory, "execution-context.txt"), new[]
+        {
+            "Started: " + DateTime.Now.ToString("O"),
+            "Previous runInBackground: " + previousRunInBackground,
+            "QA runInBackground: " + Application.runInBackground,
+            "Application focused: " + Application.isFocused,
+            "Editor paused: " + EditorApplication.isPaused,
+            $"Game view: {Screen.width}x{Screen.height}",
+        });
         previousRandom = UnityEngine.Random.state;
         previousAdsDisabled = null;
         SessionState.SetBool("VioletTap.QA.HadBest", PlayerPrefs.HasKey(BestKey));
@@ -190,7 +300,15 @@ public static class VioletTapQaRunner
         SessionState.SetBool("VioletTap.QA.MusicOnly", false);
         bool helpLayoutOnly = SessionState.GetBool("VioletTap.QA.HelpLayoutOnly", false);
         SessionState.SetBool("VioletTap.QA.HelpLayoutOnly", false);
-        routine = helpLayoutOnly ? HelpLayoutScenarios() : musicOnly ? MusicScenarios() : captionsOnly ? CaptionScenarios() : hudOnly ? HudScenarios() : modalOnly ? ModalScenarios() : roundsOnly ? RoundScenarios() : rankingOnly ? RankingScenarios() : popupsOnly ? PopupScenarios() : sceneCyclesOnly ? SceneCycleScenarios() : backgroundOnly ? BackgroundScenarios() : statusOnly ? StatusScenarios() : feedbackOnly ? FeedbackScenarios() : nicknameOnly ? NicknameScenarios() : Scenarios();
+        bool purchaseUiOnly = SessionState.GetBool("VioletTap.QA.PurchaseUiOnly", false);
+        SessionState.SetBool("VioletTap.QA.PurchaseUiOnly", false);
+        bool mutedStartupOnly = SessionState.GetBool(MutedStartupKey, false);
+        SessionState.SetBool(MutedStartupKey, false);
+        bool pointerReuseOnly = SessionState.GetBool("VioletTap.QA.PointerReuseOnly", false);
+        SessionState.SetBool("VioletTap.QA.PointerReuseOnly", false);
+        bool delayedNicknameOnly = SessionState.GetBool("VioletTap.QA.DelayedNicknameOnly", false);
+        SessionState.SetBool("VioletTap.QA.DelayedNicknameOnly", false);
+        routine = delayedNicknameOnly ? DelayedNicknameScenarios() : pointerReuseOnly ? PointerReuseScenarios() : mutedStartupOnly ? MutedStartupScenarios() : purchaseUiOnly ? PurchaseUiScenarios() : helpLayoutOnly ? HelpLayoutScenarios() : musicOnly ? MusicScenarios() : captionsOnly ? CaptionScenarios() : hudOnly ? HudScenarios() : modalOnly ? ModalScenarios() : roundsOnly ? RoundScenarios() : rankingOnly ? RankingScenarios() : popupsOnly ? PopupScenarios() : sceneCyclesOnly ? SceneCycleScenarios() : backgroundOnly ? BackgroundScenarios() : statusOnly ? StatusScenarios() : feedbackOnly ? FeedbackScenarios() : nicknameOnly ? NicknameScenarios() : Scenarios();
     }
 
     private static void Tick()
@@ -210,6 +328,30 @@ public static class VioletTapQaRunner
                 return;
             }
             string roundsRequest = Path.Combine(Root, "RUN_ROUNDS_QA");
+            if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
+                && TryConsumeRequest(Path.Combine(Root, "RUN_DELAYED_NICKNAME_QA")))
+            {
+                RunDelayedNicknameCheck();
+                return;
+            }
+            if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
+                && TryConsumeRequest(Path.Combine(Root, "RUN_POINTER_REUSE_QA")))
+            {
+                RunPointerReuseCheck();
+                return;
+            }
+            if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
+                && TryConsumeRequest(Path.Combine(Root, "RUN_MUTED_STARTUP_QA")))
+            {
+                RunMutedStartupCheck();
+                return;
+            }
+            if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
+                && TryConsumeRequest(Path.Combine(Root, "RUN_PURCHASE_UI_QA")))
+            {
+                RunPurchaseUiCheck();
+                return;
+            }
             if (!EditorApplication.isPlaying && !EditorApplication.isCompiling && !EditorApplication.isUpdating
                 && TryConsumeRequest(Path.Combine(Root, "RUN_HELP_LAYOUT_QA")))
             {
@@ -300,11 +442,15 @@ public static class VioletTapQaRunner
             }
             return;
         }
-        if (!EditorApplication.isPlaying || lastFrame == Time.frameCount) return;
-        lastFrame = Time.frameCount;
+        if (!EditorApplication.isPlaying) return;
         try
         {
-            if (EditorApplication.timeSinceStartup - started > 90) throw new TimeoutException("QA exceeded 90 seconds");
+            // The deadline must also run when an unfocused or paused Game view stops rendering frames.
+            if (EditorApplication.timeSinceStartup - started > 90)
+                throw new TimeoutException($"QA exceeded 90 seconds; frame={Time.frameCount}, lastFrame={lastFrame}, "
+                    + $"editorPaused={EditorApplication.isPaused}, focused={Application.isFocused}, runInBackground={Application.runInBackground}");
+            if (lastFrame == Time.frameCount) return;
+            lastFrame = Time.frameCount;
             if (!routine.MoveNext()) Finish(null);
         }
         catch (Exception exception) { Finish(exception.ToString()); }
@@ -410,6 +556,310 @@ public static class VioletTapQaRunner
         ScreenCapture.CaptureScreenshot(Path.Combine(directory, "screen.png"));
         File.WriteAllText(Path.Combine(Root, "latest-layout.txt"), directory);
         Debug.Log("VioletTap layout captured: " + directory);
+    }
+
+    private static IEnumerator DelayedNicknameScenarios()
+    {
+        for (int i = 0; i < 8; i++) yield return null;
+        Time.timeScale = 0f;
+        previousAdsDisabled = Managers.Ads.AdsDisabled;
+        Managers.Ads.SetAdsDisabled(true);
+        var rank = Managers.Rank;
+        var originalTask = Get<Task>(rank, "m_InitializationTask");
+        while (originalTask != null && !originalTask.IsCompleted) yield return null;
+        Check(originalTask != null && originalTask.Status == TaskStatus.RanToCompletion,
+            "Existing initialization completed before the local delay fixture");
+        var originalMetadata = new Dictionary<string, object>(rank.PlayerMetadata);
+        overriddenRank = rank;
+        previousRankInitialization = originalTask;
+        TaskCompletionSource<bool> DelayInitialization()
+        {
+            var gate = new TaskCompletionSource<bool>();
+            Set(rank, "m_InitializationTask", gate.Task);
+            return gate;
+        }
+        Managers.Scene.ChangeScene(W01SceneType.Game);
+        for (int i = 0; i < 6; i++) yield return null;
+        var game = Object.FindFirstObjectByType<GameScene>();
+        var ui = Object.FindFirstObjectByType<UI_GamePopup>();
+        var flow = Get<GameFlow>(game, "mGameFlow");
+        var firstGate = DelayInitialization();
+        game.bestScore = 0;
+        game.StartRound();
+        Tap(game, TapTargetType.Normal);
+        Invoke(game, "HandleTimerCompleted");
+        bool openedImmediately = game.IsNicknamePromptOpen;
+        // Never invoke the real confirmation callback in this scenario.
+        Set(ui, "mNicknameConfirmed", null);
+        Check(flow.State == GameFlowState.Result && !firstGate.Task.IsCompleted,
+            "New record result is reached while initialization is still pending");
+        Results.Add("DELAYED RECORD promptOpenedBeforeInitialization=" + openedImmediately);
+        if (openedImmediately)
+        {
+            game.RetryRound();
+            Check(flow.State == GameFlowState.Result, "An open record prompt blocks an underlying retry");
+            Invoke(ui, "CloseNicknamePrompt");
+        }
+        game.RetryRound();
+        game.StartRound();
+        Check(flow.State == GameFlowState.Playing, "The player can start another round before the delayed completion");
+        firstGate.SetResult(true);
+        for (int i = 0; i < 5; i++)
+        {
+            Set(ui, "mNicknameConfirmed", null);
+            yield return null;
+        }
+        Set(ui, "mNicknameConfirmed", null);
+        Results.Add($"DELAYED COMPLETION state={flow.State} nicknameOpen={game.IsNicknamePromptOpen} paused={game.IsGameplayPaused}");
+        Check(!game.IsNicknamePromptOpen && !game.IsGameplayPaused,
+            "Late initialization cannot open an old record prompt over a restarted round");
+        Check(openedImmediately, "Nickname entry does not wait for network initialization");
+
+        var secondGate = DelayInitialization();
+        game.bestScore = 0;
+        Tap(game, TapTargetType.Normal);
+        Invoke(game, "HandleTimerCompleted");
+        Set(ui, "mNicknameConfirmed", null);
+        Check(game.IsNicknamePromptOpen && flow.State == GameFlowState.Result,
+            "A later new record opens its prompt immediately");
+        var input = Get<TMP_InputField>(ui, "mNicknameInput");
+        input.text = "QA-LATE-INIT";
+        secondGate.SetResult(true);
+        for (int i = 0; i < 4; i++) yield return null;
+        Check(game.IsNicknamePromptOpen && input.text == "QA-LATE-INIT",
+            "Initialization completion cannot replace an in-progress nickname");
+        Invoke(ui, "CloseNicknamePrompt");
+        game.RetryRound();
+        game.StartRound();
+        var exitGate = DelayInitialization();
+        game.bestScore = 0;
+        Tap(game, TapTargetType.Normal);
+        Invoke(game, "HandleTimerCompleted");
+        Set(ui, "mNicknameConfirmed", null);
+        Managers.Scene.ChangeScene(W01SceneType.Intro);
+        for (int i = 0; i < 6; i++) yield return null;
+        exitGate.SetResult(true);
+        for (int i = 0; i < 4; i++) yield return null;
+        Check(Object.FindFirstObjectByType<GameScene>() == null && GameObject.Find("NicknamePrompt") == null,
+            "Late initialization after leaving Game cannot recreate its prompt");
+        Check(rank.PlayerMetadata.Count == originalMetadata.Count
+            && originalMetadata.All(pair => rank.PlayerMetadata.TryGetValue(pair.Key, out var value) && Equals(value, pair.Value)),
+            "The delay fixture never changes the real profile metadata");
+        Check(Errors.Count == 0, "No runtime errors during delayed nickname QA");
+    }
+
+    private static IEnumerator PointerReuseScenarios()
+    {
+        for (int i = 0; i < 8; i++) yield return null;
+        previousAdsDisabled = Managers.Ads.AdsDisabled;
+        Managers.Ads.SetAdsDisabled(true);
+        Time.timeScale = 0f;
+        Managers.SetEffectEnabled(false);
+        Managers.Scene.ChangeScene(W01SceneType.Game);
+        for (int i = 0; i < 6; i++) yield return null;
+        var game = Object.FindFirstObjectByType<GameScene>();
+        game.bestScore = 100000;
+        UnityEngine.Random.InitState(6132026);
+        game.StartRound();
+        Set(game, "m_NextFeverCombo", int.MaxValue);
+        Check(Targets(game).Count == 1, "Pointer reuse fixture starts with one target");
+        var autoSync = typeof(Physics2D).GetProperty("autoSyncTransforms", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
+        Results.Add($"PHYSICS autoSync={autoSync} simulation={Physics2D.simulationMode}");
+        // Establish the first contact once. Never sync, simulate or yield between recycled contacts.
+        Physics2D.SyncTransforms();
+        int inputFrame = Time.frameCount;
+        int oldPositionChecks = 0;
+        GameObject HandlerAt(Vector2 position, int pointerId, PointerEventData.InputButton button, bool dispatch)
+        {
+            var pointer = new PointerEventData(EventSystem.current) { position = position, pointerId = pointerId, button = button };
+            var hits = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointer, hits);
+            if (hits.Count == 0) return null;
+            var handler = ExecuteEvents.GetEventHandler<IPointerDownHandler>(hits[0].gameObject);
+            if (dispatch) ExecuteEvents.ExecuteHierarchy(hits[0].gameObject, pointer, ExecuteEvents.pointerDownHandler);
+            return handler;
+        }
+        void BindNormal(CircleTarget target) => target.Bind(TapTargetType.Normal, 100f, .82f,
+            t => Invoke(game, "HandleTargetTapped", t), t => Invoke(game, "HandleTargetMissed", t));
+        for (int sample = 0; sample < 24; sample++)
+        {
+            CircleTarget target = Targets(game)[0];
+            BindNormal(target);
+            Vector3 oldWorld = target.transform.position;
+            Vector2 oldScreen = Camera.main.WorldToScreenPoint(oldWorld);
+            int hitsBefore = Get<int>(game, "m_Hits");
+            Check(HandlerAt(oldScreen, sample * 2, PointerEventData.InputButton.Right, true) == target.gameObject
+                && Get<int>(game, "m_Hits") == hitsBefore && Get<Action<CircleTarget>>(target, "m_OnTapped") != null,
+                "Right-button contact does not consume target " + sample);
+            HandlerAt(oldScreen, sample * 2, PointerEventData.InputButton.Left, true);
+            Check(Get<int>(game, "m_Hits") == hitsBefore + 1, "Left contact scores exactly once " + sample);
+            CircleTarget recycled = Targets(game)[0];
+            Check(recycled == target && Targets(game).Count == 1, "Contact reuses one pooled target " + sample);
+            BindNormal(recycled);
+            Vector3 newWorld = recycled.transform.position;
+            var collider = recycled.GetComponent<CircleCollider2D>();
+            Vector2 center = recycled.transform.TransformPoint(collider.offset);
+            float radius = collider.radius * Mathf.Max(Mathf.Abs(recycled.transform.lossyScale.x), Mathf.Abs(recycled.transform.lossyScale.y));
+            if (Vector2.Distance(oldWorld, center) > radius + .1f)
+            {
+                oldPositionChecks++;
+                var staleHandler = HandlerAt(oldScreen, sample * 2 + 1, PointerEventData.InputButton.Left, true);
+                Results.Add($"RECYCLED {sample} frame={Time.frameCount} old={oldWorld} new={newWorld} oldHit={staleHandler?.name ?? "none"}");
+                Check(staleHandler != recycled.gameObject && Get<int>(game, "m_Hits") == hitsBefore + 1,
+                    "A second pointer cannot hit the recycled target at its old position " + sample);
+            }
+            Vector2 newScreen = Camera.main.WorldToScreenPoint(newWorld);
+            Check(HandlerAt(newScreen, sample * 2 + 1, PointerEventData.InputButton.Left, true) == recycled.gameObject
+                && Get<int>(game, "m_Hits") == hitsBefore + 2,
+                "A second pointer can hit the new position before physics advances " + sample);
+        }
+        Check(oldPositionChecks >= 20, "At least 20 non-overlapping recycled positions were checked");
+        Check(Time.frameCount == inputFrame, "All contact pairs ran in one frame without extra physics synchronization");
+        Managers.Scene.ChangeScene(W01SceneType.Intro);
+        for (int i = 0; i < 6; i++) yield return null;
+        Check(Errors.Count == 0, "No runtime errors during pooled pointer reuse QA");
+    }
+
+    private static IEnumerator MutedStartupScenarios()
+    {
+        Check(File.Exists(StartupBackupPath), "Fresh startup has a recoverable original-preference backup");
+        Results.Add("PLAY SETTINGS optionsEnabled=" + EditorSettings.enterPlayModeOptionsEnabled
+            + " options=" + EditorSettings.enterPlayModeOptions);
+        for (int i = 0; i < 8; i++) yield return null;
+        previousAdsDisabled = Managers.Ads.AdsDisabled;
+        Managers.Ads.SetAdsDisabled(true);
+        Check(Object.FindFirstObjectByType<IntroScene>() != null, "Fresh Play starts on Intro");
+        Check(!Managers.IsBgmEnabled && !Managers.IsEffectEnabled && !TapHaptics.IsEnabled,
+            "All three saved OFF preferences survive fresh manager initialization");
+        var sound = Managers.Sound;
+        var playback = Object.FindObjectsByType<SoundPlayback>(FindObjectsSortMode.None);
+        Check(playback.Length == 1, "Fresh startup creates one audio playback root");
+        var voices = playback[0].GetComponentsInChildren<AudioSource>();
+        Check(voices.Length == 14 && voices.All(source => source.mute), "All initial music and effect voices honor saved mute");
+        Check(voices.Any(source => source.loop && source.clip != null && source.clip.name == "Intro_NeonAwakening" && source.isPlaying),
+            "Intro music advances silently without bypassing the saved mute");
+        Time.timeScale = 0f;
+        foreach (string language in new[] { "English", "Korean" })
+        {
+            EditorPrefs.SetString("VioletTap.EditorLanguage", language);
+            var popup = Managers.UI.ShowPopupUI<UI_SoundPopup>();
+            for (int i = 0; i < 4; i++) yield return null;
+            Check(popup.GetComponentsInChildren<TMP_Text>().Count(label => label.text.Contains("OFF")) == 2,
+                language + " initial sound settings show both saved OFF values");
+            Managers.UI.ClosePopupUI(popup);
+            Managers.Scene.ChangeScene(W01SceneType.Game);
+            for (int i = 0; i < 6; i++) yield return null;
+            var game = Object.FindFirstObjectByType<GameScene>();
+            game.bestScore = 100000;
+            game.StartRound();
+            var help = Object.FindFirstObjectByType<UI_GameHelp>();
+            help.Open();
+            Check(help.GetComponentsInChildren<TMP_Text>().Count(label => label.text.Contains("OFF")) == 2,
+                language + " initial guide reflects saved effects and haptics OFF");
+            foreach (TapTargetType type in Enum.GetValues(typeof(TapTargetType)))
+            {
+                TapFeedback.PlayCue(type, false);
+                TapFeedback.PlayCue(type, true);
+            }
+            for (int i = 0; i < 4; i++) yield return null;
+            Check(voices.All(source => source.mute) && voices.Any(source => !source.loop && source.clip != null),
+                language + " every normal and fever cue keeps its voice muted");
+            Check(!TapHaptics.IsEnabled, language + " target previews do not re-enable saved haptics");
+            Capture("saved-off-help-" + language.ToLowerInvariant());
+            for (int i = 0; i < 3; i++) yield return null;
+            help.Close();
+            Tap(game, TapTargetType.Normal);
+            Check(Get<int>(game, "m_Score") > 0 && voices.All(source => source.mute),
+                language + " normal gameplay remains responsive with feedback muted");
+            Managers.Scene.ChangeScene(W01SceneType.Intro);
+            for (int i = 0; i < 6; i++) yield return null;
+        }
+        Check(!Managers.IsBgmEnabled && !Managers.IsEffectEnabled && !TapHaptics.IsEnabled,
+            "Scene changes preserve all saved OFF preferences");
+        Check(Errors.Count == 0, "No runtime errors during fresh muted startup QA");
+    }
+
+    private static IEnumerator PurchaseUiScenarios()
+    {
+        for (int i = 0; i < 8; i++) yield return null;
+        previousAdsDisabled = Managers.Ads.AdsDisabled;
+        Managers.Ads.SetAdsDisabled(true);
+        Time.timeScale = 0f;
+        const string entitlementKey = "VioletTap.IAP.RemoveAds";
+        bool hadEntitlement = PlayerPrefs.HasKey(entitlementKey);
+        int entitlementValue = PlayerPrefs.GetInt(entitlementKey);
+        var liveIap = Managers.IAP;
+        bool liveOwnership = liveIap.IsNoAds;
+        foreach (string language in new[] { "English", "Korean" })
+        {
+            EditorPrefs.SetString("VioletTap.EditorLanguage", language);
+            Managers.Scene.ChangeScene(W01SceneType.Game);
+            for (int i = 0; i < 6; i++) yield return null;
+            var ui = Object.FindFirstObjectByType<UI_GamePopup>();
+            var button = Get<UnityEngine.UI.Button>(ui, "mAdsButton");
+            // Transfer this popup's actual event handlers to an uninitialized local manager.
+            // It has no StoreController and never calls Init, PurchaseRemoveAds or GrantRemoveAds.
+            var isolated = new IAPManager(Managers.Ads);
+            foreach (EventInfo eventInfo in typeof(IAPManager).GetEvents())
+            {
+                var field = typeof(IAPManager).GetField(eventInfo.Name, BindingFlags.Instance | BindingFlags.NonPublic);
+                if (field?.GetValue(liveIap) is not Delegate callbacks) continue;
+                foreach (var callback in callbacks.GetInvocationList().Where(d => ReferenceEquals(d.Target, ui)))
+                {
+                    eventInfo.RemoveEventHandler(liveIap, callback);
+                    eventInfo.AddEventHandler(isolated, callback);
+                }
+            }
+            Set(ui, "mIapManager", isolated);
+            Invoke(ui, "RefreshAdsButton");
+            Check(button.gameObject.activeSelf && !button.interactable, language + " unavailable product stays visible and disabled");
+            Invoke(isolated, "SetStoreReady", true);
+            Check(button.interactable, language + " ready product becomes interactable");
+            string readyStatus = ui.GetTextStatus().text;
+            int failureNotifications = 0;
+            isolated.PurchaseFailed += _ => failureNotifications++;
+            var cart = new UnityEngine.Purchasing.Cart(new List<UnityEngine.Purchasing.CartItem>());
+            var failedOrder = new UnityEngine.Purchasing.FailedOrder(cart,
+                UnityEngine.Purchasing.PurchaseFailureReason.UserCancelled, "Local QA cancellation; no transaction");
+            void BeginLocalPurchase()
+            {
+                Set(isolated, "m_Purchasing", true);
+                Invoke(ui, "RefreshAdsButton");
+                Check(!button.interactable, language + " purchase in progress disables the button");
+            }
+            BeginLocalPurchase();
+            Invoke(isolated, "OnPurchaseFailed", failedOrder);
+            Check(!isolated.IsPurchasing && button.interactable, language + " failed purchase restores button input");
+            Check(failureNotifications == 1 && ui.GetTextStatus().text != readyStatus,
+                language + " failed purchase notifies the popup");
+            BeginLocalPurchase();
+            Invoke(isolated, "OnPurchaseConfirmed", failedOrder);
+            Check(!isolated.IsPurchasing && button.interactable, language + " failed confirmation restores button input");
+            BeginLocalPurchase();
+            int failuresBeforeDeferred = failureNotifications;
+            var deferred = new UnityEngine.Purchasing.DeferredOrder(cart, failedOrder.Info);
+            Invoke(isolated, "OnPurchaseDeferred", deferred);
+            Results.Add($"DEFERRED {language} purchasing={isolated.IsPurchasing} interactable={button.interactable} status={ui.GetTextStatus().text}");
+            Check(!isolated.IsPurchasing && button.interactable, language + " deferred approval restores button input");
+            Check(failureNotifications == failuresBeforeDeferred, language + " approval pending is not reported as a failed purchase");
+            Check(ui.GetTextStatus().text == GameLocalization.T("Purchase approval is pending.", "구매 승인을 기다리고 있습니다."),
+                language + " pending approval has a localized status");
+            Capture("purchase-deferred-" + language.ToLowerInvariant());
+            double until = EditorApplication.timeSinceStartup + 2.7;
+            while (EditorApplication.timeSinceStartup < until) yield return null;
+            Check(ui.GetTextStatus().text == readyStatus, language + " approval notice returns to the game status");
+            Check(!isolated.IsNoAds && liveIap.IsNoAds == liveOwnership
+                && PlayerPrefs.HasKey(entitlementKey) == hadEntitlement && PlayerPrefs.GetInt(entitlementKey) == entitlementValue,
+                language + " simulated callbacks never grant or change the real entitlement");
+            Managers.Scene.ChangeScene(W01SceneType.Intro);
+            for (int i = 0; i < 6; i++) yield return null;
+            Check(!typeof(IAPManager).GetEvents().Any(eventInfo =>
+            {
+                var field = typeof(IAPManager).GetField(eventInfo.Name, BindingFlags.Instance | BindingFlags.NonPublic);
+                return field?.GetValue(isolated) is Delegate callbacks && callbacks.GetInvocationList().Any(d => ReferenceEquals(d.Target, ui));
+            }), language + " popup destruction releases all local purchase subscriptions");
+        }
+        Check(Errors.Count == 0, "No runtime errors during local purchase UI callback QA");
     }
 
     private static IEnumerator HelpLayoutScenarios()
@@ -1688,9 +2138,22 @@ public static class VioletTapQaRunner
     private static void Finish(string failure)
     {
         routine = null;
+        if (overriddenRank != null)
+        {
+            Set(overriddenRank, "m_InitializationTask", previousRankInitialization);
+            overriddenRank = null;
+            previousRankInitialization = null;
+        }
         foreach (var audioProbe in Object.FindObjectsByType<VioletTapAudioProbe>(FindObjectsSortMode.None)) Object.Destroy(audioProbe);
         Application.logMessageReceived -= OnLog;
         Time.timeScale = previousTimeScale;
+        Application.runInBackground = previousRunInBackground;
+        File.AppendAllLines(Path.Combine(runDirectory, "execution-context.txt"), new[]
+        {
+            "Finished: " + DateTime.Now.ToString("O"),
+            "Restored runInBackground: " + Application.runInBackground,
+            "Final frame: " + Time.frameCount,
+        });
         UnityEngine.Random.state = previousRandom;
         if (previousAdsDisabled.HasValue)
         {
@@ -1705,6 +2168,7 @@ public static class VioletTapQaRunner
         }
         PlayerPrefs.Save();
         EditorPrefs.SetString("VioletTap.EditorLanguage", SessionState.GetString("VioletTap.QA.Language", "System"));
+        RestoreStartupPreferences(Path.Combine(runDirectory, "startup-preferences-restored.txt"));
         CoreServices.Sound.SetMuted(Define.Sound.Bgm, !Managers.IsBgmEnabled);
         CoreServices.Sound.SetMuted(Define.Sound.Effect, !Managers.IsEffectEnabled);
         if (failure != null) Results.Add("FAIL " + failure);

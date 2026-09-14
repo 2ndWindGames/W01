@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using _01.Scripts.Scene;
+using _01.Scripts.UI;
 using SWGUnity2DCore.Manager;
 using SWGUnity2DCore.Util;
 using TMPro;
@@ -42,9 +43,13 @@ namespace _01.Scripts.UI.Popup
 		private Image mFeverOverlay;
 		private TextMeshProUGUI mFeverBanner;
 		private Coroutine mMessageRoutine;
+		private bool mMessageIsGameplayOnly;
 		private string mStatusMessage;
 		private Color mStatusColor = Color.white;
 		private UI_GameHelp mHelp;
+		private ComboStatusView mComboStatus;
+		private Vector2 mStatusHomePosition;
+		private bool mPlayingWithComboHud;
 
 		public bool IsInitialized { get; private set; }
 		
@@ -71,6 +76,7 @@ namespace _01.Scripts.UI.Popup
 			BindButton(typeof(Buttons));
 			mStatusMessage = GetTextStatus().text;
 			mStatusColor = GetTextStatus().color;
+			mStatusHomePosition = GetTextStatus().rectTransform.anchoredPosition;
 			GameLocalization.ApplyFont(this);
 
 			var curScene = SceneManagerEx.CurrentScene;
@@ -87,13 +93,15 @@ namespace _01.Scripts.UI.Popup
 			mAdsManager = Managers.Ads;
 			mIapManager.NoAdsChanged += OnNoAdsChanged;
 			mIapManager.StoreReadyChanged += OnStoreReadyChanged;
-			mIapManager.PurchaseFailed += OnPurchaseFailed;
+			mIapManager.PurchaseFailed += OnPurchaseStatus;
+			mIapManager.PurchaseDeferred += OnPurchaseStatus;
 			RefreshAdsButton();
 			GetButton((int)Buttons.btnStart).gameObject.BindEvent(mGameScene.StartRound);
 			GetButton((int)Buttons.btnRetry).gameObject.BindEvent(mGameScene.RetryRound);
 			GetText((int)Texts.txtBestValue).text = mGameScene.bestScore.ToString("00");
 			SetStaticLabels();
 			ConfigureHudReadability();
+			mComboStatus = GetComponentInChildren<ComboStatusView>(true);
 			EnsureFeverPresentation();
 			mHelp = UI_GameHelp.Create(transform, mGameScene);
 			
@@ -179,7 +187,7 @@ namespace _01.Scripts.UI.Popup
 			if (noAds) ShowTransientStatus(GameLocalization.T("ADS REMOVED", "광고가 제거되었습니다"));
 		}
 		private void OnStoreReadyChanged(bool ready) => RefreshAdsButton();
-		private void OnPurchaseFailed(string message)
+		private void OnPurchaseStatus(string message)
 		{
 			RefreshAdsButton();
 			ShowTransientStatus(message);
@@ -198,7 +206,8 @@ namespace _01.Scripts.UI.Popup
 
 			mIapManager.NoAdsChanged -= OnNoAdsChanged;
 			mIapManager.StoreReadyChanged -= OnStoreReadyChanged;
-			mIapManager.PurchaseFailed -= OnPurchaseFailed;
+			mIapManager.PurchaseFailed -= OnPurchaseStatus;
+			mIapManager.PurchaseDeferred -= OnPurchaseStatus;
 			mIapManager = null;
 			mAdsManager = null;
 		}
@@ -216,6 +225,18 @@ namespace _01.Scripts.UI.Popup
 			if (status == null) return;
 			status.text = mStatusMessage;
 			status.color = mStatusColor;
+			RefreshStatusPlacement();
+		}
+
+		private void RefreshStatusPlacement()
+		{
+			var status = GetTextStatus();
+			// During play the combo card replaces the old top instruction. Purchase/speed
+			// notices still appear, in the gap above the bottom status strip.
+			status.enabled = !mPlayingWithComboHud || mMessageRoutine != null;
+			status.rectTransform.anchoredPosition = mPlayingWithComboHud
+				? new Vector2(mStatusHomePosition.x, -((RectTransform)status.transform.parent).rect.height + 420f)
+				: mStatusHomePosition;
 		}
 
 		private void OnDisable()
@@ -223,14 +244,19 @@ namespace _01.Scripts.UI.Popup
 			CloseNicknamePrompt();
 			if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
 			mMessageRoutine = null;
+			mMessageIsGameplayOnly = false;
 			if (IsInitialized) RestoreStatus();
 		}
 
-		private void ShowTransientStatus(string message)
+		private void ShowTransientStatus(string message) => BeginTransientStatus(message, false);
+
+		private void BeginTransientStatus(string message, bool gameplayOnly)
 		{
 			if (string.IsNullOrWhiteSpace(message) || !isActiveAndEnabled) return;
 			if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
+			mMessageIsGameplayOnly = gameplayOnly;
 			mMessageRoutine = StartCoroutine(ShowTransientStatusRoutine(message));
+			RefreshStatusPlacement();
 		}
 
 		private IEnumerator ShowTransientStatusRoutine(string message)
@@ -240,6 +266,7 @@ namespace _01.Scripts.UI.Popup
 			status.color = new Color(1f, 0.78f, 0.28f);
 			yield return new WaitForSecondsRealtime(2.5f);
 			mMessageRoutine = null;
+			mMessageIsGameplayOnly = false;
 			RestoreStatus();
 		}
 
@@ -260,6 +287,7 @@ namespace _01.Scripts.UI.Popup
 				new Vector2(700f, 70f), new Color(0.92f, 0.7f, 1f, 0f));
 			mFeverBanner.rectTransform.anchorMin = new Vector2(0.5f, 1f);
 			mFeverBanner.rectTransform.anchorMax = new Vector2(0.5f, 1f);
+			mFeverBanner.gameObject.SetActive(mComboStatus == null);
 			overlayObject.SetActive(false);
 		}
 
@@ -279,6 +307,28 @@ namespace _01.Scripts.UI.Popup
 			if (mFeverBanner != null)
 				mFeverBanner.text = GameLocalization.T("FEVER  ", "피버  ") + Mathf.Max(0f, remaining).ToString("0.0");
 		}
+
+		public void UpdateComboState(int combo, int multiplier, int nextFever, int step, float feverTime,
+			float feverMaximum, int speedStage, bool playing)
+		{
+			mComboStatus?.SetState(combo, multiplier, nextFever, step, feverTime, feverMaximum, speedStage, playing);
+			mPlayingWithComboHud = playing && mComboStatus != null;
+			if (!playing && mMessageIsGameplayOnly)
+			{
+				// Pace notices belong to the round that triggered them. Store messages
+				// still remain visible across state changes until their normal timeout.
+				if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
+				mMessageRoutine = null;
+				mMessageIsGameplayOnly = false;
+				RestoreStatus();
+			}
+			RefreshStatusPlacement();
+		}
+
+		public void ShowComboFailure(int lostCombo, bool bomb) => mComboStatus?.ShowFailure(lostCombo, bomb);
+		public void PauseComboFeedback(bool paused) => mComboStatus?.SetPaused(paused);
+		public void ShowPaceIncrease(int stage) => BeginTransientStatus(
+			GameLocalization.T("SPEED UP!  LEVEL ", "스피드 업!  단계 ") + stage, true);
 
 		public void ShowNicknamePrompt(string defaultNickname, Action<string> onConfirmed)
 		{

@@ -40,9 +40,9 @@ namespace _01.Scripts.UI.SubItem
             if (IsInitialized) return;
             BindText(typeof(Texts));
 			GameLocalization.ApplyFont(this);
-			ConfigureLabel(GetText((int)Texts.txtRank), 45f, 100f, TextAlignmentOptions.Midline, true);
-			ConfigureLabel(GetText((int)Texts.txtNicName), 155f, 275f, TextAlignmentOptions.MidlineLeft, false);
-			ConfigureLabel(GetText((int)Texts.txtScore), 442f, 190f, TextAlignmentOptions.MidlineRight, true);
+			ConfigureLabel(GetText((int)Texts.txtRank), 0f, .19f, 20f, 8f, TextAlignmentOptions.Midline, true);
+			ConfigureLabel(GetText((int)Texts.txtNicName), .19f, .62f, 4f, 12f, TextAlignmentOptions.MidlineLeft, false);
+			ConfigureLabel(GetText((int)Texts.txtScore), .62f, 1f, 8f, 24f, TextAlignmentOptions.MidlineRight, true);
 			m_Background = GetComponent<Image>();
 			if (m_Background != null)
 				m_DefaultBackgroundColor = m_Background.color;
@@ -50,13 +50,16 @@ namespace _01.Scripts.UI.SubItem
             IsInitialized = true;
         }
 
-        private static void ConfigureLabel(TextMeshProUGUI label, float left, float width, TextAlignmentOptions alignment, bool autoSize)
+        private static void ConfigureLabel(TextMeshProUGUI label, float start, float end, float leftPadding,
+            float rightPadding, TextAlignmentOptions alignment, bool autoSize)
         {
             var rect = label.rectTransform;
-            rect.anchorMin = rect.anchorMax = new Vector2(0f, .5f);
-            rect.pivot = new Vector2(0f, .5f);
-            rect.anchoredPosition = new Vector2(left, 6f);
-            rect.sizeDelta = new Vector2(width, 70f);
+            rect.anchorMin = new Vector2(start, .5f);
+            rect.anchorMax = new Vector2(end, .5f);
+            rect.pivot = new Vector2(.5f, .5f);
+            rect.anchoredPosition = new Vector2((leftPadding - rightPadding) * .5f, 0f);
+            rect.sizeDelta = new Vector2(-leftPadding - rightPadding, 70f);
+            label.margin = Vector4.zero;
             label.alignment = alignment;
             label.richText = false;
             label.parseCtrlCharacters = false;
@@ -65,7 +68,7 @@ namespace _01.Scripts.UI.SubItem
             label.overflowMode = TextOverflowModes.Ellipsis;
             label.enableAutoSizing = autoSize;
             label.fontSize = label.fontSizeMax = 36f;
-            label.fontSizeMin = 24f;
+            label.fontSizeMin = 18f;
         }
 
         public void SetProfile(int entryRank, string nickname, double entryScore, bool isCurrentPlayer = false)

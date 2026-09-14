@@ -1,0 +1,17 @@
+{
+    "state": "COMPLETED_6H",
+    "startedUtc": "2026-09-13T14:45:05.0304086Z",
+    "updatedUtc": "2026-09-13T20:58:52.9045636Z",
+    "endedUtc": "2026-09-13T20:58:52.9045636Z",
+    "activeSeconds": 21660.139973367564,
+    "timingVersion": 1,
+    "legacyStartupAllowanceSeconds": 60.0,
+    "verifiedFullSpeedSeconds": 21600.139973367564,
+    "currentTimeScale": 1.0,
+    "frames": 1295477,
+    "rounds": 484,
+    "contacts": 52483,
+    "checks": 54106,
+    "managedBytes": 55640064,
+    "error": ""
+}

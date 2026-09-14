@@ -1,0 +1,14 @@
+PASS English unavailable product stays visible and disabled
+PASS English ready product becomes interactable
+PASS English purchase in progress disables the button
+PASS English failed purchase restores button input
+PASS English failed purchase notifies the popup
+PASS English purchase in progress disables the button
+PASS English failed confirmation restores button input
+PASS English purchase in progress disables the button
+DEFERRED English purchasing=False interactable=False status=The purchase could not be confirmed.
+FAIL English deferred approval restores button input
+FAIL System.InvalidOperationException: English deferred approval restores button input
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:1790 
+  at VioletTapQaRunner+<PurchaseUiScenarios>d__34.MoveNext () [0x006c5] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:510 
+  at VioletTapQaRunner.Tick () [0x00529] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:342 

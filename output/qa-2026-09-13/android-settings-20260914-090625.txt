@@ -1,0 +1,21 @@
+Active target: Android
+Backend: IL2CPP
+Architectures: ARM64
+Managed stripping: Minimal
+Application ID: com.secondwindgames.violettap
+Version: 3.6 (9)
+Minimum API: AndroidApiLevel25
+Target API: AndroidApiLevel36
+Build app bundle: True
+Development build: False
+Custom keystore configured: True
+Enabled scene: Assets/00.Scene/Intro.unity exists=True
+Enabled scene: Assets/00.Scene/Game.unity exists=True
+Last build platform: Android
+Last build result: Succeeded
+Last build end timestamp (as reported): 2026-09-13T12:33:56.1959768 kind=Unspecified
+Last build output: C:/SecondWindGames/Repositoires/Unity/W01/violettap.aab
+Last build reported total bytes: 875759381
+Existing output file bytes: 114634169
+Last build errors: 0
+Last build warnings: 3

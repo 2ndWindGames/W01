@@ -16,10 +16,13 @@ namespace SWGUnity2DCore
 
         [Header("Difficulty")]
         [Min(0.2f)]
-        public float startingTargetLifetime = 1.8f;
+        public float startingTargetLifetime = 1.55f;
 
         [Min(0.2f)]
-        public float minimumTargetLifetime = 0.65f;
+        public float minimumTargetLifetime = 0.55f;
+
+        [Min(1f)] public float difficultyRampSeconds = 26f;
+        [Min(0.2f)] public float minimumReactionSeconds = 0.38f;
 
         [Range(0.25f, 1.5f)]
         public float minimumTargetScale = 0.8f;

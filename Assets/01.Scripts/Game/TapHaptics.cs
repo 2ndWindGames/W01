@@ -14,6 +14,9 @@ namespace _01.Scripts.Game
             PlayerPrefs.Save();
         }
 
+        // REJECT has a distinct failure feel and respects the device haptics setting.
+        public static void PlayFailure() => Play(TapTargetType.Bomb);
+
         public static void Play(TapTargetType type, bool fever = false)
         {
             if (!IsEnabled || !Application.isFocused) return;

@@ -26,6 +26,7 @@ namespace SWGUnity2DCore.Manager
         public event Action<bool> NoAdsChanged;
         public event Action<bool> StoreReadyChanged;
         public event Action<string> PurchaseFailed;
+        public event Action<string> PurchaseDeferred;
 
         public IAPManager(W01AdsManager adsManager)
         {
@@ -165,6 +166,8 @@ namespace SWGUnity2DCore.Manager
         {
             m_Purchasing = false;
             Debug.Log("[IAP] 구매 승인이 보류되었습니다.");
+            PurchaseDeferred?.Invoke(GameLocalization.T("Purchase approval is pending.",
+                "구매 승인을 기다리고 있습니다."));
         }
 
         private void OnCheckEntitlement(Entitlement entitlement)

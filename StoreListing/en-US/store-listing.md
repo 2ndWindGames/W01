@@ -33,10 +33,10 @@ How fast and accurate are you? Enter the arena and set a new record in Violet Ta
 3. Unleash Fever Mode — Keep your streak alive and multiply the score.
 4. Climb the global ranking — Set a record and make your mark.
 
-## What's new
+## What's new — 3.6
 
-- Added Korean and English in-game UI support
-- Improved nickname registration and highlighting for your ranking
-- Improved sound settings and UI stability
-- Refined game screens and neon visual assets
-
+- Added a dedicated combo HUD with score multipliers and a Fever meter.
+- Enhanced combo-break effects, sounds and haptic feedback. Misses and bombs now end Fever.
+- Targets disappear faster as the round progresses for more intense gameplay.
+- Improved ranking layout to prevent clipped scores and handle long nicknames.
+- Fixed lingering neon effects after rounds and overlapping status messages.

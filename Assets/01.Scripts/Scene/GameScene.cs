@@ -17,6 +17,9 @@ namespace _01.Scripts.Scene
 	public class GameScene : BaseScene
 	{
 		private const string BestScoreKey = "MiniGameKit.TapGame.BestScore";
+#if UNITY_EDITOR
+		public static bool SuppressRecordPersistenceForQa { get; set; }
+#endif
 		
 		private static readonly Color[] TargetColors =
 		{
@@ -80,6 +83,8 @@ namespace _01.Scripts.Scene
 		private int m_BombsTapped;
 		private float m_FeverRemaining;
 		private int m_NextFeverCombo;
+		private float m_RoundElapsed;
+		private int m_PaceStage = 1;
 		
 		
 		protected override bool Init()
@@ -206,11 +211,20 @@ namespace _01.Scripts.Scene
 				return;
 			}
 			
+			m_RoundElapsed += Time.deltaTime;
 			m_Timer.Tick(Time.deltaTime);
 			// Tick can finish the round synchronously. Do not run gameplay visuals after Result cleanup.
 			if (mGameFlow.State != GameFlowState.Playing) return;
 			UpdateFever();
 			UpdateTimerVisual();
+			int stage = RoundPacing.Stage(m_RoundElapsed, mConfig);
+			if (stage > m_PaceStage)
+			{
+				m_PaceStage = stage;
+				m_UiGamePopup.ShowPaceIncrease(stage);
+				Managers.Sound.Play(Define.Sound.Effect, "SFX/Speed_Up", .45f);
+			}
+			RefreshComboPresentation();
 		}
 		
 		private void OnDestroy()
@@ -319,13 +333,8 @@ namespace _01.Scripts.Scene
 			}
 
 			TapTargetType type = ChooseTargetType();
-			float progress = 1f - Mathf.Clamp01(m_Timer.Remaining / Mathf.Max(0.1f, mConfig.roundDuration));
-			float lifetime = Mathf.Lerp(mConfig.startingTargetLifetime, mConfig.minimumTargetLifetime, progress);
-			if (m_FeverRemaining > 0f) lifetime *= mConfig.feverTargetLifetimeMultiplier;
-			if (type == TapTargetType.Quick)
-			{
-				lifetime *= 0.62f;
-			}
+			float progress = RoundPacing.Progress(m_RoundElapsed, mConfig);
+			float lifetime = RoundPacing.Lifetime(m_RoundElapsed, type, m_FeverRemaining > 0f, mConfig);
 
 			float scale = Mathf.Lerp(0.82f, mConfig.minimumTargetScale, progress);
 			Color color = type == TapTargetType.Quick ? TargetColors[1]
@@ -337,6 +346,7 @@ namespace _01.Scripts.Scene
 			target.SetVisual(sprite, color);
 			
 			target.Bind(type, lifetime, scale, HandleTargetTapped, HandleTargetMissed);
+			target.SetPace(Mathf.Lerp(1f, 1.65f, progress));
 			target.SetFeverMode(m_FeverRemaining > 0f);
 			target.SetPaused(IsGameplayPaused);
 			m_ActiveTargets.Add(target);
@@ -345,7 +355,7 @@ namespace _01.Scripts.Scene
 		
 		private TapTargetType ChooseTargetType()
 		{
-			float elapsed = mConfig.roundDuration - m_Timer.Remaining;
+			float elapsed = m_RoundElapsed;
 			float roll = Random.value;
 			if (elapsed >= 15f && roll < 0.12f) return TapTargetType.Bomb;
 			if (elapsed >= 8f && roll < 0.32f) return TapTargetType.Quick;
@@ -386,6 +396,7 @@ namespace _01.Scripts.Scene
 			foreach (CircleTarget target in m_ActiveTargets)
 				if (target != null) target.SetPaused(paused);
 			m_TapFeedback?.SetPaused(paused);
+			m_UiGamePopup?.PauseComboFeedback(paused);
 		}
 
 		private void HandleTargetTapped(CircleTarget target)
@@ -398,13 +409,17 @@ namespace _01.Scripts.Scene
             m_TapFeedback.Show(target, m_FeverRemaining > 0f);
             if (target.Type == TapTargetType.Bomb)
             {
+				int lostCombo = m_Combo;
 				m_BombsTapped++;
 				m_Combo = 0;
 				m_NextFeverCombo = mConfig.feverCombo;
+				EndFever(false);
                 m_Timer.AddTime(-2f);
 				// AddTime can complete the round and clear every target synchronously.
 				if (mGameFlow.State != GameFlowState.Playing) return;
 				m_ComboText.text = GameLocalization.T("BOMB!  -2.0 SEC", "폭탄!  -2.0초");
+				m_UiGamePopup.ShowComboFailure(lostCombo, true);
+				RefreshComboPresentation();
                 mTargetPool.Despawn(target.gameObject);
                 m_ActiveTargets.Remove(target);
                 RefillTargets();
@@ -435,6 +450,7 @@ namespace _01.Scripts.Scene
 			}
             m_ScoreText.text = m_Score.ToString("00");
 			UpdateComboText(target.Type == TapTargetType.TimeBonus);
+			RefreshComboPresentation();
             mTargetPool.Despawn(target.gameObject);
             m_ActiveTargets.Remove(target);
             RefillTargets();
@@ -443,6 +459,13 @@ namespace _01.Scripts.Scene
 		private int GetScoreMultiplier() => m_FeverRemaining > 0f
 			? Mathf.Max(2, mConfig.feverScoreMultiplier)
 			: m_Combo >= 20 ? 3 : m_Combo >= 5 ? 2 : 1;
+
+		private void RefreshComboPresentation()
+		{
+			m_UiGamePopup.UpdateComboState(m_Combo, GetScoreMultiplier(), m_NextFeverCombo,
+				mConfig.feverCombo, m_FeverRemaining, mConfig.feverMaximumDuration, m_PaceStage,
+				mGameFlow.State == GameFlowState.Playing);
+		}
 
 		private void UpdateComboText(bool timeBonus = false)
 		{
@@ -463,11 +486,15 @@ namespace _01.Scripts.Scene
 
             if (target.Type != TapTargetType.Bomb)
             {
-				if (m_Combo > 0) Managers.Sound.Play(Define.Sound.Effect, "SFX/Target_Miss", 0.32f);
+				int lostCombo = m_Combo;
+				m_TapFeedback.ShowMiss(target, lostCombo);
 				m_Misses++;
 				m_Combo = 0;
 				m_NextFeverCombo = mConfig.feverCombo;
+				EndFever(false);
 				m_ComboText.text = GameLocalization.T("MISSED  •  STREAK LOST", "놓침  •  연속 터치 초기화");
+				m_UiGamePopup.ShowComboFailure(lostCombo, false);
+				RefreshComboPresentation();
             }
 
             mTargetPool.Despawn(target.gameObject);
@@ -526,6 +553,7 @@ namespace _01.Scripts.Scene
 			var isReady = state == GameFlowState.Ready;
 			var isPlaying = state == GameFlowState.Playing;
 			var isResult = state == GameFlowState.Result;
+			RefreshComboPresentation();
 
 			
 			m_UiGamePopup.SetStatus(isReady
@@ -574,8 +602,15 @@ namespace _01.Scripts.Scene
 				Managers.Sound.Play(Define.Sound.Effect,
 					isNewPersonalBest ? "SFX/New_Best" : "SFX/Round_Complete", 0.62f);
 				bestScore = Mathf.Max(bestScore, m_Score);
-				PlayerPrefs.SetInt(BestScoreKey, bestScore);
-				PlayerPrefs.Save();
+				bool persistResult = true;
+#if UNITY_EDITOR
+				persistResult = !SuppressRecordPersistenceForQa;
+#endif
+				if (persistResult)
+				{
+					PlayerPrefs.SetInt(BestScoreKey, bestScore);
+					PlayerPrefs.Save();
+				}
 				m_BestText.text = bestScore.ToString("00");
 				m_ResultText.text = GameLocalization.T("SCORE  ", "점수  ") + m_Score.ToString("00")
 				                              + GameLocalization.T("\nBEST  ", "\n최고 기록  ") + bestScore.ToString("00")
@@ -583,7 +618,7 @@ namespace _01.Scripts.Scene
 				                              + GameLocalization.T("\nACCURACY  ", "\n정확도  ") + GetAccuracy().ToString("0") + "%"
 				                              + GameLocalization.T("\nGRADE  ", "\n등급  ") + GetGrade();
 
-				if (isNewPersonalBest)
+				if (isNewPersonalBest && persistResult)
 				{
 					RegisterNewPersonalBest(m_Score);
 				}
@@ -595,11 +630,12 @@ namespace _01.Scripts.Scene
 			}
 		}
 
-		private async void RegisterNewPersonalBest(int score)
+		private void RegisterNewPersonalBest(int score)
 		{
 			try
 			{
-				await Managers.Rank.GetPlayerIdAsync();
+				// Nickname entry is local; score submission already waits for service initialization.
+				// Waiting here could reopen an old result prompt after the player had retried.
 				const string defaultNickname = "NONAME";
 
 				if (this == null || m_UiGamePopup == null) return;
@@ -618,6 +654,7 @@ namespace _01.Scripts.Scene
 		
 		private void ClearTargets()
 		{
+			m_TapFeedback?.Clear();
 			mTargetPool.DespawnAll();
 			m_ActiveTargets.Clear();
 		}
@@ -638,6 +675,8 @@ namespace _01.Scripts.Scene
 			m_Misses = 0;
 			m_BombsTapped = 0;
 			m_LastCountdownSecond = -1;
+			m_RoundElapsed = 0f;
+			m_PaceStage = 1;
 			m_FeverRemaining = 0f;
 			m_NextFeverCombo = mConfig.feverCombo;
 			m_ScoreText.text = "00";

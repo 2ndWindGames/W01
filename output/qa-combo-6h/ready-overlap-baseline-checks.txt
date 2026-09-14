@@ -1,0 +1,2 @@
+PASS Korean authored combo HUD hidden at Ready
+STATUS Korean Ready top=1145.80 HUD bottom=1126.84

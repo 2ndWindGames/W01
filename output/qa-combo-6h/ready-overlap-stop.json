@@ -1,0 +1,13 @@
+{
+    "state": "FAILED_OR_INTERRUPTED",
+    "startedUtc": "2026-09-13T14:45:05.0304086Z",
+    "updatedUtc": "2026-09-13T15:02:39.8283427Z",
+    "endedUtc": "2026-09-13T15:02:39.8283427Z",
+    "activeSeconds": 1054.8469919874333,
+    "frames": 63124,
+    "rounds": 23,
+    "contacts": 2558,
+    "checks": 2710,
+    "managedBytes": 52850688,
+    "error": "Stopped by request"
+}

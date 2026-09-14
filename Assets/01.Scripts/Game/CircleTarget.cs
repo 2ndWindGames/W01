@@ -24,6 +24,7 @@ namespace _01.Scripts.Game
         private float m_RemainingLifetime;
         private bool m_FeverMode;
         private bool m_Paused;
+        private float m_Pace = 1f;
         
         private static readonly Sprite[] s_TargetSprites = new Sprite[4];
         private static readonly string[] s_TargetResourcePaths =
@@ -53,7 +54,7 @@ namespace _01.Scripts.Game
         private void Update()
         {
             if (m_Paused) return;
-            float pulseSpeed = m_FeverMode ? 9.5f : 5.5f;
+            float pulseSpeed = (m_FeverMode ? 9.5f : 5.5f) * m_Pace;
             float pulseAmount = m_FeverMode ? 0.14f : 0.08f;
             float pulse = 1f + Mathf.Sin(Time.time * pulseSpeed + m_PulsePhase) * pulseAmount;
             float lifeRatio = m_Lifetime > 0f ? Mathf.Clamp01(m_RemainingLifetime / m_Lifetime) : 1f;
@@ -136,6 +137,7 @@ namespace _01.Scripts.Game
         }
 
         public void SetPaused(bool paused) => m_Paused = paused;
+        public void SetPace(float pace) => m_Pace = Mathf.Clamp(pace, 1f, 2f);
 
         // Respond on contact. Waiting for release made fast taps feel disconnected.
         public void OnPointerDown(PointerEventData eventData)
@@ -155,6 +157,7 @@ namespace _01.Scripts.Game
             m_FeverMode = false;
             m_Paused = false;
             transform.rotation = Quaternion.identity;
+            m_Pace = 1f;
             transform.localScale = m_BaseScale;
         }
     }

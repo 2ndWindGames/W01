@@ -177,6 +177,8 @@ namespace _01.Scripts.UI.Popup
                 new Color(.62f, .62f, .62f));
             dismissLabel.font = TMP_Settings.defaultFontAsset;
             dismissLabel.fontStyle = FontStyles.Bold;
+            // The shared font has a cyan outline; this icon must stay neutral grey.
+            dismissLabel.outlineColor = new Color(.62f, .62f, .62f);
             dismissLabel.textWrappingMode = TextWrappingModes.NoWrap;
             m_DismissButton = dismissRect.gameObject.AddComponent<Button>();
             StyleIconButton(m_DismissButton, dismissLabel);
@@ -234,8 +236,8 @@ namespace _01.Scripts.UI.Popup
                     "누르면 −2초, 연속 기록이 초기화돼요.\n터치하지 말고 사라지게 두세요."),
                 new Color(1f, .48f, .54f), TapTargetType.Bomb, false);
             Card("Fever", "target_normal", GameLocalization.T("FEVER", "피버"),
-                GameLocalization.T($"{config.feverCombo} hits: ×{config.feverScoreMultiplier} points for {config.feverDuration:0} seconds.\n{config.feverTargetCount} targets appear at once.\nEach hit extends fever.",
-                    $"{config.feverCombo}연속 터치하면 {config.feverDuration:0}초간 점수 {config.feverScoreMultiplier}배.\n타깃 {config.feverTargetCount}개가 함께 나타나요.\n터치할수록 피버 시간이 늘어나요."),
+                GameLocalization.T($"{config.feverCombo} hits: ×{config.feverScoreMultiplier} points for {config.feverDuration:0} seconds.\n{config.feverTargetCount} targets; each hit extends fever.\nA miss or bomb ends fever!",
+                    $"{config.feverCombo}연속 터치하면 {config.feverDuration:0}초간 점수 {config.feverScoreMultiplier}배.\n타깃 {config.feverTargetCount}개 · 터치할수록 피버 연장\n놓치거나 폭탄을 누르면 피버 종료!"),
                 new Color(1f, .54f, .92f), TapTargetType.Normal, true);
 
             var effect = Button(m_Panel, "btnHelpEffects", "", new Vector2(438, 132), new Vector2(-229, 252), () =>

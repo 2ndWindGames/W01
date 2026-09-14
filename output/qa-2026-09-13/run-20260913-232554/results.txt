@@ -1,0 +1,10 @@
+PASS Existing initialization completed before the local delay fixture
+PASS New record result is reached while initialization is still pending
+DELAYED RECORD promptOpenedBeforeInitialization=False
+PASS The player can start another round before the delayed completion
+DELAYED COMPLETION state=Playing nicknameOpen=True paused=True
+FAIL Late initialization cannot open an old record prompt over a restarted round
+FAIL System.InvalidOperationException: Late initialization cannot open an old record prompt over a restarted round
+  at VioletTapQaRunner.Check (System.Boolean condition, System.String description) [0x00029] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:2123 
+  at VioletTapQaRunner+<DelayedNicknameScenarios>d__46.MoveNext () [0x003f0] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:614 
+  at VioletTapQaRunner.Tick () [0x005e3] in C:\SecondWindGames\Repositoires\Unity\W01\Assets\Editor\VioletTapQaRunner.cs:454 

@@ -1,0 +1,17 @@
+{
+    "state": "SMOKE_PASSED",
+    "startedUtc": "2026-09-13T15:14:57.3700945Z",
+    "updatedUtc": "2026-09-13T15:15:01.1743874Z",
+    "endedUtc": "2026-09-13T15:15:01.1743874Z",
+    "activeSeconds": 0.0,
+    "timingVersion": 1,
+    "legacyStartupAllowanceSeconds": 0.0,
+    "verifiedFullSpeedSeconds": 0.0,
+    "currentTimeScale": 1.0,
+    "frames": 171,
+    "rounds": 0,
+    "contacts": 0,
+    "checks": 88,
+    "managedBytes": 49213440,
+    "error": ""
+}
