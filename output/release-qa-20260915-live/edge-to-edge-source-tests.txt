@@ -1,0 +1,17 @@
+PASS: Only the game launch theme is selected
+PASS: Permissions, metadata, deep links, activity properties and SDK activity are preserved
+PASS: Android 14 and older retain the Unity theme
+PASS: Android 15+ preserves the Unity splash parent
+PASS: Android 15+ launch explicitly uses ALWAYS
+PASS: Repeated post-processing is idempotent
+PASS: No opt-out or deprecated SHORT_EDGES added
+PASS: Invalid configuration rejected: Unexpected Android game theme
+PASS: Invalid configuration rejected: Enable Android Render Outside Safe Area
+PASS: Invalid configuration rejected: requires UnityPlayerGameActivity
+PASS: Real generated Gradle project remains unchanged by these tests
+PASS: Safe viewport: 1080,2340,0,96,1080,2124,0
+PASS: Safe viewport: 1080,2340,0,48,1080,2172,90
+PASS: Safe viewport: 2340,1080,120,0,2124,1050,90
+PASS: Safe viewport: 1536,2048,0,96,1536,1904,0
+PASS: Safe viewport: 540,2340,0,48,540,2172,90
+Passed 16 checks. Fixtures: C:\Users\rlatmdwp5\Documents\GitHub\W01\output\android-edge-to-edge-audit\fixtures-be68b18fe1ee49ca8b3da0fedc1e790b

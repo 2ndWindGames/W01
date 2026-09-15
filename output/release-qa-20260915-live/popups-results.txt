@@ -1,0 +1,71 @@
+PASS Korean sound blocks underlying btn_start
+PASS Korean sound blocks underlying btn_sound
+PASS Korean sound blocks underlying btn_rank
+PASS Korean sound blocks underlying btn_easteregg
+PASS Korean sound text fits: txtTitle
+PASS Korean sound text fits: txtBgm
+PASS Korean sound text fits: txtEffect
+PASS Korean sound text fits: txtHaptics
+PASS Korean sound text fits: txtPrivacy
+PASS Korean sound text fits: txtClose
+PASS Korean music toggle receives input
+PASS Korean music OFF persists and mutes playback
+PASS Korean effects toggle receives input
+PASS Korean effects OFF persists and mutes playback
+PASS Korean vibration toggle receives input
+PASS Korean vibration OFF persists on the device
+PASS Korean music and effects OFF persist on the device
+PASS Korean sound close receives input
+PASS Korean sound close returns to the original intro
+PASS Korean reopened settings show all three saved OFF states
+PASS Korean music can be re-enabled
+PASS Korean effects can be re-enabled
+PASS Korean vibration can be re-enabled
+PASS Korean all three feedback settings return ON
+PASS Korean reopened sound closes
+PASS Korean ranking blocks underlying btn_start
+PASS Korean ranking blocks underlying btn_sound
+PASS Korean ranking blocks underlying btn_rank
+PASS Korean ranking blocks underlying btn_easteregg
+PASS Korean ranking state fits on one line: 랭킹
+PASS Korean ranking state fits on one line: 랭킹 불러오는 중...
+PASS Korean ranking state fits on one line: 랭킹을 불러올 수 없습니다
+PASS Korean ranking state fits on one line: 아직 등록된 기록이 없습니다
+PASS Korean ranking close receives input
+PASS Korean ranking close restores the intro popup
+PASS English sound blocks underlying btn_start
+PASS English sound blocks underlying btn_sound
+PASS English sound blocks underlying btn_rank
+PASS English sound blocks underlying btn_easteregg
+PASS English sound text fits: txtTitle
+PASS English sound text fits: txtBgm
+PASS English sound text fits: txtEffect
+PASS English sound text fits: txtHaptics
+PASS English sound text fits: txtPrivacy
+PASS English sound text fits: txtClose
+PASS English music toggle receives input
+PASS English music OFF persists and mutes playback
+PASS English effects toggle receives input
+PASS English effects OFF persists and mutes playback
+PASS English vibration toggle receives input
+PASS English vibration OFF persists on the device
+PASS English music and effects OFF persist on the device
+PASS English sound close receives input
+PASS English sound close returns to the original intro
+PASS English reopened settings show all three saved OFF states
+PASS English music can be re-enabled
+PASS English effects can be re-enabled
+PASS English vibration can be re-enabled
+PASS English all three feedback settings return ON
+PASS English reopened sound closes
+PASS English ranking blocks underlying btn_start
+PASS English ranking blocks underlying btn_sound
+PASS English ranking blocks underlying btn_rank
+PASS English ranking blocks underlying btn_easteregg
+PASS English ranking state fits on one line: RANKING
+PASS English ranking state fits on one line: LOADING RANKING...
+PASS English ranking state fits on one line: RANKING UNAVAILABLE
+PASS English ranking state fits on one line: NO SCORES YET
+PASS English ranking close receives input
+PASS English ranking close restores the intro popup
+PASS No runtime errors during settings and ranking popup QA

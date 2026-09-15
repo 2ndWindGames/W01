@@ -1,0 +1,7 @@
+>     resource 0x7f0f011a style/VioletTapGameActivityTheme
+        () (style) size=0 parent=style/BaseUnityGameActivityTheme (0x7f0f00a1)
+        (v35) (style) size=1 parent=style/BaseUnityGameActivityTheme (0x7f0f00a1)
+>         0x01010586=3
+      resource 0x7f0f011b style/Widget.AppCompat.ActionBar
+        () (style) size=0 parent=style/Base.Widget.AppCompat.ActionBar (0x7f0f0067)
+      resource 0x7f0f011c style/Widget.AppCompat.ActionBar.Solid

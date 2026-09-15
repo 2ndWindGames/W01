@@ -1,0 +1,7 @@
+ARM64_LIBRARY_COUNT=6
+base/lib/arm64-v8a/libc++_shared.so	LOAD=4	MIN_ALIGN=16384	PASS=True
+base/lib/arm64-v8a/libgame.so	LOAD=3	MIN_ALIGN=16384	PASS=True
+base/lib/arm64-v8a/libil2cpp.so	LOAD=4	MIN_ALIGN=16384	PASS=True
+base/lib/arm64-v8a/libmain.so	LOAD=4	MIN_ALIGN=16384	PASS=True
+base/lib/arm64-v8a/libswappywrapper.so	LOAD=3	MIN_ALIGN=16384	PASS=True
+base/lib/arm64-v8a/libunity.so	LOAD=4	MIN_ALIGN=16384	PASS=True

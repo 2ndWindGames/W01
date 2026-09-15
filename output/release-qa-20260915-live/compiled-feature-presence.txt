@@ -1,0 +1,4 @@
+SecondPulseLabel: NEW=True OLD=False
+RewardedMethod: NEW=True OLD=False
+ConfiguredRewardedUnit: NEW=True OLD=False
+PrivacyOptionsMethod: NEW=True OLD=True

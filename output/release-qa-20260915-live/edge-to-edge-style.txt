@@ -1,0 +1,5 @@
+Package 'com.secondwindgames.violettap':
+0x7f0f011a - style/VioletTapGameActivityTheme
+	(default) - [STYLE] []
+	sdk_version: 35 - [STYLE] [3]
+

@@ -1,0 +1,6 @@
+RESULT Succeeded
+ERRORS 2
+WARNINGS 1
+Error | Build player | Saving Prefab to immutable folder is not allowed: Packages/com.google.ads.mobile/GoogleMobileAds/Editor/Resources/PlaceholderAds/Rewarded/768x1024.prefab
+Error | Build player | Saving Prefab to immutable folder is not allowed: Packages/com.google.ads.mobile/GoogleMobileAds/Editor/Resources/PlaceholderAds/Interstitials/768x1024.prefab
+Warning | Incremental player build | Plugin 'Packages/com.google.ads.mobile/Plugins/iOS/unity-plugin-library.xcframework' is not supported on Android, please deselect it in Plugin Inspector

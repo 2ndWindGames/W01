@@ -24,8 +24,6 @@ namespace _01.Scripts.UI.Popup
         private readonly List<RectTransform> m_Cards = new();
         private TextMeshProUGUI m_Title;
         private TextMeshProUGUI m_Hint;
-        private TextMeshProUGUI m_EffectLabel;
-        private TextMeshProUGUI m_HapticsLabel;
         private TextMeshProUGUI m_ResumeLabel;
         private Button m_OpenButton;
         private Vector2 m_LayoutSize;
@@ -69,11 +67,7 @@ namespace _01.Scripts.UI.Popup
             m_Hint = FindRequired("Hint").GetComponent<TextMeshProUGUI>();
             m_OpenButton = FindRequired("btnHelp").GetComponent<Button>();
             Button dismiss = FindRequired("btnHelpDismiss").GetComponent<Button>();
-            Button effects = FindRequired("btnHelpEffects").GetComponent<Button>();
-            Button haptics = FindRequired("btnHelpHaptics").GetComponent<Button>();
             Button resume = FindRequired("btnHelpClose").GetComponent<Button>();
-            m_EffectLabel = effects.GetComponentInChildren<TextMeshProUGUI>(true);
-            m_HapticsLabel = haptics.GetComponentInChildren<TextMeshProUGUI>(true);
             m_ResumeLabel = resume.GetComponentInChildren<TextMeshProUGUI>(true);
 
             foreach (string name in new[] { "Normal", "Quick", "Time", "Bomb", "Fever" })
@@ -82,8 +76,6 @@ namespace _01.Scripts.UI.Popup
             m_OpenButton.onClick.AddListener(Open);
             dismiss.onClick.AddListener(Close);
             resume.onClick.AddListener(Close);
-            effects.onClick.AddListener(ToggleEffects);
-            haptics.onClick.AddListener(ToggleHaptics);
             BindCard("Normal", TapTargetType.Normal, false);
             BindCard("Quick", TapTargetType.Quick, false);
             BindCard("Time", TapTargetType.TimeBonus, false);
@@ -101,18 +93,16 @@ namespace _01.Scripts.UI.Popup
             m_Modal.SetActive(false);
             m_OpenButton.gameObject.SetActive(true);
             RefreshText();
-            RefreshSettings();
             GameLocalization.ApplyFont(this);
         }
 
         public void Open()
         {
-            if (!isActiveAndEnabled || IsOpen || m_Game == null || Managers.Ads.IsShowingInterstitial) return;
+            if (!isActiveAndEnabled || IsOpen || m_Game == null || Managers.Ads.IsShowingFullScreenAd) return;
             m_Game.SetHelpOpen(true);
             m_OpenButton.gameObject.SetActive(false);
             m_Modal.SetActive(true);
             RefreshText();
-            RefreshSettings();
             FitPanel();
             Canvas.ForceUpdateCanvases();
             m_Scroll.StopMovement();
@@ -135,20 +125,6 @@ namespace _01.Scripts.UI.Popup
             if (Input.GetKeyDown(KeyCode.Escape)) Close();
         }
 
-        private void ToggleEffects()
-        {
-            Managers.SetEffectEnabled(!Managers.IsEffectEnabled);
-            RefreshSettings();
-            if (Managers.IsEffectEnabled) TapFeedback.PlayCue(TapTargetType.Normal, false);
-        }
-
-        private void ToggleHaptics()
-        {
-            TapHaptics.SetEnabled(!TapHaptics.IsEnabled);
-            RefreshSettings();
-            TapHaptics.Play(TapTargetType.Normal);
-        }
-
         private void BindCard(string name, TapTargetType type, bool fever)
         {
             FindRequired("Card" + name).GetComponent<Button>().onClick.AddListener(
@@ -160,8 +136,8 @@ namespace _01.Scripts.UI.Popup
             var config = m_Game.Config;
             m_Title.text = GameLocalization.T("NEON FIELD GUIDE", "네온 터치 가이드");
             m_Hint.text = GameLocalization.T(
-                "PULSE: build a streak · SCAN: tap safe, avoid bomb.\nSURGE: tap 1 → 2 → 3; mistakes or misses reset the streak.\nTap cards for sound and vibration. Play pauses here.",
-                "펄스: 연속 터치 · 스캔: 안전 타깃 터치, 폭탄 피하기\n서지: 1 → 2 → 3 순서대로. 틀리거나 놓치면 연속 기록 초기화\n카드로 소리·진동 체험 · 도움말을 보는 동안 일시정지");
+                "PULSE: build a streak · SCAN: tap safe, avoid bomb.\nSURGE: tap 1 → 2 → 3; mistakes or misses reset the streak.\nTap cards to preview effects. Play pauses here.",
+                "펄스: 연속 터치 · 스캔: 안전 타깃 터치, 폭탄 피하기\n서지: 1 → 2 → 3 순서대로. 틀리거나 놓치면 연속 기록 초기화\n카드를 눌러 효과 확인 · 도움말을 보는 동안 일시정지");
             m_Hint.fontSize = 24f;
             m_Hint.fontSizeMax = 24f;
             m_Hint.fontSizeMin = 20f;
@@ -192,14 +168,6 @@ namespace _01.Scripts.UI.Popup
             card.Find("Description").GetComponent<TextMeshProUGUI>().text = description;
         }
 
-        private void RefreshSettings()
-        {
-            m_EffectLabel.text = GameLocalization.T("SOUND", "효과음") + (Managers.IsEffectEnabled ? "  ON" : "  OFF");
-            m_HapticsLabel.text = GameLocalization.T("VIBRATION", "진동") + (TapHaptics.IsEnabled ? "  ON" : "  OFF");
-            m_EffectLabel.color = Managers.IsEffectEnabled ? Color.white : new Color(.64f, .71f, .8f);
-            m_HapticsLabel.color = TapHaptics.IsEnabled ? Color.white : new Color(.64f, .71f, .8f);
-        }
-
         private void FitPanel()
         {
             Vector2 available = ((RectTransform)transform).rect.size;
@@ -212,7 +180,18 @@ namespace _01.Scripts.UI.Popup
             m_Title.rectTransform.anchoredPosition = new Vector2(-48f, -116f);
             m_Title.rectTransform.sizeDelta = new Vector2(size.x - 256f, 72f);
             m_Hint.rectTransform.sizeDelta = new Vector2(size.x - 160f, 106f);
-            m_Content.sizeDelta = new Vector2(size.x - 84f, m_Cards.Count * (CardHeight + CardGap) - CardGap);
+            RectTransform viewport = (RectTransform)m_Scroll.transform;
+            viewport.anchoredPosition = new Vector2(0f, -58f);
+            viewport.sizeDelta = new Vector2(-64f, -500f);
+            if (m_Scroll.verticalScrollbar != null)
+            {
+                RectTransform track = (RectTransform)m_Scroll.verticalScrollbar.transform;
+                track.anchoredPosition = new Vector2(-16f, -58f);
+                track.sizeDelta = new Vector2(8f, -500f);
+            }
+            float contentHeight = m_Cards.Count * (CardHeight + CardGap) - CardGap;
+            m_Content.sizeDelta = new Vector2(size.x - 84f, contentHeight);
+            m_Scroll.vertical = contentHeight > size.y - 500f + 1f;
             float cardWidth = m_Content.sizeDelta.x;
             for (int i = 0; i < m_Cards.Count; i++)
             {
@@ -223,9 +202,6 @@ namespace _01.Scripts.UI.Popup
                 ((RectTransform)card.Find("Name")).sizeDelta = new Vector2(cardWidth - 232f, 54f);
                 ((RectTransform)card.Find("Description")).sizeDelta = new Vector2(cardWidth - 232f, 154f);
             }
-            float toggleWidth = (size.x - 84f) * .5f;
-            PlaceBottom(m_EffectLabel.transform.parent, new Vector2(toggleWidth, 132f), new Vector2(-(toggleWidth + 20f) * .5f, 252f));
-            PlaceBottom(m_HapticsLabel.transform.parent, new Vector2(toggleWidth, 132f), new Vector2((toggleWidth + 20f) * .5f, 252f));
             PlaceBottom(m_ResumeLabel.transform.parent, new Vector2(size.x - 64f, 136f), new Vector2(0f, 100f));
         }
 

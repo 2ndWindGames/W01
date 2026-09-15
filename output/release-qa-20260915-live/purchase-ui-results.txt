@@ -1,0 +1,31 @@
+PASS English unavailable product stays visible and disabled
+PASS English ready product becomes interactable
+PASS English purchase in progress disables the button
+PASS English failed purchase restores button input
+PASS English failed purchase notifies the popup
+PASS English purchase in progress disables the button
+PASS English failed confirmation restores button input
+PASS English purchase in progress disables the button
+DEFERRED English purchasing=False interactable=True status=Purchase approval is pending.
+PASS English deferred approval restores button input
+PASS English approval pending is not reported as a failed purchase
+PASS English pending approval has a localized status
+PASS English approval notice returns to the game status
+PASS English simulated callbacks never grant or change the real entitlement
+PASS English popup destruction releases all local purchase subscriptions
+PASS Korean unavailable product stays visible and disabled
+PASS Korean ready product becomes interactable
+PASS Korean purchase in progress disables the button
+PASS Korean failed purchase restores button input
+PASS Korean failed purchase notifies the popup
+PASS Korean purchase in progress disables the button
+PASS Korean failed confirmation restores button input
+PASS Korean purchase in progress disables the button
+DEFERRED Korean purchasing=False interactable=True status=구매 승인을 기다리고 있습니다.
+PASS Korean deferred approval restores button input
+PASS Korean approval pending is not reported as a failed purchase
+PASS Korean pending approval has a localized status
+PASS Korean approval notice returns to the game status
+PASS Korean simulated callbacks never grant or change the real entitlement
+PASS Korean popup destruction releases all local purchase subscriptions
+PASS No runtime errors during local purchase UI callback QA

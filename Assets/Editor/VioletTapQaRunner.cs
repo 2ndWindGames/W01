@@ -257,7 +257,7 @@ public static class VioletTapQaRunner
     private static void Begin()
     {
         SessionState.SetBool(PendingKey, false);
-        runDirectory = Path.Combine(Root, "run-" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        runDirectory = Path.Combine(Root, "run-" + DateTime.Now.ToString("yyyyMMdd-HHmmss-fff"));
         Directory.CreateDirectory(runDirectory);
         Results.Clear();
         Errors.Clear();
@@ -278,6 +278,7 @@ public static class VioletTapQaRunner
         });
         previousRandom = UnityEngine.Random.state;
         previousAdsDisabled = null;
+        GameScene.SuppressSecondPulseForQa = true;
         SessionState.SetBool("VioletTap.QA.HadBest", PlayerPrefs.HasKey(BestKey));
         SessionState.SetInt("VioletTap.QA.Best", PlayerPrefs.GetInt(BestKey));
         foreach (string key in new[] { "VioletTap.Audio.BgmEnabled", "VioletTap.Audio.EffectEnabled", TapHaptics.EnabledKey })
@@ -778,8 +779,8 @@ public static class VioletTapQaRunner
             EditorPrefs.SetString("VioletTap.EditorLanguage", language);
             var popup = Managers.UI.ShowPopupUI<UI_SoundPopup>();
             for (int i = 0; i < 4; i++) yield return null;
-            Check(popup.GetComponentsInChildren<TMP_Text>().Count(label => label.text.Contains("OFF")) == 2,
-                language + " initial sound settings show both saved OFF values");
+            Check(popup.GetComponentsInChildren<TMP_Text>().Count(label => label.text.Contains("OFF")) == 3,
+                language + " initial settings show all three saved OFF values");
             Managers.UI.ClosePopupUI(popup);
             Managers.Scene.ChangeScene(W01SceneType.Game);
             for (int i = 0; i < 6; i++) yield return null;
@@ -788,8 +789,10 @@ public static class VioletTapQaRunner
             game.StartRound();
             var help = Object.FindFirstObjectByType<UI_GameHelp>();
             help.Open();
-            Check(help.GetComponentsInChildren<TMP_Text>().Count(label => label.text.Contains("OFF")) == 2,
-                language + " initial guide reflects saved effects and haptics OFF");
+            Check(help.GetComponentsInChildren<TMP_Text>().All(label => !label.text.Contains("OFF"))
+                && help.GetComponentsInChildren<UnityEngine.UI.Button>().All(button =>
+                    button.name != "btnHelpEffects" && button.name != "btnHelpHaptics"),
+                language + " guide omits sound and vibration settings");
             foreach (TapTargetType type in Enum.GetValues(typeof(TapTargetType)))
             {
                 TapFeedback.PlayCue(type, false);
@@ -921,6 +924,11 @@ public static class VioletTapQaRunner
             }
             Canvas.ForceUpdateCanvases();
             var openerRect = ScreenRect((RectTransform)opener.transform);
+			var visibleIconRect = ScreenRect((RectTransform)opener.transform.Find("QuestionIcon"));
+			var backgroundRect = ScreenRect((RectTransform)ui.transform.Find("img_bg"));
+			float rightFrameSafeX = backgroundRect.xMax - backgroundRect.width * (80f / 1080f);
+			Check(visibleIconRect.xMax <= rightFrameSafeX,
+				language + " visible help icon clears the right neon frame");
             foreach (var control in ui.GetComponentsInChildren<UnityEngine.UI.Button>())
             {
                 if (control == opener) continue;
@@ -979,22 +987,25 @@ public static class VioletTapQaRunner
             var scrollEvent = new PointerEventData(EventSystem.current) { scrollDelta = new Vector2(0f, -30f) };
             ExecuteEvents.Execute(scroll.gameObject, scrollEvent, ExecuteEvents.scrollHandler);
             for (int i = 0; i < 3; i++) yield return null;
-            Check(scroll.content.rect.height <= scroll.viewport.rect.height || scroll.verticalNormalizedPosition < .01f,
-                language + " scrolling reaches the last card");
+            if (scroll.content.rect.height <= scroll.viewport.rect.height)
+            {
+                RectTransform lastCard = (RectTransform)help.GetComponentsInChildren<UnityEngine.UI.Button>()
+                    .Single(b => b.name == "CardFever").transform;
+                Vector2 lastCenter = RectTransformUtility.WorldToScreenPoint(Camera.main,
+                    lastCard.TransformPoint(lastCard.rect.center));
+                Check(!scroll.vertical && RectTransformUtility.RectangleContainsScreenPoint(scroll.viewport, lastCenter, Camera.main),
+                    language + " fitted guide remains fixed with the last card visible");
+            }
+            else
+            {
+                Check(scroll.verticalNormalizedPosition < .01f, language + " scrolling reaches the last card");
+            }
             Check(Get<int>(game, "m_Score") == score && Mathf.Approximately(remaining, timer.Remaining), language + " previews and scrolling never advance gameplay");
             Capture("help-bottom-" + language.ToLowerInvariant());
             for (int i = 0; i < 3; i++) yield return null;
             var buttons = help.GetComponentsInChildren<UnityEngine.UI.Button>();
-            var effects = buttons.Single(b => b.name == "btnHelpEffects");
-            bool originalEffects = Managers.IsEffectEnabled;
-            ClickVisible(effects.gameObject, language + " fixed effects control receives input");
-            Check(Managers.IsEffectEnabled != originalEffects, language + " effects setting toggles");
-            ClickVisible(effects.gameObject, language + " effects setting restores");
-            var haptics = buttons.Single(b => b.name == "btnHelpHaptics");
-            bool originalHaptics = TapHaptics.IsEnabled;
-            ClickVisible(haptics.gameObject, language + " fixed haptics control receives input");
-            Check(TapHaptics.IsEnabled != originalHaptics, language + " haptics setting toggles");
-            ClickVisible(haptics.gameObject, language + " haptics setting restores");
+            Check(buttons.All(button => button.name != "btnHelpEffects" && button.name != "btnHelpHaptics"),
+                language + " guide has no sound or vibration setting buttons");
             ClickVisible(buttons.Single(b => b.name == "btnHelpClose").gameObject, language + " fixed return control receives input");
             for (int i = 0; i < 3; i++) yield return null;
             Check(!help.IsOpen && !game.IsGameplayPaused, language + " return resumes the round");
@@ -1868,7 +1879,8 @@ public static class VioletTapQaRunner
             for (int i = 0; i < 6; i++) yield return null;
             // Disable Start on the popup before the next frame to keep these rows entirely local.
             var panel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Popup/UI_Rankpopup"));
-            panel.GetComponent<UI_RankPopup>().enabled = false;
+			var popup = panel.GetComponent<UI_RankPopup>();
+			popup.enabled = false;
             Managers.UI.SetCanvas(panel);
             GameLocalization.ApplyFont(panel.transform);
             typeof(UI_RankPopup).Assembly.GetType("_01.Scripts.UI.Popup.PopupPresentation")
@@ -1876,6 +1888,87 @@ public static class VioletTapQaRunner
             panel.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtTitle").text = GameLocalization.T("RANKING", "랭킹");
             panel.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtClose").text = GameLocalization.T("CLOSE", "닫기");
             var scroll = panel.GetComponentInChildren<UnityEngine.UI.ScrollRect>();
+			Invoke(popup, "CreateMyRankingRow");
+			var myRankingRow = Get<UI_RankingItem>(popup, "m_MyRankingRow");
+			var myRankingLabel = Get<TextMeshProUGUI>(popup, "m_MyRankingLabel");
+			var myRankingRect = (RectTransform)myRankingRow.transform;
+			Vector2 myRankingPosition = myRankingRect.anchoredPosition;
+			var scrollRect = (RectTransform)scroll.transform;
+			var closeRect = (RectTransform)panel.transform.Find("btnClose");
+			var backgroundRect = (RectTransform)panel.transform.Find("imgBg");
+			Canvas.ForceUpdateCanvases();
+			Check(myRankingRow.transform.parent == panel.transform && !myRankingRow.transform.IsChildOf(scroll.content),
+				language + " my ranking row stays outside the scrolling list");
+			Check(myRankingLabel != null && myRankingLabel.text == GameLocalization.T("MY RANK", "내 순위")
+				&& myRankingLabel.transform.parent == panel.transform && !myRankingLabel.transform.IsChildOf(scroll.content),
+				language + " fixed personal section has a localized label outside the list");
+			Check(backgroundRect.rect.height >= 1250f && scroll.viewport.rect.height >= 550f,
+				language + " ranking panel is taller and exposes at least five complete rows");
+			float scrollBottom = scrollRect.anchoredPosition.y + scrollRect.rect.yMin;
+			var myLabelRect = myRankingLabel.rectTransform;
+			float myLabelTop = myLabelRect.anchoredPosition.y + myLabelRect.rect.yMax;
+			float myLabelBottom = myLabelRect.anchoredPosition.y + myLabelRect.rect.yMin;
+			float myTop = myRankingRect.anchoredPosition.y + myRankingRect.rect.yMax;
+			float myBottom = myRankingRect.anchoredPosition.y + myRankingRect.rect.yMin;
+			float closeTop = closeRect.anchoredPosition.y + closeRect.rect.yMax;
+			Check(scrollBottom - myLabelTop >= 20f && myLabelBottom - myTop >= 10f
+				&& myBottom - closeTop >= 20f,
+				language + " list, personal label, personal row, and close button have balanced gaps");
+			float frameTop = backgroundRect.anchoredPosition.y + backgroundRect.rect.yMax - 20f;
+			float frameBottom = backgroundRect.anchoredPosition.y + backgroundRect.rect.yMin + 20f;
+			RectTransform[] majorControls =
+			{
+				(RectTransform)panel.transform.Find("txtTitle"), scrollRect, myLabelRect, myRankingRect, closeRect
+			};
+			Check(majorControls.All(control => control.anchoredPosition.y + control.rect.yMax <= frameTop
+				&& control.anchoredPosition.y + control.rect.yMin >= frameBottom),
+				language + " all ranking controls stay inside the expanded panel");
+
+			Color pinnedBackground = myRankingRow.GetComponent<UnityEngine.UI.Image>().color;
+			Color pinnedNameColor = myRankingRow.GetComponentsInChildren<TMP_Text>()
+				.Single(t => t.name == "txtNicName").color;
+
+			Invoke(popup, "ShowMyRankingLoading");
+			var myStatus = myRankingRow.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtScore");
+			Check(myStatus.text == GameLocalization.T("LOADING", "불러오는 중")
+				&& ColorDistanceSquared(pinnedBackground, myRankingRow.GetComponent<UnityEngine.UI.Image>().color) < .001f,
+				language + " my ranking starts with a localized pinned loading state");
+			Invoke(popup, "ShowMyRankingNoRecord");
+			Check(myStatus.text == GameLocalization.T("NO RECORD", "기록 없음") && myRankingRow.gameObject.activeSelf
+				&& ColorDistanceSquared(pinnedBackground, myRankingRow.GetComponent<UnityEngine.UI.Image>().color) < .001f,
+				language + " unranked player keeps a visible fixed row");
+			Invoke(popup, "ShowMyRankingUnavailable");
+			Check(myStatus.text == GameLocalization.T("UNAVAILABLE", "확인 불가")
+				&& ColorDistanceSquared(pinnedBackground, myRankingRow.GetComponent<UnityEngine.UI.Image>().color) < .001f,
+				language + " my ranking has a localized pinned unavailable state");
+			string myLongName = language == "Korean" ? new string('가', 40) : new string('W', 40);
+			Invoke(popup, "ShowMyRanking", 123456, myLongName, 2147483647d);
+			Canvas.ForceUpdateCanvases();
+			Check(ColorDistanceSquared(pinnedBackground, myRankingRow.GetComponent<UnityEngine.UI.Image>().color) < .001f
+				&& ColorDistanceSquared(pinnedNameColor, myRankingRow.GetComponentsInChildren<TMP_Text>()
+					.Single(t => t.name == "txtNicName").color) < .001f,
+				language + " loaded personal record keeps the fixed-row color theme");
+			foreach (var label in myRankingRow.GetComponentsInChildren<TMP_Text>())
+			{
+				label.ForceMeshUpdate();
+				var rect = label.rectTransform.rect;
+				bool contained = label.textInfo.characterInfo.Take(label.textInfo.characterCount).Any(c => c.isVisible)
+					&& label.textInfo.characterInfo.Take(label.textInfo.characterCount).Where(c => c.isVisible)
+					.All(c => c.bottomLeft.x >= rect.xMin - 1f && c.topRight.x <= rect.xMax + 1f
+						&& c.bottomLeft.y >= rect.yMin - 1f && c.topRight.y <= rect.yMax + 1f);
+				Check(contained, language + " fixed ranking glyphs stay within " + label.name + ": " + label.text);
+				if (label.name == "txtRank") Check(!label.isTextTruncated && label.text == "123456",
+					language + " six-digit personal rank remains complete");
+				if (label.name == "txtScore") Check(!label.isTextTruncated && label.text == "2147483647",
+					language + " ten-digit personal score remains complete");
+			}
+			var fixedRank = myRankingRow.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtRank");
+			var fixedScore = myRankingRow.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtScore");
+			Check(TryGetVisibleGlyphXBounds(fixedRank, myRankingRect, out float fixedRankMin, out _)
+				&& TryGetVisibleGlyphXBounds(fixedScore, myRankingRect, out _, out float fixedScoreMax)
+				&& fixedRankMin >= myRankingRect.rect.xMin + 58f
+				&& fixedScoreMax <= myRankingRect.rect.xMax - 58f,
+				language + " fixed rank and score clear both neon frame caps");
             var rows = new List<UI_RankingItem>();
             string[] names = { "망펭", new string('가', 50), new string('W', 50), "<b>Hi</b>", "Donut", "바이올렛탭", "Soso", "Neon", "Tap", "LastPlayer" };
             for (int i = 0; i < names.Length; i++)
@@ -1889,7 +1982,7 @@ public static class VioletTapQaRunner
             Canvas.ForceUpdateCanvases();
             scroll.verticalNormalizedPosition = 1f;
             Capture("ranking-rows-" + language.ToLowerInvariant());
-            for (int i = 0; i < 3; i++) yield return null;
+            for (int i = 0; i < 6; i++) yield return null;
             foreach (var row in rows)
             {
                 foreach (var label in row.GetComponentsInChildren<TMP_Text>())
@@ -1904,11 +1997,35 @@ public static class VioletTapQaRunner
                     if (label.name == "txtRank") Check(label.font.HasCharacters(label.text), language + " ranking font includes all rank characters");
                     if (label.name == "txtScore") Check(!label.isTextTruncated, language + " complete score remains visible: " + label.text);
                 }
+				var rowRect = (RectTransform)row.transform;
+				var rankLabel = row.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtRank");
+				var nicknameLabel = row.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName");
+				var scoreLabel = row.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtScore");
+				bool hasRankGlyphs = TryGetVisibleGlyphXBounds(rankLabel, rowRect, out float rankMin, out float rankMax);
+				bool hasNicknameGlyphs = TryGetVisibleGlyphXBounds(nicknameLabel, rowRect, out float nicknameMin, out float nicknameMax);
+				bool hasScoreGlyphs = TryGetVisibleGlyphXBounds(scoreLabel, rowRect, out float scoreMin, out float scoreMax);
+				Check(hasRankGlyphs && hasNicknameGlyphs && hasScoreGlyphs
+					&& rankMin >= rowRect.rect.xMin + 58f && scoreMax <= rowRect.rect.xMax - 58f,
+					language + " rank and score glyphs clear the neon frame: " + rankLabel.text);
+				Check(nicknameMin - rankMax >= 10f && scoreMin - nicknameMax >= 10f,
+					language + " ranking columns stay visually separated: " + rankLabel.text);
             }
             var literal = rows[3].GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName");
             Check(literal.GetParsedText() == names[3], language + " nickname markup displays literally");
             var selfName = rows[1].GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName");
             Check(selfName.GetParsedText().StartsWith(GameLocalization.T("[YOU]", "[나]")), language + " current-player marker survives long nickname truncation");
+			string marker = GameLocalization.T("[YOU]", "[나]");
+			var fixedName = myRankingRow.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName");
+			Check(panel.GetComponentsInChildren<UI_RankingItem>().Count(row =>
+				row.GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName")
+					.GetParsedText().StartsWith(marker)) == 1
+				&& !fixedName.GetParsedText().StartsWith(marker),
+				language + " list marker and fixed personal label identify separate appearances");
+			var listSelfBackground = rows[1].GetComponent<UnityEngine.UI.Image>().color;
+			var listSelfNameColor = rows[1].GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName").color;
+			Check(ColorDistanceSquared(listSelfBackground, pinnedBackground) >= .2f
+				&& ColorDistanceSquared(listSelfNameColor, pinnedNameColor) >= .2f,
+				language + " list self-row and fixed personal row use clearly different colors");
             var wrappedName = rows[4].GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName");
             rows[4].SetProfile(5, "Line\nBreak\tName", 9996);
             wrappedName.ForceMeshUpdate();
@@ -1926,12 +2043,14 @@ public static class VioletTapQaRunner
                 language + " ranking rows route pointer scrolling to the list");
             ExecuteEvents.ExecuteHierarchy(hits[0].gameObject, pointer, ExecuteEvents.scrollHandler);
             for (int i = 0; i < 4; i++) yield return null;
+			Check((myRankingRect.anchoredPosition - myRankingPosition).sqrMagnitude < .01f,
+				language + " scrolling never moves the fixed personal row");
             var lastName = rows[9].GetComponentsInChildren<TMP_Text>().Single(t => t.name == "txtNicName");
             var lastCenter = lastName.rectTransform.TransformPoint(lastName.rectTransform.rect.center);
             Check(scroll.verticalNormalizedPosition < .01f && RectTransformUtility.RectangleContainsScreenPoint(viewport,
                 RectTransformUtility.WorldToScreenPoint(Camera.main, lastCenter), Camera.main), language + " scrolling reaches the last ranking row");
             Capture("ranking-bottom-" + language.ToLowerInvariant());
-            for (int i = 0; i < 3; i++) yield return null;
+            for (int i = 0; i < 6; i++) yield return null;
             Object.Destroy(panel);
             for (int i = 0; i < 3; i++) yield return null;
         }
@@ -1949,6 +2068,7 @@ public static class VioletTapQaRunner
             var intro = Managers.UI.FindPopup<UI_IntroPopup>();
             Managers.SetBgmEnabled(true);
             Managers.SetEffectEnabled(true);
+            TapHaptics.SetEnabled(true);
             var soundPopup = Managers.UI.ShowPopupUI<UI_SoundPopup>();
             for (int i = 0; i < 4; i++) yield return null;
             CheckPopupBlocksIntro(soundPopup, intro, language + " sound");
@@ -1964,18 +2084,26 @@ public static class VioletTapQaRunner
             Check(!Managers.IsBgmEnabled && Managers.Sound.IsMuted(Define.Sound.Bgm), language + " music OFF persists and mutes playback");
             ClickVisible(buttons.Single(b => b.name == "btnEffect").gameObject, language + " effects toggle receives input");
             Check(!Managers.IsEffectEnabled && Managers.Sound.IsMuted(Define.Sound.Effect), language + " effects OFF persists and mutes playback");
+            ClickVisible(buttons.Single(b => b.name == "btnHaptics").gameObject, language + " vibration toggle receives input");
+            Check(!TapHaptics.IsEnabled && PlayerPrefs.GetInt(TapHaptics.EnabledKey, 1) == 0,
+                language + " vibration OFF persists on the device");
+            Check(PlayerPrefs.GetInt("VioletTap.Audio.BgmEnabled", 1) == 0
+                && PlayerPrefs.GetInt("VioletTap.Audio.EffectEnabled", 1) == 0,
+                language + " music and effects OFF persist on the device");
             ClickVisible(buttons.Single(b => b.name == "btnClose").gameObject, language + " sound close receives input");
             for (int i = 0; i < 3; i++) yield return null;
             Check(soundPopup == null && Managers.UI.PeekPopupUI<UI_IntroPopup>() == intro,
                 language + " sound close returns to the original intro");
             soundPopup = Managers.UI.ShowPopupUI<UI_SoundPopup>();
             for (int i = 0; i < 4; i++) yield return null;
-            Check(soundPopup.GetComponentsInChildren<TMP_Text>().Count(t => t.text.Contains("OFF")) == 2,
-                language + " reopened settings show both saved OFF states");
+            Check(soundPopup.GetComponentsInChildren<TMP_Text>().Count(t => t.text.Contains("OFF")) == 3,
+                language + " reopened settings show all three saved OFF states");
             buttons = soundPopup.GetComponentsInChildren<UnityEngine.UI.Button>();
             ClickVisible(buttons.Single(b => b.name == "btnBgm").gameObject, language + " music can be re-enabled");
             ClickVisible(buttons.Single(b => b.name == "btnEffect").gameObject, language + " effects can be re-enabled");
-            Check(Managers.IsBgmEnabled && Managers.IsEffectEnabled, language + " both audio settings return ON");
+            ClickVisible(buttons.Single(b => b.name == "btnHaptics").gameObject, language + " vibration can be re-enabled");
+            Check(Managers.IsBgmEnabled && Managers.IsEffectEnabled && TapHaptics.IsEnabled,
+                language + " all three feedback settings return ON");
             ClickVisible(buttons.Single(b => b.name == "btnClose").gameObject, language + " reopened sound closes");
             for (int i = 0; i < 3; i++) yield return null;
 
@@ -2324,18 +2452,8 @@ public static class VioletTapQaRunner
         var card = buttons.Single(b => b.name == "CardFever");
         ClickVisible(card.gameObject, "Fever card preview accepts a click");
         Check(Get<int>(game, "m_Score") == score, "Help preview never changes score");
-        var fxButton = buttons.Single(b => b.name == "btnHelpEffects");
-        Managers.SetEffectEnabled(true);
-        fxButton.onClick.Invoke();
-        Check(!Managers.IsEffectEnabled && sound.IsMuted(Define.Sound.Effect), "Help SOUND OFF mutes effects");
-        fxButton.onClick.Invoke();
-        Check(Managers.IsEffectEnabled && !sound.IsMuted(Define.Sound.Effect), "Help SOUND ON restores effects");
-        var hapticButton = buttons.Single(b => b.name == "btnHelpHaptics");
-        TapHaptics.SetEnabled(true);
-        hapticButton.onClick.Invoke();
-        Check(!TapHaptics.IsEnabled, "Help vibration preference can be disabled");
-        hapticButton.onClick.Invoke();
-        Check(TapHaptics.IsEnabled, "Help vibration preference can be enabled");
+        Check(buttons.All(button => button.name != "btnHelpEffects" && button.name != "btnHelpHaptics"),
+            "Help omits sound and vibration setting controls");
         ClickVisible(buttons.Single(b => b.name == "btnHelpClose").gameObject, "Help close button is reachable");
         Check(!help.IsOpen && !game.IsHelpOpen, "Closing help resumes the round");
         for (int i = 0; i < 4; i++) yield return null;
@@ -2662,6 +2780,34 @@ public static class VioletTapQaRunner
     private static T Get<T>(object obj, string name) => (T)obj.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(obj);
     private static void Set(object obj, string name, object value) => obj.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).SetValue(obj, value);
     private static void Invoke(object obj, string name, params object[] args) => obj.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(obj, args);
+	private static bool TryGetVisibleGlyphXBounds(TMP_Text label, RectTransform space, out float minX, out float maxX)
+	{
+		label.ForceMeshUpdate();
+		minX = float.PositiveInfinity;
+		maxX = float.NegativeInfinity;
+		bool found = false;
+		for (int i = 0; i < label.textInfo.characterCount; i++)
+		{
+			TMP_CharacterInfo character = label.textInfo.characterInfo[i];
+			if (!character.isVisible) continue;
+			float left = space.InverseTransformPoint(label.rectTransform.TransformPoint(character.bottomLeft)).x;
+			float right = space.InverseTransformPoint(label.rectTransform.TransformPoint(character.topRight)).x;
+			minX = Mathf.Min(minX, left);
+			maxX = Mathf.Max(maxX, right);
+			found = true;
+		}
+		return found;
+	}
+
+	private static float ColorDistanceSquared(Color a, Color b)
+	{
+		float red = a.r - b.r;
+		float green = a.g - b.g;
+		float blue = a.b - b.b;
+		float alpha = a.a - b.a;
+		return red * red + green * green + blue * blue + alpha * alpha;
+	}
+
     private static void Capture(string label) => ScreenCapture.CaptureScreenshot(Path.Combine(runDirectory, label + ".png"));
     private static void Check(bool condition, string description)
     {
@@ -2685,6 +2831,7 @@ public static class VioletTapQaRunner
     {
         routine = null;
         GameScene.SuppressRecordPersistenceForQa = false;
+        GameScene.SuppressSecondPulseForQa = false;
         if (overriddenRank != null)
         {
             Set(overriddenRank, "m_InitializationTask", previousRankInitialization);
@@ -2721,8 +2868,27 @@ public static class VioletTapQaRunner
         if (failure != null) Results.Add("FAIL " + failure);
         Results.AddRange(Errors.Select(error => "RUNTIME ERROR " + error));
         File.WriteAllLines(Path.Combine(runDirectory, "results.txt"), Results);
-        File.WriteAllText(Path.Combine(Root, "latest-run.txt"), runDirectory);
+        WriteLatestRun(runDirectory);
         Debug.Log($"VioletTap QA: {Results.Count(r => r.StartsWith("PASS "))} passed; report: {runDirectory}");
         if (failure != null || (!File.Exists(Path.Combine(Root, "KEEP_NICKNAME_PREVIEW")) && !File.Exists(Path.Combine(Root, "KEEP_FEEDBACK_PREVIEW")))) EditorApplication.ExitPlaymode();
     }
+
+	private static void WriteLatestRun(string value)
+	{
+		string path = Path.Combine(Root, "latest-run.txt");
+		for (int attempt = 0; ; attempt++)
+		{
+			try
+			{
+				using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+				using var writer = new StreamWriter(stream);
+				writer.Write(value);
+				return;
+			}
+			catch (IOException) when (attempt < 7)
+			{
+				System.Threading.Thread.Sleep(25);
+			}
+		}
+	}
 }

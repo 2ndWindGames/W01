@@ -1,0 +1,17 @@
+������ #1:
+
+Certificate #1:
+������: O=SecondWindGames
+������: O=SecondWindGames
+�Ϸ� ��ȣ: 1652f5eb
+������ ���� ��¥: Mon Aug 31 13:01:08 KST 2026 ���� ��¥: Tue Aug 18 13:01:08 KST 2076
+������ ����:
+	 SHA1: 6D:6E:57:77:8C:B4:B7:6C:3A:15:8D:D2:51:BB:26:21:D3:01:8E:0D
+	 SHA256: A6:05:75:12:D4:E9:AA:62:FD:57:37:19:7C:9F:D1:0A:D2:9E:12:79:E9:7A:4E:D4:8D:F4:7E:9A:6A:88:0E:EC
+���� �˰����� �̸�: SHA1withRSA(����)
+��ü ���� Ű �˰�����: 2048��Ʈ RSA Ű
+����: 3
+
+
+Warning:
+������ uses the SHA1withRSA signature algorithm which is considered a security risk. This algorithm will be disabled in a future update.

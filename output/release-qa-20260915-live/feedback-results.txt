@@ -1,0 +1,73 @@
+INITIAL AUDIO effectsEnabled=True, musicEnabled=True, listenerVolume=1, listenerPause=False
+PASS Contact starts loaded audible cue: Target_NeonTap
+PASS Audio-thread probe is attached to Target_NeonTap
+SOURCE AUDIO Target_NeonTap peak=0.44289
+PASS Audio samples are produced for Target_NeonTap
+PASS Contact starts loaded audible cue: Target_Quick
+PASS Audio-thread probe is attached to Target_Quick
+SOURCE AUDIO Target_Quick peak=0.43496
+PASS Audio samples are produced for Target_Quick
+PASS Contact starts loaded audible cue: Target_TimeBonus
+PASS Audio-thread probe is attached to Target_TimeBonus
+SOURCE AUDIO Target_TimeBonus peak=0.44371
+PASS Audio samples are produced for Target_TimeBonus
+PASS Contact starts loaded audible cue: Target_Bomb
+PASS Audio-thread probe is attached to Target_Bomb
+SOURCE AUDIO Target_Bomb peak=0.46684
+PASS Audio samples are produced for Target_Bomb
+PASS Contact starts loaded audible cue: Fever_Tap
+PASS Audio-thread probe is attached to Fever_Tap
+SOURCE AUDIO Fever_Tap peak=0.44726
+PASS Audio samples are produced for Fever_Tap
+PASS Contact starts loaded audible cue: Fever_Quick
+PASS Audio-thread probe is attached to Fever_Quick
+SOURCE AUDIO Fever_Quick peak=0.44366
+PASS Audio samples are produced for Fever_Quick
+PASS Contact starts loaded audible cue: Fever_TimeBonus
+PASS Audio-thread probe is attached to Fever_TimeBonus
+SOURCE AUDIO Fever_TimeBonus peak=0.43392
+PASS Audio samples are produced for Fever_TimeBonus
+PASS Contact starts loaded audible cue: Target_Bomb
+PASS Audio-thread probe is attached to Target_Bomb
+SOURCE AUDIO Target_Bomb peak=0.48957
+PASS Audio samples are produced for Target_Bomb
+PASS Tap bursts reuse a fixed pool
+PASS Help button is reachable above gameplay raycasts
+PASS Help opens and pauses the round
+PASS Help freezes round time and fever time
+PASS Help freezes target lifetime and blocks scoring through the overlay
+PASS Korean help label fits: HelpPanel/Title
+PASS Korean help label fits: HelpPanel/Hint
+PASS Korean help label fits: btnHelpDismiss/Label
+PASS Korean help label fits: CardNormal/Name
+PASS Korean help label fits: CardNormal/Description
+PASS Korean help label fits: CardQuick/Name
+PASS Korean help label fits: CardQuick/Description
+PASS Korean help label fits: CardTime/Name
+PASS Korean help label fits: CardTime/Description
+PASS Korean help label fits: CardBomb/Name
+PASS Korean help label fits: CardBomb/Description
+PASS Korean help label fits: CardFever/Name
+PASS Korean help label fits: CardFever/Description
+PASS Korean help label fits: btnHelpClose/Label
+PASS Fever card preview accepts a click
+PASS Help preview never changes score
+PASS Help omits sound and vibration setting controls
+PASS Help close button is reachable
+PASS Closing help resumes the round
+PASS Timer and targets continue from their paused values
+PASS English help label fits: HelpPanel/Title
+PASS English help label fits: HelpPanel/Hint
+PASS English help label fits: btnHelpDismiss/Label
+PASS English help label fits: CardNormal/Name
+PASS English help label fits: CardNormal/Description
+PASS English help label fits: CardQuick/Name
+PASS English help label fits: CardQuick/Description
+PASS English help label fits: CardTime/Name
+PASS English help label fits: CardTime/Description
+PASS English help label fits: CardBomb/Name
+PASS English help label fits: CardBomb/Description
+PASS English help label fits: CardFever/Name
+PASS English help label fits: CardFever/Description
+PASS English help label fits: btnHelpClose/Label
+PASS No runtime errors in feedback/help checks

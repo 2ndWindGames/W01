@@ -40,6 +40,13 @@ namespace _01.Scripts.UI.Popup
 		private GameObject mNicknamePrompt;
 		private TMP_InputField mNicknameInput;
 		private Action<string> mNicknameConfirmed;
+		private GameObject mSecondPulsePrompt;
+		private Button mSecondPulseWatchButton;
+		private Button mSecondPulseDeclineButton;
+		private TextMeshProUGUI mSecondPulseWatchLabel;
+		private TextMeshProUGUI mSecondPulseGuide;
+		private Action mSecondPulseWatch;
+		private Action mSecondPulseDecline;
 		private Image mFeverOverlay;
 		private TextMeshProUGUI mFeverBanner;
 		private Coroutine mMessageRoutine;
@@ -172,7 +179,7 @@ namespace _01.Scripts.UI.Popup
 
 		private void ClickBackButton()
 		{
-			if (mAdsManager != null && mAdsManager.IsShowingInterstitial) return;
+			if (mAdsManager != null && mAdsManager.IsShowingFullScreenAd) return;
 			Managers.Scene.ChangeScene(_01.Scripts.Scene.W01SceneType.Intro);
 		}
 		
@@ -203,6 +210,7 @@ namespace _01.Scripts.UI.Popup
 
 		private void OnDestroy()
 		{
+			HideSecondPulseOffer();
 			if (mIapManager == null) return;
 
 			mIapManager.NoAdsChanged -= OnNoAdsChanged;
@@ -243,6 +251,7 @@ namespace _01.Scripts.UI.Popup
 		private void OnDisable()
 		{
 			CloseNicknamePrompt();
+			HideSecondPulseOffer();
 			if (mMessageRoutine != null) StopCoroutine(mMessageRoutine);
 			mMessageRoutine = null;
 			if (IsInitialized) RestoreStatus();
@@ -321,6 +330,125 @@ namespace _01.Scripts.UI.Popup
 		public void ShowPaceIncrease(int stage) => mComboStatus?.ShowPaceIncrease(stage);
 		public void ShowSignalPhase(int phase) => mComboStatus?.ShowSignalPhase(phase);
 		public void PlayResultReveal(bool newBest) => mResultReveal?.Play(GetButtonRetry(), GetTextStatus(), newBest);
+
+		public void ShowSecondPulseOffer(Action onWatchAd, Action onDecline, bool requiresAd)
+		{
+			if (!isActiveAndEnabled) return;
+			if (mHelp != null && mHelp.IsOpen) mHelp.Close();
+			EnsureSecondPulsePrompt();
+			mSecondPulseWatch = onWatchAd;
+			mSecondPulseDecline = onDecline;
+			mSecondPulseWatchLabel.text = requiresAd
+				? GameLocalization.T("WATCH AD · +10s", "광고 보고 +10초")
+				: GameLocalization.T("CONTINUE · +10s", "계속하기 · +10초");
+			SetSecondPulseBusy(false);
+			mSecondPulsePrompt.SetActive(true);
+			mSecondPulsePrompt.transform.SetAsLastSibling();
+		}
+
+		public void SetSecondPulseBusy(bool busy)
+		{
+			if (mSecondPulsePrompt == null) return;
+			mSecondPulseWatchButton.interactable = !busy;
+			mSecondPulseDeclineButton.interactable = !busy;
+			mSecondPulseGuide.text = busy
+				? GameLocalization.T("OPENING AD...", "광고를 불러오는 중...")
+				: GameLocalization.T("KEEP YOUR SCORE AND STREAK", "점수와 콤보를 그대로 유지합니다");
+		}
+
+		public void HideSecondPulseOffer()
+		{
+			mSecondPulseWatch = null;
+			mSecondPulseDecline = null;
+			if (mSecondPulsePrompt != null) mSecondPulsePrompt.SetActive(false);
+		}
+
+		private void EnsureSecondPulsePrompt()
+		{
+			if (mSecondPulsePrompt != null) return;
+
+			mSecondPulsePrompt = CreateUiObject("SecondPulsePrompt", transform);
+			var promptCanvas = mSecondPulsePrompt.AddComponent<Canvas>();
+			promptCanvas.overrideSorting = true;
+			var ownerCanvas = GetComponent<Canvas>();
+			if (ownerCanvas != null) promptCanvas.sortingLayerID = ownerCanvas.sortingLayerID;
+			promptCanvas.sortingOrder = 950;
+			mSecondPulsePrompt.AddComponent<GraphicRaycaster>();
+			var overlayRect = mSecondPulsePrompt.GetComponent<RectTransform>();
+			overlayRect.anchorMin = Vector2.zero;
+			overlayRect.anchorMax = Vector2.one;
+			overlayRect.offsetMin = Vector2.zero;
+			overlayRect.offsetMax = Vector2.zero;
+			var overlay = mSecondPulsePrompt.AddComponent<Image>();
+			overlay.color = new Color(0.005f, 0.008f, 0.035f, 0.86f);
+
+			var panel = CreateUiObject("SecondPulsePanel", mSecondPulsePrompt.transform);
+			SetCenteredRect(panel.GetComponent<RectTransform>(), 820f, 660f, new Vector2(0f, 10f));
+			var panelImage = panel.AddComponent<Image>();
+			panelImage.color = new Color(0.045f, 0.055f, 0.18f, 0.99f);
+			var panelSprite = Resources.Load<Sprite>("UI/NeonSignalPack/NineSlice/Panels/panel_popup");
+			if (panelSprite != null)
+			{
+				panelImage.sprite = panelSprite;
+				panelImage.type = Image.Type.Sliced;
+			}
+
+			CreateLabel(panel.transform, "SecondPulseTitle", "SECOND PULSE", 52f,
+				new Vector2(0f, 230f), new Vector2(720f, 80f), new Color(0.42f, 0.93f, 1f));
+			CreateLabel(panel.transform, "SecondPulseTimeUp", GameLocalization.T("TIME UP", "시간 종료"), 28f,
+				new Vector2(0f, 157f), new Vector2(700f, 50f), new Color(0.8f, 0.86f, 1f));
+			CreateLabel(panel.transform, "SecondPulseReward", GameLocalization.T("+10 SEC", "+10초"), 76f,
+				new Vector2(0f, 65f), new Vector2(700f, 100f), new Color(1f, 0.84f, 0.32f));
+			mSecondPulseGuide = CreateLabel(panel.transform, "SecondPulseGuide",
+				GameLocalization.T("KEEP YOUR SCORE AND STREAK", "점수와 콤보를 그대로 유지합니다"), 24f,
+				new Vector2(0f, -18f), new Vector2(700f, 55f), new Color(0.8f, 0.9f, 1f));
+
+			mSecondPulseWatchButton = CreateSecondPulseButton(panel.transform, "btnSecondPulseWatch",
+				GameLocalization.T("WATCH AD · +10s", "광고 보고 +10초"), new Vector2(0f, -130f),
+				new Vector2(650f, 108f), true);
+			mSecondPulseWatchLabel = mSecondPulseWatchButton.GetComponentInChildren<TextMeshProUGUI>(true);
+			mSecondPulseWatchButton.onClick.AddListener(() => mSecondPulseWatch?.Invoke());
+
+			mSecondPulseDeclineButton = CreateSecondPulseButton(panel.transform, "btnSecondPulseDecline",
+				GameLocalization.T("VIEW RESULT", "결과 보기"), new Vector2(0f, -250f),
+				new Vector2(380f, 108f), false);
+			mSecondPulseDeclineButton.onClick.AddListener(() =>
+			{
+				var decline = mSecondPulseDecline;
+				HideSecondPulseOffer();
+				decline?.Invoke();
+			});
+			mSecondPulsePrompt.SetActive(false);
+		}
+
+		private static Button CreateSecondPulseButton(Transform parent, string name, string text,
+			Vector2 position, Vector2 size, bool primary)
+		{
+			var buttonObject = CreateUiObject(name, parent);
+			SetCenteredRect(buttonObject.GetComponent<RectTransform>(), size.x, size.y, position);
+			var image = buttonObject.AddComponent<Image>();
+			image.color = Color.white;
+			var spritePath = primary
+				? "UI/NeonSignalPack/NineSlice/Buttons/button_primary_normal"
+				: "UI/NeonSignalPack/NineSlice/Buttons/button_compact";
+			var sprite = Resources.Load<Sprite>(spritePath);
+			if (sprite != null)
+			{
+				image.sprite = sprite;
+				image.type = Image.Type.Sliced;
+			}
+			var button = buttonObject.AddComponent<Button>();
+			button.targetGraphic = image;
+			var colors = button.colors;
+			colors.highlightedColor = new Color(0.82f, 0.96f, 1f);
+			colors.pressedColor = new Color(0.55f, 0.78f, 1f);
+			colors.disabledColor = new Color(0.35f, 0.4f, 0.55f, 0.55f);
+			button.colors = colors;
+			CreateLabel(buttonObject.transform, "Label", text, primary ? 31f : 27f,
+				Vector2.zero, new Vector2(size.x - 50f, size.y - 15f),
+				primary ? Color.white : new Color(0.78f, 0.9f, 1f));
+			return button;
+		}
 
 		public void ShowNicknamePrompt(string defaultNickname, Action<string> onConfirmed)
 		{

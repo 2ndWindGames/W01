@@ -30,7 +30,6 @@ namespace _01.Scripts.Manager
         {
             if (AdsDisabled) return;
             m_Schedule.RecordRound();
-            ShowInterstitialAds();
         }
 
         public void SetAdsDisabled(bool disabled)
@@ -42,10 +41,21 @@ namespace _01.Scripts.Manager
                 ShowBanner();
         }
 
-        public new void ShowInterstitialAds()
+        public bool TryShowInterstitialBeforeRetry()
         {
-            if (!AdsDisabled && m_InGame && m_Schedule.CanShow(UnityEngine.Time.realtimeSinceStartupAsDouble))
+            if (AdsDisabled || !m_InGame
+                || !m_Schedule.CanShow(UnityEngine.Time.realtimeSinceStartupAsDouble)) return false;
+
+            try
+            {
                 base.ShowInterstitialAds();
+            }
+            catch (System.Exception exception)
+            {
+                UnityEngine.Debug.LogWarning("전면 광고를 시작하지 못해 바로 재시작합니다: " + exception.Message);
+                return false;
+            }
+            return IsShowingInterstitial;
         }
     }
 }

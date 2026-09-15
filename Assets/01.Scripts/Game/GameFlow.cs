@@ -7,6 +7,7 @@ namespace _01.Scripts.Game
     {
         Ready,
         Playing,
+        SecondPulseOffer,
         Result
     }
 
@@ -32,12 +33,32 @@ namespace _01.Scripts.Game
 
         public void FinishGame()
         {
-            if (State != GameFlowState.Playing)
+            if (State != GameFlowState.Playing && State != GameFlowState.SecondPulseOffer)
             {
                 return;
             }
 
             SetState(GameFlowState.Result);
+        }
+
+        public void OfferSecondPulse()
+        {
+            if (State != GameFlowState.Playing)
+            {
+                return;
+            }
+
+            SetState(GameFlowState.SecondPulseOffer);
+        }
+
+        public void ResumeFromSecondPulse()
+        {
+            if (State != GameFlowState.SecondPulseOffer)
+            {
+                return;
+            }
+
+            SetState(GameFlowState.Playing);
         }
 
         public void Retry()

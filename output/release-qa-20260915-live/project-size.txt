@@ -1,0 +1,30 @@
+MEASURED_AT=2026-09-15T16:22:50.3619515+09:00 ROOT_TRACKED_FILES=3525 ROOT_TRACKED_BYTES=2553881213
+TREE=Assets	FILES=1040	BYTES=187883440
+TREE=Packages	FILES=2	BYTES=14944
+TREE=ProjectSettings	FILES=24	BYTES=59889
+TREE=LocalPackages/SWGUnity2DCore	FILES=4209	BYTES=37944744
+TREE=Builds	FILES=2350	BYTES=2968445811
+TREE=Deliverables	FILES=40	BYTES=88953495
+TREE=output	FILES=15410	BYTES=1824679581
+TREE=Library	FILES=35414	BYTES=9476763501
+TOP_TRACKED_FILES:
+56578536	C:\Users\rlatmdwp5\Documents\GitHub\W01\output\release-qa-20260914\elf\libil2cpp.so
+55688134	C:\Users\rlatmdwp5\Documents\GitHub\W01\output\qa-2026-09-13\baseline\user-changes.patch
+40384689	C:\Users\rlatmdwp5\Documents\GitHub\W01\Deliverables\Promo60\VioletTap_Promo_KO_1080x1920_60s.mp4
+39695013	C:\Users\rlatmdwp5\Documents\GitHub\W01\Deliverables\Promo60\VioletTap_Promo_EN_1080x1920_60s.mp4
+37607910	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap_mapping.txt
+37248454	C:\Users\rlatmdwp5\Documents\GitHub\W01\w01_mapping.txt
+35464600	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettabp_mapping.txt
+30806965	C:\Users\rlatmdwp5\Documents\GitHub\W01\apk_violettap.Zip
+19485024	C:\Users\rlatmdwp5\Documents\GitHub\W01\output\release-symbols\w01-79dd3e6b93fb.symbols.zip
+19270976	C:\Users\rlatmdwp5\Documents\GitHub\W01\output\release-qa-20260914\elf\libunity.so
+18418781	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap_BackUpThisFolder_ButDontShipItWithYourGame\il2cppOutput\Il2CppGenericMethodPointerTable.c
+18267745	C:\Users\rlatmdwp5\Documents\GitHub\W01\w01_BackUpThisFolder_ButDontShipItWithYourGame\il2cppOutput\Il2CppGenericMethodPointerTable.c
+18052365	C:\Users\rlatmdwp5\Documents\GitHub\W01\w01-3.7-v10-IL2CPP.symbols.zip
+18047452	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap-3.6-v9-IL2CPP.symbols.zip
+18044021	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap-3.5-v8-IL2CPP.symbols.zip
+18020632	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap-3.3-v6-IL2CPP.symbols.zip
+18019214	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap-3.4-v7-IL2CPP.symbols.zip
+16158604	C:\Users\rlatmdwp5\Documents\GitHub\W01\output\play-store-3.7.1-upload.zip
+12591965	C:\Users\rlatmdwp5\Documents\GitHub\W01\violettap_BackUpThisFolder_ButDontShipItWithYourGame\il2cppOutput\Il2CppTypeDefinitions.c
+12464705	C:\Users\rlatmdwp5\Documents\GitHub\W01\w01_BackUpThisFolder_ButDontShipItWithYourGame\il2cppOutput\Il2CppTypeDefinitions.c

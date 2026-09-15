@@ -1,0 +1,29 @@
+PASS English loads the saved best into the HUD
+HUD English txtScoreValue value=0 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (32.40, 25.00, 0.00)
+HUD English txtBestValue value=0 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (32.40, 25.00, 0.00)
+HUD English txtScoreValue value=191 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (48.60, 25.00, 0.00)
+HUD English txtBestValue value=191 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (48.60, 25.00, 0.00)
+HUD English txtScoreValue value=999 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (48.60, 25.00, 0.00)
+HUD English txtBestValue value=999 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (48.60, 25.00, 0.00)
+HUD English txtScoreValue value=9999 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (64.80, 25.00, 0.00)
+HUD English txtBestValue value=9999 fits=True font=Oxanium-Regular SDF size=50 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.75, 0.00, 0.00), Extents: (64.80, 25.00, 0.00)
+HUD English txtScoreValue value=100000 fits=True font=Oxanium-Regular SDF size=37.7 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.32, 0.00, 0.00), Extents: (73.28, 18.85, 0.00)
+HUD English txtBestValue value=100000 fits=True font=Oxanium-Regular SDF size=37.7 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.32, 0.00, 0.00), Extents: (73.28, 18.85, 0.00)
+PASS English updates the HUD across the four-digit boundary
+RESULT English text=<color=#FFE36E><b>SCORE  1002</b></color> | BEST  100000 | MAX STREAK  999 | ACCURACY  100%<color=#FF8AFF> | GRADE  S</color> overflow=False lines=5 font=50 rect=(x:-360.00, y:-220.00, width:720.00, height:440.00) preferred=410.94x300.01
+PASS Korean loads the saved best into the HUD
+HUD Korean txtScoreValue value=0 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (31.26, 34.99, 0.00)
+HUD Korean txtBestValue value=0 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (31.26, 34.99, 0.00)
+HUD Korean txtScoreValue value=191 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (46.88, 34.99, 0.00)
+HUD Korean txtBestValue value=191 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (46.88, 34.99, 0.00)
+HUD Korean txtScoreValue value=999 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (46.88, 34.99, 0.00)
+HUD Korean txtBestValue value=999 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (46.88, 34.99, 0.00)
+HUD Korean txtScoreValue value=9999 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (62.51, 34.99, 0.00)
+HUD Korean txtBestValue value=9999 fits=True font=IBMPlexSansKR-Regular SDF size=46.65 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.63, 0.00, 0.00), Extents: (62.51, 34.99, 0.00)
+HUD Korean txtScoreValue value=100000 fits=True font=IBMPlexSansKR-Regular SDF size=36.45 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.28, 0.00, 0.00), Extents: (73.26, 27.34, 0.00)
+HUD Korean txtBestValue value=100000 fits=True font=IBMPlexSansKR-Regular SDF size=36.45 color=RGBA(1.000, 1.000, 1.000, 1.000) rect=(x:-72.00, y:-35.00, width:144.00, height:70.00) rendered=Center: (1.28, 0.00, 0.00), Extents: (73.26, 27.34, 0.00)
+PASS Korean updates the HUD across the four-digit boundary
+RESULT Korean text=<color=#FFE36E><b>점수  1002</b></color> | 최고 기록  100000 | 최대 연속 터치  999 | 정확도  100%<color=#FF8AFF> | 등급  S</color> overflow=False lines=5 font=50 rect=(x:-360.00, y:-220.00, width:720.00, height:440.00) preferred=446.8x375.01
+PASS Scores and best values through 100000 fit as complete single lines
+PASS Four-digit results and three-digit streaks fit their panel
+PASS No runtime errors during HUD readability QA

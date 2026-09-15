@@ -1,0 +1,7 @@
+gfx-threading-mode=4
+wait-for-native-debugger=0
+hdr-display-enabled=0
+gc-max-time-slice=3
+androidStartInFullscreen=1
+android-preferred-data-location=1
+build-guid=c88c92a0662b45508c5ca2d532bf09d7

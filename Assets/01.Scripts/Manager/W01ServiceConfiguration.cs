@@ -9,6 +9,7 @@ namespace SWGUnity2DCore.Manager
         {
             AndroidBannerId = "ca-app-pub-3765914942296716/2410098921",
             AndroidInterstitialId = "ca-app-pub-3765914942296716/4041676531",
+            AndroidRewardedId = "ca-app-pub-3765914942296716/2925288900",
             ForceTestAds = false
         };
     }

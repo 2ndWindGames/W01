@@ -1,0 +1,21 @@
+ M Assets/01.Scripts/Game/GameFlow.cs
+ M Assets/01.Scripts/Manager/W01AdsManager.cs
+ M Assets/01.Scripts/Manager/W01ServiceConfiguration.cs
+ M Assets/01.Scripts/Scene/GameScene.cs
+ M Assets/01.Scripts/UI/Popup/UI_GameHelp.cs
+ M Assets/01.Scripts/UI/Popup/UI_GamePopup.cs
+ M Assets/01.Scripts/UI/Popup/UI_IntroPopup.cs
+ M Assets/01.Scripts/UI/Popup/UI_RankPopup.cs
+ M Assets/01.Scripts/UI/Popup/UI_SoundPopup.cs
+ M Assets/01.Scripts/UI/SubItem/UI_RankingItem.cs
+ M Assets/Editor/VioletTapQaRunner.cs
+ M "Assets/Resources/Fonts/Candidates/Eng/oxanium/Oxanium-Regular SDF.asset"
+ M "Assets/Resources/Fonts/Candidates/Kor/ibmplexsanskr/IBMPlexSansKR-Regular SDF.asset"
+ M Assets/Resources/Prefabs/UI/Popup/UI_HelpPopup.prefab
+ M Assets/Resources/Prefabs/UI/Popup/UI_IntroPopup.prefab
+ M Assets/Resources/Prefabs/UI/Popup/UI_Rankpopup.prefab
+ M Assets/Resources/Prefabs/UI/Popup/UI_SoundPopup.prefab
+ M Assets/Resources/Prefabs/UI/SubItem/itemRanking.prefab
+ M "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset"
+ m LocalPackages/SWGUnity2DCore
+?? output/release-qa-20260915-live/

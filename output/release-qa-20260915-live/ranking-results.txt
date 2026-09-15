@@ -1,0 +1,187 @@
+PASS Korean my ranking row stays outside the scrolling list
+PASS Korean fixed personal section has a localized label outside the list
+PASS Korean ranking panel is taller and exposes at least five complete rows
+PASS Korean list, personal label, personal row, and close button have balanced gaps
+PASS Korean all ranking controls stay inside the expanded panel
+PASS Korean my ranking starts with a localized pinned loading state
+PASS Korean unranked player keeps a visible fixed row
+PASS Korean my ranking has a localized pinned unavailable state
+PASS Korean loaded personal record keeps the fixed-row color theme
+PASS Korean fixed ranking glyphs stay within txtRank: 123456
+PASS Korean six-digit personal rank remains complete
+PASS Korean fixed ranking glyphs stay within txtNicName: 가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+PASS Korean fixed ranking glyphs stay within txtScore: 2147483647
+PASS Korean ten-digit personal score remains complete
+PASS Korean fixed rank and score clear both neon frame caps
+PASS Korean visible glyphs stay within txtRank: 1
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: 망펭
+PASS Korean visible glyphs stay within txtScore: 2147483647
+PASS Korean complete score remains visible: 2147483647
+PASS Korean rank and score glyphs clear the neon frame: 1
+PASS Korean ranking columns stay visually separated: 1
+PASS Korean visible glyphs stay within txtRank: 2
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: [나] 가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+PASS Korean visible glyphs stay within txtScore: 9999
+PASS Korean complete score remains visible: 9999
+PASS Korean rank and score glyphs clear the neon frame: 2
+PASS Korean ranking columns stay visually separated: 2
+PASS Korean visible glyphs stay within txtRank: 3
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+PASS Korean visible glyphs stay within txtScore: 9998
+PASS Korean complete score remains visible: 9998
+PASS Korean rank and score glyphs clear the neon frame: 3
+PASS Korean ranking columns stay visually separated: 3
+PASS Korean visible glyphs stay within txtRank: 4
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: <b>Hi</b>
+PASS Korean visible glyphs stay within txtScore: 9997
+PASS Korean complete score remains visible: 9997
+PASS Korean rank and score glyphs clear the neon frame: 4
+PASS Korean ranking columns stay visually separated: 4
+PASS Korean visible glyphs stay within txtRank: 5
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: Donut
+PASS Korean visible glyphs stay within txtScore: 9996
+PASS Korean complete score remains visible: 9996
+PASS Korean rank and score glyphs clear the neon frame: 5
+PASS Korean ranking columns stay visually separated: 5
+PASS Korean visible glyphs stay within txtRank: 6
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: 바이올렛탭
+PASS Korean visible glyphs stay within txtScore: 9995
+PASS Korean complete score remains visible: 9995
+PASS Korean rank and score glyphs clear the neon frame: 6
+PASS Korean ranking columns stay visually separated: 6
+PASS Korean visible glyphs stay within txtRank: 7
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: Soso
+PASS Korean visible glyphs stay within txtScore: 9994
+PASS Korean complete score remains visible: 9994
+PASS Korean rank and score glyphs clear the neon frame: 7
+PASS Korean ranking columns stay visually separated: 7
+PASS Korean visible glyphs stay within txtRank: 8
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: Neon
+PASS Korean visible glyphs stay within txtScore: 9993
+PASS Korean complete score remains visible: 9993
+PASS Korean rank and score glyphs clear the neon frame: 8
+PASS Korean ranking columns stay visually separated: 8
+PASS Korean visible glyphs stay within txtRank: 9
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: Tap
+PASS Korean visible glyphs stay within txtScore: 9992
+PASS Korean complete score remains visible: 9992
+PASS Korean rank and score glyphs clear the neon frame: 9
+PASS Korean ranking columns stay visually separated: 9
+PASS Korean visible glyphs stay within txtRank: 10
+PASS Korean ranking font includes all rank characters
+PASS Korean visible glyphs stay within txtNicName: LastPlayer
+PASS Korean visible glyphs stay within txtScore: 9991
+PASS Korean complete score remains visible: 9991
+PASS Korean rank and score glyphs clear the neon frame: 10
+PASS Korean ranking columns stay visually separated: 10
+PASS Korean nickname markup displays literally
+PASS Korean current-player marker survives long nickname truncation
+PASS Korean list marker and fixed personal label identify separate appearances
+PASS Korean list self-row and fixed personal row use clearly different colors
+PASS Korean nickname control characters cannot create extra rows
+PASS Korean ranking rows route pointer scrolling to the list
+PASS Korean scrolling never moves the fixed personal row
+PASS Korean scrolling reaches the last ranking row
+PASS English my ranking row stays outside the scrolling list
+PASS English fixed personal section has a localized label outside the list
+PASS English ranking panel is taller and exposes at least five complete rows
+PASS English list, personal label, personal row, and close button have balanced gaps
+PASS English all ranking controls stay inside the expanded panel
+PASS English my ranking starts with a localized pinned loading state
+PASS English unranked player keeps a visible fixed row
+PASS English my ranking has a localized pinned unavailable state
+PASS English loaded personal record keeps the fixed-row color theme
+PASS English fixed ranking glyphs stay within txtRank: 123456
+PASS English six-digit personal rank remains complete
+PASS English fixed ranking glyphs stay within txtNicName: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+PASS English fixed ranking glyphs stay within txtScore: 2147483647
+PASS English ten-digit personal score remains complete
+PASS English fixed rank and score clear both neon frame caps
+PASS English visible glyphs stay within txtRank: 1
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: 망펭
+PASS English visible glyphs stay within txtScore: 2147483647
+PASS English complete score remains visible: 2147483647
+PASS English rank and score glyphs clear the neon frame: 1
+PASS English ranking columns stay visually separated: 1
+PASS English visible glyphs stay within txtRank: 2
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: [YOU] 가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+PASS English visible glyphs stay within txtScore: 9999
+PASS English complete score remains visible: 9999
+PASS English rank and score glyphs clear the neon frame: 2
+PASS English ranking columns stay visually separated: 2
+PASS English visible glyphs stay within txtRank: 3
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+PASS English visible glyphs stay within txtScore: 9998
+PASS English complete score remains visible: 9998
+PASS English rank and score glyphs clear the neon frame: 3
+PASS English ranking columns stay visually separated: 3
+PASS English visible glyphs stay within txtRank: 4
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: <b>Hi</b>
+PASS English visible glyphs stay within txtScore: 9997
+PASS English complete score remains visible: 9997
+PASS English rank and score glyphs clear the neon frame: 4
+PASS English ranking columns stay visually separated: 4
+PASS English visible glyphs stay within txtRank: 5
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: Donut
+PASS English visible glyphs stay within txtScore: 9996
+PASS English complete score remains visible: 9996
+PASS English rank and score glyphs clear the neon frame: 5
+PASS English ranking columns stay visually separated: 5
+PASS English visible glyphs stay within txtRank: 6
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: 바이올렛탭
+PASS English visible glyphs stay within txtScore: 9995
+PASS English complete score remains visible: 9995
+PASS English rank and score glyphs clear the neon frame: 6
+PASS English ranking columns stay visually separated: 6
+PASS English visible glyphs stay within txtRank: 7
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: Soso
+PASS English visible glyphs stay within txtScore: 9994
+PASS English complete score remains visible: 9994
+PASS English rank and score glyphs clear the neon frame: 7
+PASS English ranking columns stay visually separated: 7
+PASS English visible glyphs stay within txtRank: 8
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: Neon
+PASS English visible glyphs stay within txtScore: 9993
+PASS English complete score remains visible: 9993
+PASS English rank and score glyphs clear the neon frame: 8
+PASS English ranking columns stay visually separated: 8
+PASS English visible glyphs stay within txtRank: 9
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: Tap
+PASS English visible glyphs stay within txtScore: 9992
+PASS English complete score remains visible: 9992
+PASS English rank and score glyphs clear the neon frame: 9
+PASS English ranking columns stay visually separated: 9
+PASS English visible glyphs stay within txtRank: 10
+PASS English ranking font includes all rank characters
+PASS English visible glyphs stay within txtNicName: LastPlayer
+PASS English visible glyphs stay within txtScore: 9991
+PASS English complete score remains visible: 9991
+PASS English rank and score glyphs clear the neon frame: 10
+PASS English ranking columns stay visually separated: 10
+PASS English nickname markup displays literally
+PASS English current-player marker survives long nickname truncation
+PASS English list marker and fixed personal label identify separate appearances
+PASS English list self-row and fixed personal row use clearly different colors
+PASS English nickname control characters cannot create extra rows
+PASS English ranking rows route pointer scrolling to the list
+PASS English scrolling never moves the fixed personal row
+PASS English scrolling reaches the last ranking row
+PASS No runtime errors during local ranking row QA

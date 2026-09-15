@@ -1,0 +1,26 @@
+PASS Application pause freezes round time
+PASS Application pause freezes fever time
+PASS Application pause freezes target lifetime
+PASS Application pause preserves an active touch burst
+PASS Background contacts cannot score or consume the resumed contact
+PASS Application pause leaves global time scale unchanged
+PASS Closing help cannot override an active application pause
+PASS Application resume cannot override an open help panel
+PASS Timer and targets resume after every pause reason clears
+PASS Preserved target accepts its first contact after resume
+PASS Repeated application pause is stable 0
+PASS Repeated application resume progresses 0
+PASS Repeated application pause is stable 1
+PASS Repeated application resume progresses 1
+PASS Repeated application pause is stable 2
+PASS Repeated application resume progresses 2
+PASS Repeated application pause is stable 3
+PASS Repeated application resume progresses 3
+PASS Repeated application pause is stable 4
+PASS Repeated application resume progresses 4
+PASS Repeated application pause is stable 5
+PASS Repeated application resume progresses 5
+PASS Background retry is rejected
+PASS Background round start is rejected
+PASS Ready round starts after foreground resume
+PASS No runtime errors during pause/resume QA

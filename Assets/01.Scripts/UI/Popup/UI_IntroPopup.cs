@@ -38,8 +38,8 @@ namespace _01.Scripts.UI.Popup
 			{
 				if (label.name != "txt_right") continue;
 				label.text = GameLocalization.T(
-					"© 2026 SECONDWINDGAMES · CREATED BY MANGPENG, DONUT, SOSO",
-					"© 2026 SECONDWINDGAMES · 제작: 망펭, 도넛, 소소");
+					"© 2026 SECONDWINDGAMES",
+					"© 2026 SECONDWINDGAMES");
 				label.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 90f);
 				label.raycastTarget = false;
 				break;

@@ -1,0 +1,12 @@
+BUNDLETOOL_VALIDATE_EXIT=0
+MANIFEST_DUMP_EXIT=0
+CONFIG_DUMP_EXIT=0
+Package=True
+VersionName=True
+VersionCode=True
+TargetSdk36=True
+MinSdk25=True
+EdgeToEdgeTheme=True
+DebuggableAbsent=True
+TestOnlyAbsent=True
+PageAlignment16K=True

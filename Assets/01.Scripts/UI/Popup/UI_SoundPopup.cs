@@ -1,3 +1,4 @@
+using _01.Scripts.Game;
 using SWGUnity2DCore.Manager;
 using SWGUnity2DCore.Util;
 using SWGUnity2DCore.Util.Logging;
@@ -13,12 +14,14 @@ namespace _01.Scripts.UI.Popup
         {
             btnBgm,
             btnEffect,
+            btnHaptics,
             btnClose,
             btnPrivacy
         }
 
         private TextMeshProUGUI m_BgmLabel;
         private TextMeshProUGUI m_EffectLabel;
+        private TextMeshProUGUI m_HapticsLabel;
         private Button m_PrivacyButton;
         private AdsManager m_AdsManager;
         
@@ -32,6 +35,7 @@ namespace _01.Scripts.UI.Popup
             PopupPresentation.Prepare(transform);
             GetButton((int)Buttons.btnBgm).gameObject.BindEvent(OnClickBgmButton);
             GetButton((int)Buttons.btnEffect).gameObject.BindEvent(OnClickEffectButton);
+            GetButton((int)Buttons.btnHaptics).gameObject.BindEvent(OnClickHapticsButton);
             GetButton((int)Buttons.btnClose).gameObject.BindEvent(OnClickCloseButton);
             m_PrivacyButton = GetButton((int)Buttons.btnPrivacy);
             m_AdsManager = Managers.Ads;
@@ -39,6 +43,7 @@ namespace _01.Scripts.UI.Popup
 
             m_BgmLabel = GetButton((int)Buttons.btnBgm).GetComponentInChildren<TextMeshProUGUI>();
             m_EffectLabel = GetButton((int)Buttons.btnEffect).GetComponentInChildren<TextMeshProUGUI>();
+            m_HapticsLabel = GetButton((int)Buttons.btnHaptics).GetComponentInChildren<TextMeshProUGUI>();
 			foreach (var label in GetComponentsInChildren<TextMeshProUGUI>(true))
 			{
 				if (label.name == "txtTitle") label.text = GameLocalization.T("SETTINGS", "설정");
@@ -63,6 +68,13 @@ namespace _01.Scripts.UI.Popup
             RefreshLabels();
         }
 
+        private void OnClickHapticsButton()
+        {
+            TapHaptics.SetEnabled(!TapHaptics.IsEnabled);
+            RefreshLabels();
+            if (TapHaptics.IsEnabled) TapHaptics.Play(TapTargetType.Normal);
+        }
+
         private void Update() => RefreshPrivacyButton();
 
         private void RefreshPrivacyButton()
@@ -85,6 +97,8 @@ namespace _01.Scripts.UI.Popup
                 m_BgmLabel.text = $"BGM : {(Managers.IsBgmEnabled ? "ON" : "OFF")}";
             if (m_EffectLabel != null)
 				m_EffectLabel.text = $"{GameLocalization.T("SFX", "효과음")} : {(Managers.IsEffectEnabled ? "ON" : "OFF")}";
+            if (m_HapticsLabel != null)
+                m_HapticsLabel.text = $"{GameLocalization.T("VIBRATION", "진동")} : {(TapHaptics.IsEnabled ? "ON" : "OFF")}";
         }
 
         private void OnClickCloseButton()

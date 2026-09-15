@@ -1,0 +1,339 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="36" android:compileSdkVersionCodename="16" android:installLocation="2" android:versionCode="12" android:versionName="3.7.2" package="com.secondwindgames.violettap" platformBuildVersionCode="36" platformBuildVersionName="16">
+      
+  <uses-sdk android:minSdkVersion="25" android:targetSdkVersion="36"/>
+      
+  <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
+      
+  <uses-permission android:name="android.permission.INTERNET"/>
+      
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+      
+  <uses-feature android:glEsVersion="0x00030000"/>
+      
+  <uses-feature android:name="android.hardware.vulkan.version" android:required="false"/>
+      
+  <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+      
+  <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false"/>
+      
+  <uses-feature android:name="android.hardware.touchscreen.multitouch.distinct" android:required="false"/>
+      
+  <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+      
+  <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
+      
+  <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"/>
+      
+  <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS"/>
+   
+    
+  <queries>
+            
+        
+    <intent>
+                  
+      <action android:name="android.intent.action.VIEW"/>
+                  
+      <category android:name="android.intent.category.BROWSABLE"/>
+                  
+      <data android:scheme="https"/>
+              
+    </intent>
+            
+        
+        
+    <intent>
+                  
+      <action android:name="android.support.customtabs.action.CustomTabsService"/>
+              
+    </intent>
+            
+        
+        
+    <intent>
+                  
+      <action android:name="android.intent.action.INSERT"/>
+                  
+      <data android:mimeType="vnd.android.cursor.dir/event"/>
+              
+    </intent>
+            
+    <intent>
+                  
+      <action android:name="android.intent.action.VIEW"/>
+                  
+      <data android:scheme="sms"/>
+              
+    </intent>
+            
+    <intent>
+                  
+      <action android:name="android.intent.action.DIAL"/>
+                  
+      <data android:path="tel:"/>
+              
+    </intent>
+            
+        
+    <package android:name="com.android.vending"/>
+            
+    <intent>
+                  
+      <action android:name="com.android.vending.billing.InAppBillingService.BIND"/>
+              
+    </intent>
+            
+    <intent>
+                  
+      <action android:name="com.google.android.apps.play.billingtestcompanion.BillingOverrideService.BIND"/>
+              
+    </intent>
+        
+  </queries>
+      
+  <uses-permission android:name="com.android.vending.BILLING"/>
+      
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+      
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+      
+  <permission android:name="com.secondwindgames.violettap.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="0x00000002"/>
+      
+  <uses-permission android:name="com.secondwindgames.violettap.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+      
+  <application android:appCategory="0" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:enableOnBackInvokedCallback="true" android:extractNativeLibs="true" android:icon="@mipmap/app_icon" android:label="@string/app_name" android:roundIcon="@mipmap/app_icon_round">
+            
+    <meta-data android:name="unity.splash-mode" android:value="2"/>
+            
+    <meta-data android:name="unity.splash-enable" android:value="true"/>
+            
+    <meta-data android:name="unity.launch-fullscreen" android:value="true"/>
+            
+    <meta-data android:name="unity.render-outside-safearea" android:value="true"/>
+            
+    <meta-data android:name="notch.config" android:value="portrait|landscape"/>
+            
+    <meta-data android:name="unity.auto-report-fully-drawn" android:value="true"/>
+            
+    <meta-data android:name="unity.strip-engine-code" android:value="true"/>
+            
+    <meta-data android:name="unity.run-without-focus" android:value="false"/>
+            
+    <meta-data android:name="unity.auto-set-game-state" android:value="true"/>
+            
+    <activity android:configChanges="0x40003fff" android:enabled="true" android:exported="true" android:hardwareAccelerated="false" android:launchMode="2" android:name="com.unity3d.player.UnityPlayerGameActivity" android:resizeableActivity="true" android:screenOrientation="13" android:theme="@style/VioletTapGameActivityTheme">
+                  
+      <intent-filter>
+                        
+        <category android:name="android.intent.category.LAUNCHER"/>
+                        
+        <action android:name="android.intent.action.MAIN"/>
+                    
+      </intent-filter>
+                  
+      <meta-data android:name="unityplayer.UnityActivity" android:value="true"/>
+                  
+      <meta-data android:name="android.app.lib_name" android:value="game"/>
+                  
+      <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="@string/FreeformWindowSize_maximize"/>
+                  
+      <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="@string/FreeformWindowOrientation_landscape"/>
+                  
+      <meta-data android:name="notch_support" android:value="true"/>
+                  
+      <layout android:minHeight="76800" android:minWidth="102400"/>
+                  
+      <intent-filter>
+                        
+        <action android:name="android.intent.action.VIEW"/>
+                        
+        <category android:name="android.intent.category.DEFAULT"/>
+                        
+        <category android:name="android.intent.category.BROWSABLE"/>
+                        
+        <data android:host="com.unityplayeraccounts.24848817-53e4-4759-8086-4f200036f3bd" android:scheme="unitydl"/>
+                    
+      </intent-filter>
+              
+    </activity>
+     
+        
+    <activity android:configChanges="0x00000fb0" android:enableOnBackInvokedCallback="false" android:exported="false" android:name="com.google.android.gms.ads.AdActivity" android:theme="@android:style/Theme.Translucent"/>
+            
+    <provider android:authorities="com.secondwindgames.violettap.mobileadsinitprovider" android:exported="false" android:initOrder="100" android:name="com.google.android.gms.ads.MobileAdsInitProvider"/>
+            
+    <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.ads.AdService"/>
+            
+    <activity android:configChanges="0x00000fb0" android:exported="false" android:name="com.google.android.gms.ads.OutOfContextTestingActivity"/>
+            
+    <activity android:excludeFromRecents="true" android:exported="false" android:launchMode="2" android:name="com.google.android.gms.ads.NotificationHandlerActivity" android:taskAffinity="" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            
+    <meta-data android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING" android:value="true"/>
+            
+    <meta-data android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION" android:value="true"/>
+            
+    <activity android:configChanges="0x000005a0" android:excludeFromRecents="true" android:exported="false" android:launchMode="1" android:name="com.google.android.play.core.hsdp.service.HsdpShimActivity" android:theme="@style/Theme.HsdpServiceTransparent">
+        </activity>
+            
+    <meta-data android:name="com.google.android.play.billingclient.version" android:value="9.0.0"/>
+            
+    <activity android:configChanges="0x000005b0" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            
+    <activity android:configChanges="0x000005b0" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivityV2" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            
+    <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+            
+    <provider android:authorities="com.secondwindgames.violettap.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+                  
+      <meta-data android:name="androidx.work.WorkManagerInitializer" android:value="androidx.startup"/>
+                  
+      <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+                  
+      <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+                  
+      <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+              
+    </provider>
+            
+    <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+            
+    <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+            
+    <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+            
+    <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+            
+    <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+                  
+      <intent-filter>
+                        
+        <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                        
+        <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+                  
+      <intent-filter>
+                        
+        <action android:name="android.intent.action.BATTERY_OKAY"/>
+                        
+        <action android:name="android.intent.action.BATTERY_LOW"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+                  
+      <intent-filter>
+                        
+        <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                        
+        <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+                  
+      <intent-filter>
+                        
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+                  
+      <intent-filter>
+                        
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                        
+        <action android:name="android.intent.action.TIME_SET"/>
+                        
+        <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+                  
+      <intent-filter>
+                        
+        <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+                  
+      <intent-filter>
+                        
+        <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <uses-library android:name="android.ext.adservices" android:required="false"/>
+            
+    <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+            
+    <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3765914942296716~5027638921"/>
+            
+    <meta-data android:name="com.google.unity.ads.UNITY_VERSION" android:value="6000.3.23f1"/>
+            
+    <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+                  
+      <intent-filter>
+                        
+        <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+                    
+      </intent-filter>
+                  
+      <intent-filter>
+                        
+        <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+                    
+      </intent-filter>
+                  
+      <intent-filter>
+                        
+        <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+                    
+      </intent-filter>
+                  
+      <intent-filter>
+                        
+        <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+                    
+      </intent-filter>
+              
+    </receiver>
+            
+    <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+                  
+      <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+              
+    </service>
+            
+    <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+            
+    <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+            
+    <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        
+  </application>
+  
+</manifest>

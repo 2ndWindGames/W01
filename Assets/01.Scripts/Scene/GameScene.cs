@@ -22,8 +22,10 @@ namespace _01.Scripts.Scene
 		private const float SmallTargetScale = 0.64f;
 		private const float MediumTargetScale = 0.82f;
 		private const float LargeTargetScale = 1.00f;
+		private const float SecondPulseSeconds = 10f;
 #if UNITY_EDITOR
 		public static bool SuppressRecordPersistenceForQa { get; set; }
+		public static bool SuppressSecondPulseForQa { get; set; }
 #endif
 		
 		private static readonly Color[] TargetColors =
@@ -63,9 +65,16 @@ namespace _01.Scripts.Scene
 		private GameplayComboMusic m_ComboMusic;
 		private bool m_ApplicationPaused;
 		private bool m_ApplicationFocused = true;
+		private bool m_SecondPulseOffered;
+		private bool m_SecondPulseAdPending;
+		private bool m_ResumingSecondPulse;
+		private bool m_RetryPending;
+		private int m_SecondPulseRequestId;
 		public bool IsHelpOpen { get; private set; }
 		public bool IsNicknamePromptOpen { get; private set; }
-		public bool IsGameplayPaused => IsHelpOpen || IsNicknamePromptOpen || m_ApplicationPaused || !m_ApplicationFocused;
+		public bool IsGameplayPaused => IsHelpOpen || IsNicknamePromptOpen || m_ApplicationPaused || !m_ApplicationFocused
+			|| (mGameFlow != null && mGameFlow.State == GameFlowState.SecondPulseOffer)
+			|| (m_AdsManager != null && m_AdsManager.IsShowingFullScreenAd);
 		public GameConfig Config => mConfig;
 		
 		private Sprite m_TargetSprite;
@@ -269,6 +278,9 @@ namespace _01.Scripts.Scene
 		
 		private void OnDestroy()
 		{
+			m_SecondPulseRequestId++;
+			m_SecondPulseAdPending = false;
+			m_UiGamePopup?.HideSecondPulseOffer();
 			if (m_LastComboMusicTier > 0 && m_ComboMusic != null) m_ComboMusic.SetTier(0);
 			if (m_AdsAttached && m_AdsManager != null)
 			{
@@ -530,21 +542,23 @@ namespace _01.Scripts.Scene
             }
             if (sequenceTap) m_SequenceNextOrder++;
             m_TapFeedback.Show(target, m_FeverRemaining > 0f);
-            if (target.Type == TapTargetType.Bomb)
-            {
+			if (target.Type == TapTargetType.Bomb)
+			{
 				int lostCombo = m_Combo;
 				m_BombsTapped++;
 				m_Combo = 0;
 				m_NextFeverCombo = mConfig.feverCombo;
 				EndFever(false);
-                m_Timer.AddTime(-2f);
-				// AddTime can complete the round and clear every target synchronously.
+				// Remove the tapped bomb before changing the timer. AddTime can
+				// synchronously open SECOND PULSE when this penalty reaches zero.
+				mTargetPool.Despawn(target.gameObject);
+				m_ActiveTargets.Remove(target);
+				m_Timer.AddTime(-2f);
+				// AddTime can transition out of active play synchronously.
 				if (mGameFlow.State != GameFlowState.Playing) return;
 				m_UiGamePopup.ShowComboFailure(lostCombo, true);
 				RefreshComboPresentation();
-                mTargetPool.Despawn(target.gameObject);
-                m_ActiveTargets.Remove(target);
-                RefillTargets();
+				RefillTargets();
                 return;
             }
 
@@ -684,6 +698,19 @@ namespace _01.Scripts.Scene
 		// ReSharper disable Unity.PerformanceAnalysis
 		private void HandleTimerCompleted()
 		{
+			if (mGameFlow == null || mGameFlow.State != GameFlowState.Playing) return;
+			bool suppressSecondPulse = false;
+#if UNITY_EDITOR
+			suppressSecondPulse = SuppressSecondPulseForQa;
+#endif
+			bool ownsNoAds = Managers.IAP.IsNoAds;
+			if (!suppressSecondPulse && !m_SecondPulseOffered && m_AdsManager != null
+			    && (ownsNoAds || (!m_AdsManager.AdsDisabled && m_AdsManager.IsRewardedAdReady)))
+			{
+				m_SecondPulseOffered = true;
+				mGameFlow.OfferSecondPulse();
+				return;
+			}
 			mGameFlow.FinishGame();
 		}
 		
@@ -691,6 +718,7 @@ namespace _01.Scripts.Scene
 		{
 			var isReady = state == GameFlowState.Ready;
 			var isPlaying = state == GameFlowState.Playing;
+			var isSecondPulseOffer = state == GameFlowState.SecondPulseOffer;
 			var isResult = state == GameFlowState.Result;
 			if (!isResult && m_NewBestPromptRoutine != null)
 			{
@@ -704,7 +732,9 @@ namespace _01.Scripts.Scene
 				? GameLocalization.T("READY  •  TAP START TO BEGIN", "준비  •  시작 버튼을 누르세요")
 				: isPlaying
 					? GameLocalization.T("TAP THE GLOWING TARGETS", "빛나는 타겟을 터치하세요")
-					: GameLocalization.T("RESULT", "결과"),
+					: isSecondPulseOffer
+						? GameLocalization.T("SECOND PULSE", "세컨드 펄스")
+						: GameLocalization.T("RESULT", "결과"),
 				isResult ? new Color(1f, 0.78f, 0.38f) : Color.white);
 			m_StartButton.gameObject.SetActive(isReady);
 			m_RetryButton.gameObject.SetActive(isResult);
@@ -712,6 +742,7 @@ namespace _01.Scripts.Scene
 
 			if (isReady)
 			{
+				m_UiGamePopup.HideSecondPulseOffer();
 				EndFever(false);
 				m_ComboMusic?.SetTier(0);
 				m_LastComboMusicTier = 0;
@@ -724,15 +755,36 @@ namespace _01.Scripts.Scene
 			}
 			else if (isPlaying)
 			{
+				m_UiGamePopup.HideSecondPulseOffer();
 				m_RoundInProgress = true;
-				Managers.Sound.Play(Define.Sound.Bgm, "BGM/Gameplay_NeonRush", 0.32f);
-				m_ComboMusic?.SetTier(0);
-				m_LastComboMusicTier = 0;
-				Managers.Sound.Play(Define.Sound.Effect, "SFX/Round_Start", 0.58f);
-				BeginPhaseCue(1);
+				if (m_ResumingSecondPulse)
+				{
+					Managers.Sound.Play(Define.Sound.Effect, "SFX/Round_Start", 0.58f);
+					RefreshComboPresentation();
+					RefillTargets();
+				}
+				else
+				{
+					Managers.Sound.Play(Define.Sound.Bgm, "BGM/Gameplay_NeonRush", 0.32f);
+					m_ComboMusic?.SetTier(0);
+					m_LastComboMusicTier = 0;
+					Managers.Sound.Play(Define.Sound.Effect, "SFX/Round_Start", 0.58f);
+					BeginPhaseCue(1);
+				}
+				ApplyPauseState();
+			}
+			else if (isSecondPulseOffer)
+			{
+				m_Timer.Stop();
+				m_TimerText.text = "0.0";
+				m_TimerText.color = new Color(1f, 0.43f, 0.45f);
+				m_UiGamePopup.ShowSecondPulseOffer(WatchSecondPulseAd, DeclineSecondPulse,
+					!Managers.IAP.IsNoAds);
+				ApplyPauseState();
 			}
 			else if (isResult)
 			{
+				m_UiGamePopup.HideSecondPulseOffer();
 				EndFever(false);
 				m_ComboMusic?.SetTier(0);
 				m_LastComboMusicTier = 0;
@@ -821,7 +873,7 @@ namespace _01.Scripts.Scene
 		public void StartRound()
 		{
 			if (IsGameplayPaused) return;
-			if (m_AdsManager != null && m_AdsManager.IsShowingInterstitial) return;
+			if (m_AdsManager != null && m_AdsManager.IsShowingFullScreenAd) return;
 			if (mGameFlow.State != GameFlowState.Ready)
 			{
 				return;
@@ -840,6 +892,10 @@ namespace _01.Scripts.Scene
 			m_PhaseCueRemaining = 0f;
 			m_FeverRemaining = 0f;
 			m_NextFeverCombo = mConfig.feverCombo;
+			m_SecondPulseOffered = false;
+			m_SecondPulseAdPending = false;
+			m_SecondPulseRequestId++;
+			m_UiGamePopup.HideSecondPulseOffer();
 			m_ScoreText.text = "00";
 			m_ResultText.text = string.Empty;
 			m_Timer.Start(mConfig.roundDuration);
@@ -877,14 +933,118 @@ namespace _01.Scripts.Scene
 
 		public void RetryRound()
 		{
-			if (IsGameplayPaused) return;
-			if (m_AdsManager != null && m_AdsManager.IsShowingInterstitial) return;
+			if (m_RetryPending || IsGameplayPaused) return;
+			if (m_AdsManager != null && m_AdsManager.IsShowingFullScreenAd) return;
 			if (mGameFlow.State != GameFlowState.Result)
 			{
 				return;
 			}
 
-			mGameFlow.Retry();
+			if (m_AdsManager != null && m_AdsManager.TryShowInterstitialBeforeRetry())
+			{
+				m_RetryPending = true;
+				if (m_RetryButton != null) m_RetryButton.interactable = false;
+				StartCoroutine(RetryAfterInterstitial());
+				return;
+			}
+
+			CompleteRetry();
+		}
+
+		private IEnumerator RetryAfterInterstitial()
+		{
+			while (m_AdsManager != null && m_AdsManager.IsShowingInterstitial)
+				yield return null;
+
+			CompleteRetry();
+		}
+
+		private void CompleteRetry()
+		{
+			m_RetryPending = false;
+			if (m_RetryButton != null) m_RetryButton.interactable = true;
+			if (mGameFlow != null && mGameFlow.State == GameFlowState.Result)
+				mGameFlow.Retry();
+		}
+
+		private void WatchSecondPulseAd()
+		{
+			if (mGameFlow == null || mGameFlow.State != GameFlowState.SecondPulseOffer
+			    || m_SecondPulseAdPending) return;
+
+			m_SecondPulseAdPending = true;
+			m_UiGamePopup.SetSecondPulseBusy(true);
+			int requestId = ++m_SecondPulseRequestId;
+			if (Managers.IAP.IsNoAds)
+			{
+				ResumeFromSecondPulse(requestId);
+				return;
+			}
+			bool started = false;
+			try
+			{
+				if (m_AdsManager != null)
+				{
+					started = m_AdsManager.ShowRewardedAd(
+						() => ResumeFromSecondPulse(requestId),
+						() => FinishSecondPulseWithoutReward(requestId));
+				}
+			}
+			catch (System.Exception exception)
+			{
+				Debug.LogWarning("SECOND PULSE ad could not be shown: " + exception.Message);
+			}
+
+			// The SDK also resolves a failed start through onClosedWithoutReward. Keep
+			// this fallback so a provider exception can never leave the game blocked.
+			if (!started && IsCurrentSecondPulseRequest(requestId))
+				FinishSecondPulseWithoutReward(requestId);
+		}
+
+		private void DeclineSecondPulse()
+		{
+			if (mGameFlow == null || mGameFlow.State != GameFlowState.SecondPulseOffer
+			    || m_SecondPulseAdPending) return;
+
+			m_SecondPulseRequestId++;
+			m_UiGamePopup.HideSecondPulseOffer();
+			mGameFlow.FinishGame();
+		}
+
+		private bool IsCurrentSecondPulseRequest(int requestId)
+		{
+			return this != null && m_SecondPulseAdPending && requestId == m_SecondPulseRequestId
+			       && mGameFlow != null && mGameFlow.State == GameFlowState.SecondPulseOffer;
+		}
+
+		private void ResumeFromSecondPulse(int requestId)
+		{
+			if (!IsCurrentSecondPulseRequest(requestId)) return;
+
+			m_SecondPulseAdPending = false;
+			m_UiGamePopup.HideSecondPulseOffer();
+			m_LastCountdownSecond = -1;
+			m_Timer.Start(SecondPulseSeconds);
+			m_ResumingSecondPulse = true;
+			try
+			{
+				mGameFlow.ResumeFromSecondPulse();
+			}
+			finally
+			{
+				m_ResumingSecondPulse = false;
+			}
+			UpdateTimerVisual();
+			ApplyPauseState();
+		}
+
+		private void FinishSecondPulseWithoutReward(int requestId)
+		{
+			if (!IsCurrentSecondPulseRequest(requestId)) return;
+
+			m_SecondPulseAdPending = false;
+			m_UiGamePopup.HideSecondPulseOffer();
+			mGameFlow.FinishGame();
 		}
 		
 		private static Sprite CreateCircleSprite(int size)
