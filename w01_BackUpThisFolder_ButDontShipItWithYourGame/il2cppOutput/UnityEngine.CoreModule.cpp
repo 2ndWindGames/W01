@@ -4162,7 +4162,9 @@ inline RenderTexture_tBA90C4C3AD9EECCFDDCC632D97C29FAB80D60D27* Unmarshal_Unmars
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Camera_get_targetDisplay_Injected_m85A2C8B167E75DA32AD90160448F9700699475F3 (intptr_t ___0__unity_self, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_set_targetDisplay_Injected_mE8C75523C64A42DB3B390D1B14AA2B9C353BB97A (intptr_t ___0__unity_self, int32_t ___1_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_WorldToScreenPoint_Injected_m658AA7DD62E5A50B9F08A33ACB3E9E592BAB4546 (intptr_t ___0__unity_self, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_position, int32_t ___2_eye, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___3_ret, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_WorldToViewportPoint_Injected_m27BC01C8A84771470CC48AF24C8F6752C1A21AD9 (intptr_t ___0__unity_self, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_position, int32_t ___2_eye, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___3_ret, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Camera_WorldToScreenPoint_m6612AF37FFBBACC568877D4AA3AD5F11C76D9657 (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_position, int32_t ___1_eye, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Camera_WorldToViewportPoint_mDECE15F9CACAF94384F3B87305EF36126A337E97 (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_position, int32_t ___1_eye, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_ScreenToViewportPoint_Injected_m84F8A9619C8CAFC84C3046C8D5BB71298FCAA80D (intptr_t ___0__unity_self, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_position, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___2_ret, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_ScreenPointToRay_Injected_mB87D14A5F5E10941CAD144D74298788725E39836 (intptr_t ___0__unity_self, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* ___1_pos, int32_t ___2_eye, Ray_t2B1742D7958DC05BDC3EFC7461D3593E1430DC00* ___3_ret, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) ;
@@ -14885,6 +14887,44 @@ IL_000f:
 		return L_3;
 	}
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Camera_WorldToViewportPoint_mDECE15F9CACAF94384F3B87305EF36126A337E97 (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_position, int32_t ___1_eye, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MarshalledUnityObject_MarshalNotNull_TisCamera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184_m15924AC4F274B53871C5D6A6938813258F728905_RuntimeMethod_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
+	memset((&V_0), 0, sizeof(V_0));
+	intptr_t G_B2_0;
+	memset((&G_B2_0), 0, sizeof(G_B2_0));
+	intptr_t G_B1_0;
+	memset((&G_B1_0), 0, sizeof(G_B1_0));
+	{
+		intptr_t L_0;
+		L_0 = MarshalledUnityObject_MarshalNotNull_TisCamera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184_m15924AC4F274B53871C5D6A6938813258F728905_inline(__this, MarshalledUnityObject_MarshalNotNull_TisCamera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184_m15924AC4F274B53871C5D6A6938813258F728905_RuntimeMethod_var);
+		intptr_t L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000f;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		ThrowHelper_ThrowNullReferenceException_mA9C7629D32240EE0218631933DAC647668CA63CF(__this, NULL);
+		G_B2_0 = G_B1_0;
+	}
+
+IL_000f:
+	{
+		int32_t L_2 = ___1_eye;
+		Camera_WorldToViewportPoint_Injected_m27BC01C8A84771470CC48AF24C8F6752C1A21AD9(G_B2_0, (&___0_position), L_2, (&V_0), NULL);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_3 = V_0;
+		return L_3;
+	}
+}
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Camera_WorldToScreenPoint_m26B4C8945C3B5731F1CC5944CFD96BF17126BAA3 (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_position, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -14893,6 +14933,24 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0 = ___0_position;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_1;
 		L_1 = Camera_WorldToScreenPoint_m6612AF37FFBBACC568877D4AA3AD5F11C76D9657(__this, L_0, 2, NULL);
+		V_0 = L_1;
+		goto IL_000c;
+	}
+
+IL_000c:
+	{
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_2 = V_0;
+		return L_2;
+	}
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Camera_WorldToViewportPoint_m285523443225EDA79BBEF9C9EDD76B99CFED054B (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_position, const RuntimeMethod* method) 
+{
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
+	memset((&V_0), 0, sizeof(V_0));
+	{
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0 = ___0_position;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_1;
+		L_1 = Camera_WorldToViewportPoint_mDECE15F9CACAF94384F3B87305EF36126A337E97(__this, L_0, 2, NULL);
 		V_0 = L_1;
 		goto IL_000c;
 	}
@@ -15500,6 +15558,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_WorldToScreenPoint_Injected_m658A
 	static Camera_WorldToScreenPoint_Injected_m658AA7DD62E5A50B9F08A33ACB3E9E592BAB4546_ftn _il2cpp_icall_func;
 	if (!_il2cpp_icall_func)
 	_il2cpp_icall_func = (Camera_WorldToScreenPoint_Injected_m658AA7DD62E5A50B9F08A33ACB3E9E592BAB4546_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Camera::WorldToScreenPoint_Injected(System.IntPtr,UnityEngine.Vector3&,UnityEngine.Camera/MonoOrStereoscopicEye,UnityEngine.Vector3&)");
+	_il2cpp_icall_func(___0__unity_self, ___1_position, ___2_eye, ___3_ret);
+}
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_WorldToViewportPoint_Injected_m27BC01C8A84771470CC48AF24C8F6752C1A21AD9 (intptr_t ___0__unity_self, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_position, int32_t ___2_eye, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___3_ret, const RuntimeMethod* method) 
+{
+	typedef void (*Camera_WorldToViewportPoint_Injected_m27BC01C8A84771470CC48AF24C8F6752C1A21AD9_ftn) (intptr_t, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2*, int32_t, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2*);
+	static Camera_WorldToViewportPoint_Injected_m27BC01C8A84771470CC48AF24C8F6752C1A21AD9_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Camera_WorldToViewportPoint_Injected_m27BC01C8A84771470CC48AF24C8F6752C1A21AD9_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Camera::WorldToViewportPoint_Injected(System.IntPtr,UnityEngine.Vector3&,UnityEngine.Camera/MonoOrStereoscopicEye,UnityEngine.Vector3&)");
 	_il2cpp_icall_func(___0__unity_self, ___1_position, ___2_eye, ___3_ret);
 }
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Camera_ScreenToViewportPoint_Injected_m84F8A9619C8CAFC84C3046C8D5BB71298FCAA80D (intptr_t ___0__unity_self, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_position, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___2_ret, const RuntimeMethod* method) 

@@ -275,6 +275,7 @@ UnityEngine.AsyncOperation::get_isDone_Injected
 UnityEngine.AsyncOperation::InternalDestroy
 UnityEngine.AsyncOperation::InternalSetManagedObject
 UnityEngine.Audio.ScriptableProcessorBindings::CheckProcessorExistsInternal_Injected
+UnityEngine.AudioClip::get_samples_Injected
 UnityEngine.AudioClip::get_length_Injected
 UnityEngine.AudioListener::get_pause
 UnityEngine.AudioListener::set_pause
@@ -282,6 +283,7 @@ UnityEngine.AudioSettings::StartAudioOutput
 UnityEngine.AudioSettings::StopAudioOutput
 UnityEngine.AudioSettings::get_dspTime
 UnityEngine.AudioSource::get_isPlaying_Injected
+UnityEngine.AudioSource::get_timeSamples_Injected
 UnityEngine.AudioSource::get_generatorObject_Injected
 UnityEngine.AudioSource::get_volume_Injected
 UnityEngine.AudioSource::PlayHelper_Injected
@@ -294,6 +296,7 @@ UnityEngine.AudioSource::set_mute_Injected
 UnityEngine.AudioSource::set_playOnAwake_Injected
 UnityEngine.AudioSource::set_priority_Injected
 UnityEngine.AudioSource::set_spatialBlend_Injected
+UnityEngine.AudioSource::set_timeSamples_Injected
 UnityEngine.AudioSource::set_volume_Injected
 UnityEngine.Awaitable::IsNativeAwaitableCompleted
 UnityEngine.Awaitable::ReleaseNativeAwaitable
@@ -325,6 +328,7 @@ UnityEngine.Camera::ScreenPointToRay_Injected
 UnityEngine.Camera::ScreenToViewportPoint_Injected
 UnityEngine.Camera::SetupCurrent_Injected
 UnityEngine.Camera::WorldToScreenPoint_Injected
+UnityEngine.Camera::WorldToViewportPoint_Injected
 UnityEngine.Camera::get_backgroundColor_Injected
 UnityEngine.Camera::get_pixelRect_Injected
 UnityEngine.Camera::get_rect_Injected
@@ -839,6 +843,7 @@ UnityEngine.Physics::SendOnCollisionExit_Injected
 UnityEngine.Physics::SendOnCollisionStay_Injected
 UnityEngine.Physics2D::get_queriesHitTriggers
 UnityEngine.Physics2D::GetRayIntersectionAll_Internal_Injected
+UnityEngine.Physics2D::SyncTransforms
 UnityEngine.PhysicsScene::Internal_RaycastTest_Injected
 UnityEngine.PhysicsScene::Internal_Raycast_Injected
 UnityEngine.PhysicsScene::Internal_RaycastNonAlloc_Injected

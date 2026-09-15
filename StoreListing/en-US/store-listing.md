@@ -21,7 +21,7 @@ Key features
 - Streak and Fever systems that reward accurate play
 - Nickname registration when you set a new personal best
 - Global rankings for competing with other players
-- Separate BGM and sound-effect controls
+- Separate music, sound-effect, and vibration controls
 - Optional one-time in-app purchase to remove ads
 
 How fast and accurate are you? Enter the arena and set a new record in Violet Tap.
@@ -33,10 +33,10 @@ How fast and accurate are you? Enter the arena and set a new record in Violet Ta
 3. Unleash Fever Mode — Keep your streak alive as more targets fill the screen.
 4. Climb the global ranking — Set a record and make your mark.
 
-## What's new — 3.7.2
+## What's new — 3.7.3
 
-- Added a new neon app icon.
-- Improved target detection during rapid consecutive taps.
-- Fixed an issue that could stall gameplay when numbered targets could not fit on screen.
-- Improved leaderboard readability for long names and high scores.
-- Privacy options now appear in Settings when required.
+- Added Second Pulse: watch an ad at time up to keep your score and combo for 10 more seconds. Remove Ads owners continue without an ad.
+- Interstitial ads now appear on restart, after results.
+- Added a pinned My Rank section with clearer long names and scores.
+- Music, sound effects, and vibration settings now persist on your device.
+- Polished Help and Results UI and improved Android 15+ edge-to-edge and cutout support.

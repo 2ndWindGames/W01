@@ -4284,6 +4284,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Physics2D_get_queriesHitTriggers_m2652EC
 	bool icallRetVal = _il2cpp_icall_func();
 	return icallRetVal;
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Physics2D_SyncTransforms_mF936634793253A203EF6632454731E44509256D8 (const RuntimeMethod* method) 
+{
+	typedef void (*Physics2D_SyncTransforms_mF936634793253A203EF6632454731E44509256D8_ftn) ();
+	static Physics2D_SyncTransforms_mF936634793253A203EF6632454731E44509256D8_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Physics2D_SyncTransforms_mF936634793253A203EF6632454731E44509256D8_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Physics2D::SyncTransforms()");
+	_il2cpp_icall_func();
+}
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RaycastHit2D_t3EAAA06E6603C6BC61AC1291DD881C5C1E23BDFA Physics2D_Raycast_mBECD869F0788D0B0E665BBA3611362E6D5CD2947 (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_origin, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_direction, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;

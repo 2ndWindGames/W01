@@ -1,0 +1,15 @@
+<ko-KR>
+• 시간이 끝나면 광고를 보고 점수와 콤보를 유지한 채 10초 더 플레이하는 세컨드 펄스를 추가했습니다. 광고 제거 이용자는 광고 없이 이어갈 수 있습니다.
+• 전면 광고가 결과 화면을 가리지 않고 재시작할 때 표시되도록 개선했습니다.
+• 랭킹 하단에 내 순위 고정 영역을 추가하고 긴 닉네임과 큰 점수의 가독성을 높였습니다.
+• 인트로 설정에서 배경음악, 효과음, 진동을 조절하고 기기에 저장할 수 있습니다.
+• 도움말과 결과 화면을 다듬고 Android 15 이상의 화면 가장자리·컷아웃 대응을 개선했습니다.
+</ko-KR>
+
+<en-US>
+• Added Second Pulse: watch an ad at time up to keep your score and combo for 10 more seconds. Remove Ads owners continue without an ad.
+• Interstitial ads now appear on restart, after results.
+• Added a pinned My Rank section with clearer long names and scores.
+• Music, sound effects, and vibration settings now persist on your device.
+• Polished Help and Results UI and improved Android 15+ edge-to-edge and cutout support.
+</en-US>
