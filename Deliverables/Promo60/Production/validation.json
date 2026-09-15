@@ -2,27 +2,27 @@
   "KO": {
     "duration_seconds": 59.93,
     "resolution": "1080x1920",
-    "fps": 24,
+    "fps": 30,
     "video": "H.264 yuv420p",
     "audio": "AAC stereo 48 kHz",
     "decoded": true,
-    "audio_peak": 0.474,
-    "audio_rms": 0.053,
+    "audio_peak": 0.344,
+    "audio_rms": 0.037,
     "longest_silent_window_seconds": 0.0,
     "srt_cues": 10,
-    "bytes": 11072541
+    "bytes": 40384689
   },
   "EN": {
     "duration_seconds": 59.93,
     "resolution": "1080x1920",
-    "fps": 24,
+    "fps": 30,
     "video": "H.264 yuv420p",
     "audio": "AAC stereo 48 kHz",
     "decoded": true,
-    "audio_peak": 0.519,
-    "audio_rms": 0.053,
+    "audio_peak": 0.309,
+    "audio_rms": 0.035,
     "longest_silent_window_seconds": 0.0,
     "srt_cues": 10,
-    "bytes": 11395625
+    "bytes": 39695013
   }
 }

@@ -31,7 +31,7 @@ def inspect(locale: str) -> dict:
     video = re.search(r"Video: h264[^\n]*", meta).group(0)
     audio = re.search(r"Audio: aac[^\n]*", meta).group(0)
     assert 59 <= duration <= 60, duration
-    assert "1080x1920" in video and "yuv420p" in video and "24 fps" in video, video
+    assert "1080x1920" in video and "yuv420p" in video and "30 fps" in video, video
     assert "48000 Hz" in audio and "stereo" in audio, audio
     pcm = call([FFMPEG, "-hide_banner", "-loglevel", "error", "-i", src, "-vn", "-ar", "48000", "-ac", "2", "-f", "s16le", "-"]).stdout
     samples = np.frombuffer(pcm, dtype="<i2").astype(np.float32) / 32768
@@ -49,6 +49,10 @@ def inspect(locale: str) -> dict:
     assert longest_silent_blocks < 2, longest_silent_blocks
     srt = (OUT / f"VioletTap_Promo_{locale}.srt").read_text(encoding="utf-8-sig")
     assert srt.count(" --> ") == 10
+    script = json.loads((PROD / "Voice/script.json").read_text(encoding="utf-8-sig"))
+    assert all(phrase in srt for phrase in script[locale])
+    if locale == "EN":
+        assert not re.search(r"[가-힣]", srt)
     cards = []
     for i, t in enumerate(TIMES):
         frame = TEMP / f"check-{locale}-{i}.jpg"
@@ -64,7 +68,7 @@ def inspect(locale: str) -> dict:
         sheet.paste(card, (x, y))
         draw.text((x + 8, y + 539), f"{i+1:02} / {TIMES[i]:.1f}s", font=face, fill="white")
     sheet.save(PROD / f"Preview_{locale}.jpg", quality=91, optimize=True)
-    return {"duration_seconds": duration, "resolution": "1080x1920", "fps": 24, "video": "H.264 yuv420p", "audio": "AAC stereo 48 kHz", "decoded": True, "audio_peak": round(peak, 3), "audio_rms": round(rms, 3), "longest_silent_window_seconds": longest_silent_blocks * 0.25, "srt_cues": 10, "bytes": src.stat().st_size}
+    return {"duration_seconds": duration, "resolution": "1080x1920", "fps": 30, "video": "H.264 yuv420p", "audio": "AAC stereo 48 kHz", "decoded": True, "audio_peak": round(peak, 3), "audio_rms": round(rms, 3), "longest_silent_window_seconds": longest_silent_blocks * 0.25, "srt_cues": 10, "bytes": src.stat().st_size}
 
 
 def main() -> None:
@@ -78,7 +82,7 @@ def main() -> None:
 |---|---:|---:|
 | 길이 | {ko_d:.2f}초 | {en_d:.2f}초 |
 | 화면 | 1080×1920, 9:16 | 1080×1920, 9:16 |
-| 비디오 | H.264 / yuv420p / 24fps | H.264 / yuv420p / 24fps |
+| 비디오 | H.264 / yuv420p / 30fps | H.264 / yuv420p / 30fps |
 | 오디오 | AAC / 스테레오 / 48kHz | AAC / 스테레오 / 48kHz |
 | 전체 디코딩 | 성공 | 성공 |
 | 음성·음악 포함 최종 오디오 피크 | {ko_p:.3f} | {en_p:.3f} |
@@ -88,9 +92,9 @@ def main() -> None:
 
 대표 프레임: [한국어](Preview_KO.jpg), [English](Preview_EN.jpg). 제목과 자막은 프레임 경계 안에 있으며, 포인트·콤보·타겟을 가리는 위치를 확인했습니다. 화면은 원본 종횡비를 유지한 실제 게임 캡처와 클로즈업을 사용합니다. 중요 자막은 플랫폼의 하단 버튼 영역보다 위에 배치했습니다.
 
-한국어 음성은 Windows Microsoft Heami Desktop, 영어 음성은 Microsoft Zira Desktop으로 합성했습니다. 두 영상에 프로젝트 내 Gameplay 음악과 게임 효과음을 믹스했습니다. 최종 AAC에서 무음이나 디지털 클리핑은 검출되지 않았습니다. 사람 성우 녹음이나 전문 성우 감수를 의미하지 않습니다.
+두 언어의 나레이션은 로컬 Supertonic 3 모델로 생성했습니다. 두 영상에 프로젝트 내 Gameplay 음악과 게임 효과음을 믹스했습니다. 최종 AAC에서 무음이나 디지털 클리핑은 검출되지 않았습니다. 게시 문구에는 AI 생성 나레이션 고지를 넣었습니다.
 
-촬영 원본: `output/qa-2026-09-13/gameplay-video/`의 Unity Game View 플레이 영상 2개 및 `output/play-store-3.7.1/`의 한·영 게임 캡처. QA 플레이 영상은 촬영 당시 타겟 수명을 메모리에서 연장한 기록이 있어, 화면은 실제 게임 렌더링이지만 일반 플레이 속도의 실측 자료로 사용하면 안 됩니다. 한국어 50콤보 컷은 해당 영상의 실제 프레임을 추출했습니다. 영문 50콤보 컷 등 일부 이미지는 기존 스토어용 QA 캡처입니다. 캐릭터는 현재 게임 플레이에 존재하지 않아 임의로 추가하지 않았습니다.
+촬영 원본: `output/promo-production/capture-*/`의 언어별 Unity Game View 플레이 녹화와 `output/play-store-3.7.1/`의 언어별 게임 인트로 캡처입니다. 새 녹화는 1080×1920 30fps로, 게임 규칙·타겟 수명·점수 배율을 바꾸지 않고 입력을 자동화해 촬영했습니다. 게임 오디오는 프로젝트 배경음악·효과음을 편집에서 재구성했습니다. 캐릭터는 현재 게임 플레이에 존재하지 않아 임의로 추가하지 않았습니다.
 
 프로필의 실제 ‘네온터치(VioletTap)’ 다운로드 링크가 스토어로 연결되는지는 제공된 계정 정보만으로 검증할 수 없었습니다. 게시 전에 채널·인스타그램 각각에서 해당 게임 링크를 눌러 확인해야 합니다.
 """.format(ko_d=info["KO"]["duration_seconds"], en_d=info["EN"]["duration_seconds"], ko_p=info["KO"]["audio_peak"], en_p=info["EN"]["audio_peak"], ko_r=info["KO"]["audio_rms"], en_r=info["EN"]["audio_rms"], ko_s=info["KO"]["longest_silent_window_seconds"], en_s=info["EN"]["longest_silent_window_seconds"])

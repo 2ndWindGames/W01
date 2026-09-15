@@ -1,8 +1,4 @@
-"""Render the 60-second VioletTap promos from captured Unity gameplay and UI.
-
-Requires Pillow, NumPy, and the locally installed ffmpeg. No game sprites, UI, scores,
-or timing are synthesized; the 2026-09-14 QA clips are used as close-up footage.
-"""
+"""Render localized VioletTap promos from Unity captures and shipped UI/audio."""
 from __future__ import annotations
 
 import json
@@ -22,7 +18,7 @@ PROD = OUT / "Production"
 TEMP = PROD / "render-work"
 TEMP.mkdir(parents=True, exist_ok=True)
 FFMPEG = Path(r"C:\KMPlayer\ffmpeg.exe")
-FPS = 24
+FPS = 30
 SIZE = (1080, 1920)
 SR = 48000
 SLOTS = [4, 5, 6, 6, 6, 6, 6, 6, 7, 8]
@@ -31,6 +27,8 @@ assert sum(SLOTS) == 60
 
 QA_NEW = ROOT / "output/qa-2026-09-13/gameplay-video/run-20260914-191417/violet-tap-gameplay.mp4"
 QA_OLD = ROOT / "output/qa-2026-09-13/gameplay-video/run-20260914-183722/violet-tap-gameplay.mp4"
+CAPTURE_ROOTS = [ROOT / "output/promo-production/Project/output/promo-production",
+                 ROOT / "output/promo-production"]
 FONTS = ROOT / "Assets/Resources/Fonts/Candidates"
 FONT_KO_TITLE = FONTS / "Kor/dohyeon/DoHyeon-Regular.ttf"
 FONT_KO_BODY = FONTS / "Kor/ibmplexsanskr/IBMPlexSansKR-Regular.ttf"
@@ -78,21 +76,20 @@ def wrap(value: str, face: ImageFont.FreeTypeFont, limit: int, ko: bool) -> list
 
 def create_base() -> Path:
     p = TEMP / "base.png"
-    if p.exists():
-        return p
     img = Image.new("RGB", SIZE, "#050613")
     d = ImageDraw.Draw(img)
     for y in range(1920):
         wave = math.sin(y / 110) * 3
         color = (5 + int(y / 750), 7 + int(wave + 3), 20 + int(y / 340))
         d.line((0, y, 1079, y), fill=color)
-    for x in (26, 58, 1022, 1054):
-        d.line((x, 145, x, 1688), fill="#172c55", width=2)
-    for y in range(210, 1680, 165):
-        d.line((24, y, 75, y), fill="#164b75", width=2)
-        d.line((1005, y, 1056, y), fill="#512d7a", width=2)
-    d.rounded_rectangle((74, 157, 1006, 1682), radius=16, outline="#235784", width=4)
-    d.rounded_rectangle((79, 162, 1001, 1677), radius=12, outline="#56329a", width=2)
+    glow = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    gd = ImageDraw.Draw(glow)
+    gd.rounded_rectangle((79, 151, 1001, 1769), radius=22, outline=(39, 218, 255, 210), width=9)
+    glow = glow.filter(ImageFilter.GaussianBlur(24))
+    img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle((77, 149, 1003, 1771), radius=20, outline="#235784", width=3)
+    d.rounded_rectangle((82, 154, 998, 1766), radius=16, outline="#8d53d1", width=2)
     img.save(p, optimize=True)
     return p
 
@@ -102,36 +99,36 @@ def create_overlay(locale: str, i: int, caption: str) -> Path:
     img = Image.new("RGBA", SIZE, (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     accent = ACCENTS[i]
-    d.rounded_rectangle((82, 24, 998, 140), radius=24, fill=(4, 8, 24, 245), outline=accent, width=3)
-    d.line((111, 144, 969, 144), fill=accent, width=4)
-    title_face = font(FONT_KO_TITLE if locale == "KO" else FONT_EN_TITLE, 59 if locale == "KO" else 48)
+    d.rounded_rectangle((130, 27, 950, 132), radius=21, fill=(4, 8, 24, 228), outline=accent, width=3)
+    d.line((182, 140, 898, 140), fill=accent, width=3)
+    title_face = font(FONT_KO_TITLE if locale == "KO" else FONT_EN_TITLE, 53 if locale == "KO" else 45)
     title = TITLES[locale][i]
-    while text_width(d, title, title_face) > 820:
+    while text_width(d, title, title_face) > 730:
         title_face = font(FONT_KO_TITLE if locale == "KO" else FONT_EN_TITLE, title_face.size - 2)
     tb = d.textbbox((0, 0), title, font=title_face)
-    d.text(((1080 - (tb[2] - tb[0])) // 2, 55 - tb[1]), title, font=title_face, fill="#f8f5ff", stroke_width=2, stroke_fill=accent)
-    d.rounded_rectangle((94, 1410, 986, 1643), radius=26, fill=(3, 8, 23, 235), outline=accent, width=3)
-    size = 49 if locale == "KO" else 51
+    d.text(((1080 - (tb[2] - tb[0])) // 2, 51 - tb[1]), title, font=title_face, fill="#f8f5ff", stroke_width=1, stroke_fill=accent)
+    size = 48 if locale == "KO" else 47
     face_path = FONT_KO_BODY if locale == "KO" else FONT_EN_BODY
     while True:
         body_face = font(face_path, size)
-        lines = wrap(caption, body_face, 800, locale == "KO")
-        if len(lines) <= 3 and (len(lines) < 3 or size <= 43):
+        lines = wrap(caption, body_face, 804, locale == "KO")
+        if len(lines) <= 2:
             break
         size -= 2
-    spacing = size + 12
+        if size <= 34:
+            raise ValueError(f"Caption too long for scene {locale}/{i}: {caption}")
+    spacing = size + 10
     block_h = len(lines) * spacing
-    y = 1528 - block_h // 2
+    panel_top = 1471 if len(lines) == 2 else 1500
+    panel_bottom = 1658 if len(lines) == 2 else 1631
+    d.rounded_rectangle((101, panel_top, 979, panel_bottom), radius=22, fill=(3, 8, 23, 210), outline=accent, width=2)
+    d.line((168, panel_top + 8, 912, panel_top + 8), fill=accent, width=2)
+    y = (panel_top + panel_bottom - block_h) // 2
     for line in lines:
         w = text_width(d, line, body_face)
         d.text(((1080 - w) // 2, y), line, font=body_face, fill="#ffffff", stroke_width=1, stroke_fill="#233650")
         y += spacing
-    # The platform bottom UI may cover this decorative strip; no essential text lives here.
-    d.line((122, 1758, 958, 1758), fill="#2e3270", width=3)
-    d.rounded_rectangle((122, 1751, 122 + round(836 * (i + 1) / 10), 1765), radius=5, fill=accent)
-    small = font(FONT_EN_BODY, 33)
-    d.text((124, 1786), "VIOLETTAP  /  NEON CLICKER", font=small, fill="#8daace")
-    d.text((877, 1786), f"{i + 1:02}/10", font=small, fill="#9ca4db")
+    d.line((164, 1808, 916, 1808), fill=accent, width=2)
     img.save(p, optimize=True)
     return p
 
@@ -163,7 +160,71 @@ def make_srt(locale: str, phrases: list[str]) -> list[float]:
     return starts
 
 
-def render_segment(locale: str, i: int, caption: str, base: Path) -> Path:
+def capture_source(locale: str) -> tuple[Path, list[dict]] | None:
+    """Find a complete, locale-specific Game View capture; never cross locales."""
+    candidates = []
+    for root in CAPTURE_ROOTS:
+        if not (root / "capture-complete.txt").exists():
+            continue
+        for path in root.glob(f"capture-*/{locale.lower()}-gameplay.mp4"):
+            events = path.with_name(f"{locale.lower()}-events.jsonl")
+            if events.exists() and path.stat().st_size > 1_000_000:
+                candidates.append((path.stat().st_mtime, path, events))
+    if not candidates:
+        return None
+    _, path, event_file = max(candidates)
+    events = [json.loads(line) for line in event_file.read_text(encoding="utf-8-sig").splitlines() if line.strip()]
+    return path, events
+
+
+def event_time(events: list[dict], kind: str, combo: int = 0) -> float | None:
+    for e in events:
+        if kind == "combo" and e.get("kind") == "state" and e.get("combo", 0) >= combo:
+            return float(e["time"])
+        if kind == "bomb" and e.get("kind") == "tap" and e.get("target") == "Bomb":
+            return float(e["time"])
+        if kind == "time_bonus" and e.get("kind") == "tap" and e.get("target") == "TimeBonus" and e.get("time", 0) > 25:
+            return float(e["time"])
+        if kind == "sequence" and e.get("kind") == "tap" and e.get("seq") == 1:
+            return float(e["time"])
+        if kind == "fever_late" and e.get("kind") == "fever_start" and e.get("time", 0) > 25:
+            return float(e["time"])
+        if kind == "phase_late" and e.get("kind") == "phase" and e.get("time", 0) > 20:
+            return float(e["time"])
+        if kind != "combo" and e.get("kind") == kind:
+            return float(e["time"])
+    return None
+
+
+def gameplay_shots(locale: str) -> dict[int, tuple[Path, float, bool]]:
+    source = capture_source(locale)
+    if source:
+        path, events = source
+        end = max(float(e["time"]) for e in events)
+        def at(t: float | None, duration: int, before: float = 0.5) -> float:
+            start = (t if t is not None else 9.0) - before
+            return max(0.0, min(start, end - duration - 0.1))
+        result = {
+            0: (path, at(event_time(events, "round_start"), SLOTS[0], 0.1), True),
+            2: (path, at(event_time(events, "combo", 10), SLOTS[2], 1.0), True),
+            3: (path, at(event_time(events, "fever_late") or event_time(events, "fever_start"), SLOTS[3], 0.5), True),
+            4: (path, at(event_time(events, "time_bonus"), SLOTS[4], 0.4), True),
+            5: (path, at(event_time(events, "bomb"), SLOTS[5], 0.3), True),
+            6: (path, at(event_time(events, "phase_late") or event_time(events, "phase"), SLOTS[6], 0.5), True),
+            7: (path, at(event_time(events, "sequence"), SLOTS[7], 0.06), True),
+        }
+        combo_50 = event_time(events, "combo", 50)
+        if combo_50 is not None:
+            result[8] = (path, at(combo_50, SLOTS[8], 0.7), True)
+        return result
+    if locale == "EN":
+        raise FileNotFoundError("English Unity gameplay capture is required; Korean QA footage is not an English source")
+    return {0: (QA_NEW, 16, False), 2: (QA_NEW, 10, False),
+            5: (QA_NEW, 18, False), 6: (QA_OLD, 10, False)}
+
+
+def render_segment(locale: str, i: int, caption: str, base: Path,
+                   footage: dict[int, tuple[Path, float, bool]]) -> Path:
     dur = SLOTS[i]
     pp = ROOT / "output/play-store-3.7.1" / ("ko-KR" if locale == "KO" else "en-US")
     stills = {
@@ -174,27 +235,37 @@ def render_segment(locale: str, i: int, caption: str, base: Path) -> Path:
         8: pp / "phone-02-combo-50.png",
         9: pp / "phone-04-intro.png",
     }
-    footage = {0: (QA_NEW, 16), 2: (QA_NEW, 10), 5: (QA_NEW, 18), 6: (QA_OLD, 10)}
     if locale == "KO":
         stills[8] = PROD / "SourceFrame_KO_50Combo.png"
+    if i in footage:
+        stills.pop(i, None)
     overlay = create_overlay(locale, i, caption)
-    dest = TEMP / f"clip-{locale}-{i:02}.mp4"
-    if dest.exists() and dest.stat().st_size > 10000:
-        return dest
+    dest = TEMP / f"clip-v2-{locale}-{i:02}.mp4"
     cmd = [FFMPEG, "-y", "-hide_banner", "-loglevel", "error", "-loop", "1", "-framerate", str(FPS), "-t", str(dur), "-i", base]
     if i in stills:
         cmd += ["-loop", "1", "-framerate", str(FPS), "-t", str(dur), "-i", stills[i]]
-        body = "[1:v]scale=-2:1500:flags=lanczos,setsar=1[game]"
+        body = "[1:v]zoompan=z='min(zoom+0.0004,1.05)':d=1:x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':s=900x1600,fps=30,setsar=1[game]"
     else:
-        path, ss = footage[i]
+        path, ss, full_size = footage[i]
         cmd += ["-ss", str(ss), "-t", str(dur), "-i", path]
-        if locale == "KO" and i in (2, 8):
-            body = "[1:v]scale=-2:1500:flags=lanczos,fps=24,setsar=1,setpts=PTS-STARTPTS[game]"
+        if full_size and i == 7:
+            # A real 1→2→3 sequence lasts less than a second under the capture's
+            # automated taps. Editorial slow motion makes those targets readable.
+            body = ("[1:v]split=2[a][b];"
+                    "[a]trim=duration=0.45,setpts=(PTS-STARTPTS)*6.666667,crop=900:1600:90:230,"
+                    "fps=30,setsar=1[slow];"
+                    "[b]trim=start=0.45:duration=3,setpts=PTS-STARTPTS,crop=900:1600:90:230,"
+                    "fps=30,setsar=1[fast];"
+                    "[slow][fast]concat=n=2:v=1:a=0[game]")
+        elif full_size and i in (3, 4, 5, 6):
+            body = f"[1:v]crop=900:1600:90:230,fps={FPS},setsar=1,setpts=PTS-STARTPTS[game]"
+        elif full_size:
+            body = f"[1:v]scale=900:1600:flags=lanczos,fps={FPS},setsar=1,setpts=PTS-STARTPTS[game]"
         else:
-            body = "[1:v]crop=540:870:0:300,scale=900:1450:flags=lanczos,pad=900:1500:0:25:color=0x07091b,fps=24,setsar=1,setpts=PTS-STARTPTS[game]"
+            body = f"[1:v]crop=540:870:0:300,scale=900:1450:flags=lanczos,pad=900:1600:0:75:color=0x07091b,fps={FPS},setsar=1,setpts=PTS-STARTPTS[game]"
     cmd += ["-loop", "1", "-framerate", str(FPS), "-t", str(dur), "-i", overlay]
-    fc = body + ";[0:v][game]overlay=(W-w)/2:170:shortest=1[scene];[scene][2:v]overlay=0:0:shortest=1,format=yuv420p[v]"
-    cmd += ["-filter_complex", fc, "-map", "[v]", "-an", "-frames:v", str(dur * FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", "-r", str(FPS), "-movflags", "+faststart", dest]
+    fc = body + ";[0:v][game]overlay=(W-w)/2:157:shortest=1[scene];[scene][2:v]overlay=0:0:shortest=1,format=yuv420p,fade=t=in:st=0:d=0.12:color=0x101833,fade=t=out:st=" + str(dur - 0.12) + ":d=0.12:color=0x101833[v]"
+    cmd += ["-filter_complex", fc, "-map", "[v]", "-an", "-frames:v", str(dur * FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "16", "-pix_fmt", "yuv420p", "-r", str(FPS), "-movflags", "+faststart", dest]
     run(cmd)
     return dest
 
@@ -261,14 +332,19 @@ def finish_video(locale: str, clips: list[Path], audio: Path) -> None:
     print(f"FINISHED {final} {final.stat().st_size:,} bytes", flush=True)
 
 
-def main() -> None:
+def render_locale(locale: str) -> None:
     create_base()
     phrases = json.loads((PROD / "Voice/script.json").read_text(encoding="utf-8-sig"))
+    voice_starts = make_srt(locale, phrases[locale])
+    footage = gameplay_shots(locale)
+    clips = [render_segment(locale, i, phrases[locale][i], TEMP / "base.png", footage) for i in range(10)]
+    audio = mix_audio(locale, voice_starts)
+    finish_video(locale, clips, audio)
+
+
+def main() -> None:
     for locale in ("KO", "EN"):
-        voice_starts = make_srt(locale, phrases[locale])
-        clips = [render_segment(locale, i, phrases[locale][i], TEMP / "base.png") for i in range(10)]
-        audio = mix_audio(locale, voice_starts)
-        finish_video(locale, clips, audio)
+        render_locale(locale)
 
 
 if __name__ == "__main__":

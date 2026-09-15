@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 # Local package-extraction build verification artifacts
 /output/core-validation/
+/output/promo-production/
+/Deliverables/Promo60/Production/render-work/
+/Deliverables/Promo60/Production/__pycache__/
